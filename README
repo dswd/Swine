@@ -1,0 +1,29 @@
+Dependencies
+============
+Swine needs the following packages:
+- wine (Version 0.9.28 tested)
+- qt-3 (Version 3.3.8 tested)
+- python (Version 2.4 tested)
+- pyqt (Version 3.14.1 tested)
+
+
+Compiling the sources
+=====================
+In the source distribution the ui-files need to be compiled in py-files.
+The following steps are needed:
+- ./configure
+- make"
+
+
+Rebuilding the configure script
+===============================
+This is only needed when new files are added to the project.
+The following steps are needed:
+- aclocal
+- autoconf
+- automake
+
+
+Installation
+============
+At this time (Revision 86) there is no automated way to install swine.
