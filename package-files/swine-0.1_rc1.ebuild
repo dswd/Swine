@@ -41,13 +41,7 @@ src_install() {
 	insinto /usr/lib/swine
 	doins *.py
 
-	dodir /usr/lib/swine/images
-	insinto /usr/lib/swine/images
-	doins images/*
-
-	dodir /usr/lib/swine/images/16x16
-	insinto /usr/lib/swine/images/16x16
-	doins images/16x16/*
+	mv images ${D}/usr/lib/swine
 
 	exeinto /usr/lib/swine
 	doexe swine.py swinecli.py
