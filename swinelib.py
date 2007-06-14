@@ -273,6 +273,10 @@ class Shortcut:
 	def setDefault (self):
 		self.slot.setDefaultShortcut(self)
 
+	def iconsDir (self):
+		if self.data.has_key("iconsdir"):
+			return self.slot.getPath() + "/" + self.data["iconsdir"]
+		return None
 
 class Slot:
 	def __init__(self, name):
@@ -385,6 +389,7 @@ class Slot:
 		shortcut.data['description']=lnk['description']
 		file = self.winPathToUnix(lnk['target'])
 		iconsdir = self.getPath() + "/icons/" + os.path.basename(file)
+		shortcut.data['iconsdir']="icons/" + os.path.basename(file)
 		if os.path.splitext(file)[1].lower() == '.exe':
 			self.extractExeIcons ( file, iconsdir )
 			if len(str(lnk['custom_icon'])) > 0:

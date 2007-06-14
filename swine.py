@@ -328,7 +328,7 @@ class SwineShortcutDialog(ShortcutDialog):
 			self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
 	
 	def icon_clicked(self):
-		self.iconFile = QFileDialog.getOpenFileName( QString.null, "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
+		self.iconFile = QFileDialog.getOpenFileName( self.shortcut.iconsDir(), "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
 		if not self.iconFile == None:
 			self.icon.setIconSet ( QIconSet ( QPixmap ( self.iconFile ) ) )
 			self.shortcut.data["icon"] = self.iconFile
