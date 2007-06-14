@@ -21,6 +21,7 @@
 import sys, os, shutil, signal, time, ConfigParser, stat, array, pipes
 from tarfile import TarFile
 
+
 DWORD=4
 QWORD=8
 
@@ -213,7 +214,7 @@ def lnkinfo ( filename ):
 
 
 
-
+os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
 SWINE_PATH = os.getenv("HOME") + "/.swine"
 SWINE_SLOT_PATH = SWINE_PATH
@@ -368,6 +369,11 @@ class Slot:
 	def setDefaultShortcut (self,shortcut):
 		self.settings['default_shortcut'] = shortcut.name
 	
+	def extractExeIcons (self, file, iconsdir):
+		if not os.path.exists ( iconsdir ):
+			os.makedirs ( iconsdir )
+		self._run ([BIN["winresdump"],file],os.P_WAIT,iconsdir)
+	
 	def createShortcutFromFile (self, file):
 		lnk = readlnk ( file )
 		name = os.path.splitext(os.path.basename(file))[0]
@@ -377,8 +383,14 @@ class Slot:
 		shortcut.data['program']=str(prg)
 		shortcut.data['working_directory']=lnk['working_directory']
 		shortcut.data['description']=lnk['description']
-		#shortcut.data['icon_id']=lnk['icon_number']
-		#shortcut.data['icon_file']=lnk['custom_icon']
+		file = self.winPathToUnix(lnk['target'])
+		iconsdir = self.getPath() + "/icons/" + os.path.basename(file)
+		if os.path.splitext(file)[1].lower() == '.exe':
+			self.extractExeIcons ( file, iconsdir )
+			if len(str(lnk['custom_icon'])) > 0:
+				shortcut.data['icon'] = self.winPathToUnix ( lnk['custom_icon'] )
+			if len(str(lnk['icon_number'])) > 0:
+				shortcut.data['icon'] = iconsdir + "/icon" + str(lnk['icon_number']) + ".bmp"
 		return shortcut
 
 	def findShortcutsCallback ( self, shortcuts, dirname, fnames ):
@@ -503,7 +515,7 @@ def which(name, matchFunc=os.path.isfile):
     raise Exception("Can't find file %s" % name)
 
 def init ():
-	for file in ["wine", "wineconsole", "wineprefixcreate", "winecfg", "wineboot", "winepath", "regedit", "uninstaller"]:
+	for file in ["wine", "wineconsole", "wineprefixcreate", "winecfg", "wineboot", "winepath", "regedit", "uninstaller", "winresdump"]:
 		BIN[file]=which(file)
 	os.environ['WINEDEBUG'] = "warn"
 	if not os.path.exists ( SWINE_PATH ):
