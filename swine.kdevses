@@ -1,23 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <!DOCTYPE KDevPrjSession>
 <KDevPrjSession>
- <DocsAndViews NumberOfDocuments="5" >
-  <Doc0 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/swinelib.py" >
-   <View0 line="4" Type="Source" />
-  </Doc0>
-  <Doc1 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/swinecli.py" >
-   <View0 line="21" Type="Source" />
-  </Doc1>
-  <Doc2 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/swine.py" >
-   <View0 line="6" Type="Source" />
-  </Doc2>
-  <Doc3 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/AboutDialog.ui" >
-   <View0 Type="Other" />
-  </Doc3>
-  <Doc4 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/TODO" >
-   <View0 line="1" Type="Source" />
-  </Doc4>
- </DocsAndViews>
+ <DocsAndViews NumberOfDocuments="0" />
  <pluginList>
   <kdevbookmarks>
    <bookmarks>

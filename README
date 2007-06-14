@@ -6,6 +6,14 @@ Swine needs the following packages:
 - python (Version 2.4 tested)
 - pyqt (Version 3.14.1 tested)
 
+Included Software
+=================
+Winresdump
+	This software is used to extract icons from exe-files.
+	Only the sources of the command-line tool are used and included
+	Copyright (C) 1999    Caolan McNamara
+	Licensed under the GPL
+	URL: http://skynet.csn.ul.ie/~caolan
 
 Compiling the sources
 =====================

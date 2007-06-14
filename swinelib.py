@@ -20,9 +20,6 @@
 
 import sys, os, shutil, signal, time, ConfigParser, stat, array, pipes
 from tarfile import TarFile
-#http://www.python.org/doc/current/api/api.html
-#http://devel.zs4.org/tabiripp_win32.html
-#https://sourceforge.net/projects/wineicons/
 
 DWORD=4
 QWORD=8

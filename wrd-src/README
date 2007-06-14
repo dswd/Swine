@@ -1,0 +1,58 @@
+
+winresdump, windows ne/pe resource dumper
+=========================================
+
+Purpose
+-------
+winresdump (windows resource dumper) is a little utility I threw together to
+get a dump of the resources in windows ne and pe executables.  ne are the 16
+bit win 3.1 executables, pe are the 32bit ones.
+
+usage: winresdump something.exe
+
+For any dib/icon and curson graphics it comes across embedded in the ne
+resources it will create image*.bmp files from them by prepending a bmp header
+and dumping them out to file.
+
+Compiling
+---------
+Compiling should be trivial, and should work on just about any platform.
+i.e.
+
+ gcc -o winresdump *.c -lm
+
+Notes
+-----
+As always ico and cur graphics have the height field twice their actual height,
+so this is halved before dumping.
+
+I only tested it on *one* ne file, and on whatever pe files were on my sad
+little windows partition but this is sort of a handy utility that might be of
+use to someone.
+
+Helping
+-------
+
+Here are some potential projects to extend this for someone.
+
+ 1. Take a windows binary and extract the menus and dialog information
+if it exists in the .exe, parse and convert that into gtk or someother X widget
+equivalent. While you don't get a unix clone of the app automatically at least
+you get a lot of the grunt work of determining what is in the menus and
+dialogs. And making gtk equivalents automatically makes a port of an
+existing windows app that much faster.
+The included dlgtogtk program is a sort of start on this, but its really ultra
+alpha.
+
+ 2. Make a library out of this with the same functionality and similiar 
+interface to the microsoft pefile library as documented in the doc 
+subdirectory.
+
+Copying is allowed under the GPL licence, see http://www.gnu.org for details.
+
+Links
+-----
+ * winresdump home (http://www.csn.ul.ie/~caolan/docs/winresdump.html)
+ * wotsit file format archive (http://www.wotsit.org)
+
+Caolan McNamara (1999) <caolan@skynet.ie>
