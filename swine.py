@@ -41,6 +41,11 @@ class SwineSlotItem(QIconViewItem):
 		QIconViewItem.__init__(self,parent,slot.name,loadPixmap("folder.png"))
 		self.setRenameEnabled(False)
 		self.setDragEnabled(False)
+		shortcut = self.slot.loadDefaultShortcut()
+		if shortcut:
+			if shortcut.data.has_key("icon") and not shortcut.data["icon"] == "":
+				self.setPixmap ( QPixmap ( shortcut.data["icon"] ) )
+
 	def mainWindow(self):
 		return self.iconView().topLevelWidget()
 	def refreshShortcutList(self):
@@ -135,6 +140,11 @@ class SwineShortcutItem(QIconViewItem):
 	def setDefault_cb(self):
 		self.shortcut.setDefault()
 		self.shortcut.slot.saveConfig()
+		pixmap = loadPixmap ( "folder.png" )
+		if self.shortcut.data.has_key("icon") and not self.shortcut.data["icon"] == "":
+			pixmap = self.pixmap()
+		self.mainWindow().currentSlotItem().setPixmap(pixmap)
+		self.mainWindow().currentSlotItem().iconView().adjustItems()
 		self.refreshShortcutList()
 	def run_cb(self):
 		self.shortcut.run()
@@ -209,6 +219,12 @@ class SwineMainWindow(MainWindow):
 		for shortcut in shortcuts:
 			SwineShortcutItem(self.shortcutList,shortcut)
 
+	def rebuildSlotList(self):
+		self.slotList.clear()
+		for slot in getAllSlots():
+			SwineSlotItem(self.slotList,slot)
+		self.slotList.setCurrentItem ( self.slotList.firstItem() )
+
 	def import_cb(self):
 		file = QFileDialog.getOpenFileName ( QString.null, "Swine Slots (*.swine)", self )
 		if not file == None:
@@ -266,10 +282,20 @@ class SwineMainWindow(MainWindow):
 
 	def __init__(self,parent = None,name = None,fl = 0):
 		MainWindow.__init__(self,parent,name,fl)
+		self.setCaption ( "Swine " + VERSION )
+
+
+
 
 
 class SwineAboutDialog(AboutDialog):
-	pass
+	def __init__(self,parent = None,name = None,modal = False,fl = 0):
+		AboutDialog.__init__(self,parent,name,modal,fl)
+		self.versionLabel.setText ( "Swine Version " + VERSION )
+
+
+
+
 
 class SwineRunDialog(RunDialog):
 	
@@ -366,12 +392,9 @@ def main(args):
 	app=QApplication(args)
 	win=SwineMainWindow()
 	win.show()
-	win.slotList.clear()
-	sys.excepthook = win.excepthook
-	for slot in getAllSlots():
-		SwineSlotItem(win.slotList,slot)
+	#sys.excepthook = win.excepthook
 	win.shortcutList.clear()
-	win.slotList.setCurrentItem ( win.slotList.firstItem() )
+	win.rebuildSlotList()
 	app.connect(app, SIGNAL("lastWindowClosed()"), app, SLOT("quit()"))
 	app.exec_loop()
 

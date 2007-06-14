@@ -49,7 +49,7 @@
                 </widget>
                 <widget class="QLabel">
                     <property name="name">
-                        <cstring>textLabel1</cstring>
+                        <cstring>versionLabel</cstring>
                     </property>
                     <property name="font">
                         <font>
@@ -58,7 +58,7 @@
                         </font>
                     </property>
                     <property name="text">
-                        <string>Swine Version 0.1 beta</string>
+                        <string>Swine Version VERSION</string>
                     </property>
                 </widget>
                 <spacer>
@@ -89,7 +89,7 @@
                     <cstring>aboutPage</cstring>
                 </property>
                 <attribute name="title">
-                    <string>Abo&amp;ut</string>
+                    <string>&amp;About</string>
                 </attribute>
                 <hbox>
                     <property name="name">

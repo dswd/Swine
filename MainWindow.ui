@@ -13,7 +13,7 @@
         </rect>
     </property>
     <property name="caption">
-        <string>Swine 0.1</string>
+        <string>Swine VERSION</string>
     </property>
     <property name="icon">
         <pixmap>image0</pixmap>
