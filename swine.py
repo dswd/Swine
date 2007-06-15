@@ -392,7 +392,7 @@ def main(args):
 	app=QApplication(args)
 	win=SwineMainWindow()
 	win.show()
-	#sys.excepthook = win.excepthook
+	sys.excepthook = win.excepthook
 	win.shortcutList.clear()
 	win.rebuildSlotList()
 	app.connect(app, SIGNAL("lastWindowClosed()"), app, SLOT("quit()"))
