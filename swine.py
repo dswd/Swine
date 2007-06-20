@@ -59,6 +59,7 @@ class SwineSlotItem(QIconViewItem):
 		if result[1] and len(result[0]) > 0:
 			self.slot.rename ( str ( result[0] ) )
 			self.setText ( str ( result[0] ) )
+			self.iconView().adjustItems()
 	def copy_cb(self):
 		result = QInputDialog.getText ( "Copy Slot", "New name:", QLineEdit.Normal, "New Slot" )
 		if result[1]:
@@ -75,6 +76,8 @@ class SwineSlotItem(QIconViewItem):
 		self.slot.runWinecfg(os.P_NOWAIT)
 	def wineboot_cb(self):
 		self.slot.runWineboot(os.P_NOWAIT)
+	def fileManager_cb(self):
+		self.slot.runWinefile(os.P_NOWAIT)
 	def regedit_cb(self):
 		self.slot.runRegedit(os.P_NOWAIT)
 	def uninstaller_cb(self):
@@ -186,14 +189,15 @@ class SwineMainWindow(MainWindow):
 			submenu.insertItem( QIconSet(loadPixmap("16x16/find.png")), "&Import Shortcuts", slot.searchShortcuts_cb )
 			submenu.insertItem( QIconSet(loadPixmap("16x16/exit.png")), "&Reboot wine", slot.wineboot_cb )
 			submenu.insertSeparator()
-			submenu.insertItem( QIconSet(loadPixmap("16x16/configure.png")), "&Winecfg", slot.winecfg_cb )
+			submenu.insertItem( QIconSet(loadPixmap("16x16/package_utilities.png")), "&Winecfg", slot.winecfg_cb )
 			submenu.insertItem( QIconSet(loadPixmap("16x16/configure.png")), "&Start Regedit", slot.regedit_cb )
+			submenu.insertItem( QIconSet(loadPixmap("16x16/folder.png")), "&File Manager", slot.fileManager_cb )
 			submenu.insertItem( QIconSet(loadPixmap("16x16/configure.png")), "&Uninstall Software", slot.uninstaller_cb )
-			submenu.insertItem( QIconSet(loadPixmap("16x16/configure.png")), "&Control-Center", slot.control_cb )
+			submenu.insertItem( QIconSet(loadPixmap("16x16/package_system.png")), "&Control-Center", slot.control_cb )
 			submenu.insertSeparator()
 			submenu.insertItem( QIconSet(loadPixmap("16x16/package.png")), "&Export", slot.export_cb )
 			submenu.insertItem( QIconSet(loadPixmap("16x16/package.png")), "&Import Data", slot.import_cb )
-			menu.insertItem( "&Tools", submenu )
+			menu.insertItem( QIconSet(loadPixmap("16x16/package_utilities.png")), "&Tools", submenu )
 			menu.insertSeparator()
 			if not slot.slot.name == SWINE_DEFAULT_SLOT_NAME:
 				menu.insertItem( QIconSet(loadPixmap("16x16/editclear.png")), "&Rename", slot.rename_cb )
@@ -303,6 +307,7 @@ class SwineRunDialog(RunDialog):
 		file = QFileDialog.getOpenFileName( self.slot.winPathToUnix("c:\\"), "Windows executables (*.exe *.EXE)", self )
 		if not file == None:
 			self.filenameLineEdit.setText ( self.slot.unixPathToWin(str(file)) )
+			self.workingDirectoryLineEdit.setText ( self.slot.unixPathToWin(os.path.dirname(str(file))) )
 
 	def fileSelectButton_2_clicked(self):
 		file = QFileDialog.getExistingDirectory( self.slot.winPathToUnix("c:\\"), self )

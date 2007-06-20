@@ -440,6 +440,9 @@ class Slot:
 	def runWineboot (self,mode=os.P_WAIT):
 		return self._run ([BIN["wineboot"]],mode)
 		
+	def runWinefile (self,mode=os.P_WAIT,directory="C:"):
+		return self._run ([BIN["winefile"],directory],mode)
+	
 	def runUninstaller (self,mode=os.P_WAIT):
 		return self._run ([BIN["uninstaller"]],mode)
 		
@@ -519,7 +522,7 @@ def which(name, matchFunc=os.path.isfile):
     raise Exception("Can't find file %s" % name)
 
 def init ():
-	for file in ["wine", "wineconsole", "wineprefixcreate", "winecfg", "wineboot", "winepath", "regedit", "uninstaller", "winresdump"]:
+	for file in ["wine", "wineconsole", "wineprefixcreate", "winecfg", "wineboot", "winefile", "winepath", "regedit", "uninstaller", "winresdump"]:
 		BIN[file]=which(file)
 	os.environ['WINEDEBUG'] = "warn"
 	if not os.path.exists ( SWINE_PATH ):
