@@ -3,7 +3,7 @@
 
 ui_files = MainWindow.ui RunDialog.ui AboutDialog.ui ShortcutDialog.ui
 ui_files_py = MainWindow.py RunDialog.py AboutDialog.py ShortcutDialog.py
-images = images/*.png images/16x16/*.png
+images = images/*.png
 py_files = swine.py swinecli.py swinelib.py
 wrd_dir = wrd-src
 wrd_sources = $(wrd_dir)/README $(wrd_dir)/Makefile $(wrd_dir)/CHANGELOG \

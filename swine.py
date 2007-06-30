@@ -162,48 +162,48 @@ class SwineMainWindow(MainWindow):
 
 	def createShortcutMenu(self, shortcut, parent):
 		menu = QPopupMenu(parent)
-		menu.insertItem( QIconSet(loadPixmap("16x16/filenew.png")), "&New Shortcut", self.createShortcut_cb )
+		menu.insertItem( QIconSet(loadPixmap("application_add.png")), "&New Shortcut", self.createShortcut_cb )
 		if not shortcut == None :
 			menu.insertSeparator()
-			menu.insertItem( QIconSet(loadPixmap("16x16/exec.png")), "&Run", shortcut.run_cb )
+			menu.insertItem( QIconSet(loadPixmap("cog.png")), "&Run", shortcut.run_cb )
 			menu.insertSeparator()
-			menu.insertItem( QIconSet(loadPixmap("16x16/bookmark.png")), "&Set Default", shortcut.setDefault_cb )
-			menu.insertItem( QIconSet(loadPixmap("16x16/edit.png")), "&Edit", shortcut.edit_cb )
+			menu.insertItem( QIconSet(loadPixmap("lightning_add.png")), "&Set Default", shortcut.setDefault_cb )
+			menu.insertItem( QIconSet(loadPixmap("application_edit.png")), "&Edit", shortcut.edit_cb )
 			menu.insertSeparator()
-			menu.insertItem( QIconSet(loadPixmap("16x16/editclear.png")), "&Rename", shortcut.rename_cb )
-			menu.insertItem( QIconSet(loadPixmap("16x16/editcopy.png")), "&Copy", shortcut.copy_cb )
-			menu.insertItem( QIconSet(loadPixmap("16x16/editdelete.png")), "&Delete", shortcut.delete_cb )
+			menu.insertItem( QIconSet(loadPixmap("textfield_rename.png")), "&Rename", shortcut.rename_cb )
+			menu.insertItem( QIconSet(loadPixmap("arrow_divide.png")), "&Copy", shortcut.copy_cb )
+			menu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Delete", shortcut.delete_cb )
 		return menu
 		
 	def createSlotMenu(self, slot, parent):
 		menu = QPopupMenu(parent)
-		menu.insertItem( QIconSet(loadPixmap("16x16/folder_new.png")), "&New Slot", self.createSlot_cb )
+		menu.insertItem( QIconSet(loadPixmap("drive_add.png")), "&New Slot", self.createSlot_cb )
 		if slot == None:
-			menu.insertItem( QIconSet(loadPixmap("16x16/package.png")), "&Import Slot", self.import_cb )
+			menu.insertItem( QIconSet(loadPixmap("package_add.png")), "&Import Slot", self.import_cb )
 		if not slot == None :
 			menu.insertSeparator()
-			menu.insertItem( QIconSet(loadPixmap("16x16/launch.png")), "&Run default", slot.runDefault_cb )
-			menu.insertItem( QIconSet(loadPixmap("16x16/exec.png")), "&Run...", slot.run_cb )
+			menu.insertItem( QIconSet(loadPixmap("application_lightning.png")), "&Run default", slot.runDefault_cb )
+			menu.insertItem( QIconSet(loadPixmap("application.png")), "&Run...", slot.run_cb )
 			menu.insertSeparator()
 			submenu = QPopupMenu(self)
-			submenu.insertItem( QIconSet(loadPixmap("16x16/find.png")), "&Import Shortcuts", slot.searchShortcuts_cb )
-			submenu.insertItem( QIconSet(loadPixmap("16x16/exit.png")), "&Reboot wine", slot.wineboot_cb )
+			submenu.insertItem( QIconSet(loadPixmap("drive_magnify.png")), "&Import Shortcuts", slot.searchShortcuts_cb )
+			submenu.insertItem( QIconSet(loadPixmap("arrow_refresh.png")), "&Reboot wine", slot.wineboot_cb )
 			submenu.insertSeparator()
-			submenu.insertItem( QIconSet(loadPixmap("16x16/package_utilities.png")), "&Winecfg", slot.winecfg_cb )
-			submenu.insertItem( QIconSet(loadPixmap("16x16/configure.png")), "&Start Regedit", slot.regedit_cb )
-			submenu.insertItem( QIconSet(loadPixmap("16x16/folder.png")), "&File Manager", slot.fileManager_cb )
-			submenu.insertItem( QIconSet(loadPixmap("16x16/configure.png")), "&Uninstall Software", slot.uninstaller_cb )
-			submenu.insertItem( QIconSet(loadPixmap("16x16/package_system.png")), "&Control-Center", slot.control_cb )
+			submenu.insertItem( QIconSet(loadPixmap("computer_edit.png")), "&Winecfg", slot.winecfg_cb )
+			submenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.regedit_cb )
+			submenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.fileManager_cb )
+			submenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.uninstaller_cb )
+			submenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.control_cb )
 			submenu.insertSeparator()
-			submenu.insertItem( QIconSet(loadPixmap("16x16/package.png")), "&Export", slot.export_cb )
-			submenu.insertItem( QIconSet(loadPixmap("16x16/package.png")), "&Import Data", slot.import_cb )
-			menu.insertItem( QIconSet(loadPixmap("16x16/package_utilities.png")), "&Tools", submenu )
+			submenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )
+			submenu.insertItem( QIconSet(loadPixmap("package_add.png")), "&Import Data", slot.import_cb )
+			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Tools", submenu )
 			menu.insertSeparator()
 			if not slot.slot.name == SWINE_DEFAULT_SLOT_NAME:
-				menu.insertItem( QIconSet(loadPixmap("16x16/editclear.png")), "&Rename", slot.rename_cb )
-			menu.insertItem( QIconSet(loadPixmap("16x16/editcopy.png")), "&Copy", slot.copy_cb )
+				menu.insertItem( QIconSet(loadPixmap("drive_rename.png")), "&Rename", slot.rename_cb )
+			menu.insertItem( QIconSet(loadPixmap("arrow_divide.png")), "&Copy", slot.copy_cb )
 			if not slot.slot.name == SWINE_DEFAULT_SLOT_NAME:
-				menu.insertItem( QIconSet(loadPixmap("16x16/editdelete.png")), "&Delete", slot.delete_cb )
+				menu.insertItem( QIconSet(loadPixmap("drive_delete.png")), "&Delete", slot.delete_cb )
 		return menu
 	
 	def rebuildMenuBar(self):
