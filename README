@@ -11,18 +11,7 @@ Compiling the sources
 =====================
 In the source distribution the ui-files need to be compiled in py-files.
 The following steps are needed:
-- ./configure
-- make"
-
-
-Rebuilding the configure script
-===============================
-This is only needed when new files are added to the project.
-The following steps are needed:
-- aclocal
-- autoconf
-- automake
-
+- make
 
 Installation
 ============
