@@ -211,7 +211,7 @@ def lnkinfo ( filename ):
 
 
 
-VERSION = "0.2 beta"
+VERSION = "0.3 beta"
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
