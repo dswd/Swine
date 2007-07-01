@@ -46,6 +46,9 @@ src_install() {
 	exeinto /usr/lib/swine
 	doexe swine.py swinecli.py
 
+	exeinto /usr/bin
+	doexe winresdump
+
 	dosym ../lib/swine/swine.py /usr/bin/swine
-        dosym ../lib/swine/swinecli.py /usr/bin/swinecli
+	dosym ../lib/swine/swinecli.py /usr/bin/swinecli
 }
