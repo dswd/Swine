@@ -93,7 +93,7 @@ def readlnk(filename):
 	file_location['local_volume_info_offset'] = bytes2long(data[start+0xC:start+0xC+DWORD])
 	file_location['base_pathname_offset'] = bytes2long(data[start+0x10:start+0x10+DWORD])
 	file_location['network_volume_info_offset'] = bytes2long(data[start+0x14:start+0x14+DWORD])
-	file_location['remainig_pathname_offset'] = bytes2long(data[start+0x18:start+0x18+DWORD])
+	file_location['remaining_pathname_offset'] = bytes2long(data[start+0x18:start+0x18+DWORD])
 	local_volume = {}
 	
 	if file_location['flags']['on_local_volume']:
@@ -127,12 +127,12 @@ def readlnk(filename):
 			index = index + 1
 		network_volume['volume_label'] = name
 	
-	index = start + file_location['remainig_pathname_offset']
+	index = start + file_location['remaining_pathname_offset']
 	name = ""
 	while not data[index] == 0:
 		name += chr(data[index])
 		index = index + 1
-	file_location['remainig_pathname'] = name
+	file_location['remaining_pathname'] = name
 	
 	start += file_location['total_length']
 	
@@ -194,7 +194,7 @@ def readlnk(filename):
 		shortcut['target'] = shortcut['file_location']['local_volume']['base_pathname']
 	elif shortcut['file_location']['flags']['on_network_drive']:
 		shortcut['target'] = shortcut['file_location']['network_volume']['volume_label']
-	shortcut['target'] += shortcut['file_location']['remainig_pathname']
+	shortcut['target'] += shortcut['file_location']['remaining_pathname']
 	return shortcut
 
 def lnkinfo ( filename ):
