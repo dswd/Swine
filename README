@@ -24,6 +24,7 @@ Silk Icon Set 1.3
 Compiling the sources
 =====================
 In the source distribution the ui-files need to be compiled in py-files.
+Also the executable winresdump has to be compiled.
 The following steps are needed:
 - make
 

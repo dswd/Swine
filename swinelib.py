@@ -51,15 +51,18 @@ class Shortcut:
 		return self.name
 	
 	def save (self):
+		# NOTE: Slot.saveConfig needs to be called to make this permanent
 		if not self.slot.config.has_section ( self.name ):
 			self.slot.config.add_section ( self.name )
 		for k, v in self.data.iteritems():
 			self.slot.config.set(self.name,k,v)
 		
 	def delete (self):
+		# NOTE: Slot.saveConfig needs to be called to make this permanent
 		self.slot.config.remove_section (self.name)
 		
 	def rename (self, newname):
+		# NOTE: Slot.saveConfig needs to be called to make this permanent
 		if len(newname) == 0:
 			raise Exception ("Shortcut name cannot be empty.")
 		if newname == self.name:
@@ -69,6 +72,7 @@ class Shortcut:
 		self.save ()
 		
 	def clone (self, newname):
+		# NOTE: Slot.saveConfig needs to be called to make this permanent
 		if len(newname) == 0:
 			raise Exception ("Shortcut name cannot be empty.")
 		shortcut = Shortcut(newname,self.slot,self.data)
@@ -81,6 +85,7 @@ class Shortcut:
 		return ( not self.slot.loadDefaultShortcut() == None ) and self.name == self.slot.loadDefaultShortcut().name
 	
 	def setDefault (self):
+		# NOTE: Slot.saveConfig needs to be called to make this permanent
 		self.slot.setDefaultShortcut(self)
 
 	def iconsDir (self):
@@ -113,6 +118,7 @@ class Slot:
 		self.settings = dict(self.config.items(SWINE_DEFAULT_SECTION))
 
 	def saveConfig(self):
+		# NOTE: This needs to be called after any Shortcut changes to make them permanent
 		for k, v in self.settings.iteritems():
 			self.config.set(SWINE_DEFAULT_SECTION,k,v)
 		self.config.write ( open ( self.getConfigFile(), "w" ) )
@@ -181,6 +187,7 @@ class Slot:
 			return None
 	
 	def setDefaultShortcut (self,shortcut):
+		# NOTE: saveConfig needs to be called to make this permanent
 		self.settings['default_shortcut'] = shortcut.name
 	
 	def extractExeIcons (self, file, iconsdir):
