@@ -251,11 +251,10 @@ class SwineMainWindow(MainWindow):
 		bar.insertItem("&Help",self.Help,1)
 
 	def rebuildShortcutList(self):
-		slot = self.currentSlotItem().slot
-		shortcuts = slot.getAllShortcuts()
 		self.shortcutList.clear()
-		for shortcut in shortcuts:
-			SwineShortcutItem(self.shortcutList,shortcut)
+		if self.currentSlotItem():
+			for shortcut in self.currentSlotItem().slot.getAllShortcuts():
+				SwineShortcutItem(self.shortcutList,shortcut)
 
 	def rebuildSlotList(self):
 		self.slotList.clear()
