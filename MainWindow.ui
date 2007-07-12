@@ -47,7 +47,7 @@
                 <bool>false</bool>
             </property>
             <property name="lineWidth">
-                <number>1</number>
+                <number>2</number>
             </property>
             <property name="midLineWidth">
                 <number>0</number>
@@ -95,8 +95,14 @@
             <property name="acceptDrops">
                 <bool>false</bool>
             </property>
+            <property name="resizePolicy">
+                <enum>Manual</enum>
+            </property>
             <property name="dragAutoScroll">
                 <bool>false</bool>
+            </property>
+            <property name="resizeMode">
+                <enum>Adjust</enum>
             </property>
             <property name="itemsMovable">
                 <bool>false</bool>
@@ -108,10 +114,10 @@
     <property name="name">
         <cstring>menuBar</cstring>
     </property>
-    <item text="Swine" name="Swine">
+    <item text="&amp;Swine" name="Swine">
         <action name="menuExitAction"/>
     </item>
-    <item text="Help" name="Help">
+    <item text="&amp;Help" name="Help">
         <action name="helpabout_SwineAction"/>
     </item>
 </menubar>
@@ -170,10 +176,19 @@
             <iconset>image1</iconset>
         </property>
         <property name="text">
-            <string>About Swine</string>
+            <string>&amp;About Swine</string>
         </property>
         <property name="menuText">
-            <string>About Swine</string>
+            <string>&amp;About Swine</string>
+        </property>
+        <property name="whatsThis">
+            <string></string>
+        </property>
+        <property name="accel">
+            <string></string>
+        </property>
+        <property name="visible">
+            <bool>true</bool>
         </property>
     </action>
     <action>
@@ -184,10 +199,13 @@
             <iconset>image2</iconset>
         </property>
         <property name="text">
-            <string>Exit</string>
+            <string>&amp;Exit</string>
         </property>
         <property name="menuText">
-            <string>Exit</string>
+            <string>&amp;Exit</string>
+        </property>
+        <property name="accel">
+            <string>Alt+F4</string>
         </property>
     </action>
 </actions>

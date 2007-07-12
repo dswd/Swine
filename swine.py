@@ -186,7 +186,7 @@ class SwineMainWindow(MainWindow):
 			menu.insertItem( QIconSet(loadPixmap("lightning_add.png")), "&Set Default", shortcut.setDefault_cb )
 			menu.insertItem( QIconSet(loadPixmap("application_edit.png")), "&Edit", shortcut.edit_cb )
 			menu.insertSeparator()
-			menu.insertItem( QIconSet(loadPixmap("textfield_rename.png")), "&Rename", shortcut.rename_cb )
+			menu.insertItem( QIconSet(loadPixmap("textfield_rename.png")), "Re&name", shortcut.rename_cb )
 			menu.insertItem( QIconSet(loadPixmap("arrow_divide.png")), "&Copy", shortcut.copy_cb )
 			menu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Delete", shortcut.delete_cb )
 		return menu
@@ -198,7 +198,7 @@ class SwineMainWindow(MainWindow):
 			menu.insertItem( QIconSet(loadPixmap("package_add.png")), "&Import Slot", self.import_cb )
 		if not slot == None:
 			menu.insertSeparator()
-			menu.insertItem( QIconSet(loadPixmap("application_lightning.png")), "&Run default", slot.runDefault_cb )
+			menu.insertItem( QIconSet(loadPixmap("application_lightning.png")), "Run default", slot.runDefault_cb )
 			menu.insertItem( QIconSet(loadPixmap("application.png")), "&Run...", slot.run_cb )
 			menu.insertSeparator()
 			submenu = QPopupMenu(self)
@@ -209,15 +209,15 @@ class SwineMainWindow(MainWindow):
 			submenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.regedit_cb )
 			submenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.fileManager_cb )
 			submenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.uninstaller_cb )
-			submenu.insertItem( QIconSet(loadPixmap("style_add.png")), "&Install MS Corefonts", slot.install_corefonts_cb )
+			submenu.insertItem( QIconSet(loadPixmap("style_add.png")), "Install &MS Corefonts", slot.install_corefonts_cb )
 			submenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.control_cb )
 			submenu.insertSeparator()
 			submenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )
-			submenu.insertItem( QIconSet(loadPixmap("package_add.png")), "&Import Data", slot.import_cb )
+			submenu.insertItem( QIconSet(loadPixmap("package_add.png")), "Import &Data", slot.import_cb )
 			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Tools", submenu )
 			menu.insertSeparator()
 			if not slot.slot.name == SWINE_DEFAULT_SLOT_NAME:
-				menu.insertItem( QIconSet(loadPixmap("drive_rename.png")), "&Rename", slot.rename_cb )
+				menu.insertItem( QIconSet(loadPixmap("drive_rename.png")), "R&ename", slot.rename_cb )
 			menu.insertItem( QIconSet(loadPixmap("arrow_divide.png")), "&Copy", slot.copy_cb )
 			if not slot.slot.name == SWINE_DEFAULT_SLOT_NAME:
 				menu.insertItem( QIconSet(loadPixmap("drive_delete.png")), "&Delete", slot.delete_cb )
@@ -245,9 +245,9 @@ class SwineMainWindow(MainWindow):
 		slot = self.currentSlotItem()
 		shortcut = self.currentShortcutItem()
 		bar.insertItem("&Swine",self.Swine,1)
-		bar.insertItem("&Slot",self.createSlotMenu(slot,self),1)
+		bar.insertItem("S&lot",self.createSlotMenu(slot,self),1)
 		if not slot == None:
-			bar.insertItem("Shortcut",self.createShortcutMenu(shortcut,self),1)
+			bar.insertItem("Short&cut",self.createShortcutMenu(shortcut,self),1)
 		bar.insertItem("&Help",self.Help,1)
 
 	def rebuildShortcutList(self):
