@@ -22,7 +22,7 @@ import sys, os, shutil, ConfigParser, array, pipes, urllib
 import shortcutlib
 from tarfile import TarFile
 
-VERSION = "0.3 beta"
+VERSION = "0.3"
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
