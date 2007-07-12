@@ -217,6 +217,20 @@ class SwineMainWindow(MainWindow):
 				menu.insertItem( QIconSet(loadPixmap("drive_delete.png")), "&Delete", slot.delete_cb )
 		return menu
 	
+	def slotListKeyReleaseEvent(self,e):
+		if e.key() == Qt.Key_Delete:
+			e.accept()
+			self.currentSlotItem().delete_cb()
+		else:
+			e.ignore()
+	
+	def shortcutListKeyReleaseEvent(self,e):
+		if e.key() == Qt.Key_Delete:
+			e.accept()
+			self.currentShortcutItem().delete_cb()
+		else:
+			e.ignore()
+	
 	def rebuildMenuBar(self):
 		bar = self.menuBar
 		bar.clear()
@@ -315,6 +329,8 @@ class SwineMainWindow(MainWindow):
 	def __init__(self,parent = None,name = None,fl = 0):
 		MainWindow.__init__(self,parent,name,fl)
 		self.setCaption ( "Swine " + VERSION )
+		self.slotList.keyReleaseEvent = self.slotListKeyReleaseEvent
+		self.shortcutList.keyReleaseEvent = self.shortcutListKeyReleaseEvent
 
 
 
