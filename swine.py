@@ -220,14 +220,16 @@ class SwineMainWindow(MainWindow):
 	def slotListKeyReleaseEvent(self,e):
 		if e.key() == Qt.Key_Delete:
 			e.accept()
-			self.currentSlotItem().delete_cb()
+			if self.currentSlotItem():
+				self.currentSlotItem().delete_cb()
 		else:
 			e.ignore()
 	
 	def shortcutListKeyReleaseEvent(self,e):
 		if e.key() == Qt.Key_Delete:
 			e.accept()
-			self.currentShortcutItem().delete_cb()
+			if self.currentShortcutItem():
+				self.currentShortcutItem().delete_cb()
 		else:
 			e.ignore()
 	
