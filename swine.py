@@ -84,6 +84,8 @@ class SwineSlotItem(QIconViewItem):
 		self.slot.runUninstaller(os.P_NOWAIT)
 	def control_cb(self):
 		self.slot.runWineControl(os.P_NOWAIT)
+	def install_corefonts_cb(self):
+		self.slot.installCorefonts()
 	def run_cb(self):
 		runDialog = SwineRunDialog(self.slot,self.mainWindow())
 		runDialog.show()
@@ -193,6 +195,7 @@ class SwineMainWindow(MainWindow):
 			submenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.regedit_cb )
 			submenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.fileManager_cb )
 			submenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.uninstaller_cb )
+			submenu.insertItem( QIconSet(loadPixmap("style_add.png")), "&Install MS Corefonts", slot.install_corefonts_cb )
 			submenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.control_cb )
 			submenu.insertSeparator()
 			submenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )

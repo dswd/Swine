@@ -196,7 +196,7 @@ class Slot:
 		self._run ([BIN["winresdump"],file],os.P_WAIT,iconsdir)
 	
 	def createShortcutFromFile (self, file):
-		lnk = readlnk ( file )
+		lnk = shortcutlib.readlnk ( file )
 		name = os.path.splitext(os.path.basename(file))[0]
 		shortcut = Shortcut(name,self)
 		prg = [lnk['target']]
@@ -236,7 +236,6 @@ class Slot:
 		self.setWinePrefixCheck()
 		if os.path.exists(workingDirectory):
 			os.chdir ( workingDirectory )
-		print self.winPathToUnix(workingDirectory)
 		if os.path.exists(self.winPathToUnix(workingDirectory)):
 			os.chdir ( self.winPathToUnix(workingDirectory) )
 		return os.spawnv(mode, prog[0], prog)
@@ -266,6 +265,26 @@ class Slot:
 		
 	def runWineControl (self,mode=os.P_WAIT):
 		return self._run ([BIN["wine"],"control"],mode)
+	
+	def installCorefonts (self):
+		from urllib import urlopen
+		fonts = ["andale","arial","arialb","comic","courie","georgi","impact","times","trebuc","verdan","webdin"]
+		path = self.getPath() + "/corefonts"
+		cabextract = which ("cabextract")
+		if not os.path.exists ( path ):
+			os.mkdir ( path )
+		os.chdir ( path )
+		for font in fonts:
+			file = font + "32.exe"
+			if not os.path.exists ( file ):
+				instream=urlopen("http://downloads.sourceforge.net/corefonts/" + file + "?use_mirror=switch")
+				outfile=open(file, "wb")
+				outfile.write(instream.read())
+				outfile.close()
+			self._run([cabextract,file])
+		for file in os.listdir ( path ):
+			if os.path.splitext(file)[1].lower() == ".ttf":
+				shutil.copyfile ( file, self.getPath() + "/drive_c/windows/fonts/" + file )
 	
 	def winPathToUnix (self,path):
 		self.setWinePrefixCheck()
