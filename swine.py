@@ -275,6 +275,8 @@ class SwineMainWindow(MainWindow):
 		shortcut = Shortcut("New Shortcut",self.currentSlotItem().slot)
 		dialog = SwineShortcutDialog ( shortcut, self, "New Shortcut" )
 		if dialog.exec_loop() == 1:
+			if self.currentSlotItem().slot.loadShortcut ( shortcut.name ):
+				raise SwineException ( "Shortcut '" + shortcut.name + "' already exists" )
 			shortcut.save()
 			shortcut.slot.saveConfig()
 			self.slotList_selectionChanged()
