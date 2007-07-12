@@ -96,7 +96,8 @@ class SwineSlotItem(QIconViewItem):
 		runDialog = SwineRunDialog(self.slot,self.mainWindow())
 		runDialog.show()
 	def runDefault_cb(self):
-	  self.slot.loadDefaultShortcut().run()
+		if self.slot.loadDefaultShortcut():
+			self.slot.loadDefaultShortcut().run()
 	def	export_cb(self):
 		file = QFileDialog.getSaveFileName ( QString.null, "Swine Slots (*.swine)", self.mainWindow() )
 		if not os.path.splitext(str(file))[1].lower() == '.swine':
@@ -105,7 +106,7 @@ class SwineSlotItem(QIconViewItem):
 			self.slot.exportData ( str(file) )
 	def import_cb(self):
 		file = QFileDialog.getOpenFileName ( QString.null, "Swine Slots (*.swine)", self.mainWindow() )
-		if not file == None:
+		if file:
 			self.slot.importData ( str(file) )
 			self.refreshShortcutList()
 
@@ -171,7 +172,7 @@ class SwineMainWindow(MainWindow):
 	def createShortcutMenu(self, shortcut, parent):
 		menu = QPopupMenu(parent)
 		menu.insertItem( QIconSet(loadPixmap("application_add.png")), "&New Shortcut", self.createShortcut_cb )
-		if not shortcut == None :
+		if not shortcut == None:
 			menu.insertSeparator()
 			menu.insertItem( QIconSet(loadPixmap("cog.png")), "&Run", shortcut.run_cb )
 			menu.insertSeparator()
@@ -188,7 +189,7 @@ class SwineMainWindow(MainWindow):
 		menu.insertItem( QIconSet(loadPixmap("drive_add.png")), "&New Slot", self.createSlot_cb )
 		if slot == None:
 			menu.insertItem( QIconSet(loadPixmap("package_add.png")), "&Import Slot", self.import_cb )
-		if not slot == None :
+		if not slot == None:
 			menu.insertSeparator()
 			menu.insertItem( QIconSet(loadPixmap("application_lightning.png")), "&Run default", slot.runDefault_cb )
 			menu.insertItem( QIconSet(loadPixmap("application.png")), "&Run...", slot.run_cb )
@@ -240,7 +241,7 @@ class SwineMainWindow(MainWindow):
 
 	def import_cb(self):
 		file = QFileDialog.getOpenFileName ( QString.null, "Swine Slots (*.swine)", self )
-		if not file == None:
+		if file:
 			result = QInputDialog.getText ( "Import Slot", "Name:", QLineEdit.Normal, os.path.splitext(os.path.basename(str(file)))[0] )
 			if result[1]:
 				slot = importSlot ( str(result[0]), str(file) )
@@ -381,12 +382,17 @@ class SwineShortcutDialog(ShortcutDialog):
 			self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
 	
 	def icon_clicked(self):
-		self.iconFile = QFileDialog.getOpenFileName( self.shortcut.iconsDir(), "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
+		dirStr = ""
+		if self.shortcut.iconsDir():
+			dirStr = self.shortcut.iconsDir()
+		self.iconFile = QFileDialog.getOpenFileName( dirStr, "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
 		if not self.iconFile == None:
 			self.icon.setIconSet ( QIconSet ( loadIcon ( self.iconFile ) ) )
 			self.shortcut.data["icon"] = self.iconFile
 
 	def saveButton_clicked(self):
+		if len(str(self.nameInput.text())) == 0:
+			raise SwineException ( "Shotcut name cannot be empty" )
 		self.shortcut.name = str(self.nameInput.text())
 		self.shortcut.data["icon"] = str(self.iconFile)
 		prog = []

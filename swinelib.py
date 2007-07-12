@@ -55,6 +55,8 @@ class Shortcut:
 	
 	def save (self):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
+		if not self.name:
+			raise SwineException ( "Shortcut name cannot be empty" )
 		if not self.slot.config.has_section ( self.name ):
 			self.slot.config.add_section ( self.name )
 		for k, v in self.data.iteritems():
@@ -62,6 +64,8 @@ class Shortcut:
 		
 	def delete (self):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
+		if self.isDefault():
+			self.slot.unsetDefaultShortcut()
 		self.slot.config.remove_section (self.name)
 		
 	def rename (self, newname):
@@ -202,6 +206,10 @@ class Slot:
 	def setDefaultShortcut (self,shortcut):
 		# NOTE: saveConfig needs to be called to make this permanent
 		self.settings['default_shortcut'] = shortcut.name
+	
+	def unsetDefaultShortcut (self):
+		# NOTE: saveConfig needs to be called to make this permanent
+		self.settings['default_shortcut'] = None
 	
 	def extractExeIcons (self, file, iconsdir):
 		if not os.path.exists ( iconsdir ):
