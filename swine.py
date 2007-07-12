@@ -35,6 +35,11 @@ IMAGE_FOLDER = os.path.dirname(os.path.realpath(__file__)) + "/images/"
 def loadPixmap ( name ):
 	return QPixmap(QString(IMAGE_FOLDER+name))
 
+def loadIcon ( name ):
+	pm = QPixmap ( name )
+	pm.setMask ( pm.createHeuristicMask() )
+	return pm
+
 class SwineSlotItem(QIconViewItem):
 	def __init__(self,parent,slot):
 		self.slot=slot
@@ -44,7 +49,7 @@ class SwineSlotItem(QIconViewItem):
 		shortcut = self.slot.loadDefaultShortcut()
 		if shortcut:
 			if shortcut.data.has_key("icon") and not shortcut.data["icon"] == "":
-				self.setPixmap ( QPixmap ( shortcut.data["icon"] ) )
+				self.setPixmap ( loadIcon ( shortcut.data["icon"] ) )
 	def mainWindow(self):
 		return self.iconView().topLevelWidget()
 	def refreshShortcutList(self):
@@ -115,7 +120,7 @@ class SwineShortcutItem(QIconViewItem):
 		self.setRenameEnabled(False)
 		self.setDragEnabled(False)
 		if shortcut.data.has_key("icon") and not shortcut.data["icon"] == "":
-			self.setPixmap ( QPixmap ( shortcut.data["icon"] ) )
+			self.setPixmap ( loadIcon ( shortcut.data["icon"] ) )
 	def mainWindow(self):
 		return self.iconView().topLevelWidget()
 	def refreshShortcutList(self):
@@ -378,7 +383,7 @@ class SwineShortcutDialog(ShortcutDialog):
 	def icon_clicked(self):
 		self.iconFile = QFileDialog.getOpenFileName( self.shortcut.iconsDir(), "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
 		if not self.iconFile == None:
-			self.icon.setIconSet ( QIconSet ( QPixmap ( self.iconFile ) ) )
+			self.icon.setIconSet ( QIconSet ( loadIcon ( self.iconFile ) ) )
 			self.shortcut.data["icon"] = self.iconFile
 
 	def saveButton_clicked(self):
@@ -401,7 +406,7 @@ class SwineShortcutDialog(ShortcutDialog):
 		if not shortcut.data == {}:
 			self.nameInput.setEnabled ( False )
 			if shortcut.data.has_key("icon" ) and not shortcut.data["icon"] == "":
-				self.icon.setIconSet ( QIconSet ( QPixmap ( shortcut.data["icon"] ) ) )
+				self.icon.setIconSet ( QIconSet ( loadIcon ( shortcut.data["icon"] ) ) )
 				self.iconFile = shortcut.data["icon"]
 			self.applicationInput.setText ( str2args(shortcut.data["program"])[0] )
 			self.workingDirectoryInput.setText ( shortcut.data["working_directory"] )
