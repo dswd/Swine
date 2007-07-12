@@ -166,9 +166,15 @@ class SwineShortcutItem(QIconViewItem):
 
 class SwineMainWindow(MainWindow):
 	def currentSlotItem(self):
-		return self.slotList.currentItem()
+		item = self.slotList.currentItem()
+		if item and item.isSelected():
+			return item
+		return None
 	def currentShortcutItem(self):
-		return self.shortcutList.currentItem()
+		item = self.shortcutList.currentItem()
+		if item and item.isSelected():
+			return item
+		return None
 
 	def createShortcutMenu(self, shortcut, parent):
 		menu = QPopupMenu(parent)
