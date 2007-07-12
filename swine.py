@@ -72,7 +72,7 @@ class SwineSlotItem(QIconViewItem):
 			slot.loadConfig()
 			SwineSlotItem(self.mainWindow().slotList,slot)		
 	def searchShortcuts_cb(self):
-		for shortcut in self.slot.findShortcuts(True):
+		for shortcut in self.slot.findShortcuts(False):
 			shortcut.save()
 		self.slot.saveConfig()
 		self.refreshShortcutList()

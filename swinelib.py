@@ -254,6 +254,8 @@ class Slot:
 		return os.spawnv(mode, prog[0], prog)
 	
 	def run (self,prog,mode=os.P_WAIT,workingDirectory=".",runInTerminal=False):
+		if not os.path.splitext(prog[0])[1].lower() == ".exe":
+			prog.insert(0,"start")
 		if runInTerminal:
 			prog.insert(0,BIN["wineconsole"])
 			prog.insert(1,"--backend=user")
