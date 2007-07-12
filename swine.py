@@ -85,7 +85,8 @@ class SwineSlotItem(QIconViewItem):
 	def control_cb(self):
 		self.slot.runWineControl(os.P_NOWAIT)
 	def install_corefonts_cb(self):
-		self.slot.installCorefonts()
+		if QMessageBox.information ( self.iconView(), "Install MS Corefonts", "This will download, unpack and install the Microsoft Corefonts.\nYou will need an internet connection and the 'cabextract' program for this to work.", "&Continue", "&Abort", QString.null, 0, 1 ) == 0:
+			self.slot.installCorefonts()
 	def run_cb(self):
 		runDialog = SwineRunDialog(self.slot,self.mainWindow())
 		runDialog.show()

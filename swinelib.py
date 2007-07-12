@@ -107,6 +107,16 @@ class Slot:
 	def getPath(self):
 		return SWINE_SLOT_PATH + "/" + self.name
 
+	def getDrivePath(self, drive):
+		drive = drive.lower()
+		if len(drive) == 1:
+			drive = drive + ":"
+		if not len(drive) == 2:
+			raise Exception (drive + " is not a valid drive")
+		if not os.path.exists ( self.getPath() + "/dosdevices/" + drive ):
+			raise Exception (drive + " does not exist")
+		return self.getPath() + "/dosdevices/" + drive
+	
 	def getConfigFile(self):
 		return SWINE_SLOT_PATH + "/" + self.name + "/swine.ini"
 
@@ -284,7 +294,7 @@ class Slot:
 			self._run([cabextract,file])
 		for file in os.listdir ( path ):
 			if os.path.splitext(file)[1].lower() == ".ttf":
-				shutil.copyfile ( file, self.getPath() + "/drive_c/windows/fonts/" + file )
+				shutil.move ( file, self.getDrivePath("c:") + "/windows/fonts/" + file )
 	
 	def winPathToUnix (self,path):
 		self.setWinePrefixCheck()
