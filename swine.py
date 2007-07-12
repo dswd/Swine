@@ -100,10 +100,11 @@ class SwineSlotItem(QIconViewItem):
 			self.slot.loadDefaultShortcut().run()
 	def	export_cb(self):
 		file = QFileDialog.getSaveFileName ( QString.null, "Swine Slots (*.swine)", self.mainWindow() )
+		if not file:
+			return
 		if not os.path.splitext(str(file))[1].lower() == '.swine':
 			file = str(file) + ".swine"
-		if not file == None:
-			self.slot.exportData ( str(file) )
+		self.slot.exportData ( str(file) )
 	def import_cb(self):
 		file = QFileDialog.getOpenFileName ( QString.null, "Swine Slots (*.swine)", self.mainWindow() )
 		if file:
@@ -221,6 +222,7 @@ class SwineMainWindow(MainWindow):
 		bar.clear()
 		slot = self.currentSlotItem()
 		shortcut = self.currentShortcutItem()
+		bar.insertItem("&Swine",self.Swine,1)
 		bar.insertItem("&Slot",self.createSlotMenu(slot,self),1)
 		if not slot == None:
 			bar.insertItem("Shortcut",self.createShortcutMenu(shortcut,self),1)
@@ -274,6 +276,9 @@ class SwineMainWindow(MainWindow):
 
 	def helpabout_SwineAction_activated(self):
 		SwineAboutDialog().exec_loop()
+	
+	def menuExitAction_activated(self):
+		QApplication.exit(0)
 	
 	def slotList_selectionChanged(self):
 		self.rebuildShortcutList()

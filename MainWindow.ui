@@ -108,6 +108,9 @@
     <property name="name">
         <cstring>menuBar</cstring>
     </property>
+    <item text="Swine" name="Swine">
+        <action name="menuExitAction"/>
+    </item>
     <item text="Help" name="Help">
         <action name="helpabout_SwineAction"/>
     </item>
@@ -173,6 +176,20 @@
             <string>About Swine</string>
         </property>
     </action>
+    <action>
+        <property name="name">
+            <cstring>menuExitAction</cstring>
+        </property>
+        <property name="iconSet">
+            <iconset>image2</iconset>
+        </property>
+        <property name="text">
+            <string>Exit</string>
+        </property>
+        <property name="menuText">
+            <string>Exit</string>
+        </property>
+    </action>
 </actions>
 <images>
     <image name="image0">
@@ -180,6 +197,9 @@
     </image>
     <image name="image1">
         <data format="PNG" length="725">89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff610000029c49444154388da593cd6bdc6514859f779ad492693289692133b1e663da5469a10a2615a9204837428a7550a1a4edc285ab6c5570e57f2054b0bab21f5411635c0b564cc4e02cdc94310d639b34e6636a4c33c924fe66defbbef7ba1093d6e246cff272793870ce7166c6ff51d33f0f858f66f2a2e18c053dd7f0d2154c31b4027a3906bd36f1ce73b7eeff77f73b78f9e274c17bb9d097b1ec504f3b6dbb7701b09e0426cb77b9b1b4b58cb3d1e27b2f8e3d0438f561a9e013b974f2504bfa68772b8bab9eca7a425423d3b28b5c660fe5df6b8c7f736b8b26ce17df3f35b60d18fee046bf48983c79309d3bdcd54a71b64a08c2b19e0e30e3a7d9355cca7124bb975fd76a7cf5757909d3e78b1fbf763b05201a46fada2cf744b68da9f23d7ce2918632fc4c96e1c11c1204dff09416aaf4eecb3070b02d67898c00a4007c8c678ff776325bd94444108d440d7c3935cfd8d43c5e3c3e78369384b9950d4e3cd583f3feec760a3ef1dd1dad4d9497ab84189128982a232ff463c0d4f412a60a382aab1b0ce41ec362d2bde3a0e1313582810f0d3446548dd29d35fea807a20f44890409042f980362641b00717175ab4e67ba1967294c0d8d91bf1232a2045404154f26fd0877376a38a78b3b001fae4c9416e8d99f065508c6e9677b79f2f10e5af634337afa18224210a1af2bc3e4e42f805dd969623db93a7db3f6663edb9e1b1ad8cff7a5053eff6e864fafff8c49c04c318ca70f1f60aebac1ed5279c9c1d5078a34f8c66705abd52fbdf4cad174ffbe566ede5961e55e0d0dcaa3ed2d1c3ad0c95c7593eb5f7cbb856b3e5f1c7f6bec0100c0e0eb9f14307f217f249b3d713c4fe7dedd80f1db7a9d891f66982f95979d4b8d16c7df7eb8ca7f6be8d58b79b37806d37368bd0b539c7315e0b243aefd38feeebf8fe9bfe84fa83f827b2d5eeffa0000000049454e44ae426082</data>
+    </image>
+    <image name="image2">
+        <data format="PNG" length="651">89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff610000025249444154388d9d935f4b145118c69f73664667767666db5ca4964a44886224906e82a8b0408220bab32cca922084282ac98fd155f45d2a85a23ec1085de562ceee6ca1aebaee1ee73d7fbad05637f1a21e3817e7e53c3fcefb9cf3c218837f5962722ab77fcfb15f33b30398998d7088b627a72243d9e3d6f8c4e53fb53dc0ccec002cab62388ff5f3970720db0f1e45e03ce641f046134d6fdebc75760fb06b466f2fe0ba00e7b19c7eda8188fb0f2330165b791f3da5129c301cd7198dad5d1be3cc1803bc7aed1aadb7e0799c0501f4c60674a3012ddac39a2418e7310f033861012259c6762d559ac82bcebda71d0000fdec856b946a32cfb37858805a6f40aeadc290841504700a21c4720291a6ca48ca17e73e0800e80000403e9976b5544d9ecb5976f108a034a035a015449240a4f51df3fc4771304400f6bbb7c210e5696545831450a9008b8b805210b5546bcabacc070000a089861803879200112025202598c5b9ce68e8eff35d80f69d7b111862cbcb0192807219281f07a4446fa100cbb6e2fac8f9ae27ee64d0ba7d37629cc576ce87138668d7aa10f5bad244cc2d1ee57ef9185ab514ad6a15d96673b8fc6d61a17383d6f844c4188b6d2f0727f0d14e76d2d619e50d91bf95246af3fb2272a53e78a512ec1e275e1e1c8a00c0deedbb9f3b366034da490ded9f756548e6fbbe7c1200909e1bc93793a469b2cc727c1f8c7318a5fa012c745a58bf7e63943bce1c6dac6b4dd22f7dfddc9576f5f419d728d5ec09024bacae5e3db954990780ae495bb97465f4d7858bee6193f86360d05d3a716a747fadeb23fd8f7e03bf9e75c9cb73019f0000000049454e44ae426082</data>
     </image>
 </images>
 <connections>
@@ -237,6 +257,12 @@
         <receiver>MainWindow</receiver>
         <slot>helpabout_SwineAction_activated()</slot>
     </connection>
+    <connection>
+        <sender>menuExitAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindow</receiver>
+        <slot>menuExitAction_activated()</slot>
+    </connection>
 </connections>
 <slots>
     <slot>slotList_selectionChanged(QIconViewItem*)</slot>
@@ -252,6 +278,10 @@
     <slot>slotList_itemExecuted(QIconViewItem*)</slot>
     <slot>shortcutList_selectionChanged(QIconViewItem*)</slot>
     <slot>helpabout_SwineAction_activated()</slot>
+    <slot>menuExitAction_activated()</slot>
 </slots>
+<functions>
+    <function>quit()</function>
+</functions>
 <layoutdefaults spacing="2" margin="1"/>
 </UI>

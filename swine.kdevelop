@@ -99,7 +99,7 @@
     <groups>
       <group pattern="*.py" name="Python files" />
       <group pattern="*.ui" name="QT Designer files" />
-      <hidenonprojectfiles>false</hidenonprojectfiles>
+      <hidenonprojectfiles>true</hidenonprojectfiles>
       <hidenonlocation>false</hidenonlocation>
     </groups>
   </kdevfileview>
@@ -121,7 +121,7 @@
     <LICENSEFILE>COPYING</LICENSEFILE>
     <VERSION>0.1</VERSION>
     <YEAR>2007</YEAR>
-    <dest>/home/lemming/projekte/swine</dest>
+    <dest>/home/lemming/projekte/swine/trunk</dest>
   </substmap>
   <kdevpythonsupport>
     <run>
