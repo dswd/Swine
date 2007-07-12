@@ -307,7 +307,7 @@ class SwineMainWindow(MainWindow):
 		self.rebuildShortcutList()
 		self.rebuildMenuBar()
 
-	def shortcutList_selectionChanged(self,item):
+	def shortcutList_selectionChanged(self):
 		self.rebuildMenuBar()
 
 	def shortcutList_itemExceuted(self,item):

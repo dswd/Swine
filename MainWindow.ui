@@ -246,12 +246,6 @@
         <slot>slotList_itemExecuted(QIconViewItem*)</slot>
     </connection>
     <connection>
-        <sender>shortcutList</sender>
-        <signal>selectionChanged(QIconViewItem*)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>shortcutList_selectionChanged(QIconViewItem*)</slot>
-    </connection>
-    <connection>
         <sender>helpabout_SwineAction</sender>
         <signal>activated()</signal>
         <receiver>MainWindow</receiver>
@@ -262,6 +256,12 @@
         <signal>activated()</signal>
         <receiver>MainWindow</receiver>
         <slot>menuExitAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>shortcutList</sender>
+        <signal>selectionChanged()</signal>
+        <receiver>MainWindow</receiver>
+        <slot>shortcutList_selectionChanged()</slot>
     </connection>
 </connections>
 <slots>
@@ -279,6 +279,7 @@
     <slot>shortcutList_selectionChanged(QIconViewItem*)</slot>
     <slot>helpabout_SwineAction_activated()</slot>
     <slot>menuExitAction_activated()</slot>
+    <slot>shortcutList_selectionChanged()</slot>
 </slots>
 <functions>
     <function>quit()</function>
