@@ -288,6 +288,8 @@ class SwineMainWindow(MainWindow):
 			SwineSlotItem(self.slotList,slot)
 
 	def shortcutList_rightButtonClicked(self, shortcut, point):
+		if not self.currentSlotItem():
+			return
 		menu = self.createShortcutMenu(shortcut,self)
 		menu.popup(point)
 		menu.show()
