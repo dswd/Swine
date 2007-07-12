@@ -18,7 +18,7 @@
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
 
-import sys, os, shutil, ConfigParser, array, pipes
+import sys, os, shutil, ConfigParser, array, pipes, urllib
 import shortcutlib
 from tarfile import TarFile
 
@@ -280,7 +280,6 @@ class Slot:
 		return self._run ([BIN["wine"],"control"],mode)
 	
 	def installCorefonts (self):
-		from urllib import urlopen
 		fonts = ["andale","arial","arialb","comic","courie","georgi","impact","times","trebuc","verdan","webdin"]
 		path = self.getPath() + "/corefonts"
 		cabextract = which ("cabextract")
@@ -290,7 +289,7 @@ class Slot:
 		for font in fonts:
 			file = font + "32.exe"
 			if not os.path.exists ( file ):
-				instream=urlopen("http://downloads.sourceforge.net/corefonts/" + file + "?use_mirror=switch")
+				instream=urllib.urlopen("http://downloads.sourceforge.net/corefonts/" + file + "?use_mirror=switch")
 				outfile=open(file, "wb")
 				outfile.write(instream.read())
 				outfile.close()
