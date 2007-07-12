@@ -36,10 +36,13 @@ WINE_PATH = os.getenv("HOME") + "/.wine"
 BIN = {}
 
 
+class SwineException(Exception):
+	pass
+
 class Shortcut:
 	def __init__(self,name,slot,data={}):
 		if len(name) == 0:
-			raise Exception ("Shortcut name cannot be empty.")
+			raise SwineException ("Shortcut name cannot be empty.")
 		self.name = name
 		if len(data) == 0:
 			self.data = {}
@@ -64,7 +67,7 @@ class Shortcut:
 	def rename (self, newname):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
 		if len(newname) == 0:
-			raise Exception ("Shortcut name cannot be empty.")
+			raise SwineException ("Shortcut name cannot be empty.")
 		if newname == self.name:
 			return None
 		self.delete ()
@@ -74,7 +77,7 @@ class Shortcut:
 	def clone (self, newname):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
 		if len(newname) == 0:
-			raise Exception ("Shortcut name cannot be empty.")
+			raise SwineException ("Shortcut name cannot be empty.")
 		shortcut = Shortcut(newname,self.slot,self.data)
 		shortcut.save ()
 
@@ -96,7 +99,7 @@ class Shortcut:
 class Slot:
 	def __init__(self, name):
 		if len(name) == 0:
-			raise Exception ("Slot name cannot be empty.")
+			raise SwineException ("Slot name cannot be empty.")
 		self.name = name
 		self.config = None
 		self.settings = None
@@ -112,9 +115,9 @@ class Slot:
 		if len(drive) == 1:
 			drive = drive + ":"
 		if not len(drive) == 2:
-			raise Exception (drive + " is not a valid drive")
+			raise SwineException (drive + " is not a valid drive")
 		if not os.path.exists ( self.getPath() + "/dosdevices/" + drive ):
-			raise Exception (drive + " does not exist")
+			raise SwineException (drive + " does not exist")
 		return self.getPath() + "/dosdevices/" + drive
 	
 	def getConfigFile(self):
@@ -138,7 +141,7 @@ class Slot:
 
 	def setWinePrefixCheck (self):
 		if not self.exists():
-			raise Exception ("Slot does not exist: " + self.name)
+			raise SwineException ("Slot does not exist: " + self.name)
 		self.setWinePrefix()
 
 	def exists (self):
@@ -146,7 +149,7 @@ class Slot:
 	
 	def create (self):
 		if self.exists():
-			raise Exception ("Slot already exists: " + self.name)
+			raise SwineException ("Slot already exists: " + self.name)
 		self.setWinePrefix()
 		os.system (BIN["wineprefixcreate"])
 		self.loadConfig()
@@ -154,29 +157,29 @@ class Slot:
 	
 	def delete (self):
 		if self.name == SWINE_DEFAULT_SLOT_NAME:
-			raise Exception ("Default slot cannot be deleted")
+			raise SwineException ("Default slot cannot be deleted")
 		if not self.exists ():
-			raise Exception ("Slot does not exist: " + self.name)
+			raise SwineException ("Slot does not exist: " + self.name)
 		shutil.rmtree ( self.getPath() )
 
 	def clone (self,newname):
 		if len(newname) == 0:
-			raise Exception ("Slot name cannot be empty.")
+			raise SwineException ("Slot name cannot be empty.")
 		if not self.exists():
-			raise Exception ("Slot does not exist: " + self.name)
+			raise SwineException ("Slot does not exist: " + self.name)
 		if Slot(newname).exists():
-			raise Exception ("Slot does already exist: " + newname)
+			raise SwineException ("Slot does already exist: " + newname)
 		shutil.copytree ( self.getPath(), Slot(newname).getPath(), True )
 
 	def rename (self,newname):
 		if len(newname) == 0:
-			raise Exception ("Slot name cannot be empty.")
+			raise SwineException ("Slot name cannot be empty.")
 		if self.name == SWINE_DEFAULT_SLOT_NAME:
-			raise Exception ("Default slot cannot be renamed")
+			raise SwineException ("Default slot cannot be renamed")
 		if not self.exists():
-			raise Exception ("Slot does not exist: " + self.name)
+			raise SwineException ("Slot does not exist: " + self.name)
 		if Slot(newname).exists():
-			raise Exception ("Slot does already exist: " + newname)
+			raise SwineException ("Slot does already exist: " + newname)
 		shutil.move ( self.getPath(), Slot(newname).getPath() )
 		self.name = newname
 
@@ -306,7 +309,7 @@ class Slot:
 
 	def exportData (self,file):
 		if len(file) == 0:
-			raise Exception ("File name cannot be empty.")
+			raise SwineException ("File name cannot be empty.")
 		os.chdir(self.getPath ())
 		tar = TarFile.gzopen ( file, "w" )
 		tar.add ( "." )
@@ -314,7 +317,7 @@ class Slot:
 
 	def importData (self, file):
 		if len(file) == 0:
-			raise Exception ("File name cannot be empty.")
+			raise SwineException ("File name cannot be empty.")
 		os.chdir(self.getPath ())
 		tar = TarFile.gzopen ( file, "r" )
 		for file in tar:
@@ -325,7 +328,7 @@ class Slot:
 
 def importSlot (name, file):
 	if len(file) == 0:
-		raise Exception ("File name cannot be empty.")
+		raise SwineException ("File name cannot be empty.")
 	slot = Slot ( name )
 	slot.create()
 	os.chdir(slot.getPath ())
@@ -366,7 +369,9 @@ def which(name, matchFunc=os.path.isfile):
         candidate = os.path.join(dirname, name)
         if matchFunc(candidate):
             return candidate
-    raise Exception("Can't find file %s" % name)
+    raise SwineException("Can't find file %s" % name)
+
+
 
 def init ():
 	for file in ["wine", "wineconsole", "wineprefixcreate", "winecfg", "wineboot", "winefile", "winepath", "regedit", "uninstaller", "winresdump"]:
@@ -393,7 +398,7 @@ def getAllSlots ():
 def loadSlot (name):
 	slot = Slot(name)
 	if not slot.exists():
-		raise Exception ("Slot does not exist: " + name)
+		raise SwineException ("Slot does not exist: " + name)
 	slot.loadConfig()
 	return slot
 

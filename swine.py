@@ -20,7 +20,7 @@
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
 
-import os, sys
+import os, sys, traceback
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 import swinelib
@@ -45,7 +45,6 @@ class SwineSlotItem(QIconViewItem):
 		if shortcut:
 			if shortcut.data.has_key("icon") and not shortcut.data["icon"] == "":
 				self.setPixmap ( QPixmap ( shortcut.data["icon"] ) )
-
 	def mainWindow(self):
 		return self.iconView().topLevelWidget()
 	def refreshShortcutList(self):
@@ -87,6 +86,7 @@ class SwineSlotItem(QIconViewItem):
 	def install_corefonts_cb(self):
 		if QMessageBox.information ( self.iconView(), "Install MS Corefonts", "This will download, unpack and install the Microsoft Corefonts.\nYou will need an internet connection and the 'cabextract' program for this to work.", "&Continue", "&Abort", QString.null, 0, 1 ) == 0:
 			self.slot.installCorefonts()
+			QMessageBox.information ( self.iconView(), "Install MS Corefonts", "MS Corefonts installed sucessfully.")
 	def run_cb(self):
 		runDialog = SwineRunDialog(self.slot,self.mainWindow())
 		runDialog.show()
@@ -286,7 +286,20 @@ class SwineMainWindow(MainWindow):
 			slot.loadDefaultShortcut().run()
 
 	def excepthook(self, excType, excValue, tracebackobj):
-		QMessageBox.critical (self, "Error", str(excType) + ": " + str(excValue) )
+		tb = tracebackobj
+		while not tb.tb_next == None:
+			tb = tb.tb_next
+		f = tb.tb_frame
+		obj = f.f_locals.get("self", None)
+		functionName = f.f_code.co_name
+		callStr = f.f_code.co_name+" (" + os.path.basename(f.f_code.co_filename) + ", line "+str(f.f_lineno)+")"
+		if obj:
+			callStr = obj.__class__.__name__+"::"+callStr
+		if excType == SwineException:
+			excStr = str(excValue)
+		else:
+			excStr = str(excType) + ": " + str(excValue) + "\nin " + callStr
+		QMessageBox.critical (self, "Error", excStr )
 
 	def __init__(self,parent = None,name = None,fl = 0):
 		MainWindow.__init__(self,parent,name,fl)
