@@ -201,6 +201,9 @@ class Slot:
 		self.settings['default_shortcut'] = None
 	
 	def extractExeIcons (self, file, iconsdir):
+		"""Extract icons from an exe-file
+		This ignores stdout because its very verbose
+		"""
 		if not os.path.exists ( iconsdir ):
 			os.makedirs ( iconsdir )
 		self.runNative (["winresdump",file],wait=True,cwd=iconsdir,stdout=open('/dev/null', 'w'))
@@ -227,7 +230,7 @@ class Slot:
 
 	def findShortcutsCallback ( self, shortcuts, dirname, fnames ):
 		for file in fnames:
-			if os.path.splitext(file)[1] == ".lnk":
+			if os.path.splitext(file)[1].lower() == ".lnk":
 				try:
 					shortcuts.append(self.createShortcutFromFile(os.path.join(dirname,file)))
 				except Exception, inst:
@@ -243,6 +246,15 @@ class Slot:
 		return shortcuts
 
 	def runNative (self, prog, cwd=None, wait=False, env=None, stdin=None, stdout=None, stderr=None):
+		"""Run any native program (no windows binaries)
+		Parameters:
+			prog: this is the program with all paramters as a list
+			cwd: the working directory (unix-path)
+			wait: wait until the process terminates
+			env: custom environment, NOTE: this overwrites the normal environment
+			stdin, stdout, stderr: if this is set to "subprocess.PIPE" a new pipe is created to be accessed later
+			                       if this is set to a file descriptor, the file is used as input/output
+		"""
 		if cwd == None:
 			cwd = self.getPath()
 		proc = Popen ( prog, stdin=stdin, stderr=stderr, stdout=stdout, cwd=cwd, env=env)
@@ -251,6 +263,9 @@ class Slot:
 		return proc
 	
 	def runWineTool (self, prog, cwd=None, wait=False, stdin=None, stdout=None, stderr=None, debug=None):
+		"""Run a wine tool (eg wine itself) with prefix and debug environment set
+		This is only a wrapper for runNative
+		"""
 		env = os.environ
 		env["WINEPREFIX"] = self.getPath()
 		env["WINEDEBUG"] = "err+all,warn-all,fixme-all,trace-all"
@@ -259,6 +274,15 @@ class Slot:
 		return self.runNative ( prog, cwd, wait, env, stdin, stdout, stderr )
 	
 	def runWin (self,prog,workingDirectory=".",wait=False,runInTerminal=False,debug=None,log=None):
+		"""Run a windows program
+		Parameters:
+			prog: this is the program with all paramters as a list
+			workingDirectory: the working directory, unix- and windows-paths will work
+			wait: wait until the process terminates
+			runInTerminal: if this is set the wine call is done with wineconsole instead of wine
+			debug: user-defines WINEDEBUG-String (see wine manpage)
+			log: if this is set, wine stderr output will be written to that file
+		"""
 		if not os.path.splitext(prog[0])[1].lower() == ".exe":
 			prog.insert(0,"start")
 		if runInTerminal:
@@ -295,6 +319,11 @@ class Slot:
 		return self.runWineTool (["wine","control"],wait=False)
 	
 	def installCorefonts (self):
+		"""Install Microsoft Corefonts
+		This will download the corefonts from sourceforge to a subdirectory named 'corefonts'.
+		Then it extracts the contents of the downloaded files with 'cabextract'.
+		Finally it searches for TTF-Files and moves them to the fonts directory.
+		""" 
 		fonts = ["andale","arial","arialb","comic","courie","georgi","impact","times","trebuc","verdan","webdin"]
 		path = self.getPath() + "/corefonts"
 		if not os.path.exists ( path ):
@@ -314,18 +343,18 @@ class Slot:
 	
 	def winPathToUnix (self,path):
 		proc = self.runWineTool (["winepath","-u",path],wait=True,stdout=subprocess.PIPE)
-		return proc.stdout.read()[:-1]
+		return proc.stdout.read()[:-1] #cut the \n
 	
 	def unixPathToWin (self,path):
 		proc = self.runWineTool (["winepath","-w",path],wait=True,stdout=subprocess.PIPE)
-		return proc.stdout.read()[:-1]
+		return proc.stdout.read()[:-1] #cut the \n
 
 	def exportData (self,file):
 		if len(file) == 0:
 			raise SwineException ("File name cannot be empty.")
 		os.chdir(self.getPath ())
 		tar = TarFile.gzopen ( file, "w" )
-		tar.add ( "." )
+		tar.add ( "." ) #recursive
 		tar.close ()
 
 	def importData (self, file):
@@ -354,6 +383,11 @@ def importSlot (name, file):
 
 
 def str2args ( s ):
+	"""Convert a string-encoded list to a real list
+	This understands 2 formats of string encoded lists:
+		- The normal representation as understood by the python parser (eg "['a','b','c']")
+		- Space separated representation (eg "a b c")
+	"""
 	if len(s) == 0:
 		return []
 	if s[0] == "[":
@@ -379,7 +413,8 @@ def getAllSlots ():
 	slist.sort()
 	slots = []
 	for slot in slist:
-		slots.append ( loadSlot(slot) )
+		if os.path.isdir(SWINE_SLOT_PATH+"/"+slot):
+			slots.append ( loadSlot(slot) )
 	return slots
 
 def loadSlot (name):
