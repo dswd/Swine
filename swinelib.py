@@ -203,7 +203,7 @@ class Slot:
 	def extractExeIcons (self, file, iconsdir):
 		if not os.path.exists ( iconsdir ):
 			os.makedirs ( iconsdir )
-		self.runNative (["winresdump",file],wait=True,cwd=iconsdir)
+		self.runNative (["winresdump",file],wait=True,cwd=iconsdir,stdout=open('/dev/null', 'w'))
 	
 	def createShortcutFromFile (self, file):
 		lnk = shortcutlib.readlnk ( file )
@@ -250,12 +250,15 @@ class Slot:
 			proc.wait()
 		return proc
 	
-	def runWineTool (self, prog, cwd=None, wait=False, stdin=None, stdout=None, stderr=None):
+	def runWineTool (self, prog, cwd=None, wait=False, stdin=None, stdout=None, stderr=None, debug=None):
 		env = os.environ
 		env["WINEPREFIX"] = self.getPath()
+		env["WINEDEBUG"] = "err+all,warn-all,fixme-all,trace-all"
+		if debug:
+			env["WINEDEBUG"] = debug
 		return self.runNative ( prog, cwd, wait, env, stdin, stdout, stderr )
 	
-	def runWin (self,prog,workingDirectory=".",wait=False,runInTerminal=False):
+	def runWin (self,prog,workingDirectory=".",wait=False,runInTerminal=False,debug=None,log=None):
 		if not os.path.splitext(prog[0])[1].lower() == ".exe":
 			prog.insert(0,"start")
 		if runInTerminal:
@@ -268,7 +271,10 @@ class Slot:
 			cwd = workingDirectory
 		if os.path.exists(self.winPathToUnix(workingDirectory)):
 			cwd = self.winPathToUnix(workingDirectory)
-		return self.runWineTool (prog, cwd, wait)	
+		stderr = None
+		if log:
+			stderr = open(log,"w")
+		return self.runWineTool (prog, cwd, wait, stderr=stderr, debug=debug)	
 		
 	def runWinecfg (self):
 		return self.runWineTool (["winecfg"],wait=False)
@@ -291,7 +297,6 @@ class Slot:
 	def installCorefonts (self):
 		fonts = ["andale","arial","arialb","comic","courie","georgi","impact","times","trebuc","verdan","webdin"]
 		path = self.getPath() + "/corefonts"
-		cabextract = which ("cabextract")
 		if not os.path.exists ( path ):
 			os.mkdir ( path )
 		os.chdir ( path )
@@ -309,11 +314,11 @@ class Slot:
 	
 	def winPathToUnix (self,path):
 		proc = self.runWineTool (["winepath","-u",path],wait=True,stdout=subprocess.PIPE)
-		return pipeToStr ( proc.stdout )[:-1]
+		return proc.stdout.read()[:-1]
 	
 	def unixPathToWin (self,path):
 		proc = self.runWineTool (["winepath","-w",path],wait=True,stdout=subprocess.PIPE)
-		return pipeToStr ( proc.stdout )[:-1]
+		return proc.stdout.read()[:-1]
 
 	def exportData (self,file):
 		if len(file) == 0:
@@ -348,19 +353,6 @@ def importSlot (name, file):
 	return slot
 
 
-def pipeToStr (pipe):
-	# this definetly needs a rewrite
-	output = ""
-	while True:
-		try:
-			data = array.array("B")
-			data.read ( pipe, 1 )
-		except Exception:
-			break
-		else:
-			output += chr ( data[0] )
-	return output
-
 def str2args ( s ):
 	if len(s) == 0:
 		return []
@@ -371,17 +363,7 @@ def str2args ( s ):
 			pass
 	return s.split ( " " )
 
-def which(name, matchFunc=os.path.isfile):
-    for dirname in os.environ["PATH"].split(os.pathsep):
-        candidate = os.path.join(dirname, name)
-        if matchFunc(candidate):
-            return candidate
-    raise SwineException("Can't find file %s" % name)
-
-
-
 def init ():
-	os.environ['WINEDEBUG'] = "warn"
 	if not os.path.exists ( SWINE_PATH ):
 		os.mkdir ( SWINE_PATH )
 		print "created " + SWINE_PATH

@@ -377,7 +377,7 @@ class SwineRunDialog(RunDialog):
 		if not self.paramsLineEdit.text().isEmpty():
 			args.extend ( str2args ( str ( self.paramsLineEdit.text() ) ) )
 		self.hide()
-		result = self.slot.runWin ( args, wait=True, workingDirectory=str(self.workingDirectoryLineEdit.text()), rinInTerminal=self.runInTerminalCheckBox.isChecked() )
+		result = self.slot.runWin ( args, wait=True, workingDirectory=str(self.workingDirectoryLineEdit.text()), runInTerminal=self.runInTerminalCheckBox.isChecked(), log=self.slot.getPath()+"/wine.log", debug="err+all,warn-all,fixme+all,trace-all" )
 		# status codes from include/winerror.h
 		# 0: success
 		# 2: exe-file not found
