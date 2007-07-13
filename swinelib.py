@@ -18,9 +18,10 @@
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
 
-import sys, os, shutil, ConfigParser, array, pipes, urllib
+import sys, os, shutil, ConfigParser, array, pipes, urllib, subprocess
 import shortcutlib
 from tarfile import TarFile
+from subprocess import Popen
 
 VERSION = "0.3"
 
@@ -32,9 +33,6 @@ SWINE_DEFAULT_SLOT_NAME = "DEFAULT"
 SWINE_DEFAULT_SLOT_PATH = SWINE_PATH + "/" + SWINE_DEFAULT_SLOT_NAME
 SWINE_DEFAULT_SECTION = "__SYSTEM__"
 WINE_PATH = os.getenv("HOME") + "/.wine"
-
-BIN = {}
-
 
 class SwineException(Exception):
 	pass
@@ -85,8 +83,8 @@ class Shortcut:
 		shortcut = Shortcut(newname,self.slot,self.data)
 		shortcut.save ()
 
-	def run (self,mode=os.P_NOWAIT):
-		return self.slot.run (str2args(self.data['program']),mode,self.data['working_directory'])
+	def run (self,wait=False):
+		return self.slot.runWin (prog=str2args(self.data['program']),wait=wait,workingDirectory=self.data['working_directory'])
 
 	def isDefault (self):
 		return ( not self.slot.loadDefaultShortcut() == None ) and self.name == self.slot.loadDefaultShortcut().name
@@ -140,22 +138,13 @@ class Slot:
 			self.config.set(SWINE_DEFAULT_SECTION,k,v)
 		self.config.write ( open ( self.getConfigFile(), "w" ) )
 
-	def setWinePrefix(self):
-		os.environ['WINEPREFIX'] = self.getPath()
-
-	def setWinePrefixCheck (self):
-		if not self.exists():
-			raise SwineException ("Slot does not exist: " + self.name)
-		self.setWinePrefix()
-
 	def exists (self):
 		return os.path.exists ( self.getPath() )
 	
 	def create (self):
 		if self.exists():
 			raise SwineException ("Slot already exists: " + self.name)
-		self.setWinePrefix()
-		os.system (BIN["wineprefixcreate"])
+		self.runWineTool(["wineprefixcreate"],wait=True)
 		self.loadConfig()
 		self.saveConfig()
 	
@@ -214,7 +203,7 @@ class Slot:
 	def extractExeIcons (self, file, iconsdir):
 		if not os.path.exists ( iconsdir ):
 			os.makedirs ( iconsdir )
-		self._run ([BIN["winresdump"],file],os.P_WAIT,iconsdir)
+		self.runNative (["winresdump",file],wait=True,cwd=iconsdir)
 	
 	def createShortcutFromFile (self, file):
 		lnk = shortcutlib.readlnk ( file )
@@ -253,41 +242,51 @@ class Slot:
 					shortcuts.remove ( shortcut )
 		return shortcuts
 
-	def _run (self,prog,mode=os.P_WAIT,workingDirectory="."):
-		self.setWinePrefixCheck()
-		if os.path.exists(workingDirectory):
-			os.chdir ( workingDirectory )
-		if os.path.exists(self.winPathToUnix(workingDirectory)):
-			os.chdir ( self.winPathToUnix(workingDirectory) )
-		return os.spawnv(mode, prog[0], prog)
+	def runNative (self, prog, cwd=None, wait=False, env=None, stdin=None, stdout=None, stderr=None):
+		if cwd == None:
+			cwd = self.getPath()
+		proc = Popen ( prog, stdin=stdin, stderr=stderr, stdout=stdout, cwd=cwd, env=env)
+		if wait:
+			proc.wait()
+		return proc
 	
-	def run (self,prog,mode=os.P_WAIT,workingDirectory=".",runInTerminal=False):
+	def runWineTool (self, prog, cwd=None, wait=False, stdin=None, stdout=None, stderr=None):
+		env = os.environ
+		env["WINEPREFIX"] = self.getPath()
+		return self.runNative ( prog, cwd, wait, env, stdin, stdout, stderr )
+	
+	def runWin (self,prog,workingDirectory=".",wait=False,runInTerminal=False):
 		if not os.path.splitext(prog[0])[1].lower() == ".exe":
 			prog.insert(0,"start")
 		if runInTerminal:
-			prog.insert(0,BIN["wineconsole"])
+			prog.insert(0,"wineconsole")
 			prog.insert(1,"--backend=user")
 		else:
-			prog.insert(0,BIN["wine"])
-		return self._run(prog,mode,workingDirectory)
+			prog.insert(0,"wine")
+		cwd = None
+		if os.path.exists(workingDirectory):
+			cwd = workingDirectory
+		if os.path.exists(self.winPathToUnix(workingDirectory)):
+			cwd = self.winPathToUnix(workingDirectory)
+		return self.runWineTool (prog, cwd, wait)	
 		
-	def runWinecfg (self,mode=os.P_WAIT):
-		return self._run ([BIN["winecfg"]],mode)
+	def runWinecfg (self):
+		return self.runWineTool (["winecfg"],wait=False)
 
-	def runRegedit (self,mode=os.P_WAIT):
-		return self._run ([BIN["regedit"]],mode)
+	def runRegedit (self):
+		return self.runWineTool (["regedit"],wait=False)
 	
-	def runWineboot (self,mode=os.P_WAIT):
-		return self._run ([BIN["wineboot"]],mode)
+	def runWineboot (self):
+		return self.runWineTool (["wineboot"],wait=False)
 		
-	def runWinefile (self,mode=os.P_WAIT,directory="C:"):
-		return self._run ([BIN["winefile"],directory],mode)
+	def runWinefile (self,directory="C:"):
+		return self.runWineTool (["winefile",directory],wait=False)
 	
-	def runUninstaller (self,mode=os.P_WAIT):
-		return self._run ([BIN["uninstaller"]],mode)
+	def runUninstaller (self):
+		return self.runWineTool (["uninstaller"],wait=False)
 		
-	def runWineControl (self,mode=os.P_WAIT):
-		return self._run ([BIN["wine"],"control"],mode)
+	def runWineControl (self):
+		return self.runWineTool (["wine","control"],wait=False)
 	
 	def installCorefonts (self):
 		fonts = ["andale","arial","arialb","comic","courie","georgi","impact","times","trebuc","verdan","webdin"]
@@ -303,18 +302,18 @@ class Slot:
 				outfile=open(file, "wb")
 				outfile.write(instream.read())
 				outfile.close()
-			self._run([cabextract,file])
+			self.runNative(["cabextract",file],cwd=path,wait=True)
 		for file in os.listdir ( path ):
 			if os.path.splitext(file)[1].lower() == ".ttf":
 				shutil.move ( file, self.getDrivePath("c:") + "/windows/fonts/" + file )
 	
 	def winPathToUnix (self,path):
-		self.setWinePrefixCheck()
-		return readCommandOutput("winepath -u " + pipes.quote(path))[:-1]
+		proc = self.runWineTool (["winepath","-u",path],wait=True,stdout=subprocess.PIPE)
+		return pipeToStr ( proc.stdout )[:-1]
 	
 	def unixPathToWin (self,path):
-		self.setWinePrefixCheck()
-		return readCommandOutput("winepath -w " + pipes.quote(path))[:-1]
+		proc = self.runWineTool (["winepath","-w",path],wait=True,stdout=subprocess.PIPE)
+		return pipeToStr ( proc.stdout )[:-1]
 
 	def exportData (self,file):
 		if len(file) == 0:
@@ -349,14 +348,13 @@ def importSlot (name, file):
 	return slot
 
 
-def readCommandOutput (command):
+def pipeToStr (pipe):
 	# this definetly needs a rewrite
-	stdin, stdout = os.popen2(command)
 	output = ""
 	while True:
 		try:
 			data = array.array("B")
-			data.read ( stdout, 1 )
+			data.read ( pipe, 1 )
 		except Exception:
 			break
 		else:
@@ -383,8 +381,6 @@ def which(name, matchFunc=os.path.isfile):
 
 
 def init ():
-	for file in ["wine", "wineconsole", "wineprefixcreate", "winecfg", "wineboot", "winefile", "winepath", "regedit", "uninstaller", "winresdump"]:
-		BIN[file]=which(file)
 	os.environ['WINEDEBUG'] = "warn"
 	if not os.path.exists ( SWINE_PATH ):
 		os.mkdir ( SWINE_PATH )

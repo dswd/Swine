@@ -87,7 +87,7 @@ for opt, val in opts:
 			print "killed"
 
 	elif opt in ("-R","--run"): 
-		print loadSlot(val).run(otherargs)
+		print loadSlot(val).runWin(otherargs)
 		try:
 			os.wait()
 		except Exception:

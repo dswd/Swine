@@ -38,6 +38,8 @@ def loadPixmap ( name ):
 def loadIcon ( name ):
 	pm = QPixmap ( name )
 	pm.setMask ( pm.createHeuristicMask() )
+	if not pm:
+		pm = loadPixmap("wabi.png")
 	return pm
 
 class SwineSlotItem(QIconViewItem):
@@ -77,17 +79,17 @@ class SwineSlotItem(QIconViewItem):
 		self.slot.saveConfig()
 		self.refreshShortcutList()
 	def winecfg_cb(self):
-		self.slot.runWinecfg(os.P_NOWAIT)
+		self.slot.runWinecfg()
 	def wineboot_cb(self):
-		self.slot.runWineboot(os.P_NOWAIT)
+		self.slot.runWineboot()
 	def fileManager_cb(self):
-		self.slot.runWinefile(os.P_NOWAIT)
+		self.slot.runWinefile()
 	def regedit_cb(self):
-		self.slot.runRegedit(os.P_NOWAIT)
+		self.slot.runRegedit()
 	def uninstaller_cb(self):
-		self.slot.runUninstaller(os.P_NOWAIT)
+		self.slot.runUninstaller()
 	def control_cb(self):
-		self.slot.runWineControl(os.P_NOWAIT)
+		self.slot.runWineControl()
 	def install_corefonts_cb(self):
 		if QMessageBox.information ( self.iconView(), "Install MS Corefonts", "This will download, unpack and install the Microsoft Corefonts.\nYou will need an internet connection and the 'cabextract' program for this to work.", "&Continue", "&Abort", QString.null, 0, 1 ) == 0:
 			self.slot.installCorefonts()
@@ -375,7 +377,7 @@ class SwineRunDialog(RunDialog):
 		if not self.paramsLineEdit.text().isEmpty():
 			args.extend ( str2args ( str ( self.paramsLineEdit.text() ) ) )
 		self.hide()
-		result = self.slot.run ( args, os.P_WAIT, str(self.workingDirectoryLineEdit.text()), self.runInTerminalCheckBox.isChecked() )
+		result = self.slot.runWin ( args, wait=True, workingDirectory=str(self.workingDirectoryLineEdit.text()), rinInTerminal=self.runInTerminalCheckBox.isChecked() )
 		# status codes from include/winerror.h
 		# 0: success
 		# 2: exe-file not found
@@ -388,7 +390,7 @@ class SwineRunDialog(RunDialog):
 			self.slot.saveConfig()
 			self.parent().slotList_selectionChanged()
 		if self.winebootCheckBox.isChecked():
-			self.slot.wineboot(os.P_NOWAIT)
+			self.slot.runWineboot()
 
 	def cancelButton_clicked(self):
 		self.close()
