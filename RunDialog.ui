@@ -186,10 +186,10 @@
                         <cstring>runInTerminalCheckBox</cstring>
                     </property>
                     <property name="text">
-                        <string>Run in &amp;Terminal</string>
+                        <string>Ru&amp;n in Terminal</string>
                     </property>
                     <property name="accel">
-                        <string>Alt+T</string>
+                        <string>Alt+N</string>
                     </property>
                     <property name="checked">
                         <bool>false</bool>
@@ -199,6 +199,9 @@
                     <property name="name">
                         <cstring>addShortcutsCheckBox</cstring>
                     </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
                     <property name="text">
                         <string>&amp;Add new shortcuts</string>
                     </property>
@@ -206,7 +209,7 @@
                         <string>Alt+A</string>
                     </property>
                     <property name="checked">
-                        <bool>true</bool>
+                        <bool>false</bool>
                     </property>
                 </widget>
                 <widget class="QCheckBox" row="0" column="1">

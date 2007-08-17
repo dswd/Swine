@@ -377,9 +377,11 @@ class SwineRunDialog(RunDialog):
 		if not self.paramsLineEdit.text().isEmpty():
 			args.extend ( str2args ( str ( self.paramsLineEdit.text() ) ) )
 		self.hide()
-		result = self.slot.runWin ( args, wait=True, workingDirectory=str(self.workingDirectoryLineEdit.text()), runInTerminal=self.runInTerminalCheckBox.isChecked(), log=self.slot.getPath()+"/wine.log", debug="err+all,warn-all,fixme+all,trace-all" )
+		result = self.slot.runWin ( args, wait=True, workingDirectory=str(self.workingDirectoryLineEdit.text()), runInTerminal=self.runInTerminalCheckBox.isChecked(), log=self.slot.getPath()+"/wine.log", debug="err+all,warn-all,fixme+all,trace-all" ).returncode
 		# status codes from include/winerror.h
 		# 0: success
+		if not result == 0:
+			QMessageBox.critical ( self, "Error", "Code: " + str(result) )
 		# 2: exe-file not found
 		# 3: exe-path not found
 		# 126: mod not found (path invalid)

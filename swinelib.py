@@ -23,7 +23,7 @@ import shortcutlib
 from tarfile import TarFile
 from subprocess import Popen
 
-VERSION = "0.3"
+VERSION = "0.4"
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
@@ -184,6 +184,8 @@ class Slot:
 		return shortcuts
 		
 	def loadShortcut (self,name):
+		if not self.config.has_section (name ):
+			return None
 		return Shortcut ( name, self, dict(self.config.items(name)))
 	
 	def loadDefaultShortcut (self):
