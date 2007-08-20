@@ -362,10 +362,16 @@
 </connections>
 <tabstops>
     <tabstop>filenameLineEdit</tabstop>
+    <tabstop>runButton</tabstop>
     <tabstop>fileSelectButton</tabstop>
     <tabstop>paramsLineEdit</tabstop>
     <tabstop>addShortcutsCheckBox</tabstop>
-    <tabstop>runButton</tabstop>
+    <tabstop>fileSelectButton_2</tabstop>
+    <tabstop>workingDirectoryLineEdit</tabstop>
+    <tabstop>logfileCheckBox</tabstop>
+    <tabstop>runInTerminalCheckBox</tabstop>
+    <tabstop>winebootCheckBox</tabstop>
+    <tabstop>cancelButton</tabstop>
 </tabstops>
 <slots>
     <slot>pushButton1_pressed()</slot>

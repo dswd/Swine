@@ -219,15 +219,19 @@ class Slot:
 		shortcut.data['program']=str(prg)
 		shortcut.data['working_directory']=lnk['working_directory']
 		shortcut.data['description']=lnk['description']
-		file = self.winPathToUnix(lnk['target'])
+		if str(lnk['custom_icon']):
+			file = self.winPathToUnix(lnk['custom_icon'],"c:\windows")
+		else:
+			file = self.winPathToUnix(lnk['target'])
 		iconsdir = self.getPath() + "/icons/" + os.path.basename(file)
 		shortcut.data['iconsdir']="icons/" + os.path.basename(file)
 		if os.path.splitext(file)[1].lower() == '.exe':
 			self.extractExeIcons ( file, iconsdir )
-			if len(str(lnk['custom_icon'])) > 0:
-				shortcut.data['icon'] = self.winPathToUnix ( lnk['custom_icon'] )
-			if len(str(lnk['icon_number'])) > 0:
-				shortcut.data['icon'] = iconsdir + "/icon" + str(lnk['icon_number']) + ".bmp"
+			shortcut.data['icon'] = iconsdir + "/icon" + str(lnk['icon_number']) + ".bmp"
+		else:
+			shortcut.data['icon'] = self.winPathToUnix ( file )
+		if not os.path.exists ( shortcut.data['icon'] ):
+			shortcut.data['icon'] = ""
 		return shortcut
 
 	def findShortcutsCallback ( self, shortcuts, dirname, fnames ):
@@ -343,12 +347,14 @@ class Slot:
 			if os.path.splitext(file)[1].lower() == ".ttf":
 				shutil.move ( file, self.getDrivePath("c:") + "/windows/fonts/" + file )
 	
-	def winPathToUnix (self,path):
-		proc = self.runWineTool (["winepath","-u",path],wait=True,stdout=subprocess.PIPE)
+	def winPathToUnix (self,path,basedir=None):
+		if basedir:
+			basedir = self.winPathToUnix ( basedir )
+		proc = self.runWineTool (["winepath","-u",path],wait=True,stdout=subprocess.PIPE,cwd=basedir)
 		return proc.stdout.read()[:-1] #cut the \n
 	
-	def unixPathToWin (self,path):
-		proc = self.runWineTool (["winepath","-w",path],wait=True,stdout=subprocess.PIPE)
+	def unixPathToWin (self,path,basedir=None):
+		proc = self.runWineTool (["winepath","-w",path],wait=True,stdout=subprocess.PIPE,cwd=basedir)
 		return proc.stdout.read()[:-1] #cut the \n
 
 	def exportData (self,file):

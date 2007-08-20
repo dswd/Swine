@@ -180,7 +180,7 @@ def readlnk(filename):
 			if i % 2 == 0:
 				name += chr(data[start+2+i]+data[start+2+i+1]*256)
 		start += i + 2 + 1
-		shortcut['custom_icon']=name
+		shortcut['custom_icon']=str(name[:-1])
 	else:
 		shortcut['custom_icon']=""
 
