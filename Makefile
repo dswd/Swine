@@ -1,10 +1,10 @@
 %.py : %.ui
 	pyuic $< >$@
 
-ui_files = MainWindow.ui RunDialog.ui AboutDialog.ui ShortcutDialog.ui
-ui_files_py = MainWindow.py RunDialog.py AboutDialog.py ShortcutDialog.py
+ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui
+ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py
 images = images/*.png
-py_files = swine.py swinecli.py swinelib.py shortcutlib.py
+py_files = swine.py swinecli.py swinelib.py shortcutlib.py Registry.py
 wrd_dir = wrd-src
 wrd_sources = $(wrd_dir)/README $(wrd_dir)/Makefile $(wrd_dir)/CHANGELOG \
 	$(wrd_dir)/newexe.h $(wrd_dir)/resfmt.h $(wrd_dir)/winresdump.h $(wrd_dir)/wv_extract.h \

@@ -1,27 +1,19 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
-<class>RunDialog</class>
+<class>ProgramDialog</class>
 <widget class="QDialog">
     <property name="name">
-        <cstring>RunDialog</cstring>
+        <cstring>ProgramDialog</cstring>
     </property>
     <property name="geometry">
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>292</width>
-            <height>212</height>
+            <width>388</width>
+            <height>230</height>
         </rect>
     </property>
-    <property name="sizePolicy">
-        <sizepolicy>
-            <hsizetype>5</hsizetype>
-            <vsizetype>5</vsizetype>
-            <horstretch>200</horstretch>
-            <verstretch>100</verstretch>
-        </sizepolicy>
-    </property>
     <property name="caption">
-        <string>Run</string>
+        <string>TITLE</string>
     </property>
     <vbox>
         <property name="name">
@@ -29,15 +21,36 @@
         </property>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout8</cstring>
+                <cstring>layout4</cstring>
             </property>
             <grid>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QPushButton" row="2" column="2">
+                <widget class="QLabel" row="3" column="0" rowspan="1" colspan="2">
                     <property name="name">
-                        <cstring>fileSelectButton_2</cstring>
+                        <cstring>textLabel2_3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Working Directory:</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit" row="2" column="2" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>paramsInput</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit" row="1" column="2">
+                    <property name="name">
+                        <cstring>applicationInput</cstring>
+                    </property>
+                </widget>
+                <widget class="QToolButton" row="3" column="3">
+                    <property name="name">
+                        <cstring>wdSelectButton</cstring>
                     </property>
                     <property name="sizePolicy">
                         <sizepolicy>
@@ -50,13 +63,49 @@
                     <property name="text">
                         <string></string>
                     </property>
-                    <property name="pixmap">
-                        <pixmap>image0</pixmap>
+                    <property name="iconSet">
+                        <iconset>image0</iconset>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="0" column="2">
+                <widget class="QPushButton" row="0" column="0">
                     <property name="name">
-                        <cstring>fileSelectButton</cstring>
+                        <cstring>icon</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>16</width>
+                            <height>16</height>
+                        </size>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>image1</iconset>
+                    </property>
+                    <property name="flat">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QLineEdit" row="3" column="2">
+                    <property name="name">
+                        <cstring>workingDirectoryInput</cstring>
+                    </property>
+                </widget>
+                <widget class="QToolButton" row="1" column="3">
+                    <property name="name">
+                        <cstring>exeSelectButton</cstring>
                     </property>
                     <property name="sizePolicy">
                         <sizepolicy>
@@ -69,102 +118,47 @@
                     <property name="text">
                         <string></string>
                     </property>
-                    <property name="pixmap">
-                        <pixmap>image0</pixmap>
+                    <property name="iconSet">
+                        <iconset>image0</iconset>
                     </property>
                 </widget>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="QLabel" row="1" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel1</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
                     </property>
                     <property name="text">
                         <string>Application:</string>
                     </property>
                 </widget>
-                <widget class="QLineEdit" row="0" column="1">
+                <widget class="QLabel" row="0" column="1">
                     <property name="name">
-                        <cstring>filenameLineEdit</cstring>
+                        <cstring>nameLabel</cstring>
                     </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>7</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
+                    <property name="text">
+                        <string>Name:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="QLabel" row="2" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel2</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
                     </property>
                     <property name="text">
                         <string>Parameters:</string>
                     </property>
                 </widget>
-                <widget class="QLineEdit" row="1" column="1" rowspan="1" colspan="2">
+                <widget class="QLineEdit" row="0" column="2" rowspan="1" colspan="2">
                     <property name="name">
-                        <cstring>paramsLineEdit</cstring>
+                        <cstring>nameInput</cstring>
                     </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>7</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                </widget>
-                <widget class="QLineEdit" row="2" column="1">
-                    <property name="name">
-                        <cstring>workingDirectoryLineEdit</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>7</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="2" column="0">
-                    <property name="name">
-                        <cstring>textLabel1_2</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="text">
-                        <string>Working Directory:</string>
+                    <property name="enabled">
+                        <bool>true</bool>
                     </property>
                 </widget>
             </grid>
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout4</cstring>
+                <cstring>runOptions</cstring>
             </property>
             <grid>
                 <property name="name">
@@ -233,7 +227,7 @@
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout11</cstring>
+                <cstring>layout6</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -241,7 +235,7 @@
                 </property>
                 <spacer>
                     <property name="name">
-                        <cstring>spacer4</cstring>
+                        <cstring>spacer2</cstring>
                     </property>
                     <property name="orientation">
                         <enum>Horizontal</enum>
@@ -258,26 +252,18 @@
                 </spacer>
                 <widget class="QPushButton">
                     <property name="name">
-                        <cstring>runButton</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
+                        <cstring>okButton</cstring>
                     </property>
                     <property name="text">
-                        <string>Run</string>
+                        <string>O&amp;K</string>
                     </property>
                     <property name="accel">
-                        <string></string>
+                        <string>Alt+K</string>
                     </property>
                 </widget>
                 <spacer>
                     <property name="name">
-                        <cstring>spacer5</cstring>
+                        <cstring>spacer3</cstring>
                     </property>
                     <property name="orientation">
                         <enum>Horizontal</enum>
@@ -296,21 +282,13 @@
                     <property name="name">
                         <cstring>cancelButton</cstring>
                     </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
                     <property name="text">
                         <string>Cancel</string>
                     </property>
                 </widget>
                 <spacer>
                     <property name="name">
-                        <cstring>spacer3</cstring>
+                        <cstring>spacer1</cstring>
                     </property>
                     <property name="orientation">
                         <enum>Horizontal</enum>
@@ -333,53 +311,58 @@
     <image name="image0">
         <data format="PNG" length="818">89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff61000002f949444154388da5904b6b9c650046cffb7def5c9249a689491a53429ad2069a262548abb4168325185c0451105ca954975d08ee54e8a22a28fe0441c185a0fe03412a41da228d343169ab4d4932934c32b9cd2533dfe5bdba28b873e5b33f87c323bcf7fc9f89d3efac70e5623fedd8633ddcbe5be5ca6083e1a2214d2156b6a7d099b9d999cfcc6d6e352f7ba836639001cc2f69e47f999df7c4b19e1e3bddffc5dcab672e178b396e7cfedb8dfdc3e8facf0b0252207448e7dc374afb9cd64f0bb4726d6bdd87a108afcfce8c7e3c7b75a4d8910f51ca71757af4edef7f5afe41ca60de3801803c3bd67deddabbfd1c34a16d60e26c8ef4e1c6dc7b6f8c0c4d8cf71245d06a597030f3d270f7fcef3b5fdac5fdb7202c0104d90cadde9e808e3ca88d3a13bec6cd0f2687ce4ff4a23518034100d65976eb86c973fd97868edbd7494c1fcef74963c179d8b9bfcf54b7e1c5374ffdfb432e0759012e1ff2d1d76596d60c27060b8c4e9df974604cbcf6d7d2b695ce42184092ebe0c77bfbfc516ba2538db116ab01eb597edc60ad1e3272fe24952443efc5e1e2fe9deacba6bdb520ad774801bf2e460cf80c033d199230473d76348e1cb596a730d2c5e47881a512c4b1a3b65a73e55b2b012ef9453aeba9b7a05a6af1d527a78852436630c3725970f8b767b7ea29ef78f6b6136a9b07341e5748b79a1532aa939cbb27a514dc5e88193fd945ae2fe0ee43385877ac6f873c79e2d82c2554b614f58d03d4610de2d8837004ba84b70f0204dc5f3c64fa42078f6a508eb3acac3b6a0d87368e44799a07312a05b21d20f3206c0fe8152cab72a394323e9665e8789e63c0b9223c331cd238d49c080dbd69c4b3a145c760db86b46dc466d975ed55ec9f0861e4daea1133178e313b960501f4403204510451db915e9244b1a3d5f644ed2e94caf3d9b771bc57720b8402a95b29af4c159ec20002f28580309478a751ca628d46a918a512da89e6c1a3a30adedd8100219fbb557bfe85feae422ec05ac059b471e844a152854a5354a231a9c228439a1a76d7cc7718de47c03f86cca25b1aecc3700000000049454e44ae426082</data>
     </image>
+    <image name="image1">
+        <data format="PNG" length="1678">89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af400000655494441545885ed974d6c5d4715c77f3373df87ede7afc44e1d2b7142933469086d131327a1840a01955a84d8b0a9101252114202042b2416486c58f0b56791151b6001088a026d442b0a51b11252f52b494d431a9b244a9cc4b1fdbeeebd33e7b098fb9ebf026417168cded1bd77eecc9cfffd9fff3933cfa82a0fb2d907eafd7f0140026007f61f57868f4130b1dbac8c30eb66987b74fe8731c6505ee93680628c09b4664ff9c6ec99c40d1c7866f7d4577efde4a15d155409a2882a2285a9220222822a2bef56f58bd2ed53d1e259e2fb75e35585e546839bd766beee2a431f4fc40d3ff5c963fb2a5ffccc7e96ea1979107c104210722f78aff8a0e4de1324de7b1fc88312bce243c07b25f78a174f089df1b13f3e176b85f881b7171ccb8b83638d64e858828a3706961b294bf5945ce284e0055f4cca0ba741b400e4d702088acf955c4217800f9e3c5f0110414400f56646081e553109aa0c0e5418dddc83b18248110651448410e88645ad435d82620941f0598e4f5342014e546398647528591b0203adf630cbcbd7b913822688323ed6cfe826cbe8e830ced9759a8ac2a154a63d3fcf9d77dea63e7f1d57ae30b06b1f437bf6d2d35b41b214630c982835b346aca6f323491ce572c285772f72fee510b3201623c3d8d8e6b8c83ddac22f7f41fdfbdfa6a6ff644b5f8ea94223a9717be2636cfdd27719397478cdf80e13a829841ad975d612424042003402e8b4108424711b9c4b50ee9ef811438b97296f81a402a55ed852abd3f8fb492efc66376f0cb738367e84de4aa5cb9b33863417d2d0c691d0a9ba2a824abc4f3678bb47cb66de452fbf85a981dac20c8801ad5698dd3ec20fce3ecbaeeaa31c1d7b861d837bc0e55c6b5de1e2e2393e37f1353e32f234cd3cc5dac8b8a8dc3f80e69f4e611b290c80b1d130e004eae587796f34a55a6e7095b39c78ff2c164805e69bb07308beb9f78778898eb50885aa6c0cc13d9b42f6e7977049a4d500d680759037e1eef8e35cb4e769e760248aaf99412b030d7060f0089bcb3bc8435e00888baa04e03ef6023f3747fbf449288354a0add05c02934348e1c6c41e66b237c9032cb7a1de864616ade5e1b14d47e8733d8804544105448837f7c3809dbbc4f8e79f63f99127b89d6cc1f596292f5fe7ca6bbf253f77864b630937dbb3180bed0c521fad99c1483feced9f5a55c205753686e17e01dcda7d8c17268ff2d239cf95d9bb7c60abf089a95e9efac617a8befe2ae7ed296e2ce5f49721cd5700f80c062a8e3db503a42174e957e95c05f4bf0090a03cf79d262fbf1a60c0d2b765909996f0ca5cc6e69fcd73e25b4f73bc94f1fb33a7996bbe4d235310c0c1d0a61a530f4d325ade890f7974aa8a46057453b20bc0da8d05e8e265cf5fde14a8597afa2d3d65a5b796d037d2c3ad4bcaad9957f8ecfedf3139f9655e6b04decfe6c1b518292b7b69f2c8b6e731b68fe0db2b0c143ba66a580bc0b98d7afce3b4275b066a51ddc6188c852c83f172cac1ed17b0bb4e32617ec5c49d4d10b681a4c04d586a50375f25954e552cf60429165fa30103ce39d657e117a73d18b036a69d756013682ca61c1f6f33323c0d7d0b7170e92a645721053c84e641b2d20e34e445de776897551eb4938606678bea52b4ab3784d36f04b006518b3716751697384223e3f0c41d2ad5e9b85e1d582eac0edc85dc1e25946a88f8b5f477cec0ab356000e7d67efea969a125caf61d81c16a13ef7316170d0b668872abcde187df83d23568022d202bac60204fa6106b20749c4b778372767d0800bb2e04fb761a4efeb88f0fed866aa28410b8f48f3a3f3f798dcb73b06df03426d108a0bdca790ee415f2f10f43c8ba5f2eb28e01d66581732bbba02a1c7dcc0296ce39513561f25095c92736717729909e1fa439eba80e06ac168e53c041ae8f9327db9190178ad7ae0e4414751d009101e39ca55472181b25d1394c44f42bace45e5135d4fa4b540e7e8fecdaa791e51729d94b248987ea08623f487be053947b7b50f1a89a782e20d25f2a39ac5562d6ab4930965b0b2d8c8dc72c54d789666d0c57d46cb05b9f248c7d149f66a806c49451e730d202dfea02ef9418eb0c86c0c29d3a4bf5161823890dd75ff8c94ffff0fc5b172e3fe44c3cbb6d0411295bdd87129d4a00d5b8d98807f5c5fc50082dacdcab600d2cd51bfcedf53317a0fd57a3aa98d2f0a33038854a372d575ffe7debc46895ad7e56d9f83e9ac734a755f219f3ff3fa70f1ac0bf00fe767baeea1df29a0000000049454e44ae426082</data>
+    </image>
 </images>
 <connections>
     <connection>
-        <sender>runButton</sender>
-        <signal>pressed()</signal>
-        <receiver>RunDialog</receiver>
-        <slot>runButton_pressed()</slot>
-    </connection>
-    <connection>
-        <sender>fileSelectButton</sender>
+        <sender>icon</sender>
         <signal>clicked()</signal>
-        <receiver>RunDialog</receiver>
-        <slot>fileSelectButton_clicked()</slot>
+        <receiver>ProgramDialog</receiver>
+        <slot>icon_clicked()</slot>
     </connection>
     <connection>
         <sender>cancelButton</sender>
         <signal>clicked()</signal>
-        <receiver>RunDialog</receiver>
+        <receiver>ProgramDialog</receiver>
         <slot>cancelButton_clicked()</slot>
     </connection>
     <connection>
-        <sender>fileSelectButton_2</sender>
+        <sender>okButton</sender>
         <signal>clicked()</signal>
-        <receiver>RunDialog</receiver>
-        <slot>fileSelectButton_2_clicked()</slot>
+        <receiver>ProgramDialog</receiver>
+        <slot>okButton_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>exeSelectButton</sender>
+        <signal>clicked()</signal>
+        <receiver>ProgramDialog</receiver>
+        <slot>exeSelectButton_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>wdSelectButton</sender>
+        <signal>clicked()</signal>
+        <receiver>ProgramDialog</receiver>
+        <slot>wdSelectButton_clicked()</slot>
     </connection>
 </connections>
 <tabstops>
-    <tabstop>filenameLineEdit</tabstop>
-    <tabstop>runButton</tabstop>
-    <tabstop>fileSelectButton</tabstop>
-    <tabstop>paramsLineEdit</tabstop>
-    <tabstop>addShortcutsCheckBox</tabstop>
-    <tabstop>fileSelectButton_2</tabstop>
-    <tabstop>workingDirectoryLineEdit</tabstop>
-    <tabstop>logfileCheckBox</tabstop>
-    <tabstop>runInTerminalCheckBox</tabstop>
-    <tabstop>winebootCheckBox</tabstop>
-    <tabstop>cancelButton</tabstop>
+    <tabstop>nameInput</tabstop>
+    <tabstop>applicationInput</tabstop>
+    <tabstop>paramsInput</tabstop>
+    <tabstop>icon</tabstop>
+    <tabstop>okButton</tabstop>
 </tabstops>
 <slots>
-    <slot>pushButton1_pressed()</slot>
-    <slot>runButton_pressed()</slot>
-    <slot>fileSelectButton_pressed()</slot>
+    <slot>saveButton_clicked()</slot>
+    <slot>icon_clicked()</slot>
     <slot>fileSelectButton_clicked()</slot>
     <slot>cancelButton_clicked()</slot>
     <slot>fileSelectButton_2_clicked()</slot>
+    <slot>okButton_clicked()</slot>
+    <slot>exeSelectButton_clicked()</slot>
+    <slot>wdSelectButton_clicked()</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 </UI>

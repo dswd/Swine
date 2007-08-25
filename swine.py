@@ -27,8 +27,7 @@ import swinelib
 from swinelib import *
 from qt import *
 from AboutDialog import *
-from RunDialog import *
-from ShortcutDialog import *
+from ProgramDialog import *
 from MainWindow import *
 
 IMAGE_FOLDER = os.path.dirname(os.path.realpath(__file__)) + "/images/"
@@ -356,28 +355,65 @@ class SwineAboutDialog(AboutDialog):
 
 
 
+class SwineProgramDialog(ProgramDialog):
+	def cancelButton_clicked(self):
+		self.close()
 
+	def exeSelectButton_clicked(self):
+		file = QFileDialog.getOpenFileName( self.shortcut.slot.winPathToUnix("c:\\"), "Windows executables (*.exe *.EXE)", self )
+		if not file == None:
+			self.applicationInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
+			if len(str(self.workingDirectoryInput.text())) == 0:
+				self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(os.path.dirname(str(file))) )
 
-class SwineRunDialog(RunDialog):
+	def wdSelectButton_clicked(self):
+		file = QFileDialog.getExistingDirectory( self.shortcut.slot.winPathToUnix("c:\\"), self )
+		if not file == None:
+			self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
 	
-	def fileSelectButton_clicked(self):
-		file = QFileDialog.getOpenFileName( self.slot.winPathToUnix("c:\\"), "Windows executables (*.exe *.EXE)", self )
-		if not file == None:
-			self.filenameLineEdit.setText ( self.slot.unixPathToWin(str(file)) )
-			self.workingDirectoryLineEdit.setText ( self.slot.unixPathToWin(os.path.dirname(str(file))) )
+	def icon_clicked(self):
+		dirStr = ""
+		if self.shortcut.iconsDir():
+			dirStr = self.shortcut.iconsDir()
+		self.iconFile = QFileDialog.getOpenFileName( dirStr, "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
+		if not self.iconFile == None:
+			self.icon.setIconSet ( QIconSet ( loadIcon ( self.iconFile ) ) )
+			self.shortcut.data["icon"] = self.iconFile
 
-	def fileSelectButton_2_clicked(self):
-		file = QFileDialog.getExistingDirectory( self.slot.winPathToUnix("c:\\"), self )
-		if not file == None:
-			self.workingDirectoryLineEdit.setText ( self.slot.unixPathToWin(str(file)) )
+	def okButton_clicked(self):
+		if len(str(self.nameInput.text())) == 0:
+			raise SwineException ( "Shotcut name cannot be empty" )
+		self.shortcut.name = str(self.nameInput.text())
+		self.shortcut.data["icon"] = str(self.iconFile)
+		prog = []
+		prog.append(str(self.applicationInput.text()))
+		prog.extend(str2args(str(self.paramsInput.text())))
+		self.shortcut.data["program"] = str(prog)
+		self.shortcut.data["working_directory"] = str(self.workingDirectoryInput.text())
 
-	def runButton_pressed(self):
-		args = []
-		args.append ( str ( self.filenameLineEdit.text() ) )
-		if not self.paramsLineEdit.text().isEmpty():
-			args.extend ( str2args ( str ( self.paramsLineEdit.text() ) ) )
+	def __init__(self,shortcut,parent = None,name = None,modal = False,fl = 0):
+		self.shortcut = shortcut
+		ProgramDialog.__init__(self,parent,name,modal,fl)
+		self.nameInput.setText ( shortcut.name )
+		self.setCaption ( name )
+		self.iconFile = ""
+		self.paramsInput.setText ( "" )
+		if not shortcut.data == {}:
+			self.nameInput.setEnabled ( False )
+			if shortcut.data.has_key("icon" ) and not shortcut.data["icon"] == "":
+				self.icon.setIconSet ( QIconSet ( loadIcon ( shortcut.data["icon"] ) ) )
+				self.iconFile = shortcut.data["icon"]
+			self.applicationInput.setText ( str2args(shortcut.data["program"])[0] )
+			self.workingDirectoryInput.setText ( shortcut.data["working_directory"] )
+			self.paramsInput.setText ( str(str2args(shortcut.data["program"])[1:]) )
+
+
+
+class SwineRunDialog(SwineProgramDialog):
+	def okButton_clicked(self):
+		SwineProgramDialog.okButton_clicked(self)
 		self.hide()
-		result = self.slot.runWin ( args, wait=True, workingDirectory=str(self.workingDirectoryLineEdit.text()), runInTerminal=self.runInTerminalCheckBox.isChecked(), log=self.slot.getPath()+"/wine.log", debug="err+all,warn-all,fixme+all,trace-all" ).returncode
+		result = self.slot.runWin ( str2args(self.shortcut.data['program']), wait=True, workingDirectory=self.shortcut.data['working_directory'], runInTerminal=self.runInTerminalCheckBox.isChecked(), log=self.slot.getPath()+"/wine.log", debug="err+all,warn-all,fixme+all,trace-all" ).returncode
 		# status codes from include/winerror.h
 		# 0: success
 		if not result == 0:
@@ -393,68 +429,29 @@ class SwineRunDialog(RunDialog):
 			self.parent().slotList_selectionChanged()
 		if self.winebootCheckBox.isChecked():
 			self.slot.runWineboot()
-
-	def cancelButton_clicked(self):
-		self.close()
-
-	def __init__(self,slot,parent = None,name = None,modal = False,fl = 0):
+	def __init__(self,slot,parent = None,name = "Run Program",modal = False,fl = 0):
 		self.slot = slot
-		RunDialog.__init__(self,parent,name,modal,fl)
+		self.shortcut = Shortcut ( "Run Program", slot )
+		SwineProgramDialog.__init__(self,self.shortcut,parent,name,modal,fl)
+		self.okButton.setText ("Run")
+		self.icon.hide()
+		self.nameLabel.hide()
+		self.nameInput.hide()
+		self.adjustSize()
 
 
-
-class SwineShortcutDialog(ShortcutDialog):
-	def cancelButton_clicked(self):
-		self.close()
-
-	def fileSelectButton_clicked(self):
-		file = QFileDialog.getOpenFileName( self.shortcut.slot.winPathToUnix("c:\\"), "Windows executables (*.exe *.EXE)", self )
-		if not file == None:
-			self.applicationInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
-
-	def fileSelectButton_2_clicked(self):
-		file = QFileDialog.getExistingDirectory( self.shortcut.slot.winPathToUnix("c:\\"), self )
-		if not file == None:
-			self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
-	
-	def icon_clicked(self):
-		dirStr = ""
-		if self.shortcut.iconsDir():
-			dirStr = self.shortcut.iconsDir()
-		self.iconFile = QFileDialog.getOpenFileName( dirStr, "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
-		if not self.iconFile == None:
-			self.icon.setIconSet ( QIconSet ( loadIcon ( self.iconFile ) ) )
-			self.shortcut.data["icon"] = self.iconFile
-
-	def saveButton_clicked(self):
-		if len(str(self.nameInput.text())) == 0:
-			raise SwineException ( "Shotcut name cannot be empty" )
-		self.shortcut.name = str(self.nameInput.text())
-		self.shortcut.data["icon"] = str(self.iconFile)
-		prog = []
-		prog.append(str(self.applicationInput.text()))
-		prog.extend(str2args(str(self.paramsInput.text())))
-		self.shortcut.data["program"] = str(prog)
-		self.shortcut.data["working_directory"] = str(self.workingDirectoryInput.text())
+class SwineShortcutDialog(SwineProgramDialog):
+	def okButton_clicked(self):
+		SwineProgramDialog.okButton_clicked(self)
 		self.accept()
-
 	def __init__(self,shortcut,parent = None,name = None,modal = False,fl = 0):
-		self.shortcut = shortcut
-		ShortcutDialog.__init__(self,parent,name,modal,fl)
-		self.nameInput.setText ( shortcut.name )
-		self.setCaption ( name )
-		self.iconFile = ""
-		self.paramsInput.setText ( "" )
-		if not shortcut.data == {}:
-			self.nameInput.setEnabled ( False )
-			if shortcut.data.has_key("icon" ) and not shortcut.data["icon"] == "":
-				self.icon.setIconSet ( QIconSet ( loadIcon ( shortcut.data["icon"] ) ) )
-				self.iconFile = shortcut.data["icon"]
-			self.applicationInput.setText ( str2args(shortcut.data["program"])[0] )
-			self.workingDirectoryInput.setText ( shortcut.data["working_directory"] )
-			self.paramsInput.setText ( str(str2args(shortcut.data["program"])[1:]) )
-
-
+		SwineProgramDialog.__init__(self,shortcut,parent,name,modal,fl)
+		self.okButton.setText ("Save")
+		self.runInTerminalCheckBox.hide()
+		self.winebootCheckBox.hide()
+		self.addShortcutsCheckBox.hide()
+		self.logfileCheckBox.hide()
+		self.adjustSize()
 
 
 def main(args):
