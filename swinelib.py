@@ -255,7 +255,7 @@ class Slot:
 			stdin, stdout, stderr: if this is set to "subprocess.PIPE" a new pipe is created to be accessed later
 			                       if this is set to a file descriptor, the file is used as input/output
 		"""
-		if cwd == None:
+		if cwd == None and self.exists():
 			cwd = self.getPath()
 		proc = Popen ( prog, stdin=stdin, stderr=stderr, stdout=stdout, cwd=cwd, env=env)
 		if wait:
