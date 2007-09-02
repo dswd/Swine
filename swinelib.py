@@ -23,7 +23,7 @@ import shortcutlib
 from tarfile import TarFile
 from subprocess import Popen
 
-VERSION = "0.4"
+VERSION = "0.3"
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
