@@ -49,7 +49,7 @@ class SwineSlotItem(QIconViewItem):
 		self.setDragEnabled(False)
 		shortcut = self.slot.loadDefaultShortcut()
 		if shortcut:
-			if shortcut.data.has_key("icon") and not shortcut.data["icon"] == "":
+			if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ) :
 				self.setPixmap ( loadIcon ( shortcut.data["icon"] ) )
 	def mainWindow(self):
 		return self.iconView().topLevelWidget()
@@ -122,7 +122,7 @@ class SwineShortcutItem(QIconViewItem):
 		QIconViewItem.__init__(self,parent,name,loadPixmap("wabi.png"))
 		self.setRenameEnabled(False)
 		self.setDragEnabled(False)
-		if shortcut.data.has_key("icon") and not shortcut.data["icon"] == "":
+		if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ):
 			self.setPixmap ( loadIcon ( shortcut.data["icon"] ) )
 	def mainWindow(self):
 		return self.iconView().topLevelWidget()
