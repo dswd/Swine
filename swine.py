@@ -77,18 +77,6 @@ class SwineSlotItem(QIconViewItem):
 			shortcut.save()
 		self.slot.saveConfig()
 		self.refreshShortcutList()
-	def winecfg_cb(self):
-		self.slot.runWinecfg()
-	def wineboot_cb(self):
-		self.slot.runWineboot()
-	def fileManager_cb(self):
-		self.slot.runWinefile()
-	def regedit_cb(self):
-		self.slot.runRegedit()
-	def uninstaller_cb(self):
-		self.slot.runUninstaller()
-	def control_cb(self):
-		self.slot.runWineControl()
 	def install_corefonts_cb(self):
 		if QMessageBox.information ( self.iconView(), "Install MS Corefonts", "This will download, unpack and install the Microsoft Corefonts.\nYou will need an internet connection and the 'cabextract' program for this to work.", "&Continue", "&Abort", QString.null, 0, 1 ) == 0:
 			self.slot.installCorefonts()
@@ -96,6 +84,8 @@ class SwineSlotItem(QIconViewItem):
 	def run_cb(self):
 		runDialog = SwineRunDialog(self.slot,self.mainWindow())
 		runDialog.show()
+	def filemanager_cb(self):
+		self.slot.runWinefile()
 	def runDefault_cb(self):
 		if self.slot.loadDefaultShortcut():
 			self.slot.loadDefaultShortcut().run()
@@ -160,8 +150,6 @@ class SwineShortcutItem(QIconViewItem):
 		self.mainWindow().currentSlotItem().setPixmap(pixmap)
 		self.mainWindow().currentSlotItem().iconView().adjustItems()
 		self.refreshShortcutList()
-	def run_cb(self):
-		self.shortcut.run()
 
 
 
@@ -182,7 +170,7 @@ class SwineMainWindow(MainWindow):
 		menu.insertItem( QIconSet(loadPixmap("application_add.png")), "&New Shortcut", self.createShortcut_cb )
 		if not shortcut == None:
 			menu.insertSeparator()
-			menu.insertItem( QIconSet(loadPixmap("cog.png")), "&Run", shortcut.run_cb )
+			menu.insertItem( QIconSet(loadPixmap("cog.png")), "&Run", shortcut.shortcut.run )
 			menu.insertSeparator()
 			menu.insertItem( QIconSet(loadPixmap("lightning_add.png")), "&Set Default", shortcut.setDefault_cb )
 			menu.insertItem( QIconSet(loadPixmap("application_edit.png")), "&Edit", shortcut.edit_cb )
@@ -204,14 +192,14 @@ class SwineMainWindow(MainWindow):
 			menu.insertSeparator()
 			submenu = QPopupMenu(self)
 			submenu.insertItem( QIconSet(loadPixmap("drive_magnify.png")), "&Import Shortcuts", slot.searchShortcuts_cb )
-			submenu.insertItem( QIconSet(loadPixmap("arrow_refresh.png")), "&Reboot wine", slot.wineboot_cb )
+			submenu.insertItem( QIconSet(loadPixmap("arrow_refresh.png")), "&Reboot wine", slot.slot.runWineboot )
 			submenu.insertSeparator()
-			submenu.insertItem( QIconSet(loadPixmap("computer_edit.png")), "&Winecfg", slot.winecfg_cb )
-			submenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.regedit_cb )
-			submenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.fileManager_cb )
-			submenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.uninstaller_cb )
+			submenu.insertItem( QIconSet(loadPixmap("computer_edit.png")), "&Winecfg", slot.slot.runWinecfg )
+			submenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.slot.runRegedit )
+			submenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.filemanager_cb )
+			submenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.slot.runUninstaller )
 			submenu.insertItem( QIconSet(loadPixmap("style_add.png")), "Install &MS Corefonts", slot.install_corefonts_cb )
-			submenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.control_cb )
+			submenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.slot.runWineControl )
 			submenu.insertSeparator()
 			submenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )
 			submenu.insertItem( QIconSet(loadPixmap("package_add.png")), "Import &Data", slot.import_cb )
