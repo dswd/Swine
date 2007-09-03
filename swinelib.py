@@ -22,6 +22,7 @@ import sys, os, shutil, ConfigParser, array, pipes, urllib, subprocess
 import shortcutlib
 from tarfile import TarFile
 from subprocess import Popen
+from Registry import Registry
 
 VERSION = "0.3"
 
@@ -374,6 +375,32 @@ class Slot:
 			tar.extract(file)
 		tar.close ()
 		self.loadConfig()
+		
+	def getRegistry (self, file):
+		return Registry ( file )
+	
+	def getRegistrySystem (self):
+		return self.getRegistry ( self.getPath() + "/system.reg" )
+	
+	def getRegistryHKCU (self):
+		return self.getRegistry ( self.getPath() + "/user.reg" )
+	
+	def getRegistryUserDef (self):
+		return self.getRegistry ( self.getPath() + "/userdef.reg" )
+	
+	def getDesktopRes (self):
+		hkcu = self.getRegistryHKCU()
+		res = hkcu.getPath ( "Software\\Wine\\X11 Driver", True ).getAttr ( "Desktop" ).value
+		if res == "n" or res == "f" or res == "0": return None
+		else: return res
+		
+	
+	def setDesktopRes (self,res):
+		if not res:
+			res = "n"
+		hkcu = self.getRegistryHKCU()
+		hkcu.getPath ( "Software\\Wine\\X11 Driver", True ).setAttr ( "Desktop", res )
+		hkcu.save()
 
 
 def importSlot (name, file):

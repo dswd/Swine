@@ -47,14 +47,13 @@
 
 class Path:
 	def __init__(self,name,chdate):
-		print name
 		self.name = name
 		self.chdate = chdate
 		self.attrs = {}
 	def __str__(self):
 		return "[" + escapeString(self.name) + "] " + str(self.chdate)
-	def addAttr (self,name,typ,value):
-		r = Attr(name,typ,value)
+	def addAttr (self,name,value,typ="string"):
+		r = Attr(name,value,typ)
 		self.attrs[name] = r
 		return r
 	def getAttr (self,name):
@@ -62,9 +61,15 @@ class Path:
 			return self.attrs[name]
 		except (KeyError):
 			return None
+	def setAttr (self,name,value,typ="string"):
+		attr = self.getAttr (name)
+		if attr:
+			attr.typ = typ
+			attr.value = value
+		else: self.addAttr (name,value,typ)
 	
 class Attr:
-	def __init__(self,name,typ,value):
+	def __init__(self,name,value,typ):
 		self.name = name
 		self.typ = typ
 		self.value = value
@@ -78,18 +83,23 @@ class Attr:
 		return name + "=" + tv
 
 class Registry:
+	def __init__(self,file):
+		self.load(file)
+	
 	def addPath (self,name,chdate):
 		r = Path(name,chdate)
 		self.paths[name] = r
 		return r
 
-	def getPath (self,name):
+	def getPath (self,name,create=False):
 		try:
 			return self.paths[name]
 		except (KeyError):
-			return None
+			if not create: return None
+			return self.addPath (name,0)
 	
-	def save (self,file):
+	def saveToFile (self,file):
+		self.fileName = file
 		fp = open(file,"w")
 		fp.write ( "WINE REGISTRY Version 2\n" )
 		for name, p in self.paths.iteritems():
@@ -99,7 +109,11 @@ class Registry:
 				fp.write ( str(a) + "\n" )
 		fp.close ()
 	
+	def save (self):
+		self.saveToFile ( self.fileName )
+	
 	def load (self,file):
+		self.fileName = file
 		self.paths = {}
 		fp = open(file,"r")
 		path = None
@@ -119,7 +133,7 @@ class Registry:
 				path = self.addPath ( name, date )
 				continue
 			if s[0] == '"' or s[0] == '@': #parse attribute line
-				eq = s.rfind("=")
+				eq = s.find("=")
 				name = s[0:eq]
 				if name[0] == "\"": name = deescapeString(s[1:eq-1])
 				tv = s[eq+1:]
@@ -131,12 +145,12 @@ class Registry:
 					typ = tv[0:sep]
 					value = tv[sep+1:]
 					if value[0] == "\"": value = deescapeString(value[1:-1])
-				path.addAttr ( name, typ, value )
+				path.addAttr ( name, value, typ )
 				continue
 			raise Exception("Invalid line: " + s)
 
 
-plainchrs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,{}()[]/.;-0123456789&@_:%*#'$<>?~ "
+plainchrs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,{}()[]/.;-0123456789&@_:%*#'$<>?~| "
 def escapeString(string):
 	result = ""
 	for ch in string:
