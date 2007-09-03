@@ -459,6 +459,9 @@ def loadSlot (name):
 	slot.loadConfig()
 	return slot
 
+def loadDefaultSlot ():
+	return loadSlot ( SWINE_DEFAULT_SLOT_NAME )
+
 try:
 	init()
 except Exception, data:

@@ -86,6 +86,10 @@ class SwineSlotItem(QIconViewItem):
 		runDialog.show()
 	def filemanager_cb(self):
 		self.slot.runWinefile()
+	def shell_cb(self):
+		self.slot.runWin(["cmd.exe"],runInTerminal=True)
+	def taskmgr_cb(self):
+		self.slot.runWin(["taskmgr.exe"])
 	def runDefault_cb(self):
 		if self.slot.loadDefaultShortcut():
 			self.slot.loadDefaultShortcut().run()
@@ -196,7 +200,9 @@ class SwineMainWindow(MainWindow):
 			submenu.insertSeparator()
 			submenu.insertItem( QIconSet(loadPixmap("computer_edit.png")), "&Winecfg", slot.slot.runWinecfg )
 			submenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.slot.runRegedit )
+			submenu.insertItem( QIconSet(loadPixmap("application_xp_terminal.png")), "&Shell", slot.shell_cb )
 			submenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.filemanager_cb )
+			submenu.insertItem( QIconSet(loadPixmap("application_form_magnify.png")), "&Taskmanager", slot.taskmgr_cb )
 			submenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.slot.runUninstaller )
 			submenu.insertItem( QIconSet(loadPixmap("style_add.png")), "Install &MS Corefonts", slot.install_corefonts_cb )
 			submenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.slot.runWineControl )
@@ -290,6 +296,9 @@ class SwineMainWindow(MainWindow):
 
 	def helpabout_SwineAction_activated(self):
 		SwineAboutDialog().exec_loop()
+	
+	def helpAbout_WineAction_activated(self):
+		loadDefaultSlot().runWin ( ["winver"] )
 	
 	def menuExitAction_activated(self):
 		QApplication.exit(0)

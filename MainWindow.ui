@@ -119,6 +119,7 @@
     </item>
     <item text="&amp;Help" name="Help">
         <action name="helpabout_SwineAction"/>
+        <action name="helpAbout_WineAction"/>
     </item>
 </menubar>
 <toolbars>
@@ -208,6 +209,20 @@
             <string>Alt+F4</string>
         </property>
     </action>
+    <action>
+        <property name="name">
+            <cstring>helpAbout_WineAction</cstring>
+        </property>
+        <property name="iconSet">
+            <iconset>image3</iconset>
+        </property>
+        <property name="text">
+            <string>About &amp;Wine</string>
+        </property>
+        <property name="menuText">
+            <string>About &amp;Wine</string>
+        </property>
+    </action>
 </actions>
 <images>
     <image name="image0">
@@ -218,6 +233,9 @@
     </image>
     <image name="image2">
         <data format="PNG" length="651">89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff610000025249444154388d9d935f4b145118c69f73664667767666db5ca4964a44886224906e82a8b0408220bab32cca922084282ac98fd155f45d2a85a23ec1085de562ceee6ca1aebaee1ee73d7fbad05637f1a21e3817e7e53c3fcefb9cf3c218837f5962722ab77fcfb15f33b30398998d7088b627a72243d9e3d6f8c4e53fb53dc0ccec002cab62388ff5f3970720db0f1e45e03ce641f046134d6fdebc75760fb06b466f2fe0ba00e7b19c7eda8188fb0f2330165b791f3da5129c301cd7198dad5d1be3cc1803bc7aed1aadb7e0799c0501f4c60674a3012ddac39a2418e7310f033861012259c6762d559ac82bcebda71d0000fdec856b946a32cfb37858805a6f40aeadc290841504700a21c4720291a6ca48ca17e73e0800e80000403e9976b5544d9ecb5976f108a034a035a015449240a4f51df3fc4771304400f6bbb7c210e5696545831450a9008b8b805210b5546bcabacc070000a089861803879200112025202598c5b9ce68e8eff35d80f69d7b111862cbcb0192807219281f07a4446fa100cbb6e2fac8f9ae27ee64d0ba7d37629cc576ce87138668d7aa10f5bad244cc2d1ee57ef9185ab514ad6a15d96673b8fc6d61a17383d6f844c4188b6d2f0727f0d14e76d2d619e50d91bf95246af3fb2272a53e78a512ec1e275e1e1c8a00c0deedbb9f3b366034da490ded9f756548e6fbbe7c1200909e1bc93793a469b2cc727c1f8c7318a5fa012c745a58bf7e63943bce1c6dac6b4dd22f7dfddc9576f5f419d728d5ec09024bacae5e3db954990780ae495bb97465f4d7858bee6193f86360d05d3a716a747fadeb23fd8f7e03bf9e75c9cb73019f0000000049454e44ae426082</data>
+    </image>
+    <image name="image3">
+        <data format="PNG" length="415">89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff610000016649444154388d9592214f03411085bf23235634a462654155905079a20259790251920a122a10888afe840a7ec08913151535284c45492a9015a750881315882359813871e2c4268b29a5a5dc512659b1d9f7decc7b3bdee9f1315575757bebce5b2d168b05278d068f9389b7fdee550984d3a90b82001121cff3cd31c6701d041ec05155f7f97c8e880050abd5d05aa3944229b5c1481979f9faea3aed364551a094a2280ac6e331ef69ba63a354c018c3b05e27f27d661f1f5c6a4d0d78f9812bb510c73102d481bed6d44510e0e1f9f93081244900b0eb0c2cf094e7b4cfce767ea132442b8258bbbe586ec2700f532ad0ebf5bec922d8bb3b86fdbef713571aa2d69ac16a4543294651c4fd60b047868a458a93c4359b4db4c8afc43f2de4794eb7dbade2fe2ef096652e31c645517490c04e06a330745fab0b90a6e9ff26e8743a2c974b7cdf0760369b618ac2c549e20e9ae0a2d5da0496a6a9cbb20c6beddef26cd7277db580e43385ac300000000049454e44ae426082</data>
     </image>
 </images>
 <connections>
@@ -281,23 +299,30 @@
         <receiver>MainWindow</receiver>
         <slot>shortcutList_selectionChanged()</slot>
     </connection>
+    <connection>
+        <sender>helpAbout_WineAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindow</receiver>
+        <slot>helpAbout_WineAction_activated()</slot>
+    </connection>
 </connections>
 <slots>
-    <slot>slotList_selectionChanged(QIconViewItem*)</slot>
+    <slot>slotList_selectionChanged( QIconViewItem * )</slot>
     <slot>slotList_selectionChanged()</slot>
-    <slot>slotList_itemRenamed(QIconViewItem*)</slot>
-    <slot>slotList_itemRenamed(QIconViewItem*,const QString&amp;)</slot>
-    <slot>shortcutList_itemExceuted(QIconViewItem*)</slot>
-    <slot>shortcutList_itemRenamed(QIconViewItem*,const QString&amp;)</slot>
-    <slot>slotList_rightButtonClicked(QIconViewItem*,const QPoint&amp;)</slot>
+    <slot>slotList_itemRenamed( QIconViewItem * )</slot>
+    <slot>slotList_itemRenamed( QIconViewItem *, const QString &amp; )</slot>
+    <slot>shortcutList_itemExceuted( QIconViewItem * )</slot>
+    <slot>shortcutList_itemRenamed( QIconViewItem *, const QString &amp; )</slot>
+    <slot>slotList_rightButtonClicked( QIconViewItem *, const QPoint &amp; )</slot>
     <slot>testSlot()</slot>
-    <slot>shortcutList_rightButtonClicked(QIconViewItem*,const QPoint&amp;)</slot>
-    <slot>slotList_doubleClicked(QIconViewItem*)</slot>
-    <slot>slotList_itemExecuted(QIconViewItem*)</slot>
-    <slot>shortcutList_selectionChanged(QIconViewItem*)</slot>
+    <slot>shortcutList_rightButtonClicked( QIconViewItem *, const QPoint &amp; )</slot>
+    <slot>slotList_doubleClicked( QIconViewItem * )</slot>
+    <slot>slotList_itemExecuted( QIconViewItem * )</slot>
+    <slot>shortcutList_selectionChanged( QIconViewItem * )</slot>
     <slot>helpabout_SwineAction_activated()</slot>
     <slot>menuExitAction_activated()</slot>
     <slot>shortcutList_selectionChanged()</slot>
+    <slot>helpAbout_WineAction_activated()</slot>
 </slots>
 <functions>
     <function>quit()</function>
