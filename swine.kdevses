@@ -1,28 +1,25 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <!DOCTYPE KDevPrjSession>
 <KDevPrjSession>
- <DocsAndViews NumberOfDocuments="7" >
+ <DocsAndViews NumberOfDocuments="6" >
   <Doc0 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/swine.py" >
-   <View0 line="460" Type="Source" />
+   <View0 Encoding="" Type="Source" />
   </Doc0>
   <Doc1 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/swinelib.py" >
-   <View0 line="25" Type="Source" />
+   <View0 Encoding="" Type="Source" />
   </Doc1>
   <Doc2 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/shortcutlib.py" >
-   <View0 line="207" Type="Source" />
+   <View0 Encoding="" Type="Source" />
   </Doc2>
   <Doc3 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/swinecli.py" >
-   <View0 line="54" Type="Source" />
+   <View0 Encoding="" Type="Source" />
   </Doc3>
-  <Doc4 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/ProgramDialog.ui" >
-   <View0 Type="Other" />
+  <Doc4 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/Makefile" >
+   <View0 Encoding="" Type="Source" />
   </Doc4>
-  <Doc5 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/Makefile" >
-   <View0 line="6" Type="Source" />
+  <Doc5 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/Registry.py" >
+   <View0 Encoding="" line="183" Type="Source" />
   </Doc5>
-  <Doc6 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/Registry.py" >
-   <View0 line="183" Type="Source" />
-  </Doc6>
  </DocsAndViews>
  <pluginList>
   <kdevbookmarks>
@@ -41,7 +38,7 @@
    </bookmarks>
   </kdevbookmarks>
   <kdevsubversion>
-   <subversion recurseresolve="1" recurserelocate="1" recursemerge="1" recursecommit="1" base="" recursepropget="1" recurseswitch="1" recurseupdate="1" recursepropset="1" recursediff="1" recurserevert="1" forcemove="1" recursecheckout="1" forceremove="1" recurseadd="1" recurseproplist="1" forcemerge="1" />
+   <subversion base="" />
   </kdevsubversion>
  </pluginList>
 </KDevPrjSession>

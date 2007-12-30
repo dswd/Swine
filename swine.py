@@ -37,50 +37,50 @@ def loadPixmap ( name ):
 def loadIcon ( name ):
 	pm = QPixmap ( name )
 	pm.setMask ( pm.createHeuristicMask() )
-	if not pm:
+	if not pm or pm.isNull():
 		pm = loadPixmap("wabi.png")
-	return pm
+	return QPixmap ( pm.convertToImage().smoothScale(32,32,QImage.ScaleMin) )
 
-class SwineSlotItem(QIconViewItem):
+class SwineSlotItem(QListBoxPixmap):
 	def __init__(self,parent,slot):
 		self.slot=slot
-		QIconViewItem.__init__(self,parent,slot.name,loadPixmap("folder.png"))
-		self.setRenameEnabled(False)
-		self.setDragEnabled(False)
+		self.pixmap = loadPixmap("folder.png")
 		shortcut = self.slot.loadDefaultShortcut()
 		if shortcut:
 			if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ) :
-				self.setPixmap ( loadIcon ( shortcut.data["icon"] ) )
+				self.pixmap = loadIcon ( shortcut.data["icon"] )
+		QListBoxPixmap.__init__(self,parent,self.pixmap,slot.name)
+		self.listBox().sort()
 	def mainWindow(self):
-		return self.iconView().topLevelWidget()
+		return self.listBox().topLevelWidget()
 	def refreshShortcutList(self):
 		self.mainWindow().slotList_selectionChanged()
 	def delete_cb(self):
-		if QMessageBox.warning ( self.iconView(), "Delete Slot", "Are you sure ?", "&Yes", "&No", QString.null, 0, 1 ) == 0:
+		if QMessageBox.warning ( self.listBox(), "Delete Slot", "Are you sure ?", "&Yes", "&No", QString.null, 0, 1 ) == 0:
 			self.slot.delete()
-			self.iconView().takeItem(self)
+			self.listBox().takeItem(self)
 	def rename_cb(self):
 		result = QInputDialog.getText ( "Rename Slot", "New name:", QLineEdit.Normal, self.slot.name )
 		if result[1] and len(result[0]) > 0:
 			self.slot.rename ( str ( result[0] ) )
 			self.setText ( str ( result[0] ) )
-			self.iconView().adjustItems()
+			self.listBox().sort()
 	def copy_cb(self):
 		result = QInputDialog.getText ( "Copy Slot", "New name:", QLineEdit.Normal, "New Slot" )
 		if result[1]:
 			self.slot.clone ( str ( result[0] ) )
 			slot = Slot(str(result[0]))
 			slot.loadConfig()
-			SwineSlotItem(self.mainWindow().slotList,slot)		
+			SwineSlotItem(self.mainWindow().slotList,slot)
 	def searchShortcuts_cb(self):
 		for shortcut in self.slot.findShortcuts(False):
 			shortcut.save()
 		self.slot.saveConfig()
 		self.refreshShortcutList()
 	def install_corefonts_cb(self):
-		if QMessageBox.information ( self.iconView(), "Install MS Corefonts", "This will download, unpack and install the Microsoft Corefonts.\nYou will need an internet connection and the 'cabextract' program for this to work.", "&Continue", "&Abort", QString.null, 0, 1 ) == 0:
+		if QMessageBox.information ( self.listBox(), "Install MS Corefonts", "This will download, unpack and install the Microsoft Corefonts.\nYou will need an internet connection and the 'cabextract' program for this to work.", "&Continue", "&Abort", QString.null, 0, 1 ) == 0:
 			self.slot.installCorefonts()
-			QMessageBox.information ( self.iconView(), "Install MS Corefonts", "MS Corefonts installed sucessfully.")
+			QMessageBox.information ( self.listBox(), "Install MS Corefonts", "MS Corefonts installed sucessfully.")
 	def run_cb(self):
 		runDialog = SwineRunDialog(self.slot,self.mainWindow())
 		runDialog.show()
@@ -105,7 +105,8 @@ class SwineSlotItem(QIconViewItem):
 		if file:
 			self.slot.importData ( str(file) )
 			self.refreshShortcutList()
-
+	def height(self,lb):
+		return QListBoxPixmap.height(self,lb)+6
 
 class SwineShortcutItem(QIconViewItem):
 	def __init__(self,parent,shortcut):
@@ -148,18 +149,16 @@ class SwineShortcutItem(QIconViewItem):
 	def setDefault_cb(self):
 		self.shortcut.setDefault()
 		self.shortcut.slot.saveConfig()
-		pixmap = loadPixmap ( "folder.png" )
-		if self.shortcut.data.has_key("icon") and not self.shortcut.data["icon"] == "":
-			pixmap = self.pixmap()
-		self.mainWindow().currentSlotItem().setPixmap(pixmap)
-		self.mainWindow().currentSlotItem().iconView().adjustItems()
-		self.refreshShortcutList()
+		main = self.mainWindow()
+		main.slotList.takeItem (main.currentSlotItem())
+		item = SwineSlotItem (main.slotList,self.shortcut.slot)
+		main.slotList.setCurrentItem ( item )
 
 
 
 class SwineMainWindow(MainWindow):
 	def currentSlotItem(self):
-		item = self.slotList.currentItem()
+		item = self.slotList.selectedItem()
 		if item and item.isSelected():
 			return item
 		return None

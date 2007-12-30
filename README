@@ -4,8 +4,7 @@ Swine needs the following packages:
 - wine (Version 0.9.28 tested)
 - qt-3 (Version 3.3.8 tested)
 - python (Version 2.4 tested)
-- pyqt (Version 3.17.3 tested)
-- python-qtext (Version 3.17.3 tested
+- pyqt (Version 3.14.1 tested)
 
 Included Works
 ==============

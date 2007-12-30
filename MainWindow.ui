@@ -22,7 +22,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QIconView">
+        <widget class="QListBox">
             <property name="name">
                 <cstring>slotList</cstring>
             </property>
@@ -47,7 +47,10 @@
                 <bool>false</bool>
             </property>
             <property name="lineWidth">
-                <number>2</number>
+                <number>1</number>
+            </property>
+            <property name="margin">
+                <number>0</number>
             </property>
             <property name="midLineWidth">
                 <number>0</number>
@@ -55,26 +58,16 @@
             <property name="resizePolicy">
                 <enum>Manual</enum>
             </property>
+            <property name="vScrollBarMode">
+                <enum>Auto</enum>
+            </property>
+            <property name="hScrollBarMode">
+                <enum>Auto</enum>
+            </property>
             <property name="dragAutoScroll">
                 <bool>false</bool>
             </property>
-            <property name="itemTextPos">
-                <enum>Right</enum>
-            </property>
-            <property name="arrangement">
-                <enum>TopToBottom</enum>
-            </property>
-            <property name="resizeMode">
-                <enum>Adjust</enum>
-            </property>
-            <property name="maxItemWidth">
-                <number>250</number>
-            </property>
-            <property name="itemsMovable">
-                <bool>false</bool>
-            </property>
-            <property name="wordWrapIconText">
-                <bool>true</bool>
+            <property name="resizeMode" stdset="0">
             </property>
         </widget>
         <widget class="QIconView">
@@ -258,28 +251,10 @@
         <slot>shortcutList_itemExceuted(QIconViewItem*)</slot>
     </connection>
     <connection>
-        <sender>slotList</sender>
-        <signal>rightButtonClicked(QIconViewItem*,const QPoint&amp;)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>slotList_rightButtonClicked(QIconViewItem*,const QPoint&amp;)</slot>
-    </connection>
-    <connection>
         <sender>shortcutList</sender>
         <signal>rightButtonClicked(QIconViewItem*,const QPoint&amp;)</signal>
         <receiver>MainWindow</receiver>
         <slot>shortcutList_rightButtonClicked(QIconViewItem*,const QPoint&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>slotList</sender>
-        <signal>doubleClicked(QIconViewItem*)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>slotList_itemExecuted(QIconViewItem*)</slot>
-    </connection>
-    <connection>
-        <sender>slotList</sender>
-        <signal>returnPressed(QIconViewItem*)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>slotList_itemExecuted(QIconViewItem*)</slot>
     </connection>
     <connection>
         <sender>helpabout_SwineAction</sender>
@@ -305,7 +280,28 @@
         <receiver>MainWindow</receiver>
         <slot>helpAbout_WineAction_activated()</slot>
     </connection>
+    <connection>
+        <sender>slotList</sender>
+        <signal>rightButtonClicked(QListBoxItem*,const QPoint&amp;)</signal>
+        <receiver>MainWindow</receiver>
+        <slot>slotList_rightButtonClicked(QListBoxItem*,const QPoint&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>slotList</sender>
+        <signal>returnPressed(QListBoxItem*)</signal>
+        <receiver>MainWindow</receiver>
+        <slot>slotList_itemExecuted(QListBoxItem*)</slot>
+    </connection>
+    <connection>
+        <sender>slotList</sender>
+        <signal>doubleClicked(QListBoxItem*)</signal>
+        <receiver>MainWindow</receiver>
+        <slot>slotList_itemExecuted(QListBoxItem*)</slot>
+    </connection>
 </connections>
+<includes>
+    <include location="local" impldecl="in implementation">MainWindow.ui.h</include>
+</includes>
 <slots>
     <slot>slotList_selectionChanged( QIconViewItem * )</slot>
     <slot>slotList_selectionChanged()</slot>
@@ -323,6 +319,10 @@
     <slot>menuExitAction_activated()</slot>
     <slot>shortcutList_selectionChanged()</slot>
     <slot>helpAbout_WineAction_activated()</slot>
+    <slot>slotList_returnPressed( QListBoxItem * )</slot>
+    <slot>slotList_doubleClicked( QListBoxItem * )</slot>
+    <slot>slotList_rightButtonClicked( QListBoxItem *, const QPoint &amp; )</slot>
+    <slot>slotList_itemExecuted( QListBoxItem * )</slot>
 </slots>
 <functions>
     <function>quit()</function>
