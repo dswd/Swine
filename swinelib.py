@@ -24,7 +24,7 @@ from tarfile import TarFile
 from subprocess import Popen
 from Registry import Registry
 
-VERSION = "0.3.1"
+VERSION = "0.4"
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
