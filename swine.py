@@ -193,22 +193,27 @@ class SwineMainWindow(MainWindow):
 			menu.insertItem( QIconSet(loadPixmap("application_lightning.png")), "Run default", slot.runDefault_cb )
 			menu.insertItem( QIconSet(loadPixmap("application.png")), "&Run...", slot.run_cb )
 			menu.insertSeparator()
-			submenu = QPopupMenu(self)
-			submenu.insertItem( QIconSet(loadPixmap("drive_magnify.png")), "&Import Shortcuts", slot.searchShortcuts_cb )
-			submenu.insertItem( QIconSet(loadPixmap("arrow_refresh.png")), "&Reboot wine", slot.slot.runWineboot )
-			submenu.insertSeparator()
-			submenu.insertItem( QIconSet(loadPixmap("computer_edit.png")), "&Winecfg", slot.slot.runWinecfg )
-			submenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.slot.runRegedit )
-			submenu.insertItem( QIconSet(loadPixmap("application_xp_terminal.png")), "&Shell", slot.shell_cb )
-			submenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.filemanager_cb )
-			submenu.insertItem( QIconSet(loadPixmap("application_form_magnify.png")), "&Taskmanager", slot.taskmgr_cb )
-			submenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.slot.runUninstaller )
-			submenu.insertItem( QIconSet(loadPixmap("style_add.png")), "Install &MS Corefonts", slot.install_corefonts_cb )
-			submenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.slot.runWineControl )
-			submenu.insertSeparator()
-			submenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )
-			submenu.insertItem( QIconSet(loadPixmap("package_add.png")), "Import &Data", slot.import_cb )
-			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Tools", submenu )
+			toolsMenu = QPopupMenu(self)
+			toolsMenu.insertItem( QIconSet(loadPixmap("application_xp_terminal.png")), "&Shell", slot.shell_cb )
+			toolsMenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.filemanager_cb )
+			toolsMenu.insertItem( QIconSet(loadPixmap("application_form_magnify.png")), "&Taskmanager", slot.taskmgr_cb )
+			toolsMenu.insertSeparator()
+			toolsMenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )
+			toolsMenu.insertItem( QIconSet(loadPixmap("package_add.png")), "Import &Data", slot.import_cb )
+			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Tools", toolsMenu )
+			configMenu = QPopupMenu(self)
+			configMenu.insertItem( QIconSet(loadPixmap("computer_edit.png")), "&Winecfg", slot.slot.runWinecfg )
+			configMenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.slot.runRegedit )
+			configMenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.slot.runUninstaller )
+			configMenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.slot.runWineControl )
+			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Config", configMenu )
+			commandsMenu = QPopupMenu(self)
+			commandsMenu.insertItem( QIconSet(loadPixmap("drive_magnify.png")), "&Import Shortcuts", slot.searchShortcuts_cb )
+			commandsMenu.insertItem( QIconSet(loadPixmap("arrow_refresh.png")), "&Reboot wine", slot.slot.runWineboot )
+			commandsMenu.insertItem( QIconSet(loadPixmap("drive_cd.png")), "&Eject CD", slot.slot.runEject )
+			commandsMenu.insertSeparator()
+			commandsMenu.insertItem( QIconSet(loadPixmap("style_add.png")), "Install &MS Corefonts", slot.install_corefonts_cb )
+			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Commands", commandsMenu )
 			menu.insertSeparator()
 			if not slot.slot.name == SWINE_DEFAULT_SLOT_NAME:
 				menu.insertItem( QIconSet(loadPixmap("drive_rename.png")), "R&ename", slot.rename_cb )
@@ -378,7 +383,7 @@ class SwineProgramDialog(ProgramDialog):
 
 	def okButton_clicked(self):
 		if len(str(self.nameInput.text())) == 0:
-			raise SwineException ( "Shotcut name cannot be empty" )
+			raise SwineException ( "Shortcut name cannot be empty" )
 		self.shortcut.name = str(self.nameInput.text())
 		self.shortcut.data["icon"] = str(self.iconFile)
 		prog = []
@@ -386,6 +391,12 @@ class SwineProgramDialog(ProgramDialog):
 		prog.extend(str2args(str(self.paramsInput.text())))
 		self.shortcut.data["program"] = str(prog)
 		self.shortcut.data["working_directory"] = str(self.workingDirectoryInput.text())
+		if self.desktopCheckBox.isChecked():
+			self.shortcut.data["desktop"] = "default,"+str(self.desktopResolution.currentText())
+		else:
+			if self.shortcut.data.has_key("desktop"):
+				del self.shortcut.data["desktop"]
+		self.shortcut.data["interminal"]=str(int(self.runInTerminalCheckBox.isChecked()))
 
 	def __init__(self,shortcut,parent = None,name = None,modal = False,fl = 0):
 		self.shortcut = shortcut
@@ -402,17 +413,33 @@ class SwineProgramDialog(ProgramDialog):
 			self.applicationInput.setText ( str2args(shortcut.data["program"])[0] )
 			self.workingDirectoryInput.setText ( shortcut.data["working_directory"] )
 			self.paramsInput.setText ( str(str2args(shortcut.data["program"])[1:]) )
-
+			if shortcut.data.has_key("desktop"):
+				self.desktopCheckBox.setChecked ( True )
+				self.desktopResolution.setCurrentText ( shortcut.data["desktop"].split(",")[1] )
+			else:
+				self.desktopCheckBox.setChecked ( False )
+			self.runInTerminalCheckBox.setChecked ( self.shortcut.data.has_key("interminal") and int(self.shortcut.data["interminal"])==1 )
 
 
 class SwineRunDialog(SwineProgramDialog):
 	def okButton_clicked(self):
 		SwineProgramDialog.okButton_clicked(self)
 		self.hide()
-		result = self.slot.runWin ( str2args(self.shortcut.data['program']), wait=True, workingDirectory=self.shortcut.data['working_directory'], runInTerminal=self.runInTerminalCheckBox.isChecked(), log=self.slot.getPath()+"/wine.log", debug="err+all,warn-all,fixme+all,trace-all" ).returncode
+		prog = str2args(self.shortcut.data['program'])
+		wait=False
+		workingDirectory=self.shortcut.data['working_directory']
+		runInTerminal=self.shortcut.data["inTerminal"]
+		log=None
+		if self.logfileCheckBox.isChecked():
+			log=self.slot.getPath()+"/wine.log"
+		debug="err+all,warn-all,fixme+all,trace-all"
+		desktop=None
+		if self.shortcut.data.has_key('desktop'):
+			desktop=self.shortcut.data['desktop']
+		result = self.slot.runWin ( prog, wait=wait, workingDirectory=workingDirectory, runInTerminal=runInTerminal, log=log, debug=debug, desktop=desktop ).returncode
 		# status codes from include/winerror.h
 		# 0: success
-		if not result == 0:
+		if not result == 0 and not result == None :
 			QMessageBox.critical ( self, "Error", "Code: " + str(result) )
 		# 2: exe-file not found
 		# 3: exe-path not found
@@ -443,7 +470,6 @@ class SwineShortcutDialog(SwineProgramDialog):
 	def __init__(self,shortcut,parent = None,name = None,modal = False,fl = 0):
 		SwineProgramDialog.__init__(self,shortcut,parent,name,modal,fl)
 		self.okButton.setText ("Save")
-		self.runInTerminalCheckBox.hide()
 		self.winebootCheckBox.hide()
 		self.addShortcutsCheckBox.hide()
 		self.logfileCheckBox.hide()

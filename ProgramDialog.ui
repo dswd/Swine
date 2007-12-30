@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>388</width>
-            <height>230</height>
+            <height>306</height>
         </rect>
     </property>
     <property name="caption">
@@ -158,24 +158,13 @@
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>runOptions</cstring>
+                <cstring>layout9</cstring>
             </property>
             <grid>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox" row="1" column="1">
-                    <property name="name">
-                        <cstring>logfileCheckBox</cstring>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Log to wine.log</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+L</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" row="0" column="0">
+                <widget class="QCheckBox" row="1" column="0">
                     <property name="name">
                         <cstring>runInTerminalCheckBox</cstring>
                     </property>
@@ -189,7 +178,7 @@
                         <bool>false</bool>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="1" column="0">
+                <widget class="QCheckBox" row="2" column="0">
                     <property name="name">
                         <cstring>addShortcutsCheckBox</cstring>
                     </property>
@@ -206,7 +195,18 @@
                         <bool>false</bool>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="0" column="1">
+                <widget class="QCheckBox" row="2" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>logfileCheckBox</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Log to wine.log</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+L</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="1" column="1" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>winebootCheckBox</cstring>
                     </property>
@@ -222,6 +222,52 @@
                     <property name="checked">
                         <bool>false</bool>
                     </property>
+                </widget>
+                <widget class="QLayoutWidget" row="0" column="0" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>layout8</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>desktopCheckBox</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Desktop:</string>
+                            </property>
+                        </widget>
+                        <widget class="QComboBox">
+                            <item>
+                                <property name="text">
+                                    <string>640x480</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>800x600</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>1024x768</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>1280x1024</string>
+                                </property>
+                            </item>
+                            <property name="name">
+                                <cstring>desktopResolution</cstring>
+                            </property>
+                            <property name="editable">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                    </hbox>
                 </widget>
             </grid>
         </widget>

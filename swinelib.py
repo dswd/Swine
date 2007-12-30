@@ -54,12 +54,16 @@ class Shortcut:
 	
 	def save (self):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
-		if not self.name:
+		section = self.name
+		config = self.slot.config
+		if not section:
 			raise SwineException ( "Shortcut name cannot be empty" )
-		if not self.slot.config.has_section ( self.name ):
-			self.slot.config.add_section ( self.name )
+		if not config.has_section ( section ):
+			config.add_section ( section )
+		for o in config.options(section):
+			config.remove_option(section,o)
 		for k, v in self.data.iteritems():
-			self.slot.config.set(self.name,k,v)
+			config.set(section,k,v)
 		
 	def delete (self):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
@@ -85,7 +89,13 @@ class Shortcut:
 		shortcut.save ()
 
 	def run (self,wait=False):
-		return self.slot.runWin (prog=str2args(self.data['program']),wait=wait,workingDirectory=self.data['working_directory'])
+		prog=str2args(self.data['program'])
+		workingDirectory=self.data['working_directory']
+		runInTerminal=self.data.has_key("interminal") and int(self.data["interminal"]) == 1
+		desktop=None
+		if self.data.has_key("desktop"):
+			desktop=self.data["desktop"]
+		return self.slot.runWin (prog=prog,wait=wait,workingDirectory=workingDirectory,runInTerminal=runInTerminal,desktop=desktop)
 
 	def isDefault (self):
 		return ( not self.slot.loadDefaultShortcut() == None ) and self.name == self.slot.loadDefaultShortcut().name
@@ -280,7 +290,7 @@ class Slot:
 			env["WINEDEBUG"] = debug
 		return self.runNative ( prog, cwd, wait, env, stdin, stdout, stderr )
 	
-	def runWin (self,prog,workingDirectory=".",wait=False,runInTerminal=False,debug=None,log=None):
+	def runWin (self,prog,workingDirectory=".",wait=False,runInTerminal=False,desktop=None,debug=None,log=None):
 		"""Run a windows program
 		Parameters:
 			prog: this is the program with all paramters as a list
@@ -289,9 +299,13 @@ class Slot:
 			runInTerminal: if this is set the wine call is done with wineconsole instead of wine
 			debug: user-defines WINEDEBUG-String (see wine manpage)
 			log: if this is set, wine stderr output will be written to that file
+			desktop: if this is set, program will be run in a window
 		"""
 		if not os.path.splitext(prog[0])[1].lower() == ".exe":
 			prog.insert(0,"start")
+		if desktop:
+			prog.insert(0,"explorer")
+			prog.insert(1,"/desktop="+desktop)
 		if runInTerminal:
 			prog.insert(0,"wineconsole")
 			prog.insert(1,"--backend=user")
@@ -324,6 +338,9 @@ class Slot:
 		
 	def runWineControl (self):
 		return self.runWineTool (["wine","control"],wait=False)
+	
+	def runEject (self):
+		return self.runWin (["eject"],wait=False)
 	
 	def installCorefonts (self):
 		"""Install Microsoft Corefonts
