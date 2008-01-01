@@ -1,9 +1,9 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <!DOCTYPE KDevPrjSession>
 <KDevPrjSession>
- <DocsAndViews NumberOfDocuments="6" >
+ <DocsAndViews NumberOfDocuments="5" >
   <Doc0 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/swine.py" >
-   <View0 Encoding="" Type="Source" />
+   <View0 Encoding="" line="431" Type="Source" />
   </Doc0>
   <Doc1 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/swinelib.py" >
    <View0 Encoding="" Type="Source" />
@@ -14,12 +14,9 @@
   <Doc3 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/swinecli.py" >
    <View0 Encoding="" Type="Source" />
   </Doc3>
-  <Doc4 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/Makefile" >
-   <View0 Encoding="" Type="Source" />
-  </Doc4>
-  <Doc5 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/Registry.py" >
+  <Doc4 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/Registry.py" >
    <View0 Encoding="" line="183" Type="Source" />
-  </Doc5>
+  </Doc4>
  </DocsAndViews>
  <pluginList>
   <kdevbookmarks>

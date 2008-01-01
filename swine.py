@@ -373,6 +373,7 @@ class SwineProgramDialog(ProgramDialog):
 			self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
 	
 	def icon_clicked(self):
+		self.shortcut.extractIcons()
 		dirStr = ""
 		if self.shortcut.iconsDir():
 			dirStr = self.shortcut.iconsDir()
@@ -428,7 +429,7 @@ class SwineRunDialog(SwineProgramDialog):
 		prog = str2args(self.shortcut.data['program'])
 		wait=False
 		workingDirectory=self.shortcut.data['working_directory']
-		runInTerminal=self.shortcut.data["inTerminal"]
+		runInTerminal=self.shortcut.data["interminal"]
 		log=None
 		if self.logfileCheckBox.isChecked():
 			log=self.slot.getPath()+"/wine.log"

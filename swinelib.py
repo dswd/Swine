@@ -109,6 +109,14 @@ class Shortcut:
 			return self.slot.getPath() + "/" + self.data["iconsdir"]
 		return None
 
+	def extractIcons (self):
+		file = self.slot.winPathToUnix(str2args(self.data["program"])[0])
+		iconsdir = self.slot.getPath() + "/icons/" + os.path.basename(file)
+		if os.path.splitext(file)[1].lower() == '.exe':
+			self.data['iconsdir']="icons/" + os.path.basename(file)
+			self.slot.extractExeIcons ( file, iconsdir )
+
+
 class Slot:
 	def __init__(self, name):
 		if len(name) == 0:
