@@ -433,7 +433,7 @@ class SwineRunDialog(SwineProgramDialog):
 		prog = str2args(self.shortcut.data['program'])
 		wait=False
 		workingDirectory=self.shortcut.data['working_directory']
-		runInTerminal=self.shortcut.data["interminal"]
+		runInTerminal=self.shortcut.data.has_key("interminal") and int(self.shortcut.data["interminal"]) == 1
 		log=None
 		if self.logfileCheckBox.isChecked():
 			log=self.slot.getPath()+"/wine.log"
