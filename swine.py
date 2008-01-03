@@ -373,7 +373,8 @@ class SwineProgramDialog(ProgramDialog):
 			self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
 	
 	def icon_clicked(self):
-		self.shortcut.extractIcons()
+		if not self.shortcut.data == {}:
+			self.shortcut.extractIcons()
 		dirStr = ""
 		if self.shortcut.iconsDir():
 			dirStr = self.shortcut.iconsDir()
