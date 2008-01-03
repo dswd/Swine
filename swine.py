@@ -81,6 +81,8 @@ class SwineSlotItem(QListBoxPixmap):
 		if QMessageBox.information ( self.listBox(), "Install MS Corefonts", "This will download, unpack and install the Microsoft Corefonts.\nYou will need an internet connection and the 'cabextract' program for this to work.", "&Continue", "&Abort", QString.null, 0, 1 ) == 0:
 			self.slot.installCorefonts()
 			QMessageBox.information ( self.listBox(), "Install MS Corefonts", "MS Corefonts installed sucessfully.")
+	def install_gecko_cb(self):
+		self.slot.runWin(["iexplore"])
 	def run_cb(self):
 		runDialog = SwineRunDialog(self.slot,self.mainWindow())
 		runDialog.show()
@@ -93,7 +95,7 @@ class SwineSlotItem(QListBoxPixmap):
 	def runDefault_cb(self):
 		if self.slot.loadDefaultShortcut():
 			self.slot.loadDefaultShortcut().run()
-	def	export_cb(self):
+	def export_cb(self):
 		file = QFileDialog.getSaveFileName ( QString.null, "Swine Slots (*.swine)", self.mainWindow() )
 		if not file:
 			return
@@ -206,14 +208,15 @@ class SwineMainWindow(MainWindow):
 			configMenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.slot.runRegedit )
 			configMenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.slot.runUninstaller )
 			configMenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.slot.runWineControl )
-			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Config", configMenu )
+			menu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Config", configMenu )
 			commandsMenu = QPopupMenu(self)
 			commandsMenu.insertItem( QIconSet(loadPixmap("drive_magnify.png")), "&Import Shortcuts", slot.searchShortcuts_cb )
 			commandsMenu.insertItem( QIconSet(loadPixmap("arrow_refresh.png")), "&Reboot wine", slot.slot.runWineboot )
 			commandsMenu.insertItem( QIconSet(loadPixmap("drive_cd.png")), "&Eject CD", slot.slot.runEject )
 			commandsMenu.insertSeparator()
 			commandsMenu.insertItem( QIconSet(loadPixmap("style_add.png")), "Install &MS Corefonts", slot.install_corefonts_cb )
-			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Commands", commandsMenu )
+			commandsMenu.insertItem( QIconSet(loadPixmap("world_add.png")), "Install &Gecko", slot.install_gecko_cb )
+			menu.insertItem( QIconSet(loadPixmap("script_gear.png")), "&Commands", commandsMenu )
 			menu.insertSeparator()
 			if not slot.slot.name == SWINE_DEFAULT_SLOT_NAME:
 				menu.insertItem( QIconSet(loadPixmap("drive_rename.png")), "R&ename", slot.rename_cb )
