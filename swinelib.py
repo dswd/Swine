@@ -294,6 +294,9 @@ class Slot:
 		env = os.environ
 		env["WINEPREFIX"] = self.getPath()
 		env["WINEDEBUG"] = "err+all,warn-all,fixme-all,trace-all"
+		global WINE_WRAPPER
+		if WINE_WRAPPER:
+			open(self.getPath()+"/.no_prelaunch_window_flag","wc").close()
 		if debug:
 			env["WINEDEBUG"] = debug
 		return self.runNative ( prog, cwd, wait, env, stdin, stdout, stderr )
@@ -376,12 +379,18 @@ class Slot:
 	def winPathToUnix (self,path,basedir=None):
 		if basedir:
 			basedir = self.winPathToUnix ( basedir )
-		proc = self.runWineTool (["winepath","-u",path],wait=True,stdout=subprocess.PIPE,cwd=basedir)
-		return proc.stdout.read()[:-1] #cut the \n
+		return self.runWinePath (["winepath","-u",path],basedir)
 	
 	def unixPathToWin (self,path,basedir=None):
-		proc = self.runWineTool (["winepath","-w",path],wait=True,stdout=subprocess.PIPE,cwd=basedir)
-		return proc.stdout.read()[:-1] #cut the \n
+		return self.runWinePath (["winepath","-w",path],basedir)
+
+	def runWinePath (self,prog,basedir):
+		proc = self.runWineTool (prog,wait=True,stdout=subprocess.PIPE,cwd=basedir)
+		output = proc.communicate()[0][:-1] #cut the last \n
+		if len(output.split("\n")) > 1: #workaround for broken output of winelauncher
+			return output.split("\n")[1]
+		else:
+			return output
 
 	def exportData (self,file):
 		if len(file) == 0:
@@ -467,6 +476,8 @@ def init ():
 	if not os.path.exists ( SWINE_DEFAULT_SLOT_PATH ) and os.path.exists ( WINE_PATH ):
 		os.symlink ( WINE_PATH, SWINE_DEFAULT_SLOT_PATH )
 		print "symlinked " + SWINE_DEFAULT_SLOT_PATH + " to " + WINE_PATH
+	global WINE_WRAPPER
+	WINE_WRAPPER = (os.popen('file `which wine`', 'r').read().find('text') != -1)
 
 def getAllSlots ():
 	slist = os.listdir ( SWINE_SLOT_PATH )
