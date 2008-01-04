@@ -141,6 +141,9 @@ class Slot:
 			raise SwineException (drive + " does not exist")
 		return self.getPath() + "/dosdevices/" + drive
 	
+	def getDosDrivesPath(self):
+		return self.getPath() + "/dosdevices"
+	
 	def getConfigFile(self):
 		return SWINE_SLOT_PATH + "/" + self.name + "/swine.ini"
 
@@ -428,7 +431,6 @@ class Slot:
 		if res == "n" or res == "f" or res == "0": return None
 		else: return res
 		
-	
 	def setDesktopRes (self,res):
 		if not res:
 			res = "n"

@@ -364,14 +364,14 @@ class SwineProgramDialog(ProgramDialog):
 		self.close()
 
 	def exeSelectButton_clicked(self):
-		file = QFileDialog.getOpenFileName( self.shortcut.slot.winPathToUnix("c:\\"), "Windows executables (*.exe *.EXE)", self )
+		file = QFileDialog.getOpenFileName( self.shortcut.slot.getDosDrivesPath(), "Windows executables (*.exe *.EXE)", self )
 		if not file == None:
 			self.applicationInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
 			if len(str(self.workingDirectoryInput.text())) == 0:
 				self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(os.path.dirname(str(file))) )
 
 	def wdSelectButton_clicked(self):
-		file = QFileDialog.getExistingDirectory( self.shortcut.slot.winPathToUnix("c:\\"), self )
+		file = QFileDialog.getExistingDirectory( self.shortcut.slot.getDosDrivesPath(), self )
 		if not file == None:
 			self.workingDirectoryInput.setText ( self.shortcut.slot.unixPathToWin(str(file)) )
 	

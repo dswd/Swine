@@ -3,10 +3,10 @@
 <KDevPrjSession>
  <DocsAndViews NumberOfDocuments="5" >
   <Doc0 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/swine.py" >
-   <View0 Encoding="" line="431" Type="Source" />
+   <View0 Encoding="" line="435" Type="Source" />
   </Doc0>
   <Doc1 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/swinelib.py" >
-   <View0 Encoding="" Type="Source" />
+   <View0 Encoding="" line="7" Type="Source" />
   </Doc1>
   <Doc2 NumberOfViews="1" URL="file:///home/lemming/projekte/swine/trunk/shortcutlib.py" >
    <View0 Encoding="" Type="Source" />
@@ -34,8 +34,5 @@
     </bookmark>
    </bookmarks>
   </kdevbookmarks>
-  <kdevsubversion>
-   <subversion base="" />
-  </kdevsubversion>
  </pluginList>
 </KDevPrjSession>
