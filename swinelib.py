@@ -298,7 +298,7 @@ class Slot:
 		env["WINEPREFIX"] = self.getPath()
 		env["WINEDEBUG"] = "err+all,warn-all,fixme-all,trace-all"
 		global WINE_WRAPPER
-		if WINE_WRAPPER:
+		if WINE_WRAPPER and os.path.exists(self.getPath()):
 			open(self.getPath()+"/.no_prelaunch_window_flag","wc").close()
 		if debug:
 			env["WINEDEBUG"] = debug
