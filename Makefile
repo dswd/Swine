@@ -1,6 +1,7 @@
 %.py : %.ui
 	pyuic $< >$@
 
+rev = 0.41
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui
 ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py
 images = images/*.png
@@ -22,15 +23,30 @@ winresdump-compile:
 winresdump-clean:
 	cd $(wrd_dir); make clean; cd ..
 
-swine.tar.gz: compile $(distfiles)
-	tar -czvf swine.tar.gz $(distfiles)
+swine-$(rev).tar.gz: compile $(distfiles)
+	mkdir swine-$(rev)
+	rsync -R $(distfiles) swine-$(rev)
+	tar -czvf swine-$(rev).tar.gz swine-$(rev)
+	rm -r swine-$(rev)
 
-swine-src.tar.gz: $(sources) $(buildfiles)
-	tar -czvf swine-src.tar.gz $(sources) $(buildfiles)
+swine-$(rev)-src.tar.gz: $(sources) $(buildfiles)
+	mkdir swine-$(rev)-src
+	rsync -R $(distfiles) swine-$(rev)-src
+	tar -czvf swine-$(rev)-src.tar.gz swine-$(rev)-src
+	rm -r swine-$(rev)-src
 
 compile: $(ui_files_py) winresdump-compile
 
-dist: swine.tar.gz swine-src.tar.gz
+dist: swine-$(rev).tar.gz swine-$(rev)-src.tar.gz
 
 clean: winresdump-clean
 	rm -rf $(ui_files_py) *.pyc *.tar.gz *~ $(wrd_bin)
+
+install: compile
+	mkdir -p $(DESTDIR)/usr/share/swine/lib/
+	cp $(py_files) $(ui_files_py) $(DESTDIR)/usr/share/swine/lib/
+	mkdir -p $(DESTDIR)/usr/share/swine/lib/images/
+	cp -r $(images) $(DESTDIR)/usr/share/swine/lib/images
+	mkdir -p $(DESTDIR)/usr/share/swine/bin/
+	cp $(wrd_bin) $(DESTDIR)/usr/share/swine/bin/
+	ln -s ../share/swine/lib/swine.py $(DESTDIR)/usr/bin/swine
