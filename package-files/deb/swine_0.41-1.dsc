@@ -1,3 +1,6 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
 Format: 1.0
 Source: swine
 Binary: swine
@@ -7,5 +10,13 @@ Maintainer: Dennis Schwerdel <schwerdel+swine@goolgemail.com>
 Standards-Version: 3.7.3
 Build-Depends: debhelper (>= 5), pyqt-tools
 Files: 
- 6eaf618bc18f97d496e85d4f3b6db377 66615 swine_0.41.orig.tar.gz
- 2528be66c3d16f404a624c2c8a26e1d0 1882 swine_0.41-1.diff.gz
+ c8b41f62e7cae4b5f5be69560107e80f 66614 swine_0.41.orig.tar.gz
+ a5fd4ad81c533cbc1dd7f82ce4be4aa6 1983 swine_0.41-1.diff.gz
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFITZ1LlBR/R4oC7XcRAroeAJ4iuUYWHa+0my4V6i6qqGPVCwNSlACeJzeP
+bKifGMxwqr1O83QRHJRacTU=
+=kjKz
+-----END PGP SIGNATURE-----

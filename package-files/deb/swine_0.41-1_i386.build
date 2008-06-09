@@ -9,6 +9,26 @@ dpkg-buildpackage: Quellversion 0.41-1
 dpkg-buildpackage: Quellen geändert durch Dennis Schwerdel <schwerdel@googlemail.com>
 dpkg-buildpackage: Host-Architektur i386
  fakeroot debian/rules clean
+debian/rules:107: Warnung: Die Befehle für das Ziel »configure-stamp« werden überschrieben
+debian/rules:17: Warnung: Alte Befehle für das Ziel »configure-stamp« werden ignoriert
+debian/rules:116: Warnung: Die Befehle für das Ziel »build-stamp« werden überschrieben
+debian/rules:26: Warnung: Alte Befehle für das Ziel »build-stamp« werden ignoriert
+debian/rules:125: Warnung: Die Befehle für das Ziel »clean« werden überschrieben
+debian/rules:35: Warnung: Alte Befehle für das Ziel »clean« werden ignoriert
+debian/rules:135: Warnung: Die Befehle für das Ziel »install« werden überschrieben
+debian/rules:45: Warnung: Alte Befehle für das Ziel »install« werden ignoriert
+debian/rules:150: Warnung: Die Befehle für das Ziel »binary-arch« werden überschrieben
+debian/rules:60: Warnung: Alte Befehle für das Ziel »binary-arch« werden ignoriert
+debian/rules:197: Warnung: Die Befehle für das Ziel »configure-stamp« werden überschrieben
+debian/rules:107: Warnung: Alte Befehle für das Ziel »configure-stamp« werden ignoriert
+debian/rules:206: Warnung: Die Befehle für das Ziel »build-stamp« werden überschrieben
+debian/rules:116: Warnung: Alte Befehle für das Ziel »build-stamp« werden ignoriert
+debian/rules:215: Warnung: Die Befehle für das Ziel »clean« werden überschrieben
+debian/rules:125: Warnung: Alte Befehle für das Ziel »clean« werden ignoriert
+debian/rules:225: Warnung: Die Befehle für das Ziel »install« werden überschrieben
+debian/rules:135: Warnung: Alte Befehle für das Ziel »install« werden ignoriert
+debian/rules:240: Warnung: Die Befehle für das Ziel »binary-arch« werden überschrieben
+debian/rules:150: Warnung: Alte Befehle für das Ziel »binary-arch« werden ignoriert
 dh_testdir
 dh_testroot
 rm -f build-stamp configure-stamp
@@ -23,10 +43,34 @@ rm -rf MainWindow.py AboutDialog.py ProgramDialog.py *.pyc *.tar.gz *~ winresdum
 make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41'
 dh_clean 
  dpkg-source -b swine-0.41
+dpkg-source: Warnung: unbekanntes Informationsfeld »Source« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-source: Warnung: unbekanntes Informationsfeld »Maintainer« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-source: Warnung: unbekanntes Informationsfeld »Build-Depends« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-source: Warnung: unbekanntes Informationsfeld »Standards-Version« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
 dpkg-source: building swine using existing swine_0.41.orig.tar.gz
 dpkg-source: baue swine in swine_0.41-1.diff.gz
 dpkg-source: baue swine in swine_0.41-1.dsc
  debian/rules build
+debian/rules:107: Warnung: Die Befehle für das Ziel »configure-stamp« werden überschrieben
+debian/rules:17: Warnung: Alte Befehle für das Ziel »configure-stamp« werden ignoriert
+debian/rules:116: Warnung: Die Befehle für das Ziel »build-stamp« werden überschrieben
+debian/rules:26: Warnung: Alte Befehle für das Ziel »build-stamp« werden ignoriert
+debian/rules:125: Warnung: Die Befehle für das Ziel »clean« werden überschrieben
+debian/rules:35: Warnung: Alte Befehle für das Ziel »clean« werden ignoriert
+debian/rules:135: Warnung: Die Befehle für das Ziel »install« werden überschrieben
+debian/rules:45: Warnung: Alte Befehle für das Ziel »install« werden ignoriert
+debian/rules:150: Warnung: Die Befehle für das Ziel »binary-arch« werden überschrieben
+debian/rules:60: Warnung: Alte Befehle für das Ziel »binary-arch« werden ignoriert
+debian/rules:197: Warnung: Die Befehle für das Ziel »configure-stamp« werden überschrieben
+debian/rules:107: Warnung: Alte Befehle für das Ziel »configure-stamp« werden ignoriert
+debian/rules:206: Warnung: Die Befehle für das Ziel »build-stamp« werden überschrieben
+debian/rules:116: Warnung: Alte Befehle für das Ziel »build-stamp« werden ignoriert
+debian/rules:215: Warnung: Die Befehle für das Ziel »clean« werden überschrieben
+debian/rules:125: Warnung: Alte Befehle für das Ziel »clean« werden ignoriert
+debian/rules:225: Warnung: Die Befehle für das Ziel »install« werden überschrieben
+debian/rules:135: Warnung: Alte Befehle für das Ziel »install« werden ignoriert
+debian/rules:240: Warnung: Die Befehle für das Ziel »binary-arch« werden überschrieben
+debian/rules:150: Warnung: Alte Befehle für das Ziel »binary-arch« werden ignoriert
 dh_testdir
 # Add here commands to configure the package.
 touch configure-stamp
@@ -50,6 +94,26 @@ make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/
 #docbook-to-man debian/swine.sgml > swine.1
 touch build-stamp
  fakeroot debian/rules binary
+debian/rules:107: Warnung: Die Befehle für das Ziel »configure-stamp« werden überschrieben
+debian/rules:17: Warnung: Alte Befehle für das Ziel »configure-stamp« werden ignoriert
+debian/rules:116: Warnung: Die Befehle für das Ziel »build-stamp« werden überschrieben
+debian/rules:26: Warnung: Alte Befehle für das Ziel »build-stamp« werden ignoriert
+debian/rules:125: Warnung: Die Befehle für das Ziel »clean« werden überschrieben
+debian/rules:35: Warnung: Alte Befehle für das Ziel »clean« werden ignoriert
+debian/rules:135: Warnung: Die Befehle für das Ziel »install« werden überschrieben
+debian/rules:45: Warnung: Alte Befehle für das Ziel »install« werden ignoriert
+debian/rules:150: Warnung: Die Befehle für das Ziel »binary-arch« werden überschrieben
+debian/rules:60: Warnung: Alte Befehle für das Ziel »binary-arch« werden ignoriert
+debian/rules:197: Warnung: Die Befehle für das Ziel »configure-stamp« werden überschrieben
+debian/rules:107: Warnung: Alte Befehle für das Ziel »configure-stamp« werden ignoriert
+debian/rules:206: Warnung: Die Befehle für das Ziel »build-stamp« werden überschrieben
+debian/rules:116: Warnung: Alte Befehle für das Ziel »build-stamp« werden ignoriert
+debian/rules:215: Warnung: Die Befehle für das Ziel »clean« werden überschrieben
+debian/rules:125: Warnung: Alte Befehle für das Ziel »clean« werden ignoriert
+debian/rules:225: Warnung: Die Befehle für das Ziel »install« werden überschrieben
+debian/rules:135: Warnung: Alte Befehle für das Ziel »install« werden ignoriert
+debian/rules:240: Warnung: Die Befehle für das Ziel »binary-arch« werden überschrieben
+debian/rules:150: Warnung: Alte Befehle für das Ziel »binary-arch« werden ignoriert
 dh_testdir
 dh_testroot
 dh_clean -k 
@@ -65,7 +129,7 @@ mkdir -p /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/
 cp swine.py swinecli.py swinelib.py shortcutlib.py Registry.py MainWindow.py AboutDialog.py ProgramDialog.py /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/lib/swine
 mkdir -p /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/share/swine/images/
 cp -r images/*.png /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/share/swine/images
-ln -s ../../usr/share/swine/images /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/lib/swine
+ln -s ../../share/swine/images /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/lib/swine
 cp winresdump /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/lib/swine
 ln -s ../lib/swine/swine.py /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/bin/swine
 make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41'
@@ -82,12 +146,24 @@ dh_fixperms
 dh_installdeb
 dh_shlibdeps
 dh_gencontrol
+dpkg-gencontrol: Warnung: unbekanntes Informationsfeld »Source« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-gencontrol: Warnung: unbekanntes Informationsfeld »Maintainer« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-gencontrol: Warnung: unbekanntes Informationsfeld »Build-Depends« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-gencontrol: Warnung: unbekanntes Informationsfeld »Standards-Version« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
 dpkg-gencontrol: Warnung: unbekannte Substitutionsvariable ${misc:Depends}
 dh_md5sums
 dh_builddeb
 dpkg-deb: Baue Paket »swine« in »../swine_0.41-1_i386.deb«.
  dpkg-genchanges  >../swine_0.41-1_i386.changes
+dpkg-genchanges: Warnung: unbekanntes Informationsfeld »Source« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-genchanges: Warnung: unbekanntes Informationsfeld »Maintainer« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-genchanges: Warnung: unbekanntes Informationsfeld »Build-Depends« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
+dpkg-genchanges: Warnung: unbekanntes Informationsfeld »Standards-Version« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
 dpkg-genchanges: füge kompletten Quellcode beim Hochladen hinzu
 dpkg-buildpackage: Alles hochzuladen (Originalquellen enthalten)
 Now signing changes and any dsc files...
  signfile swine_0.41-1.dsc Dennis Schwerdel <schwerdel@googlemail.com>
+
+ signfile swine_0.41-1_i386.changes Dennis Schwerdel <schwerdel@googlemail.com>
+
+Successfully signed dsc and changes files

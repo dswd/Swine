@@ -1,3 +1,6 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
 Format: 1.7
 Date: Mon, 09 Jun 2008 18:46:00 +0200
 Source: swine
@@ -15,7 +18,15 @@ Changes:
  .
    * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
 Files: 
- 6d34f457949fd0581925d067a60d4eee 336 unknown extra swine_0.41-1.dsc
- 6eaf618bc18f97d496e85d4f3b6db377 66615 unknown extra swine_0.41.orig.tar.gz
- 2528be66c3d16f404a624c2c8a26e1d0 1882 unknown extra swine_0.41-1.diff.gz
- 8471de899950a635d011afa3bbb00ec9 65382 unknown extra swine_0.41-1_i386.deb
+ e9e7268e9257058ad616da0fc5a8af84 573 unknown extra swine_0.41-1.dsc
+ c8b41f62e7cae4b5f5be69560107e80f 66614 unknown extra swine_0.41.orig.tar.gz
+ a5fd4ad81c533cbc1dd7f82ce4be4aa6 1983 unknown extra swine_0.41-1.diff.gz
+ 600efe62fd8ae997b604e5fe4e963ab4 65462 unknown extra swine_0.41-1_i386.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFITZ1LlBR/R4oC7XcRAhgBAKDSW+7aOU76QRA6PPZodMsABUaPfQCeOPBm
+2S3BLo2Inv+Q6CQk6XCfUo0=
+=QDIL
+-----END PGP SIGNATURE-----
