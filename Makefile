@@ -47,6 +47,6 @@ install: compile
 	cp $(py_files) $(ui_files_py) $(DESTDIR)/usr/lib/swine
 	mkdir -p $(DESTDIR)/usr/share/swine/images/
 	cp -r $(images) $(DESTDIR)/usr/share/swine/images
-	ln -s ../../usr/share/swine/images $(DESTDIR)/usr/lib/swine
+	ln -s ../../share/swine/images $(DESTDIR)/usr/lib/swine
 	cp $(wrd_bin) $(DESTDIR)/usr/lib/swine
 	ln -s ../lib/swine/swine.py $(DESTDIR)/usr/bin/swine
