@@ -1,10 +1,10 @@
 New sources:
-tar -xzvf swine_0.41.orig.tar.gz
-zcat swine_0.41-1.diff.gz | patch -p0
-cd swine-0.41
+tar -xzvf swine_????.orig.tar.gz
+zcat swine_????-1.diff.gz | patch -p0
+cd swine-????
 debuild
 
 Build binary:
-dpkg-source -x swine_0.41-1.dsc
-cd swine-0.41
+dpkg-source -x swine_????-1.dsc
+cd swine-????
 debuild binary

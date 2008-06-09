@@ -5,7 +5,7 @@ dpkg-buildpackage: set CXXFLAGS to default value: -g -O2
 dpkg-buildpackage: set FFLAGS to default value: -g -O2
 dpkg-buildpackage: set LDFLAGS to default value: -Wl,-Bsymbolic-functions
 dpkg-buildpackage: Quellpaket swine
-dpkg-buildpackage: Quellversion 0.41-1
+dpkg-buildpackage: Quellversion 0.4-1
 dpkg-buildpackage: Quellen geändert durch Dennis Schwerdel <schwerdel@googlemail.com>
 dpkg-buildpackage: Host-Architektur i386
  fakeroot debian/rules clean
@@ -34,22 +34,22 @@ dh_testroot
 rm -f build-stamp configure-stamp
 # Add here commands to clean up after the build process.
 /usr/bin/make clean
-make[1]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41'
+make[1]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4'
 cd wrd-src; make clean; cd ..
-make[2]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/wrd-src'
+make[2]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/wrd-src'
 rm -rf *.o winresdump a.out core *.a .pure
-make[2]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/wrd-src'
+make[2]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/wrd-src'
 rm -rf MainWindow.py AboutDialog.py ProgramDialog.py *.pyc *.tar.gz *~ winresdump
-make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41'
+make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4'
 dh_clean 
- dpkg-source -b swine-0.41
+ dpkg-source -b swine-0.4
 dpkg-source: Warnung: unbekanntes Informationsfeld »Source« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
 dpkg-source: Warnung: unbekanntes Informationsfeld »Maintainer« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
 dpkg-source: Warnung: unbekanntes Informationsfeld »Build-Depends« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
 dpkg-source: Warnung: unbekanntes Informationsfeld »Standards-Version« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
-dpkg-source: building swine using existing swine_0.41.orig.tar.gz
-dpkg-source: baue swine in swine_0.41-1.diff.gz
-dpkg-source: baue swine in swine_0.41-1.dsc
+dpkg-source: building swine using existing swine_0.4.orig.tar.gz
+dpkg-source: baue swine in swine_0.4-1.diff.gz
+dpkg-source: baue swine in swine_0.4-1.dsc
  debian/rules build
 debian/rules:107: Warnung: Die Befehle für das Ziel »configure-stamp« werden überschrieben
 debian/rules:17: Warnung: Alte Befehle für das Ziel »configure-stamp« werden ignoriert
@@ -77,20 +77,20 @@ touch configure-stamp
 dh_testdir
 # Add here commands to compile the package.
 /usr/bin/make
-make[1]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41'
+make[1]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4'
 pyuic MainWindow.ui >MainWindow.py
 pyuic AboutDialog.ui >AboutDialog.py
 pyuic ProgramDialog.ui >ProgramDialog.py
 cd wrd-src; make; cd .. ; cp wrd-src/winresdump winresdump
-make[2]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/wrd-src'
+make[2]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/wrd-src'
 cc -I. -c support.c 
 cc -I. -c version.c 
 cc -I. -c winresdump.c 
 winresdump.c: In Funktion »GetResourceTypeName«:
 winresdump.c:546: Warnung: Unverträgliche implizite Deklaration der eingebauten Funktion »strncpy«
 cc -o winresdump support.o version.o winresdump.o -lm
-make[2]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/wrd-src'
-make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41'
+make[2]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/wrd-src'
+make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4'
 #docbook-to-man debian/swine.sgml > swine.1
 touch build-stamp
  fakeroot debian/rules binary
@@ -119,20 +119,20 @@ dh_testroot
 dh_clean -k 
 dh_installdirs
 # Add here commands to install the package into debian/swine.
-/usr/bin/make DESTDIR=/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine install
-make[1]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41'
+/usr/bin/make DESTDIR=/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/debian/swine install
+make[1]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4'
 cd wrd-src; make; cd .. ; cp wrd-src/winresdump winresdump
-make[2]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/wrd-src'
+make[2]: Betrete Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/wrd-src'
 make[2]: Für das Ziel »all« ist nichts zu tun.
-make[2]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/wrd-src'
-mkdir -p /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/lib/swine/
-cp swine.py swinecli.py swinelib.py shortcutlib.py Registry.py MainWindow.py AboutDialog.py ProgramDialog.py /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/lib/swine
-mkdir -p /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/share/swine/images/
-cp -r images/*.png /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/share/swine/images
-ln -s ../../share/swine/images /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/lib/swine
-cp winresdump /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/lib/swine
-ln -s ../lib/swine/swine.py /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41/debian/swine/usr/bin/swine
-make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.41'
+make[2]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/wrd-src'
+mkdir -p /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/debian/swine/usr/lib/swine/
+cp swine.py swinecli.py swinelib.py shortcutlib.py Registry.py MainWindow.py AboutDialog.py ProgramDialog.py /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/debian/swine/usr/lib/swine
+mkdir -p /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/debian/swine/usr/share/swine/images/
+cp -r images/*.png /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/debian/swine/usr/share/swine/images
+ln -s ../../share/swine/images /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/debian/swine/usr/lib/swine
+cp winresdump /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/debian/swine/usr/lib/swine
+ln -s ../lib/swine/swine.py /home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4/debian/swine/usr/bin/swine
+make[1]: Verlasse Verzeichnis '/home/lemming/projekte/swine/trunk/package-files/deb/swine-0.4'
 dh_testdir
 dh_testroot
 dh_installchangelogs 
@@ -153,8 +153,8 @@ dpkg-gencontrol: Warnung: unbekanntes Informationsfeld »Standards-Version« in 
 dpkg-gencontrol: Warnung: unbekannte Substitutionsvariable ${misc:Depends}
 dh_md5sums
 dh_builddeb
-dpkg-deb: Baue Paket »swine« in »../swine_0.41-1_i386.deb«.
- dpkg-genchanges  >../swine_0.41-1_i386.changes
+dpkg-deb: Baue Paket »swine« in »../swine_0.4-1_i386.deb«.
+ dpkg-genchanges  >../swine_0.4-1_i386.changes
 dpkg-genchanges: Warnung: unbekanntes Informationsfeld »Source« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
 dpkg-genchanges: Warnung: unbekanntes Informationsfeld »Maintainer« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
 dpkg-genchanges: Warnung: unbekanntes Informationsfeld »Build-Depends« in den Eingabedateien in Paketabschnitt der Steuer-Infodatei
@@ -162,8 +162,12 @@ dpkg-genchanges: Warnung: unbekanntes Informationsfeld »Standards-Version« in 
 dpkg-genchanges: füge kompletten Quellcode beim Hochladen hinzu
 dpkg-buildpackage: Alles hochzuladen (Originalquellen enthalten)
 Now signing changes and any dsc files...
- signfile swine_0.41-1.dsc Dennis Schwerdel <schwerdel@googlemail.com>
+ signfile swine_0.4-1.dsc Dennis Schwerdel <schwerdel@googlemail.com>
 
- signfile swine_0.41-1_i386.changes Dennis Schwerdel <schwerdel@googlemail.com>
+ signfile swine_0.4-1_i386.changes Dennis Schwerdel <schwerdel@googlemail.com>
 
 Successfully signed dsc and changes files
+
+WARNING generated by debuild:
+Making debian/rules executable!
+

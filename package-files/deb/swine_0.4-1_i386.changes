@@ -6,7 +6,7 @@ Date: Mon, 09 Jun 2008 18:46:00 +0200
 Source: swine
 Binary: swine
 Architecture: source i386
-Version: 0.41-1
+Version: 0.4-1
 Distribution: unstable
 Urgency: low
 Maintainer: Dennis Schwerdel <schwerdel+swine@goolgemail.com>
@@ -14,19 +14,19 @@ Changed-By: Dennis Schwerdel <schwerdel@googlemail.com>
 Description: 
  swine      - A graphical frontend for wine
 Changes: 
- swine (0.41-1) unstable; urgency=low
+ swine (0.4-1) unstable; urgency=low
  .
    * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
 Files: 
- 3424a05bb4c027571fd3277b587f725a 573 unknown extra swine_0.41-1.dsc
- c8b41f62e7cae4b5f5be69560107e80f 66614 unknown extra swine_0.41.orig.tar.gz
- de8a077a90f4a978ae4c375cc5c56408 1983 unknown extra swine_0.41-1.diff.gz
- 1c6bd72efd4590808cbdf8df982ce29f 65446 unknown extra swine_0.41-1_i386.deb
+ 8023614621c905b97e5ef60c6aca12b2 570 unknown extra swine_0.4-1.dsc
+ 4a649b45bf1463cfc9625294f31d095e 66615 unknown extra swine_0.4.orig.tar.gz
+ dd62484af5fa0f12295803617bdc24d7 1982 unknown extra swine_0.4-1.diff.gz
+ a3d6c12eededbb81860fc9a092f4d05e 65470 unknown extra swine_0.4-1_i386.deb
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFITZ2mlBR/R4oC7XcRAoxbAJ9WgQ7umCvR/79Sx/9J2FC+nDeEjgCfdDnH
-J/Rp7IZgSNat03ZEgf+FMkU=
-=OhCv
+iD8DBQFITbDglBR/R4oC7XcRAt2TAJ9HrZ2bhrImZmC6S2tgkFdtXO4/CQCgtJb3
+r4nYdmywwyg1364HAMYjOqw=
+=byC3
 -----END PGP SIGNATURE-----
