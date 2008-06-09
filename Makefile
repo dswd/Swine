@@ -1,7 +1,7 @@
 %.py : %.ui
 	pyuic $< >$@
 
-rev = 0.41
+rev = 0.4
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui
 ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py
 images = images/*.png
