@@ -1,0 +1,21 @@
+Format: 1.7
+Date: Mon, 09 Jun 2008 18:46:00 +0200
+Source: swine
+Binary: swine
+Architecture: source i386
+Version: 0.41-1
+Distribution: unstable
+Urgency: low
+Maintainer: Dennis Schwerdel <schwerdel+swine@goolgemail.com>
+Changed-By: Dennis Schwerdel <schwerdel@googlemail.com>
+Description: 
+ swine      - A graphical frontend for wine
+Changes: 
+ swine (0.41-1) unstable; urgency=low
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Files: 
+ 8592147fa2f0d2e0607a7b0d35b4ccf5 336 unknown extra swine_0.41-1.dsc
+ 6eaf618bc18f97d496e85d4f3b6db377 66615 unknown extra swine_0.41.orig.tar.gz
+ 826b5bb1895267b1dd88f4e605bddcfc 1882 unknown extra swine_0.41-1.diff.gz
+ 9a11bf8a29ebd9df5da13f24ed64f22d 65398 unknown extra swine_0.41-1_i386.deb

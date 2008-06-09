@@ -7,5 +7,5 @@ Maintainer: Dennis Schwerdel <schwerdel+swine@goolgemail.com>
 Standards-Version: 3.7.3
 Build-Depends: debhelper (>= 5), pyqt-tools
 Files: 
- 1753c97f55eb50f96a9de43a01b182ab 76232 swine_0.41.orig.tar.gz
- e3ce913bcf9de47823ccebd1a00fc4c3 1882 swine_0.41-1.diff.gz
+ 6eaf618bc18f97d496e85d4f3b6db377 66615 swine_0.41.orig.tar.gz
+ 826b5bb1895267b1dd88f4e605bddcfc 1882 swine_0.41-1.diff.gz
