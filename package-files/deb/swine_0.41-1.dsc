@@ -11,12 +11,12 @@ Standards-Version: 3.7.3
 Build-Depends: debhelper (>= 5), pyqt-tools
 Files: 
  c8b41f62e7cae4b5f5be69560107e80f 66614 swine_0.41.orig.tar.gz
- a5fd4ad81c533cbc1dd7f82ce4be4aa6 1983 swine_0.41-1.diff.gz
+ de8a077a90f4a978ae4c375cc5c56408 1983 swine_0.41-1.diff.gz
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFITZ1LlBR/R4oC7XcRAroeAJ4iuUYWHa+0my4V6i6qqGPVCwNSlACeJzeP
-bKifGMxwqr1O83QRHJRacTU=
-=kjKz
+iD8DBQFITZ2mlBR/R4oC7XcRAv1mAJ9eFgu0DtEVB5QpIzQIF7Vcqr+zHQCeNy2l
+wFQmvUUoCILip1vN6OdfFnE=
+=R+0k
 -----END PGP SIGNATURE-----

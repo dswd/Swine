@@ -18,15 +18,15 @@ Changes:
  .
    * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
 Files: 
- e9e7268e9257058ad616da0fc5a8af84 573 unknown extra swine_0.41-1.dsc
+ 3424a05bb4c027571fd3277b587f725a 573 unknown extra swine_0.41-1.dsc
  c8b41f62e7cae4b5f5be69560107e80f 66614 unknown extra swine_0.41.orig.tar.gz
- a5fd4ad81c533cbc1dd7f82ce4be4aa6 1983 unknown extra swine_0.41-1.diff.gz
- 600efe62fd8ae997b604e5fe4e963ab4 65462 unknown extra swine_0.41-1_i386.deb
+ de8a077a90f4a978ae4c375cc5c56408 1983 unknown extra swine_0.41-1.diff.gz
+ 1c6bd72efd4590808cbdf8df982ce29f 65446 unknown extra swine_0.41-1_i386.deb
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFITZ1LlBR/R4oC7XcRAhgBAKDSW+7aOU76QRA6PPZodMsABUaPfQCeOPBm
-2S3BLo2Inv+Q6CQk6XCfUo0=
-=QDIL
+iD8DBQFITZ2mlBR/R4oC7XcRAoxbAJ9WgQ7umCvR/79Sx/9J2FC+nDeEjgCfdDnH
+J/Rp7IZgSNat03ZEgf+FMkU=
+=OhCv
 -----END PGP SIGNATURE-----
