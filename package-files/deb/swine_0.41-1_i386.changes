@@ -15,7 +15,7 @@ Changes:
  .
    * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
 Files: 
- 8592147fa2f0d2e0607a7b0d35b4ccf5 336 unknown extra swine_0.41-1.dsc
+ 6d34f457949fd0581925d067a60d4eee 336 unknown extra swine_0.41-1.dsc
  6eaf618bc18f97d496e85d4f3b6db377 66615 unknown extra swine_0.41.orig.tar.gz
- 826b5bb1895267b1dd88f4e605bddcfc 1882 unknown extra swine_0.41-1.diff.gz
- 9a11bf8a29ebd9df5da13f24ed64f22d 65398 unknown extra swine_0.41-1_i386.deb
+ 2528be66c3d16f404a624c2c8a26e1d0 1882 unknown extra swine_0.41-1.diff.gz
+ 8471de899950a635d011afa3bbb00ec9 65382 unknown extra swine_0.41-1_i386.deb
