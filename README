@@ -30,4 +30,4 @@ The following steps are needed:
 
 Installation
 ============
-At this time (Revision 86) there is no automated way to install swine.
+- make install
