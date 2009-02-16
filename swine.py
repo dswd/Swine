@@ -24,8 +24,10 @@ import os, sys, traceback
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 import swinelib
+import time
 from swinelib import *
 from qt import *
+from threading import Thread
 from AboutDialog import *
 from ProgramDialog import *
 from MainWindow import *
@@ -308,7 +310,7 @@ class SwineMainWindow(MainWindow):
 		loadDefaultSlot().runWin ( ["winver"] )
 	
 	def menuExitAction_activated(self):
-		QApplication.exit(0)
+		self.close()
 	
 	def slotList_selectionChanged(self):
 		self.rebuildShortcutList()
@@ -338,9 +340,10 @@ class SwineMainWindow(MainWindow):
 			callStr = obj.__class__.__name__+"::"+callStr
 		if excType == SwineException:
 			excStr = str(excValue)
+			QMessageBox.critical (self, "Error", excStr )
 		else:
-			excStr = str(excType) + ": " + str(excValue) + "\nin " + callStr
-		QMessageBox.critical (self, "Error", excStr )
+			excStr = str(excType.__name__) + ": " + str(excValue) + "\nin " + callStr
+			QMessageBox.critical (self, "Error", excStr )
 
 	def __init__(self,parent = None,name = None,fl = 0):
 		MainWindow.__init__(self,parent,name,fl)
@@ -481,15 +484,43 @@ class SwineShortcutDialog(SwineProgramDialog):
 		self.adjustSize()
 
 
+class UIThread(Thread):
+	def __init__(self,args):
+		Thread.__init__(self)
+		self.args=args
+
+	def run(self):
+		app=QApplication(self.args)
+		global win
+		win=SwineMainWindow()
+		win.show()
+		sys.excepthook=excepthook
+		win.shortcutList.clear()
+		win.rebuildSlotList()
+		app.connect(app, SIGNAL("lastWindowClosed()"), app, SLOT("quit()"))
+		app.connect(app, SIGNAL("lastWindowClosed()"), self.quit)
+		app.exec_loop()
+
+	def quit(self):
+		QApplication.exit(0)
+		sys.exit(0)
+
+
+win=None
+		
 def main(args):
-	app=QApplication(args)
-	win=SwineMainWindow()
-	win.show()
-	sys.excepthook = win.excepthook
-	win.shortcutList.clear()
-	win.rebuildSlotList()
-	app.connect(app, SIGNAL("lastWindowClosed()"), app, SLOT("quit()"))
-	app.exec_loop()
+	ui=UIThread(args)
+	ui.start()
+	sys.excepthook=excepthook
+	while(1):
+		time.sleep(1)
+	
+def excepthook(excType, excValue, tracebackobj):
+	if excType == KeyboardInterrupt:
+		sys.exit(0)
+	else:
+		global win
+		win.excepthook(excType, excValue, tracebackobj)
 
 if __name__=="__main__":
 	main(sys.argv)
