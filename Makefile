@@ -30,6 +30,9 @@ deb-clean:
 deb-build: swine-$(rev)-src.tar.gz
 	cd $(deb_dir); export rev=$(rev); make build
 
+deb-rebuild: swine-$(rev)-src.tar.gz
+	cd $(deb_dir); export rev=$(rev); make rebuild
+
 swine-$(rev).tar.gz: compile $(distfiles)
 	mkdir swine-$(rev)
 	rsync -R $(distfiles) swine-$(rev)
