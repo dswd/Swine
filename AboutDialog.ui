@@ -8,7 +8,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>531</width>
+            <width>539</width>
             <height>303</height>
         </rect>
     </property>
@@ -104,11 +104,6 @@
                         </property>
                         <property name="backgroundOrigin">
                             <enum>WidgetOrigin</enum>
-                        </property>
-                        <property name="font">
-                            <font>
-                                <pointsize>13</pointsize>
-                            </font>
                         </property>
                         <property name="text">
                             <string>Swine is a graphical frontend for wine that can manage several slots.
@@ -310,6 +305,22 @@ This General Public License does not permit incorporating your program into prop
 	Copyright (c) 1999    Caolan McNamara
 	Licensed under the GPL
 	URL: http://www.skynet.ie/~caolan/pub/winresdump
+
+Winetricks
+	Quick and dirty script to download and install various
+	redistributable runtime libraries
+
+	Current maintainers: Austin English, Dan Kegel
+	Copyright 2007, 2008, 2009 Google (Dan Kegel, dank@kegel.com)
+	Copyright 2008, 2009 Austin English (austinenglish@gmail.com)
+	Thanks to Detlef Riekenberg for lots of updates
+	Thanks to Saulius Krasuckas for corrections and suggestions
+	Thanks to Erik Inge BolsÃ¸ for several patches
+	Thanks to Hugh Perkins for the directplay patch
+	Please report problems at http://code.google.com/p/winezeug/issues
+	See also http://wiki.winehq.org/winetricks
+	Licensed under the GNU Lesser General Public License
+
 
 Silk Icon Set 1.3
 	This is the Iconset used by Swine

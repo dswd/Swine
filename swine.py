@@ -79,12 +79,6 @@ class SwineSlotItem(QListBoxPixmap):
 			shortcut.save()
 		self.slot.saveConfig()
 		self.refreshShortcutList()
-	def install_corefonts_cb(self):
-		if QMessageBox.information ( self.listBox(), "Install MS Corefonts", "This will download, unpack and install the Microsoft Corefonts.\nYou will need an internet connection and the 'cabextract' program for this to work.", "&Continue", "&Abort", QString.null, 0, 1 ) == 0:
-			self.slot.installCorefonts()
-			QMessageBox.information ( self.listBox(), "Install MS Corefonts", "MS Corefonts installed sucessfully.")
-	def install_gecko_cb(self):
-		self.slot.runWin(["iexplore"])
 	def run_cb(self):
 		runDialog = SwineRunDialog(self.slot,self.mainWindow())
 		runDialog.show()
@@ -111,6 +105,10 @@ class SwineSlotItem(QListBoxPixmap):
 			self.refreshShortcutList()
 	def height(self,lb):
 		return QListBoxPixmap.height(self,lb)+6
+	def winetricks(self,tool):
+		self.slot.runWinetricks(tool)
+	def winetricks_callback(self,tool):
+		return lambda x: self.winetricks(tool)
 
 class SwineShortcutItem(QIconViewItem):
 	def __init__(self,parent,shortcut):
@@ -202,24 +200,183 @@ class SwineMainWindow(MainWindow):
 			toolsMenu.insertItem( QIconSet(loadPixmap("folder_explore.png")), "&File Manager", slot.filemanager_cb )
 			toolsMenu.insertItem( QIconSet(loadPixmap("application_form_magnify.png")), "&Taskmanager", slot.taskmgr_cb )
 			toolsMenu.insertSeparator()
-			toolsMenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )
-			toolsMenu.insertItem( QIconSet(loadPixmap("package_add.png")), "Import &Data", slot.import_cb )
+			toolsMenu.insertItem( QIconSet(loadPixmap("computer_edit.png")), "&Winecfg", slot.slot.runWinecfg )
+			toolsMenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.slot.runRegedit )
+			toolsMenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.slot.runUninstaller )
+			toolsMenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.slot.runWineControl )
 			menu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "&Tools", toolsMenu )
-			configMenu = QPopupMenu(self)
-			configMenu.insertItem( QIconSet(loadPixmap("computer_edit.png")), "&Winecfg", slot.slot.runWinecfg )
-			configMenu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Start Regedit", slot.slot.runRegedit )
-			configMenu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Uninstall Software", slot.slot.runUninstaller )
-			configMenu.insertItem( QIconSet(loadPixmap("computer.png")), "&Control-Center", slot.slot.runWineControl )
-			menu.insertItem( QIconSet(loadPixmap("wrench.png")), "&Config", configMenu )
 			commandsMenu = QPopupMenu(self)
 			commandsMenu.insertItem( QIconSet(loadPixmap("drive_magnify.png")), "&Import Shortcuts", slot.searchShortcuts_cb )
 			commandsMenu.insertItem( QIconSet(loadPixmap("arrow_refresh.png")), "&Reboot wine", slot.slot.runWineboot )
 			commandsMenu.insertItem( QIconSet(loadPixmap("drive_cd.png")), "&Eject CD", slot.slot.runEject )
 			commandsMenu.insertSeparator()
-			commandsMenu.insertItem( QIconSet(loadPixmap("style_add.png")), "Install &MS Corefonts", slot.install_corefonts_cb )
-			commandsMenu.insertItem( QIconSet(loadPixmap("world_add.png")), "Install &Gecko", slot.install_gecko_cb )
-			menu.insertItem( QIconSet(loadPixmap("script_gear.png")), "&Commands", commandsMenu )
-			menu.insertSeparator()
+			commandsMenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )
+			commandsMenu.insertItem( QIconSet(loadPixmap("package_add.png")), "Import &Data", slot.import_cb )
+			menu.insertItem( QIconSet(loadPixmap("cog.png")), "&Commands", commandsMenu )
+			winetricksMenu = QPopupMenu(self)
+			
+			winetricksAppsMenu = QPopupMenu(self)
+			winetricksAppsMenu.insertItem( QIconSet(loadPixmap("application_add.png")), "Unix apps for Windows (needed by some build scripts)", slot.winetricks_callback("cygwin") )
+			winetricksAppsMenu.insertItem( QIconSet(loadPixmap("application_add.png")), "KDE for Windows installer", slot.winetricks_callback("kde") )
+			winetricksMenu.insertItem( QIconSet(loadPixmap("application.png")), "&Applications", winetricksAppsMenu )
+
+			winetricksBrowserMenu = QPopupMenu(self)
+			winetricksBrowserMenu.insertItem( QIconSet(loadPixmap("world_add.png")), "Set registry to claim IE6sp1 is installed", slot.winetricks_callback("fakeie6") )
+			winetricksBrowserMenu.insertItem( QIconSet(loadPixmap("world_add.png")), "The HTML rendering Engine (Mozilla), with debugging symbols", slot.winetricks_callback("gecko-dbg") )
+			winetricksBrowserMenu.insertItem( QIconSet(loadPixmap("world_add.png")), "The HTML rendering Engine (Mozilla)", slot.winetricks_callback("gecko") )
+			winetricksBrowserMenu.insertItem( QIconSet(loadPixmap("world_add.png")), "Firefox web browser", slot.winetricks_callback("firefox") )
+			winetricksBrowserMenu.insertItem( QIconSet(loadPixmap("world_add.png")), "Microsoft Internet Explorer 6.0", slot.winetricks_callback("ie6") )
+			winetricksBrowserMenu.insertItem( QIconSet(loadPixmap("world_add.png")), "Microsoft Internet Explorer 7.0", slot.winetricks_callback("ie7") )
+			winetricksMenu.insertItem( QIconSet(loadPixmap("world.png")), "&Browser", winetricksBrowserMenu )
+			
+			winetricksMediaMenu = QPopupMenu(self)
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "All listed codecs (xvid, ffdshow, icodecs)", slot.winetricks_callback("allcodecs") )
+			winetricksMediaMenu.insertSeparator()
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "divx video codec", slot.winetricks_callback("divx") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "ffdshow video codecs", slot.winetricks_callback("ffdshow") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "Intel Codecs (Indeo)", slot.winetricks_callback("icodecs") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "ogg filters/codecs: flac, theora, speex, vorbis, schroedinger", slot.winetricks_callback("ogg") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "xvid video codec", slot.winetricks_callback("xvid") )
+			winetricksMediaMenu.insertSeparator()
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "Apple Quicktime 7.2", slot.winetricks_callback("quicktime72") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "Adobe Flash Player ActiveX and firefox plugins", slot.winetricks_callback("flash") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "Adobe Shockwave Player", slot.winetricks_callback("shockwave") )
+			winetricksMediaMenu.insertSeparator()
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "Media Player Classic", slot.winetricks_callback("mpc") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "VLC media player", slot.winetricks_callback("vlc") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "MS Windows Media Encoder 9 (requires Windows license)", slot.winetricks_callback("wme9") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "MS Windows Media Player 10 (requires Windows license)", slot.winetricks_callback("wmp10") )
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "MS Windows Media Player 9 (requires Windows license)", slot.winetricks_callback("wmp9") )
+			winetricksMediaMenu.insertSeparator()
+			winetricksMediaMenu.insertItem( QIconSet(loadPixmap("film_add.png")), "Standard RGB color profile", slot.winetricks_callback("colorprofile") )
+			winetricksMenu.insertItem( QIconSet(loadPixmap("film.png")), "&Multimedia", winetricksMediaMenu )
+			
+			winetricksFontsMenu = QPopupMenu(self)
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("font_add.png")), "Install all listed fonts (corefonts, tahoma, liberation)", slot.winetricks_callback("allfonts") )
+			winetricksFontsMenu.insertSeparator()
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("font_add.png")), "Install MS Corefonts: Arial, Courier, Times fonts", slot.winetricks_callback("corefonts") )
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("font_add.png")), "Install Red Hat Liberation fonts (Sans, Serif, Mono)", slot.winetricks_callback("liberation") )
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("font_add.png")), "Install MS Tahoma font (not part of corefonts)", slot.winetricks_callback("tahoma") )
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("font_add.png")), "Install Droid fonts (on LCD, looks better with fontsmooth-rgb)", slot.winetricks_callback("droid") )
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("font_add.png")), "Install WenQuanYi CJK font (on LCD looks better with fontsmooth-rgb)", slot.winetricks_callback("wenquanyi") )
+			winetricksFontsMenu.insertSeparator()			
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "Fix bad fonts which cause crash in some apps (e.g. .net)", slot.winetricks_callback("fontfix") )
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "Enable subpixel smoothing for BGR LCDs", slot.winetricks_callback("fontsmooth-bgr") )
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "Enable grayscale font smoothing", slot.winetricks_callback("fontsmooth-gray") )
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "Enable subpixel smoothing for RGB LCDs", slot.winetricks_callback("fontsmooth-rgb") )
+			winetricksFontsMenu.insertItem( QIconSet(loadPixmap("wrench_orange.png")), "Disable font smoothing", slot.winetricks_callback("fontsmooth-disable") )
+			winetricksMenu.insertItem( QIconSet(loadPixmap("font.png")), "&Fonts", winetricksFontsMenu )
+			
+			winetricksDirectXMenu = QPopupMenu(self)
+			winetricksDirectXMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS ActiveX Control Pad", slot.winetricks_callback("controlpad") )
+			winetricksDirectXMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS d3dx9_??.dll (from DirectX 9 user redistributable)", slot.winetricks_callback("d3dx9") )
+			winetricksDirectXMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS dinput8.dll (from DirectX 9 user redistributable)", slot.winetricks_callback("dinput8") )
+			winetricksDirectXMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS DirectPlay (from DirectX 9 user redistributable)", slot.winetricks_callback("directplay") )
+			winetricksDirectXMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS DirectX 9 user redistributable (not recommended! use d3dx9 instead)", slot.winetricks_callback("directx9") )
+			winetricksDirectXMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "the obsolete Dirac 0.8 directshow filter", slot.winetricks_callback("dirac0.8") )
+			winetricksMenu.insertItem( QIconSet(loadPixmap("plugin.png")), "&DirectX", winetricksDirectXMenu )
+			
+			winetricksDotNetMenu = QPopupMenu(self)
+			winetricksDotNetMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS .NET 1.1 (requires Windows license)", slot.winetricks_callback("dotnet11") )
+			winetricksDotNetMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS .NET 2.0 (requires Windows license)", slot.winetricks_callback("dotnet20") )
+			winetricksDotNetMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS .NET 2.0 sp2 (requires Windows license)", slot.winetricks_callback("dotnet20sp2") )
+			winetricksDotNetMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS .NET 3.0 (requires Windows license, might not work yet)", slot.winetricks_callback("dotnet30") )
+			winetricksMenu.insertItem( QIconSet(loadPixmap("plugin.png")), "&.Net", winetricksDotNetMenu )
+
+			winetricksLibsMenu = QPopupMenu(self)
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Access 2000 runtime.  Requires Access 2000 Dev license!", slot.winetricks_callback("art2kmin") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "Adobe Type Manager. Needed for Adobe CS4", slot.winetricks_callback("atmlib") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS common controls 5.80", slot.winetricks_callback("comctl32") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS comctl32.ocx and mscomctl.ocx, comctl32 wrappers for VB6", slot.winetricks_callback("comctl32.ocx") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS DCOM (ole32, oleaut32); requires Win98 license!", slot.winetricks_callback("dcom98") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Forms 2.0 Object Library", slot.winetricks_callback("fm20") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS gdiplus.dll (from powerpoint viewer)", slot.winetricks_callback("gdiplus") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Jet 4.0 Service Pack 8", slot.winetricks_callback("jet40") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS MDAC 2.5: Microsoft ODBC drivers, etc.", slot.winetricks_callback("mdac25") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS MDAC 2.7", slot.winetricks_callback("mdac27") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS MDAC 2.8", slot.winetricks_callback("mdac28") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS mfc40 (Microsoft Foundation Classes from Visual C++ 4)", slot.winetricks_callback("mfc40") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS mfc42 (same as vcrun6 below)", slot.winetricks_callback("mfc42") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "mono-2.0.1", slot.winetricks_callback("mono20") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "mono-2.2", slot.winetricks_callback("mono22") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "mono-2.4", slot.winetricks_callback("mono24") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Hierarchical Flex Grid Control", slot.winetricks_callback("mshflxgd") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Installer 2.0", slot.winetricks_callback("msi2") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Line Services 3.1 (needed by native riched?)", slot.winetricks_callback("msls31") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Masked Edit Control", slot.winetricks_callback("msmask") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Script Control", slot.winetricks_callback("msscript") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS XML version 3", slot.winetricks_callback("msxml3") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS XML version 4", slot.winetricks_callback("msxml4") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS XML version 6", slot.winetricks_callback("msxml6") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS 16 bit OLE", slot.winetricks_callback("ole2") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS pdh.dll (Performance Data Helper)", slot.winetricks_callback("pdh") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "NVIDIA/AGEIA PhysX runtime", slot.winetricks_callback("physx") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS riched20 and riched32", slot.winetricks_callback("riched20") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS riched30", slot.winetricks_callback("riched30") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS urlmon.dll", slot.winetricks_callback("urlmon") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual Basic 2 runtime", slot.winetricks_callback("vb2run") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual Basic 3 runtime", slot.winetricks_callback("vb3run") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual Basic 4 runtime", slot.winetricks_callback("vb4run") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual Basic 5 runtime", slot.winetricks_callback("vb5run") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual Basic 6 runtime", slot.winetricks_callback("vb6run") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual C++ 2003 libraries (mfc71,msvcp71,msvcr71)", slot.winetricks_callback("vcrun2003") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual C++ 2005 sp1 libraries (mfc80,msvcp80,msvcr80)", slot.winetricks_callback("vcrun2005") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual C++ 2008 libraries (mfc90,msvcp90,msvcr90)", slot.winetricks_callback("vcrun2008") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual C++ 6 sp4 libraries (mfc42, msvcp60, msvcrt)", slot.winetricks_callback("vcrun6") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Visual J# 2.0 SE libraries (requires dotnet20)", slot.winetricks_callback("vjrun20") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS wininet.dll (requires Windows license)", slot.winetricks_callback("wininet") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Windows scripting 5.6, jscript only, no cscript", slot.winetricks_callback("wsh56js") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Windows Scripting Host 5.6", slot.winetricks_callback("wsh56") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS Windows scripting 5.6, vbscript only, no cscript", slot.winetricks_callback("wsh56vb") )
+			winetricksLibsMenu.insertItem( QIconSet(loadPixmap("plugin_add.png")), "MS XACT Engine (x3daudio?_?.dll, xactengine?_?.dll)", slot.winetricks_callback("xact") )
+			winetricksMenu.insertItem( QIconSet(loadPixmap("plugin.png")), "&Libraries", winetricksLibsMenu )
+
+			winetricksDevelopMenu = QPopupMenu(self)
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "Autohotkey (open source gui scripting language)", slot.winetricks_callback("autohotkey") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "CMake, the cross-platform, open-source build system", slot.winetricks_callback("cmake") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "GDB for MinGW", slot.winetricks_callback("mingw-gdb") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "Minimalist GNU for Windows, including GCC for Windows!", slot.winetricks_callback("mingw") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "Open Watcom C/C++ compiler (can compile win16 code!)", slot.winetricks_callback("openwatcom") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "MS Platform SDK 2003", slot.winetricks_callback("psdk2003") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "MS Vista SDK (does not install yet)", slot.winetricks_callback("psdkvista") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "MS Windows 7 SDK (installing just headers and c++ compiler works)", slot.winetricks_callback("psdkwin7") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "Python 2.6.2 (and pywin32)", slot.winetricks_callback("python26") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "MS Visual C++ 2005 Express", slot.winetricks_callback("vc2005express") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "MS Visual C++ 2005 Express SP1 (does not work yet)", slot.winetricks_callback("vc2005expresssp1") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "MS Visual C++ 2005 Service Pack 1 (install trial 1st)", slot.winetricks_callback("vc2005sp1") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "MS Visual C++ 2005 Trial", slot.winetricks_callback("vc2005trial") )
+			winetricksDevelopMenu.insertItem( QIconSet(loadPixmap("pencil_add.png")), "Mozilla build environment", slot.winetricks_callback("mozillabuild") )
+			winetricksDevelopMenu.insertSeparator()
+			winetricksMenu.insertItem( QIconSet(loadPixmap("pencil.png")), "&Development tools", winetricksDevelopMenu )
+			
+			"""Rest
+ hosts         Adds empty C:\windows\system32\drivers\etc\{hosts,services} files
+ glsl-disable  Disable GLSL use by Wine Direct3D
+ glsl-enable   Enable GLSL use by Wine Direct3D (default)
+ native_mdac   Override odbc32 and odbccp32
+ native_oleaut32 Override oleaut32
+ nocrashdialog Disable the graphical crash dialog
+ orm=backbuffer Registry tweak: OffscreenRenderingMode=backbuffer
+ orm=fbo        Registry tweak: OffscreenRenderingMode=fbo (default)
+ orm=pbuffer    Registry tweak: OffscreenRenderingMode=pbuffer
+ sandbox       Sandbox the wineprefix - remove links to ~
+ sound=alsa       Set sound driver to ALSA
+ sound=audioio    Set sound driver to AudioIO
+ sound=coreaudio  Set sound driver to CoreAudio
+ sound=esound     Set sound driver to Esound
+ sound=jack       Set sound driver to Jack
+ sound=nas        Set sound driver to Nas
+ sound=oss        Set sound driver to OSS
+ nt40          Set windows version to nt40
+ win98         Set windows version to Windows 98
+ win2k         Set windows version to Windows 2000
+ winxp         Set windows version to Windows XP
+ vista         Set windows version to Windows Vista
+ winver=       Set windows version to default (winxp)
+ volnum        Rename drive_c to harddiskvolume0 (needed by some installers)"""
+						
+			menu.insertItem( QIconSet(loadPixmap("script_gear.png")), "&Winetricks", winetricksMenu )
+			menu.insertSeparator()			
 			if not slot.slot.name == SWINE_DEFAULT_SLOT_NAME:
 				menu.insertItem( QIconSet(loadPixmap("drive_rename.png")), "R&ename", slot.rename_cb )
 			menu.insertItem( QIconSet(loadPixmap("arrow_divide.png")), "&Copy", slot.copy_cb )

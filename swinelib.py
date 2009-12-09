@@ -24,7 +24,7 @@ from tarfile import TarFile
 from subprocess import Popen
 from Registry import Registry
 
-VERSION = "0.4"
+VERSION = "0.5"
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
@@ -34,6 +34,7 @@ SWINE_DEFAULT_SLOT_NAME = "DEFAULT"
 SWINE_DEFAULT_SLOT_PATH = SWINE_PATH + "/" + SWINE_DEFAULT_SLOT_NAME
 SWINE_DEFAULT_SECTION = "__SYSTEM__"
 WINE_PATH = os.getenv("HOME") + "/.wine"
+WINETRICKS = "winetricks"
 
 class SwineException(Exception):
 	pass
@@ -166,7 +167,7 @@ class Slot:
 	def create (self):
 		if self.exists():
 			raise SwineException ("Slot already exists: " + self.name)
-		self.runWineTool(["wineprefixcreate"],wait=True)
+		os.mkdir(self.getPath())
 		self.loadConfig()
 		self.saveConfig()
 	
@@ -304,6 +305,12 @@ class Slot:
 			env["WINEDEBUG"] = debug
 		return self.runNative ( prog, cwd, wait, env, stdin, stdout, stderr )
 	
+	def runWinetricks (self, prog):
+		"""Run a winetricks command
+		This is only a wrapper for runNative
+		"""
+		return self.runNative (["xterm", "-T", "Winetricks "+str(prog), "-hold", "-e", "sh", WINETRICKS, str(prog)])
+	
 	def runWin (self,prog,workingDirectory=".",wait=False,runInTerminal=False,desktop=None,debug=None,log=None):
 		"""Run a windows program
 		Parameters:
@@ -355,29 +362,6 @@ class Slot:
 	
 	def runEject (self):
 		return self.runWin (["eject"],wait=False)
-	
-	def installCorefonts (self):
-		"""Install Microsoft Corefonts
-		This will download the corefonts from sourceforge to a subdirectory named 'corefonts'.
-		Then it extracts the contents of the downloaded files with 'cabextract'.
-		Finally it searches for TTF-Files and moves them to the fonts directory.
-		""" 
-		fonts = ["andale","arial","arialb","comic","courie","georgi","impact","times","trebuc","verdan","webdin"]
-		path = self.getPath() + "/corefonts"
-		if not os.path.exists ( path ):
-			os.mkdir ( path )
-		os.chdir ( path )
-		for font in fonts:
-			file = font + "32.exe"
-			if not os.path.exists ( file ):
-				instream=urllib.urlopen("http://downloads.sourceforge.net/corefonts/" + file + "?use_mirror=switch")
-				outfile=open(file, "wb")
-				outfile.write(instream.read())
-				outfile.close()
-			self.runNative(["cabextract",file],cwd=path,wait=True)
-		for file in os.listdir ( path ):
-			if os.path.splitext(file)[1].lower() == ".ttf":
-				shutil.move ( file, self.getDrivePath("c:") + "/windows/fonts/" + file )
 	
 	def winPathToUnix (self,path,basedir=None):
 		if basedir:

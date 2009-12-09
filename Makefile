@@ -1,7 +1,7 @@
 %.py : %.ui
 	pyuic $< >$@
 
-rev = 0.4
+rev = 0.5
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui
 ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py
 images = images/*.png
@@ -13,7 +13,7 @@ wrd_sources = $(wrd_dir)/README $(wrd_dir)/Makefile $(wrd_dir)/CHANGELOG \
 wrd_bin = winresdump
 buildfiles = Makefile
 sources = $(py_files) $(ui_files) $(images) README LICENSE $(wrd_sources) $(buildfiles)
-distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE $(wrd_bin)
+distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE $(wrd_bin) winetricks
 
 ALL: compile
 
@@ -50,3 +50,4 @@ install: compile
 	ln -s ../../share/swine/images $(DESTDIR)/usr/lib/swine
 	cp $(wrd_bin) $(DESTDIR)/usr/lib/swine
 	ln -s ../lib/swine/swine.py $(DESTDIR)/usr/bin/swine
+	install winetricks $(DESTDIR)/usr/bin/winetricks
