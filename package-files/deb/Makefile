@@ -1,5 +1,3 @@
-rev=0.5
-
 ALL: build
 
 swine_$(rev).orig.tar.gz:

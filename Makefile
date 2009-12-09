@@ -7,6 +7,7 @@ ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py
 images = images/*.png
 py_files = swine.py swinecli.py swinelib.py shortcutlib.py Registry.py
 wrd_dir = wrd-src
+deb_dir = package-files/deb
 wrd_sources = $(wrd_dir)/README $(wrd_dir)/Makefile $(wrd_dir)/CHANGELOG \
 	$(wrd_dir)/newexe.h $(wrd_dir)/resfmt.h $(wrd_dir)/winresdump.h $(wrd_dir)/wv_extract.h \
 	$(wrd_dir)/support.c $(wrd_dir)/version.c $(wrd_dir)/winresdump.c
@@ -21,7 +22,13 @@ winresdump-compile:
 	cd $(wrd_dir); make; cd .. ; cp $(wrd_dir)/winresdump $(wrd_bin)
 
 winresdump-clean:
-	cd $(wrd_dir); make clean; cd ..
+	cd $(wrd_dir); make clean
+
+deb-clean:
+	cd $(deb_dir); export rev=$(rev); make clean
+
+deb-build: swine-$(rev)-src.tar.gz
+	cd $(deb_dir); export rev=$(rev); make build
 
 swine-$(rev).tar.gz: compile $(distfiles)
 	mkdir swine-$(rev)
@@ -51,3 +58,5 @@ install: compile
 	cp $(wrd_bin) $(DESTDIR)/usr/lib/swine
 	ln -s ../lib/swine/swine.py $(DESTDIR)/usr/bin/swine
 	install winetricks $(DESTDIR)/usr/bin/winetricks
+
+deb: deb-build
