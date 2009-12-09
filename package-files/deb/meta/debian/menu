@@ -1,0 +1,2 @@
+?package(swine):needs="X11" section="Applications/Wine"\
+  title="Swine" command="/usr/bin/swine"
