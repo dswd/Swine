@@ -355,7 +355,7 @@ class Slot:
 		return self.runWineTool (["winefile",directory],wait=False)
 	
 	def runUninstaller (self):
-		return self.runWineTool (["uninstaller"],wait=False)
+		return self.runWineTool (["wine", "uninstaller"],wait=False)
 		
 	def runWineControl (self):
 		return self.runWineTool (["wine","control"],wait=False)
