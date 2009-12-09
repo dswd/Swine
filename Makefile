@@ -12,7 +12,7 @@ wrd_sources = $(wrd_dir)/README $(wrd_dir)/Makefile $(wrd_dir)/CHANGELOG \
 	$(wrd_dir)/support.c $(wrd_dir)/version.c $(wrd_dir)/winresdump.c
 wrd_bin = winresdump
 buildfiles = Makefile
-sources = $(py_files) $(ui_files) $(images) README LICENSE $(wrd_sources) $(buildfiles)
+sources = $(py_files) $(ui_files) $(images) README LICENSE $(wrd_sources) $(buildfiles) winetricks
 distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE $(wrd_bin) winetricks
 
 ALL: compile
