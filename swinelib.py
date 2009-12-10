@@ -324,6 +324,8 @@ class Slot:
 		"""
 		if not os.path.splitext(prog[0])[1].lower() == ".exe":
 			prog.insert(0,"start")
+			if wait:
+				prog.insert(1,"/W")
 		if desktop:
 			prog.insert(0,"explorer")
 			prog.insert(1,"/desktop="+desktop)
@@ -340,7 +342,7 @@ class Slot:
 		stderr = None
 		if log:
 			stderr = open(log,"w")
-		return self.runWineTool (prog, cwd, wait, stderr=stderr, debug=debug)	
+		return self.runWineTool (prog, cwd, wait=wait, stderr=stderr, debug=debug)	
 		
 	def runWinecfg (self):
 		return self.runWineTool (["winecfg"],wait=False)
