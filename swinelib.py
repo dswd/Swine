@@ -35,6 +35,7 @@ SWINE_DEFAULT_SLOT_PATH = SWINE_PATH + "/" + SWINE_DEFAULT_SLOT_NAME
 SWINE_DEFAULT_SECTION = "__SYSTEM__"
 WINE_PATH = os.getenv("HOME") + "/.wine"
 WINETRICKS = "winetricks"
+DESKTOP_MENU_DIR = os.getenv("HOME") + "/.local/share/applications/swine"
 
 class SwineException(Exception):
 	pass
@@ -71,6 +72,7 @@ class Shortcut:
 		if self.isDefault():
 			self.slot.unsetDefaultShortcut()
 		self.slot.config.remove_section (self.name)
+		self.removeMenuEntry()
 		
 	def rename (self, newname):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
@@ -116,6 +118,28 @@ class Shortcut:
 		if os.path.splitext(file)[1].lower() == '.exe':
 			self.data['iconsdir']="icons/" + os.path.basename(file)
 			self.slot.extractExeIcons ( file, iconsdir )
+	
+	def hasMenuEntry (self):
+		file_name = DESKTOP_MENU_DIR + "/" + self.slot.name + "-" + self.name + ".desktop"
+		return os.path.exists(file_name)
+	
+	def createMenuEntry (self):
+		if not os.path.exists (DESKTOP_MENU_DIR):
+			os.mkdir (DESKTOP_MENU_DIR)
+		file_name = DESKTOP_MENU_DIR + "/" + self.slot.name + "-" + self.name + ".desktop"
+		file = open ( file_name, "w" )
+		file.write("[Desktop Entry]\nEncoding=UTF-8\nVersion=1.0\n")
+		file.write("Name="+self.slot.name+": "+self.name+"\n")
+		file.write("Type=Application\n")
+		file.write("Exec=swinecli --slot \""+self.slot.name+"\" --shortcut \""+self.name+"\" --run\n")
+		file.write("Icon="+self.data["icon"]+"\n")
+		file.write("Categories=Wine;\n")
+		file.close()
+		
+	def removeMenuEntry (self):
+		file_name = DESKTOP_MENU_DIR + "/" + self.slot.name + "-" + self.name + ".desktop"
+		if self.hasMenuEntry():
+			os.remove(file_name)
 
 
 class Slot:
@@ -176,6 +200,8 @@ class Slot:
 			raise SwineException ("Default slot cannot be deleted")
 		if not self.exists ():
 			raise SwineException ("Slot does not exist: " + self.name)
+		for s in self.getAllShortcuts():
+			s.delete()
 		shutil.rmtree ( self.getPath() )
 
 	def clone (self,newname):
@@ -196,8 +222,15 @@ class Slot:
 			raise SwineException ("Slot does not exist: " + self.name)
 		if Slot(newname).exists():
 			raise SwineException ("Slot does already exist: " + newname)
+		shortcutMenus = []
+		for s in self.getAllShortcuts():
+			if s.hasMenuEntry():
+				shortcutMenus.append(s)
+				s.removeMenuEntry()
 		shutil.move ( self.getPath(), Slot(newname).getPath() )
 		self.name = newname
+		for s in shortcutMenus:
+			s.createMenuEntry()
 
 	def getAllShortcuts (self):
 		shortcuts = []

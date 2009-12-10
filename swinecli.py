@@ -28,70 +28,106 @@ from swinelib import *
 
 def usage():
 	print '''Usage:
-		--list
-	-l,	--listSlots
-	-L,	--listShortcuts SLOTNAME
-	-C,	--create SLOTNAME
-	-r,	--runShortcut SLOT | SLOT:SHORTCUT
-	-R,	--run SLOTNAME PROGRAM [ARGUMENTS]
-	-I,	--importShortcuts SLOTNAME
-	-w,	--winecfg SLOTNAME'''
+	-l	--list				List all slots or all shortcuts if --slot is specified
+	-s	--slot SLOT			Selects a slot
+	-S	--shortcut SHORTCUT		Selects a shortcut
+	-r	--run				Runs a shortcut
+	-R	--run-direct PROGRAM		Runs a program
+'''
+
+class Mode:
+	Nothing=0
+	List=1
+	Run=2
+	RunDirect=3
 
 try:
-	opts, otherargs = getopt.getopt(sys.argv[1:], "hlL:C:r:R:I:w:", ["help", "list", "listSlots", "listShortcuts=", "create=", "runShortcut=", "run=", "winecfg=", "importShortcuts="])
+	opts, otherargs = getopt.getopt(sys.argv[1:], "hls:S:rR:", ["help", "list", "slot=", "shortcut=", "run", "run-direct="])
 except getopt.GetoptError:
 	# print help information and exit:
 	usage()
-	sys.exit(2)
+	sys.exit(1)
+
+slot_name = None
+slot = None
+shortcut_name = None
+shortcut = None
+mode = Mode.Nothing
+program = None
+
 for opt, val in opts:
 	if opt in ("-h", "--help"):
 		usage()
+		sys.exit(0)
+	elif opt in ("-s","--slot"):
+		slot_name = val
+	elif opt in ("-S","--shortcut"):
+		shortcut_name = val
+	elif opt in ("-l","--list"):
+		mode = Mode.List
+	elif opt in ("-r","--run"):
+		mode = Mode.Run
+	elif opt in ("-R","--run-direct"):
+		mode = Mode.RunDirect
+		program = val
 
-	elif opt in ("--list"):
-		for slot in getAllSlots():
-			print slot.name + "	default: " + str(slot.loadDefaultShortcut())
-			for shortcut in slot.getAllShortcuts():
-				print " |- " + shortcut.name + " : " + shortcut.data['program']
-			print
+if slot_name:
+	slot = loadSlot(slot_name)
+	if not slot:
+		print "Slot " + slot_name + " does not exit"
+		sys.exit(2)
 
-	elif opt in ("-l","--listSlots"):
-		for slot in getAllSlots():
-			print slot.name + "	default: " + str(slot.loadDefaultShortcut())
-
-	elif opt in ("-L","--listShortcuts"):
-		slot = loadSlot(val)
-		for shortcut in slot.getAllShortcuts():
-			print shortcut.name + " : " + shortcut.data['program']
-
-	elif opt in ("-I","--importShortcuts"):
-		slot = loadSlot(val)
-		for shortcut in slot.findShortcuts(True):
-			shortcut.save()
-		slot.saveConfig()
-
-	elif opt in ("-C","--create"):
-		Slot(val).create()
-
-	elif opt in ("-w","--winecfg"):
-		loadSlot(val).runWinecfg()
-
-	elif opt in ("-r","--runShortcut"): 
-		slot = val.split(":",1)
-		if len(slot) == 1:
-			print loadSlot(slot[0]).loadDefaultShortcut().run()
-		else:
-			print loadSlot(slot[0]).loadShortcut(slot[1]).run()
-		try:
-			os.wait()
-		except Exception:
-			print "killed"
-
-	elif opt in ("-R","--run"): 
-		print loadSlot(val).runWin(otherargs)
-		try:
-			os.wait()
-		except Exception:
-			print "killed"
-
+if shortcut_name:
+	if not slot:
+		print "Need to sprecify the slot"
+		sys.exit(2)
 	else:
-		usage()
+		shortcut = slot.loadShortcut(shortcut_name)
+		if not shortcut:
+			print "Shortcut " + shortcut_name + " does not exit"
+			sys.exit(3)
+
+def need_slot ():
+	global slot
+	if not slot:
+		print "Need to specify the slot"
+		sys.exit(2)
+
+def need_shortcut_def ():
+	need_slot()
+	global shortcut, slot, slot_name
+	if not shortcut:
+		shortcut = slot.loadDefaultShortcut()
+		if not shortcut:
+			print "Slot " + slot_name + " does not have a default shortcut"
+			sys.exit(3)
+
+def need_shortcut ():
+	need_slot()
+	global shortcut, slot, slot_name
+	if not shortcut:
+		print "Need to specify the shortcut"
+		sys.exit(3)
+
+
+if mode == Mode.List:
+	if slot:
+		for shortcut in slot.getAllShortcuts():
+			if shortcut.isDefault():
+				print shortcut.name + "(default)\tCommand: " + " ".join(str2args(shortcut.data['program']))
+			else:
+				print shortcut.name + "\tCommand: " + " ".join(str2args(shortcut.data['program']))
+	else:
+		for slot in getAllSlots():
+			print slot.name
+
+elif mode == Mode.Run:
+	need_shortcut_def()
+	shortcut.run(wait=True)
+	
+elif mode == Mode.RunDirect:
+	need_slot()
+	slot.runWin([program], wait=True)
+	
+else:
+	usage()

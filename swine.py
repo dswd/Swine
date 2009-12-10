@@ -155,6 +155,13 @@ class SwineShortcutItem(QIconViewItem):
 		main.slotList.takeItem (main.currentSlotItem())
 		item = SwineSlotItem (main.slotList,self.shortcut.slot)
 		main.slotList.setCurrentItem ( item )
+	def createMenuEntry_cb(self):
+		self.shortcut.createMenuEntry()
+		QMessageBox.information ( self.mainWindow(), "Menu Entry", "Menu entry for "+self.shortcut.name+" has been created" )
+	def removeMenuEntry_cb(self):
+		self.shortcut.removeMenuEntry()
+		QMessageBox.information ( self.mainWindow(), "Menu Entry", "Menu entry for "+self.shortcut.name+" has been removed" )
+		
 
 
 
@@ -178,8 +185,12 @@ class SwineMainWindow(MainWindow):
 			menu.insertItem( QIconSet(loadPixmap("cog.png")), "&Run", shortcut.shortcut.run )
 			menu.insertSeparator()
 			menu.insertItem( QIconSet(loadPixmap("lightning_add.png")), "&Set Default", shortcut.setDefault_cb )
-			menu.insertItem( QIconSet(loadPixmap("application_edit.png")), "&Edit", shortcut.edit_cb )
+			if shortcut.shortcut.hasMenuEntry():
+				menu.insertItem( QIconSet(loadPixmap("lightning_delete.png")), "&Remove Menu Entry", shortcut.removeMenuEntry_cb )
+			else:
+				menu.insertItem( QIconSet(loadPixmap("lightning_add.png")), "&Create Menu Entry", shortcut.createMenuEntry_cb )
 			menu.insertSeparator()
+			menu.insertItem( QIconSet(loadPixmap("application_edit.png")), "&Edit", shortcut.edit_cb )
 			menu.insertItem( QIconSet(loadPixmap("textfield_rename.png")), "Re&name", shortcut.rename_cb )
 			menu.insertItem( QIconSet(loadPixmap("arrow_divide.png")), "&Copy", shortcut.copy_cb )
 			menu.insertItem( QIconSet(loadPixmap("application_delete.png")), "&Delete", shortcut.delete_cb )

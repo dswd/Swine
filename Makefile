@@ -61,6 +61,7 @@ install: compile
 	ln -s ../../share/swine/images $(DESTDIR)/usr/lib/swine
 	cp $(wrd_bin) $(DESTDIR)/usr/lib/swine
 	ln -s ../lib/swine/swine.py $(DESTDIR)/usr/bin/swine
+	ln -s ../lib/swine/swinecli.py $(DESTDIR)/usr/bin/swinecli
 	install winetricks $(DESTDIR)/usr/bin/winetricks
 	mkdir -p $(DESTDIR)/usr/share/applications
 	cp resources/swine.desktop $(DESTDIR)/usr/share/applications/swine.desktop
