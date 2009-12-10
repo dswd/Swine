@@ -13,8 +13,9 @@ wrd_sources = $(wrd_dir)/README $(wrd_dir)/Makefile $(wrd_dir)/CHANGELOG \
 	$(wrd_dir)/support.c $(wrd_dir)/version.c $(wrd_dir)/winresdump.c
 wrd_bin = winresdump
 buildfiles = Makefile
-sources = $(py_files) $(ui_files) $(images) README LICENSE $(wrd_sources) $(buildfiles) winetricks
-distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE $(wrd_bin) winetricks
+resources = resources/swine.desktop
+sources = $(py_files) $(ui_files) $(images) README LICENSE $(wrd_sources) $(buildfiles) winetricks $(resources)
+distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE $(wrd_bin) winetricks $(resources)
 
 ALL: compile
 
@@ -61,5 +62,7 @@ install: compile
 	cp $(wrd_bin) $(DESTDIR)/usr/lib/swine
 	ln -s ../lib/swine/swine.py $(DESTDIR)/usr/bin/swine
 	install winetricks $(DESTDIR)/usr/bin/winetricks
+	mkdir -p $(DESTDIR)/usr/share/applications
+	cp resources/swine.desktop $(DESTDIR)/usr/share/applications/swine.desktop
 
-deb: deb-build
+deb: deb-clean deb-build
