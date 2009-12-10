@@ -215,6 +215,8 @@ class SwineMainWindow(MainWindow):
 			menu.insertItem( QIconSet(loadPixmap("cog.png")), "&Commands", commandsMenu )
 			winetricksMenu = QPopupMenu(self)
 			
+			winetricksMenu.insertItem( QIconSet(loadPixmap("script_gear.png")), "&Call Winetricks", slot.winetricks_callback("") )
+			
 			winetricksAppsMenu = QPopupMenu(self)
 			winetricksAppsMenu.insertItem( QIconSet(loadPixmap("application_add.png")), "Unix apps for Windows (needed by some build scripts)", slot.winetricks_callback("cygwin") )
 			winetricksAppsMenu.insertItem( QIconSet(loadPixmap("application_add.png")), "KDE for Windows installer", slot.winetricks_callback("kde") )

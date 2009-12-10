@@ -2,7 +2,7 @@
 <kdevelop>
   <general>
     <author>Dennis Schwerdel, Thomas Schmidt</author>
-    <email></email>
+    <email/>
     <version>0.1</version>
     <projectmanagement>KDevAutoProject</projectmanagement>
     <primarylanguage>Python</primarylanguage>
@@ -16,7 +16,7 @@
     <absoluteprojectpath>false</absoluteprojectpath>
     <description>Swine is a wine frontend</description>
     <projectname>swine</projectname>
-    <defaultencoding></defaultencoding>
+    <defaultencoding/>
   </general>
   <kdevautoproject>
     <general>
@@ -27,12 +27,12 @@
       <mainprogram>swine.py</mainprogram>
       <directoryradio>executable</directoryradio>
       <customdirectory>/</customdirectory>
-      <programargs></programargs>
+      <programargs/>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <envvars/>
-      <globaldebugarguments></globaldebugarguments>
-      <globalcwd></globalcwd>
+      <globaldebugarguments/>
+      <globalcwd/>
       <useglobalprogram>true</useglobalprogram>
       <autoinstall>false</autoinstall>
       <autokdesu>false</autokdesu>
@@ -132,7 +132,7 @@
   </substmap>
   <kdevpythonsupport>
     <run>
-      <interpreter></interpreter>
+      <interpreter/>
       <terminal>false</terminal>
     </run>
   </kdevpythonsupport>
