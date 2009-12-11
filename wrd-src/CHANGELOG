@@ -1,8 +1,0 @@
-ver 1.0.1:
-	* bugfix for rewinding ne binaries on end of resource table marker
-	* added some ne documentation, i.e. winexe.txt to doc
-	* added rewind after finding name in file
-	* added test for resource len == 0
-ver 1.0.0:
-	* version 1.0.0 released, dumps the dibs,cursors and icons contained in ne and
-	pe windows binaries to disk formatted as .bmp

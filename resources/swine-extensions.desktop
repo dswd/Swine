@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Swine Windows Program Loader
+Exec=swinerun %f
+MimeType=application/x-ms-dos-executable;application/x-msi;application/x-win-lnk;
+NoDisplay=true
+StartupNotify=true

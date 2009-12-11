@@ -38,7 +38,6 @@ def loadPixmap ( name ):
 
 def loadIcon ( name ):
 	pm = QPixmap ( name )
-	pm.setMask ( pm.createHeuristicMask() )
 	if not pm or pm.isNull():
 		pm = loadPixmap("wabi.png")
 	return QPixmap ( pm.convertToImage().smoothScale(32,32,QImage.ScaleMin) )

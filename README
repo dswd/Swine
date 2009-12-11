@@ -7,15 +7,11 @@ Swine needs the following packages:
 - pyqt (Version 3.14.1 tested)
 - cabextract (Version 1.2-2 tested)
 - xterm (Version 229 tested)
+- icoutils
+- imagemagick
 
 Included Works
 ==============
-Winresdump
-	This software is used to extract icons from exe-files.
-	Only the sources of the command-line tool are used and included
-	Copyright (c) 1999    Caolan McNamara
-	Licensed under the GPL
-	URL: http://www.skynet.ie/~caolan/pub/winresdump
 Winetricks
 	Quick and dirty script to download and install various
 	redistributable runtime libraries

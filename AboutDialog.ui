@@ -299,14 +299,7 @@ This General Public License does not permit incorporating your program into prop
                             <cstring>textEdit3</cstring>
                         </property>
                         <property name="text">
-                            <string>Winresdump
-	This software is used to extract icons from exe-files.
-	Only the sources of the command-line tool are used and included
-	Copyright (c) 1999    Caolan McNamara
-	Licensed under the GPL
-	URL: http://www.skynet.ie/~caolan/pub/winresdump
-
-Winetricks
+                            <string>Winetricks
 	Quick and dirty script to download and install various
 	redistributable runtime libraries
 

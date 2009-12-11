@@ -22,7 +22,6 @@ import sys, os, shutil, ConfigParser, array, pipes, urllib, subprocess
 import shortcutlib
 from tarfile import TarFile
 from subprocess import Popen
-from Registry import Registry
 
 VERSION = "0.5"
 
@@ -259,12 +258,14 @@ class Slot:
 		self.settings['default_shortcut'] = None
 	
 	def extractExeIcons (self, file, iconsdir):
-		"""Extract icons from an exe-file
-		This ignores stdout because its very verbose
-		"""
 		if not os.path.exists ( iconsdir ):
 			os.makedirs ( iconsdir )
-		self.runNative (["winresdump",file],wait=True,cwd=iconsdir,stdout=open('/dev/null', 'w'))
+		self.runNative (["wrestool","-x","-t14","--output",iconsdir,file],wait=True)
+		files = os.listdir ( iconsdir )
+		for file in files:
+			if os.path.splitext(file)[1].lower() == '.ico':
+				self.runNative (["convert",iconsdir+"/"+file,iconsdir+"/"+os.path.splitext(file)[0]+".png"],wait=True)
+				os.remove(iconsdir+"/"+file)
 	
 	def createShortcutFromFile (self, file):
 		lnk = shortcutlib.readlnk ( file )
@@ -432,32 +433,6 @@ class Slot:
 		tar.close ()
 		self.loadConfig()
 		
-	def getRegistry (self, file):
-		return Registry ( file )
-	
-	def getRegistrySystem (self):
-		return self.getRegistry ( self.getPath() + "/system.reg" )
-	
-	def getRegistryHKCU (self):
-		return self.getRegistry ( self.getPath() + "/user.reg" )
-	
-	def getRegistryUserDef (self):
-		return self.getRegistry ( self.getPath() + "/userdef.reg" )
-	
-	def getDesktopRes (self):
-		hkcu = self.getRegistryHKCU()
-		res = hkcu.getPath ( "Software\\Wine\\X11 Driver", True ).getAttr ( "Desktop" ).value
-		if res == "n" or res == "f" or res == "0": return None
-		else: return res
-		
-	def setDesktopRes (self,res):
-		if not res:
-			res = "n"
-		hkcu = self.getRegistryHKCU()
-		hkcu.getPath ( "Software\\Wine\\X11 Driver", True ).setAttr ( "Desktop", res )
-		hkcu.save()
-
-
 def importSlot (name, file):
 	if len(file) == 0:
 		raise SwineException ("File name cannot be empty.")

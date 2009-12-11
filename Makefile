@@ -5,25 +5,14 @@ rev = 0.5
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui
 ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py RunnerDialog.py
 images = images/*.png
-py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py Registry.py
-wrd_dir = wrd-src
+py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py
 deb_dir = package-files/deb
-wrd_sources = $(wrd_dir)/README $(wrd_dir)/Makefile $(wrd_dir)/CHANGELOG \
-	$(wrd_dir)/newexe.h $(wrd_dir)/resfmt.h $(wrd_dir)/winresdump.h $(wrd_dir)/wv_extract.h \
-	$(wrd_dir)/support.c $(wrd_dir)/version.c $(wrd_dir)/winresdump.c
-wrd_bin = winresdump
 buildfiles = Makefile
-resources = resources/swine.desktop
-sources = $(py_files) $(ui_files) $(images) README LICENSE $(wrd_sources) $(buildfiles) winetricks $(resources)
-distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE $(wrd_bin) winetricks $(resources)
+resources = resources/swine.desktop resources/swine-extensions.desktop
+sources = $(py_files) $(ui_files) $(images) README LICENSE $(buildfiles) winetricks $(resources)
+distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE winetricks $(resources)
 
 ALL: compile
-
-winresdump-compile:
-	cd $(wrd_dir); make; cd .. ; cp $(wrd_dir)/winresdump $(wrd_bin)
-
-winresdump-clean:
-	cd $(wrd_dir); make clean
 
 deb-clean:
 	cd $(deb_dir); export rev=$(rev); make clean
@@ -46,12 +35,12 @@ swine-$(rev)-src.tar.gz: $(sources) $(buildfiles)
 	tar -czvf swine-$(rev)-src.tar.gz swine-$(rev)
 	rm -r swine-$(rev)
 
-compile: $(ui_files_py) winresdump-compile
+compile: $(ui_files_py)
 
 dist: swine-$(rev).tar.gz swine-$(rev)-src.tar.gz
 
-clean: winresdump-clean
-	rm -rf $(ui_files_py) *.pyc *.tar.gz *~ $(wrd_bin)
+clean:
+	rm -rf $(ui_files_py) *.pyc *.tar.gz *~
 
 install: compile
 	mkdir -p $(DESTDIR)/usr/lib/swine/
@@ -59,12 +48,12 @@ install: compile
 	mkdir -p $(DESTDIR)/usr/share/swine/images/
 	cp -r $(images) $(DESTDIR)/usr/share/swine/images
 	ln -s ../../share/swine/images $(DESTDIR)/usr/lib/swine
-	cp $(wrd_bin) $(DESTDIR)/usr/lib/swine
 	ln -s ../lib/swine/swine.py $(DESTDIR)/usr/bin/swine
 	ln -s ../lib/swine/swinecli.py $(DESTDIR)/usr/bin/swinecli
 	ln -s ../lib/swine/swinerun.py $(DESTDIR)/usr/bin/swinerun
 	install winetricks $(DESTDIR)/usr/bin/winetricks
 	mkdir -p $(DESTDIR)/usr/share/applications
 	cp resources/swine.desktop $(DESTDIR)/usr/share/applications/swine.desktop
+	cp resources/swine-extensions.desktop $(DESTDIR)/usr/share/applications/swine-extensions.desktop
 
 deb: deb-clean deb-build
