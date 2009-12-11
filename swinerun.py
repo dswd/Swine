@@ -145,4 +145,5 @@ def excepthook(excType, excValue, tracebackobj):
 		win.excepthook(excType, excValue, tracebackobj)
 
 if __name__=="__main__":
-	main(sys.argv)
+	if len(sys.argv) > 1:
+		main(sys.argv)

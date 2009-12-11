@@ -8,7 +8,7 @@ images = images/*.png
 py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py
 deb_dir = package-files/deb
 buildfiles = Makefile
-resources = resources/swine.desktop resources/swine-extensions.desktop
+resources = resources/*
 sources = $(py_files) $(ui_files) $(images) README LICENSE $(buildfiles) winetricks $(resources)
 distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE winetricks $(resources)
 
