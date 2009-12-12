@@ -379,33 +379,33 @@ class Slot:
 		return self.runWineTool (prog, cwd, wait=wait, stderr=stderr, debug=debug)	
 		
 	def runWinecfg (self):
-		return self.runWineTool (["winecfg"],wait=False)
+		return self.runWineTool (["wine", "winecfg"],wait=False)
 
 	def runRegedit (self):
-		return self.runWineTool (["regedit"],wait=False)
+		return self.runWineTool (["wine", "regedit"],wait=False)
 	
 	def runWineboot (self):
-		return self.runWineTool (["wineboot"],wait=False)
+		return self.runWineTool (["wine", "wineboot"],wait=False)
 		
 	def runWinefile (self,directory="C:"):
-		return self.runWineTool (["winefile",directory],wait=False)
+		return self.runWineTool (["wine", "winefile",directory],wait=False)
 	
 	def runUninstaller (self):
 		return self.runWineTool (["wine", "uninstaller"],wait=False)
 		
 	def runWineControl (self):
-		return self.runWineTool (["wine","control"],wait=False)
+		return self.runWineTool (["wine", "control"],wait=False)
 	
 	def runEject (self):
-		return self.runWin (["eject"],wait=False)
+		return self.runWin (["wine", "eject"],wait=False)
 	
 	def winPathToUnix (self,path,basedir=None):
 		if basedir:
 			basedir = self.winPathToUnix ( basedir )
-		return self.runWinePath (["winepath","-u",path],basedir)
+		return self.runWinePath (["wine", "winepath","-u",path],basedir)
 	
 	def unixPathToWin (self,path,basedir=None):
-		return self.runWinePath (["winepath","-w",path],basedir)
+		return self.runWinePath (["wine", "winepath","-w",path],basedir)
 
 	def runWinePath (self,prog,basedir):
 		proc = self.runWineTool (prog,wait=True,stdout=subprocess.PIPE,cwd=basedir)
