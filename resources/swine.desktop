@@ -4,6 +4,6 @@ Version=1.0
 Name=Swine
 Type=Application
 Exec=swine
-Icon=/usr/share/swine/images/wabi.png
+Icon=/usr/share/swine/images/swine32.png
 Categories=Wine;
 Comment=Swine is a wine frontend
