@@ -33,6 +33,7 @@ def usage():
 	-S	--shortcut SHORTCUT		Selects a shortcut
 	-r	--run				Runs a shortcut
 	-R	--run-direct PROGRAM		Runs a program
+		--import-lnk FILE		Imports a .lnk file
 '''
 
 class Mode:
@@ -40,9 +41,10 @@ class Mode:
 	List=1
 	Run=2
 	RunDirect=3
+	ImportLnk=4
 
 try:
-	opts, otherargs = getopt.getopt(sys.argv[1:], "hls:S:rR:", ["help", "list", "slot=", "shortcut=", "run", "run-direct="])
+	opts, otherargs = getopt.getopt(sys.argv[1:], "hls:S:rR:", ["help", "list", "slot=", "shortcut=", "run", "run-direct=", "import-lnk="])
 except getopt.GetoptError:
 	# print help information and exit:
 	usage()
@@ -54,6 +56,7 @@ shortcut_name = None
 shortcut = None
 mode = Mode.Nothing
 program = None
+file = None
 
 for opt, val in opts:
 	if opt in ("-h", "--help"):
@@ -70,6 +73,9 @@ for opt, val in opts:
 	elif opt in ("-R","--run-direct"):
 		mode = Mode.RunDirect
 		program = val
+	elif opt in ("--import-lnk"):
+		mode = Mode.ImportLnk
+		file = val
 
 if slot_name:
 	slot = loadSlot(slot_name)
@@ -109,25 +115,34 @@ def need_shortcut ():
 		print "Need to specify the shortcut"
 		sys.exit(3)
 
+try:
 
-if mode == Mode.List:
-	if slot:
-		for shortcut in slot.getAllShortcuts():
-			if shortcut.isDefault():
-				print shortcut.name + "(default)\tCommand: " + " ".join(str2args(shortcut.data['program']))
-			else:
-				print shortcut.name + "\tCommand: " + " ".join(str2args(shortcut.data['program']))
+	if mode == Mode.List:
+		if slot:
+			for shortcut in slot.getAllShortcuts():
+				if shortcut.isDefault():
+					print shortcut.name + "(default)\tCommand: " + " ".join(str2args(shortcut.data['program']))
+				else:
+					print shortcut.name + "\tCommand: " + " ".join(str2args(shortcut.data['program']))
+		else:
+			for slot in getAllSlots():
+				print slot.name
+
+	elif mode == Mode.Run:
+		need_shortcut_def()
+		shortcut.run(wait=True)
+	
+	elif mode == Mode.RunDirect:
+		need_slot()
+		slot.runWin([program], wait=True)
+
+	elif mode == Mode.ImportLnk:
+		need_slot()
+		slot.createShortcutFromFile(file).save()
+		slot.saveConfig()
+	
 	else:
-		for slot in getAllSlots():
-			print slot.name
+		usage()
 
-elif mode == Mode.Run:
-	need_shortcut_def()
-	shortcut.run(wait=True)
-	
-elif mode == Mode.RunDirect:
-	need_slot()
-	slot.runWin([program], wait=True)
-	
-else:
-	usage()
+except Exception, ex:
+	print ex

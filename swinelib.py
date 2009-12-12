@@ -268,6 +268,10 @@ class Slot:
 				os.remove(iconsdir+"/"+file)
 	
 	def createShortcutFromFile (self, file):
+		if not os.path.exists ( file ):
+			file = self.winPathToUnix(file)
+		if not os.path.exists ( file ):
+			raise Exception ( "File does not exist" )
 		lnk = shortcutlib.readlnk ( file )
 		name = os.path.splitext(os.path.basename(file))[0]
 		shortcut = Shortcut(name,self)
