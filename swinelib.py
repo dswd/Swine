@@ -284,7 +284,9 @@ class Slot:
 		shortcut.data['iconsdir']="icons/" + os.path.basename(file)
 		if os.path.splitext(file)[1].lower() == '.exe':
 			self.extractExeIcons ( file, iconsdir )
-			shortcut.data['icon'] = iconsdir + "/icon" + str(lnk['icon_number']) + ".bmp"
+			icons = os.listdir ( iconsdir )
+        		icons.sort()
+			shortcut.data['icon'] = iconsdir + "/" + icons[lnk['icon_number']]
 		else:
 			shortcut.data['icon'] = self.winPathToUnix ( file )
 		if not os.path.exists ( shortcut.data['icon'] ):

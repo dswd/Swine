@@ -50,7 +50,7 @@ class SwineSlotItem(QListBoxPixmap):
 		if shortcut:
 			if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ) :
 				self.pixmap = loadIcon ( shortcut.data["icon"] )
-		QListBoxPixmap.__init__(self,parent,self.pixmap,slot.name)
+		QListBoxPixmap.__init__(self,parent,self.pixmap,QString.fromUtf8(slot.name))
 		self.listBox().sort()
 	def mainWindow(self):
 		return self.listBox().topLevelWidget()
@@ -115,7 +115,7 @@ class SwineShortcutItem(QIconViewItem):
 		name=shortcut.name
 		if shortcut.isDefault():
 			name = name + "*"
-		QIconViewItem.__init__(self,parent,name,loadPixmap("wabi.png"))
+		QIconViewItem.__init__(self,parent,QString.fromUtf8(name),loadPixmap("wabi.png"))
 		self.setRenameEnabled(False)
 		self.setDragEnabled(False)
 		if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ):
