@@ -1,0 +1,12 @@
+require_min_wine_version 1.1.16
+require_min_wislib_version 0.1
+
+winetricks wsh56js
+
+info "Please select the installation file"
+SETUP="$(ask-file "Installer" "." "*.exe")"
+[ -f "$SETUP" ] || fatal "Installer not found"
+wine "$SETUP"
+override_dlls native,builtin riched20.dll usp10.dll
+
+info "Installation complete"

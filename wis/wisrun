@@ -1,0 +1,23 @@
+#!/bin/bash
+
+export WINE=/usr/bin/wine
+export SWINECLI=/usr/bin/swinecli
+export SLOT=test
+export WINETRICKS=/usr/bin/winetricks
+export WINEPREFIX=$HOME/.swine/test
+export TMP=/tmp
+
+
+if [ -f wislib ]; then
+  . wislib
+else
+  echo "Fatal: wislib not found" >&2
+  exit -1
+fi
+
+if [ -f "$1" ]; then
+  . $1
+else
+  echo "Fatal: script $1 not found" >&2
+  exit -2
+fi

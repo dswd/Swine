@@ -1,0 +1,194 @@
+#!/bin/bash
+
+export VERSION="0.1"
+
+#-----------------------------------------
+#------------- Dialogs -------------------
+#-----------------------------------------
+
+info () {
+  MSG="$1"
+  if [ -x `which kdialog` ]; then
+    kdialog --msgbox "$MSG" --title "Info"
+    return
+  fi 
+  if [ -x `which zenity` ]; then
+    zenity --info --text "$MSG" --title "Info"
+    return
+  fi 
+  echo Info: $MSG
+}
+
+warn () {
+  MSG="$1"
+  if [ -x `which kdialog` ]; then
+    kdialog --sorry "$MSG" --title "Warning"
+    return
+  fi 
+  if [ -x `which zenity` ]; then
+    zenity --warning --text "$MSG" --title "Warning"
+    return
+  fi 
+  echo Warning: $MSG >&2
+}
+
+fatal () {
+  MSG="$1"
+  if [ -x `which kdialog` ]; then
+    kdialog --error "$MSG" --title "Fatal"
+    exit -1
+  fi 
+  if [ -x `which zenity` ]; then
+    zenity --error --text "$MSG" --title "Fatal"
+    exit -1
+  fi 
+  echo Fatal error: $MSG >&2
+  exit -1
+}
+
+ask-file() {
+  title="$1"
+  dir="$2"
+  [ -z "$dir" ] && dir="."
+  filter="$3"
+  [ -z "$filter" ] && filter='*'
+  if [ -x `which kdialog` ]; then
+    kdialog --getopenfilename "$dir" "$filter" --title "$title"
+    return
+  fi 
+  if [ -x `which zenity` ]; then
+    zenity --fileselection --filename "$dir" --title "$title"
+    return
+  fi 
+}
+
+yesno () {
+  TITLE="$1"
+  QUESTION="$2"
+  if [ -x `which kdialog` ]; then
+    kdialog --yesno "$QUESTION" --title "$TITLE"
+    return $?
+  fi 
+  if [ -x `which zenity` ]; then
+    zenity --question --text "$QUESTION" --title "$TITLE"
+    return $?
+  fi   
+}
+
+#-----------------------------------------
+#------------- Versions ------------------
+#-----------------------------------------
+
+wine_version () {
+  $WINE --version | sed -e 's/wine-//g'
+}
+
+winetricks_version () {
+  grep ^VERSION= $WINETRICKS | sed -e 's/VERSION=//g'
+}
+
+wislib_version () {
+  echo $VERSION
+}
+
+# returns 1 if $1 > $2, 2 if $1 < $2 and 0 if $1 == $2
+compare_version () {
+  perl -e "
+  @verA = split(/\\./, \"$1\");
+  @verB = split(/\\./, \"$2\");        
+  for my \$i (0 .. scalar(@verA)-1) {
+    exit 2 if (\$verA[\$i] < \$verB[\$i]);
+    exit 1 if (\$verB[\$i] < \$verA[\$i]);
+  }
+  exit 0;" $1 $2
+}
+
+require_min_wine_version () {
+  MIN_VER="$1"
+  compare_version `wine_version` $MIN_VER
+  [ $? -lt 2 ] || fatal "Wine version $MIN_VER or greater is needed"
+}
+
+require_min_winetricks_version () {
+  MIN_VER="$1"
+  compare_version `winetricks_version` $MIN_VER
+  [ $? -lt 2 ] || fatal "Winetricks version $MIN_VER or greater is needed"
+}
+
+require_min_wislib_version () {
+  MIN_VER="$1"
+  compare_version `wislib_version` $MIN_VER
+  [ $? -lt 2 ] || fatal "Wislib version $MIN_VER or greater is needed"
+}
+
+#-----------------------------------------
+#------------- Other Stuff ---------------
+#-----------------------------------------
+
+download () {
+  URL="$1"
+  FILE="$2"
+  HASH="$3"
+  if [ -f "$FILE" ]; then
+    FHASH=`sha1sum $FILE | awk '{ print $1 }'`
+    if [ "$HASH" == "$FHASH" ]; then
+      return
+    else
+      rm "$FILE"
+    fi
+  fi
+  wget -nd -c "$URL" -O "$FILE" 
+  FHASH=`sha1sum $FILE | awk '{ print $1 }'`
+  [ "$HASH" == "$FHASH" ] || fatal "Hash value of $URL has changed (expected: $HASH, was $FHASH"
+}
+
+wine () {
+  $WINE "$@"
+}
+
+winetricks () {
+  $WINETRICKS "$@"
+}
+
+import-lnk () {
+  $SWINECLI --slot $SLOT --import-lnk "$1"
+}
+
+find-import-lnk () {
+  find $WINEPREFIX -name "$1" | while read f; do 
+    echo "Importing $f"
+    import-lnk "$f"
+  done
+} 
+
+int_override_dlls() {
+  key="$1"
+  shift
+  mode=$1
+  shift
+  echo Using $mode override for following DLLs: $@
+  cat > "$TMP"/override-dll.reg <<_EOF_
+REGEDIT4
+
+[$key]
+_EOF_
+  while test "$1" != ""; do
+    echo "\"$1\"=\"$mode\"" >> "$TMP"/override-dll.reg
+    shift
+  done
+  wine regedit "$TMP"/override-dll.reg
+  rm "$TMP"/override-dll.reg
+}
+
+# mode dll dll ...
+override_dlls() {
+  int_override_dlls 'KEY_CURRENT_USER\Software\Wine\DllOverrides' "$@"
+}
+
+# app mode dll dll
+override_app_dlls() {
+  app="$1"
+  shift
+  int_override_dlls "HKEY_CURRENT_USER\\Software\\Wine\\AppDefaults\\$app\\DllOverrides" "$@"
+}
+
