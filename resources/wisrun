@@ -7,9 +7,12 @@ export WINETRICKS=/usr/bin/winetricks
 export WINEPREFIX=$HOME/.swine/test
 export TMP=/tmp
 
+WISLIB=/usr/lib/swine/wislib
 
-if [ -f wislib ]; then
-  . wislib
+if [ -f "$WISLIB" ]; then
+  . "$WISLIB"
+elif [ -f "`dirname $0`/wislib" ]; then
+  . "`dirname $0`/wislib"
 else
   echo "Fatal: wislib not found" >&2
   exit -1
