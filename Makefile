@@ -44,7 +44,7 @@ clean:
 
 install: compile
 	mkdir -p $(DESTDIR)/usr/lib/swine/
-	cp $(py_files) $(ui_files_py) resources/wislib resources/winrun $(DESTDIR)/usr/lib/swine
+	cp $(py_files) $(ui_files_py) resources/wislib resources/wisrun $(DESTDIR)/usr/lib/swine
 	mkdir -p $(DESTDIR)/usr/share/swine/images/
 	cp -r $(images) $(DESTDIR)/usr/share/swine/images
 	ln -s ../../share/swine/images $(DESTDIR)/usr/lib/swine
