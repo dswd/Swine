@@ -7,7 +7,7 @@ Standards-Version: 3.7.3
 
 Package: swine
 Architecture: all
-Depends: ${shlibs:Depends}, python-qt3, python, cabextract, wine, xterm, icoutils, imagemagick
+Depends: ${shlibs:Depends}, python-qt3, python, cabextract, wine, xterm, icoutils
 Description: A graphical frontend for wine
  Swine is a graphical frontend for wine (windows-api emulation 
  for Linux) that can manage several slots. With Swine you can 
