@@ -3,12 +3,12 @@ require_min_wislib_version 0.1
 
 winetricks wsh56js
 
+override_dlls native,builtin riched20 usp10
+
 info "Please select the installation file"
 SETUP="$(ask-file "Installer" "." "*.exe")"
 [ -f "$SETUP" ] || fatal "Installer not found"
 wine "$SETUP"
-
-override_dlls native,builtin riched20.dll usp10.dll
 
 find-import-lnk "Microsoft Office Excel 2007.lnk"
 find-import-lnk "Microsoft Office Word 2007.lnk"
