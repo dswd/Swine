@@ -257,14 +257,17 @@ class Slot:
 		# NOTE: saveConfig needs to be called to make this permanent
 		self.settings['default_shortcut'] = None
 	
-	def extractExeIcons (self, file, iconsdir):
+	def extractExeIcons (self, file, iconsdir, onlyNr=None):
 		if not os.path.exists ( iconsdir ):
 			os.makedirs ( iconsdir )
-		self.runNative (["wrestool","-x","-t14","--output",iconsdir,file],wait=True)
+		if onlyNr == None:
+			self.runNative (["wrestool","-x","-t14","--output",iconsdir,file],wait=True)
+		else:
+			self.runNative (["wrestool","-x","-t14","-n"+str(onlyNr),"--output",iconsdir,file],wait=True)
 		files = os.listdir ( iconsdir )
 		for file in files:
 			if os.path.splitext(file)[1].lower() == '.ico':
-				self.runNative (["convert",iconsdir+"/"+file,iconsdir+"/"+os.path.splitext(file)[0]+".png"],wait=True)
+				self.runNative (["icotool","-x","-o",iconsdir,iconsdir+"/"+file],wait=True)
 				os.remove(iconsdir+"/"+file)
 	
 	def createShortcutFromFile (self, file):
@@ -279,7 +282,7 @@ class Slot:
 		prg.extend ( str2args ( lnk['command_line_arguments'] ) )
 		shortcut.data['program']=str(prg)
 		shortcut.data['working_directory']=lnk['working_directory']
-		shortcut.data['description']=lnk['description']
+		#shortcut.data['description']=lnk['description']
 		if str(lnk['custom_icon']):
 			file = self.winPathToUnix(lnk['custom_icon'],"c:\windows")
 		else:
@@ -287,10 +290,17 @@ class Slot:
 		iconsdir = self.getPath() + "/icons/" + os.path.basename(file)
 		shortcut.data['iconsdir']="icons/" + os.path.basename(file)
 		if os.path.splitext(file)[1].lower() == '.exe':
-			self.extractExeIcons ( file, iconsdir )
+			self.extractExeIcons ( file, iconsdir, lnk['icon_number'] )
 			icons = os.listdir ( iconsdir )
-        		icons.sort()
-			shortcut.data['icon'] = iconsdir + "/" + icons[lnk['icon_number']]
+			if len(icons) == 0:
+				self.extractExeIcons ( file, iconsdir )
+				icons = os.listdir ( iconsdir )
+        			icons.sort()
+        		best = [ i for i in icons if i.find("32x32x8") > -1 ]
+			if len(best) >= 1:
+				shortcut.data['icon'] = iconsdir + "/" + best[0]
+			else:
+				shortcut.data['icon'] = iconsdir + "/" + icons[0]
 		else:
 			shortcut.data['icon'] = self.winPathToUnix ( file )
 		if not os.path.exists ( shortcut.data['icon'] ):

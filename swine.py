@@ -559,9 +559,9 @@ class SwineProgramDialog(ProgramDialog):
 			self.shortcut.data["icon"] = self.iconFile
 
 	def okButton_clicked(self):
-		if len(str(self.nameInput.text())) == 0:
+		if len(unicode(self.nameInput.text())) == 0:
 			raise SwineException ( "Shortcut name cannot be empty" )
-		self.shortcut.name = str(self.nameInput.text())
+		self.shortcut.name = unicode(self.nameInput.text())
 		self.shortcut.data["icon"] = str(self.iconFile)
 		prog = []
 		prog.append(str(self.applicationInput.text()))
@@ -578,7 +578,7 @@ class SwineProgramDialog(ProgramDialog):
 	def __init__(self,shortcut,parent = None,name = None,modal = False,fl = 0):
 		self.shortcut = shortcut
 		ProgramDialog.__init__(self,parent,name,modal,fl)
-		self.nameInput.setText ( shortcut.name )
+		self.nameInput.setText ( QString.fromUtf8(shortcut.name) )
 		self.setCaption ( name )
 		self.iconFile = ""
 		self.paramsInput.setText ( "" )
