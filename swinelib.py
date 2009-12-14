@@ -90,14 +90,14 @@ class Shortcut:
 		shortcut = Shortcut(newname,self.slot,self.data)
 		shortcut.save ()
 
-	def run (self,wait=False):
+	def run (self,wait=False,args=[]):
 		prog=str2args(self.data['program'])
 		workingDirectory=self.data['working_directory']
 		runInTerminal=self.data.has_key("interminal") and int(self.data["interminal"]) == 1
 		desktop=None
 		if self.data.has_key("desktop"):
 			desktop=self.data["desktop"]
-		return self.slot.runWin (prog=prog,wait=wait,workingDirectory=workingDirectory,runInTerminal=runInTerminal,desktop=desktop)
+		return self.slot.runWin (prog=prog+args,wait=wait,workingDirectory=workingDirectory,runInTerminal=runInTerminal,desktop=desktop)
 
 	def isDefault (self):
 		return ( not self.slot.loadDefaultShortcut() == None ) and self.name == self.slot.loadDefaultShortcut().name
@@ -130,7 +130,7 @@ class Shortcut:
 		file.write("[Desktop Entry]\nEncoding=UTF-8\nVersion=1.0\n")
 		file.write("Name="+self.slot.name+": "+self.name+"\n")
 		file.write("Type=Application\n")
-		file.write("Exec=swinecli --slot \""+self.slot.name+"\" --shortcut \""+self.name+"\" --run\n")
+		file.write("Exec=swinecli --slot \""+self.slot.name+"\" --shortcut \""+self.name+"\" --translate-paths --run %U\n")
 		file.write("Icon="+self.data["icon"]+"\n")
 		file.write("Categories=Wine;\n")
 		file.close()

@@ -31,8 +31,9 @@ def usage():
 	-l	--list				List all slots or all shortcuts if --slot is specified
 	-s	--slot SLOT			Selects a slot
 	-S	--shortcut SHORTCUT		Selects a shortcut
-	-r	--run				Runs a shortcut
-	-R	--run-direct PROGRAM		Runs a program
+	-t	--translate-paths		Translates paths to windows format
+	-r	--run ARGS			Runs a shortcut
+	-R	--run-direct PROGRAM ARGS	Runs a program
 		--import-lnk FILE		Imports a .lnk file
 '''
 
@@ -44,7 +45,7 @@ class Mode:
 	ImportLnk=4
 
 try:
-	opts, otherargs = getopt.getopt(sys.argv[1:], "hls:S:rR:", ["help", "list", "slot=", "shortcut=", "run", "run-direct=", "import-lnk="])
+	opts, otherargs = getopt.getopt(sys.argv[1:], "hls:S:rR:t", ["help", "list", "slot=", "shortcut=", "run", "run-direct=", "import-lnk=", "translate-paths"])
 except getopt.GetoptError:
 	# print help information and exit:
 	usage()
@@ -57,6 +58,7 @@ shortcut = None
 mode = Mode.Nothing
 program = None
 file = None
+translate_paths = False
 
 for opt, val in opts:
 	if opt in ("-h", "--help"):
@@ -68,6 +70,8 @@ for opt, val in opts:
 		shortcut_name = val
 	elif opt in ("-l","--list"):
 		mode = Mode.List
+	elif opt in ("-t","--translate-paths"):
+		translate_paths = True
 	elif opt in ("-r","--run"):
 		mode = Mode.Run
 	elif opt in ("-R","--run-direct"):
@@ -115,6 +119,11 @@ def need_shortcut ():
 		print "Need to specify the shortcut"
 		sys.exit(3)
 
+if translate_paths:
+	for i in range(0, len(otherargs)):
+		if os.path.exists(otherargs[i]):
+			otherargs[i] = slot.unixPathToWin(otherargs[i])
+
 try:
 
 	if mode == Mode.List:
@@ -130,11 +139,11 @@ try:
 
 	elif mode == Mode.Run:
 		need_shortcut_def()
-		shortcut.run(wait=True)
+		shortcut.run(wait=True,args=otherargs)
 	
 	elif mode == Mode.RunDirect:
 		need_slot()
-		slot.runWin([program], wait=True)
+		slot.runWin([program]+atherargs, wait=True)
 
 	elif mode == Mode.ImportLnk:
 		need_slot()
