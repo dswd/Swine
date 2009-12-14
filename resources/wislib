@@ -182,7 +182,7 @@ _EOF_
 
 # mode dll dll ...
 override_dlls() {
-  int_override_dlls 'KEY_CURRENT_USER\Software\Wine\DllOverrides' "$@"
+  int_override_dlls 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' "$@"
 }
 
 # app mode dll dll
