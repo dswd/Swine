@@ -50,7 +50,7 @@ class SwineSlotItem(QListBoxPixmap):
 		if shortcut:
 			if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ) :
 				self.pixmap = loadIcon ( shortcut.data["icon"] )
-		QListBoxPixmap.__init__(self,parent,self.pixmap,QString.fromUtf8(slot.name))
+		QListBoxPixmap.__init__(self,parent,self.pixmap,unicode(slot.name))
 		self.listBox().sort()
 	def mainWindow(self):
 		return self.listBox().topLevelWidget()
@@ -61,16 +61,16 @@ class SwineSlotItem(QListBoxPixmap):
 			self.slot.delete()
 			self.listBox().takeItem(self)
 	def rename_cb(self):
-		result = QInputDialog.getText ( "Rename Slot", "New name:", QLineEdit.Normal, self.slot.name )
+		result = QInputDialog.getText ( "Rename Slot", "New name:", QLineEdit.Normal, unicode(self.slot.name) )
 		if result[1] and len(result[0]) > 0:
-			self.slot.rename ( str ( result[0] ) )
-			self.setText ( str ( result[0] ) )
+			self.slot.rename ( unicode(result[0]) )
+			self.setText ( self.slot.name )
 			self.listBox().sort()
 	def copy_cb(self):
 		result = QInputDialog.getText ( "Copy Slot", "New name:", QLineEdit.Normal, "New Slot" )
 		if result[1]:
-			self.slot.clone ( str ( result[0] ) )
-			slot = Slot(str(result[0]))
+			self.slot.clone ( unicode ( result[0] ) )
+			slot = Slot(unicode(result[0]))
 			slot.loadConfig()
 			SwineSlotItem(self.mainWindow().slotList,slot)
 	def searchShortcuts_cb(self):
@@ -115,7 +115,7 @@ class SwineShortcutItem(QIconViewItem):
 		name=shortcut.name
 		if shortcut.isDefault():
 			name = name + "*"
-		QIconViewItem.__init__(self,parent,QString.fromUtf8(name),loadPixmap("wabi.png"))
+		QIconViewItem.__init__(self,parent,unicode(name),loadPixmap("wabi.png"))
 		self.setRenameEnabled(False)
 		self.setDragEnabled(False)
 		if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ):
@@ -129,21 +129,21 @@ class SwineShortcutItem(QIconViewItem):
 		self.shortcut.slot.saveConfig()
 		self.iconView().takeItem(self)
 	def rename_cb(self):
-		result = QInputDialog.getText ( "Rename Shortcut", "New name:", QLineEdit.Normal, self.shortcut.name )
+		result = QInputDialog.getText ( "Rename Shortcut", "New name:", QLineEdit.Normal, unicode(self.shortcut.name) )
 		if result[1]:
-			self.shortcut.rename ( str ( result[0] ) )
+			self.shortcut.rename ( unicode ( result[0] ) )
 			self.shortcut.slot.saveConfig()
-			self.setText ( str ( result[0] ) )
+			self.setText ( unicode ( self.shortcut.name ) )
 	def copy_cb(self):
 		result = QInputDialog.getText ( "Copy Shortcut", "New name:", QLineEdit.Normal, "New Shortcut" )
 		if result[1]:
-			self.shortcut.clone ( str ( result[0] ) )
+			self.shortcut.clone ( unicode ( result[0] ) )
 			self.shortcut.slot.saveConfig()
 			self.refreshShortcutList()	
 	def edit_cb(self):
 		dialog = SwineShortcutDialog ( self.shortcut, self.mainWindow(), "Edit Shortcut" )
 		if dialog.exec_loop() == 1:
-			self.shortcut.rename(self.shortcut.name)
+			self.shortcut.rename(unicode(self.shortcut.name))
 			self.shortcut.save()
 			self.shortcut.slot.saveConfig()
 			self.mainWindow().slotList_selectionChanged()
@@ -156,10 +156,10 @@ class SwineShortcutItem(QIconViewItem):
 		main.slotList.setCurrentItem ( item )
 	def createMenuEntry_cb(self):
 		self.shortcut.createMenuEntry()
-		QMessageBox.information ( self.mainWindow(), "Menu Entry", "Menu entry for "+self.shortcut.name+" has been created" )
+		QMessageBox.information ( self.mainWindow(), "Menu Entry", "Menu entry for "+unicode(self.shortcut.name)+" has been created" )
 	def removeMenuEntry_cb(self):
 		self.shortcut.removeMenuEntry()
-		QMessageBox.information ( self.mainWindow(), "Menu Entry", "Menu entry for "+self.shortcut.name+" has been removed" )
+		QMessageBox.information ( self.mainWindow(), "Menu Entry", "Menu entry for "+unicode(self.shortcut.name)+" has been removed" )
 		
 
 
@@ -448,7 +448,7 @@ class SwineMainWindow(MainWindow):
 		dialog = SwineShortcutDialog ( shortcut, self, "New Shortcut" )
 		if dialog.exec_loop() == 1:
 			if self.currentSlotItem().slot.loadShortcut ( shortcut.name ):
-				raise SwineException ( "Shortcut '" + shortcut.name + "' already exists" )
+				raise SwineException ( "Shortcut '" + unicode(shortcut.name) + "' already exists" )
 			shortcut.save()
 			shortcut.slot.saveConfig()
 			self.slotList_selectionChanged()
@@ -508,10 +508,10 @@ class SwineMainWindow(MainWindow):
 		if obj:
 			callStr = obj.__class__.__name__+"::"+callStr
 		if excType == SwineException:
-			excStr = str(excValue)
+			excStr = unicode(excValue)
 			QMessageBox.critical (self, "Error", excStr )
 		else:
-			excStr = str(excType.__name__) + ": " + str(excValue) + "\nin " + callStr
+			excStr = str(excType.__name__) + ": " + unicode(excValue) + "\nin " + callStr
 			QMessageBox.critical (self, "Error", excStr )
 
 	def __init__(self,parent = None,name = None,fl = 0):
@@ -578,7 +578,7 @@ class SwineProgramDialog(ProgramDialog):
 	def __init__(self,shortcut,parent = None,name = None,modal = False,fl = 0):
 		self.shortcut = shortcut
 		ProgramDialog.__init__(self,parent,name,modal,fl)
-		self.nameInput.setText ( QString.fromUtf8(shortcut.name) )
+		self.nameInput.setText ( shortcut.name )
 		self.setCaption ( name )
 		self.iconFile = ""
 		self.paramsInput.setText ( "" )

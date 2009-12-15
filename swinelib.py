@@ -18,12 +18,15 @@
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
 
-import sys, os, shutil, ConfigParser, array, pipes, urllib, subprocess
+import sys, os, shutil, ConfigParser, array, pipes, urllib, subprocess, codecs
 import shortcutlib
 from tarfile import TarFile
 from subprocess import Popen
 
 VERSION = "0.5"
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
@@ -43,7 +46,7 @@ class Shortcut:
 	def __init__(self,name,slot,data={}):
 		if len(name) == 0:
 			raise SwineException ("Shortcut name cannot be empty.")
-		self.name = name
+		self.name = unicode(name)
 		if len(data) == 0:
 			self.data = {}
 		else:
@@ -75,6 +78,7 @@ class Shortcut:
 		
 	def rename (self, newname):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
+		newname = unicode(newname)
 		if len(newname) == 0:
 			raise SwineException ("Shortcut name cannot be empty.")
 		if newname == self.name:
@@ -85,6 +89,7 @@ class Shortcut:
 		
 	def clone (self, newname):
 		# NOTE: Slot.saveConfig needs to be called to make this permanent
+		newname = unicode(newname)
 		if len(newname) == 0:
 			raise SwineException ("Shortcut name cannot be empty.")
 		shortcut = Shortcut(newname,self.slot,self.data)
@@ -145,7 +150,7 @@ class Slot:
 	def __init__(self, name):
 		if len(name) == 0:
 			raise SwineException ("Slot name cannot be empty.")
-		self.name = name
+		self.name = unicode(name)
 		self.config = None
 		self.settings = None
 		
@@ -173,7 +178,8 @@ class Slot:
 
 	def loadConfig(self):
 		self.config = ConfigParser.ConfigParser()
-		self.config.read(self.getConfigFile())
+		if os.path.exists(self.getConfigFile()):
+			self.config.readfp(codecs.open(self.getConfigFile(), "r", "utf8"))
 		if not self.config.has_section ( SWINE_DEFAULT_SECTION ):
 			self.config.add_section ( SWINE_DEFAULT_SECTION )
 		self.settings = dict(self.config.items(SWINE_DEFAULT_SECTION))
@@ -189,7 +195,7 @@ class Slot:
 	
 	def create (self):
 		if self.exists():
-			raise SwineException ("Slot already exists: " + self.name)
+			raise SwineException ("Slot already exists: " + unicode(self.name))
 		os.mkdir(self.getPath())
 		self.loadConfig()
 		self.saveConfig()
@@ -198,29 +204,31 @@ class Slot:
 		if self.name == SWINE_DEFAULT_SLOT_NAME:
 			raise SwineException ("Default slot cannot be deleted")
 		if not self.exists ():
-			raise SwineException ("Slot does not exist: " + self.name)
+			raise SwineException ("Slot does not exist: " + unicode(self.name))
 		for s in self.getAllShortcuts():
 			s.delete()
 		shutil.rmtree ( self.getPath() )
 
 	def clone (self,newname):
+		newname = unicode(newname)
 		if len(newname) == 0:
 			raise SwineException ("Slot name cannot be empty.")
 		if not self.exists():
-			raise SwineException ("Slot does not exist: " + self.name)
+			raise SwineException ("Slot does not exist: " + unicode(self.name))
 		if Slot(newname).exists():
-			raise SwineException ("Slot does already exist: " + newname)
+			raise SwineException ("Slot does already exist: " + unicode(newname))
 		shutil.copytree ( self.getPath(), Slot(newname).getPath(), True )
 
 	def rename (self,newname):
+		newname = unicode(newname)
 		if len(newname) == 0:
 			raise SwineException ("Slot name cannot be empty.")
 		if self.name == SWINE_DEFAULT_SLOT_NAME:
 			raise SwineException ("Default slot cannot be renamed")
 		if not self.exists():
-			raise SwineException ("Slot does not exist: " + self.name)
+			raise SwineException ("Slot does not exist: " + unicode(self.name))
 		if Slot(newname).exists():
-			raise SwineException ("Slot does already exist: " + newname)
+			raise SwineException ("Slot does already exist: " + unicode(newname))
 		shortcutMenus = []
 		for s in self.getAllShortcuts():
 			if s.hasMenuEntry():
@@ -461,7 +469,6 @@ def importSlot (name, file):
 	tar.close ()
 	slot.loadConfig()
 	return slot
-
 
 def str2args ( s ):
 	"""Convert a string-encoded list to a real list
