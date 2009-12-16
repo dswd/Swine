@@ -75,8 +75,8 @@ ask-file() {
 }
 
 yesno () {
-  TITLE="$1"
-  QUESTION="$2"
+  TITLE="Question"
+  QUESTION="$1"
   if [ -x `which kdialog` ]; then
     kdialog --yesno "$QUESTION" --title "$TITLE"
     return $?

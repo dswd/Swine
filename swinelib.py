@@ -369,7 +369,7 @@ class Slot:
 		env = os.environ
 		env["WINEPREFIX"] = self.getPath()
 		env["SLOT"] = self.name
-		return self.runNative ( [WISRUN,file], cwd=".", wait=True, env=env )
+		return self.runNative ( ["xterm","-T","WIS","-hold","-e",WISRUN,file], cwd=".", wait=True, env=env )
 	
 	def runWinetricks (self, prog):
 		"""Run a winetricks command
