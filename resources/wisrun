@@ -1,13 +1,16 @@
 #!/bin/bash
 
-export WINE=/usr/bin/wine
-export SWINECLI=/usr/bin/swinecli
-export SLOT=test
-export WINETRICKS=/usr/bin/winetricks
-export WINEPREFIX=$HOME/.swine/test
+export WINE="`which wine`"
+export SWINECLI="`which swinecli`"
+export WINETRICKS="`which winetricks`"
 export TMP=/tmp
 
 WISLIB=/usr/lib/swine/wislib
+
+if [ -z "$SLOT" ]; then
+  echo "Fatal: SLOT not set" >&2
+  exit -1
+fi  
 
 if [ -f "$WISLIB" ]; then
   . "$WISLIB"

@@ -19,7 +19,11 @@ info () {
   echo Info: $MSG
 }
 
-warn () {
+message () {
+  info "$@"
+}
+
+warning () {
   MSG="$1"
   if [ -x `which kdialog` ]; then
     kdialog --sorry "$MSG" --title "Warning"
@@ -30,6 +34,10 @@ warn () {
     return
   fi 
   echo Warning: $MSG >&2
+}
+
+warn () {
+  warning "$@"
 }
 
 fatal () {
@@ -44,6 +52,10 @@ fatal () {
   fi 
   echo Fatal error: $MSG >&2
   exit -1
+}
+
+error () {
+  fatal "$@"
 }
 
 ask-file() {
@@ -192,3 +204,9 @@ override_app_dlls() {
   int_override_dlls "HKEY_CURRENT_USER\\Software\\Wine\\AppDefaults\\$app\\DllOverrides" "$@"
 }
 
+find_on_cd() {
+  FILE="$1"
+  mount | fgrep iso9660 | awk '{ print $3 }' | while read mountp; do
+    find "$mountp" -wholename "$FILE"
+  done
+}

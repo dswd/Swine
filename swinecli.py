@@ -34,6 +34,7 @@ def usage():
 	-t	--translate-paths		Translates paths to windows format
 	-r	--run ARGS			Runs a shortcut
 	-R	--run-direct PROGRAM ARGS	Runs a program
+	-w	--run-wis PROGRAM		Runs a program
 		--import-lnk FILE		Imports a .lnk file
 '''
 
@@ -42,10 +43,11 @@ class Mode:
 	List=1
 	Run=2
 	RunDirect=3
-	ImportLnk=4
+	RunWis=4
+	ImportLnk=5
 
 try:
-	opts, otherargs = getopt.getopt(sys.argv[1:], "hls:S:rR:t", ["help", "list", "slot=", "shortcut=", "run", "run-direct=", "import-lnk=", "translate-paths"])
+	opts, otherargs = getopt.getopt(sys.argv[1:], "hls:S:rR:tw:", ["help", "list", "slot=", "shortcut=", "run", "run-direct=", "import-lnk=", "translate-paths", "run-wis="])
 except getopt.GetoptError:
 	# print help information and exit:
 	usage()
@@ -77,6 +79,9 @@ for opt, val in opts:
 	elif opt in ("-R","--run-direct"):
 		mode = Mode.RunDirect
 		program = val
+	elif opt in ("-w","--run-wis"):
+		mode = Mode.RunWis
+		file = val
 	elif opt in ("--import-lnk"):
 		mode = Mode.ImportLnk
 		file = val
@@ -144,6 +149,10 @@ try:
 	elif mode == Mode.RunDirect:
 		need_slot()
 		slot.runWin([program]+atherargs, wait=True)
+
+	elif mode == Mode.RunWis:
+		need_slot()
+		slot.runWis(file)
 
 	elif mode == Mode.ImportLnk:
 		need_slot()
