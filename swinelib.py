@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ############################################################################
 #    Copyright (C) 2007 by Dennis Schwerdel, Thomas Schmidt                #
 #                                                                          #
@@ -37,6 +38,7 @@ SWINE_DEFAULT_SLOT_PATH = SWINE_PATH + "/" + SWINE_DEFAULT_SLOT_NAME
 SWINE_DEFAULT_SECTION = "__SYSTEM__"
 WINE_PATH = os.getenv("HOME") + "/.wine"
 WINETRICKS = "winetricks"
+WISRUN = os.path.dirname(os.path.realpath(__file__)) + "/wisrun"
 DESKTOP_MENU_DIR = os.getenv("HOME") + "/.local/share/applications/swine"
 
 class SwineException(Exception):
@@ -362,6 +364,12 @@ class Slot:
 		if debug:
 			env["WINEDEBUG"] = debug
 		return self.runNative ( prog, cwd, wait, env, stdin, stdout, stderr )
+
+	def runWis (self, file):
+		env = os.environ
+		env["WINEPREFIX"] = self.getPath()
+		env["SLOT"] = self.name
+		return self.runNative ( ["xterm","-T","WIS","-hold","-e",WISRUN,file], cwd=".", wait=True, env=env )
 	
 	def runWinetricks (self, prog):
 		"""Run a winetricks command

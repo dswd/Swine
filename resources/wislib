@@ -19,7 +19,11 @@ info () {
   echo Info: $MSG
 }
 
-warn () {
+message () {
+  info "$@"
+}
+
+warning () {
   MSG="$1"
   if [ -x `which kdialog` ]; then
     kdialog --sorry "$MSG" --title "Warning"
@@ -30,6 +34,10 @@ warn () {
     return
   fi 
   echo Warning: $MSG >&2
+}
+
+warn () {
+  warning "$@"
 }
 
 fatal () {
@@ -46,6 +54,14 @@ fatal () {
   exit -1
 }
 
+error () {
+  fatal "$@"
+}
+
+warning-no-gui () {
+  echo Warning: Please install zenity or kdialog for graphical dialogs >&2
+}
+
 ask-file() {
   title="$1"
   dir="$2"
@@ -59,12 +75,16 @@ ask-file() {
   if [ -x `which zenity` ]; then
     zenity --fileselection --filename "$dir" --title "$title"
     return
-  fi 
+  fi
+  warning-no-gui
+  read -p "Filename:" file
+  echo "$file"
+  return
 }
 
 yesno () {
-  TITLE="$1"
-  QUESTION="$2"
+  TITLE="Question"
+  QUESTION="$1"
   if [ -x `which kdialog` ]; then
     kdialog --yesno "$QUESTION" --title "$TITLE"
     return $?
@@ -72,7 +92,12 @@ yesno () {
   if [ -x `which zenity` ]; then
     zenity --question --text "$QUESTION" --title "$TITLE"
     return $?
-  fi   
+  fi
+  warning-no-gui
+  read -p "$QUESTION [yn]" res
+  [ "$res" == "y" ] && return 0
+  [ "$res" == "n" ] && return 1
+  return 2
 }
 
 #-----------------------------------------
@@ -103,6 +128,12 @@ compare_version () {
   exit 0;" $1 $2
 }
 
+disallow_wine_version () {
+  VER="$1"
+  compare_version `wine_version` $VER
+  [ $? -lt 0 ] || fatal "Wine version $VER cannot be used"
+}
+
 require_min_wine_version () {
   MIN_VER="$1"
   compare_version `wine_version` $MIN_VER
@@ -122,25 +153,8 @@ require_min_wislib_version () {
 }
 
 #-----------------------------------------
-#------------- Other Stuff ---------------
+#------------- Wine Calls ----------------
 #-----------------------------------------
-
-download () {
-  URL="$1"
-  FILE="$2"
-  HASH="$3"
-  if [ -f "$FILE" ]; then
-    FHASH=`sha1sum $FILE | awk '{ print $1 }'`
-    if [ "$HASH" == "$FHASH" ]; then
-      return
-    else
-      rm "$FILE"
-    fi
-  fi
-  wget -nd -c "$URL" -O "$FILE" 
-  FHASH=`sha1sum $FILE | awk '{ print $1 }'`
-  [ "$HASH" == "$FHASH" ] || fatal "Hash value of $URL has changed (expected: $HASH, was $FHASH"
-}
 
 wine () {
   $WINE "$@"
@@ -192,3 +206,30 @@ override_app_dlls() {
   int_override_dlls "HKEY_CURRENT_USER\\Software\\Wine\\AppDefaults\\$app\\DllOverrides" "$@"
 }
 
+#-----------------------------------------
+#------------- Other Stuff ---------------
+#-----------------------------------------
+
+download () {
+  URL="$1"
+  FILE="$2"
+  HASH="$3"
+  if [ -f "$FILE" ]; then
+    FHASH=`sha1sum $FILE | awk '{ print $1 }'`
+    if [ "$HASH" == "$FHASH" ]; then
+      return
+    else
+      rm "$FILE"
+    fi
+  fi
+  wget -nd -c "$URL" -O "$FILE" 
+  FHASH=`sha1sum $FILE | awk '{ print $1 }'`
+  [ "$HASH" == "$FHASH" ] || fatal "Hash value of $URL has changed (expected: $HASH, was $FHASH"
+}
+
+find_on_cd() {
+  FILE="$1"
+  mount | fgrep iso9660 | awk '{ print $3 }' | while read mountp; do
+    find "$mountp" -wholename "$FILE"
+  done
+}

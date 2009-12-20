@@ -1,14 +1,16 @@
+yesno "Do you want to install Office 2007 ?" || exit -1
+
 require_min_wine_version 1.1.16
 require_min_wislib_version 0.1
 
-winetricks wsh56js
+winetricks wsh56js || fatal "winetricks failed"
 
 override_dlls native,builtin riched20 usp10
 
 info "Please select the installation file"
 SETUP="$(ask-file "Installer" "." "*.exe")"
 [ -f "$SETUP" ] || fatal "Installer not found"
-wine "$SETUP"
+wine "$SETUP" || fatal "Setup failed"
 
 find-import-lnk "Microsoft Office Excel 2007.lnk"
 find-import-lnk "Microsoft Office Word 2007.lnk"

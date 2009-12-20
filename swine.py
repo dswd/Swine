@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 ############################################################################
 #    Copyright (C) 2007 by Dennis Schwerdel, Thomas Schmidt                #
@@ -102,6 +103,10 @@ class SwineSlotItem(QListBoxPixmap):
 		if file:
 			self.slot.importData ( str(file) )
 			self.refreshShortcutList()
+	def wisrun_cb(self):
+		file = QFileDialog.getOpenFileName ( QString.null, "WIS Scripts (*.wis)", self.mainWindow() )
+		if file:
+			self.slot.runWis ( os.path.realpath(str(file)) )
 	def height(self,lb):
 		return QListBoxPixmap.height(self,lb)+6
 	def winetricks(self,tool):
@@ -223,6 +228,9 @@ class SwineMainWindow(MainWindow):
 			commandsMenu.insertItem( QIconSet(loadPixmap("package_go.png")), "&Export", slot.export_cb )
 			commandsMenu.insertItem( QIconSet(loadPixmap("package_add.png")), "Import &Data", slot.import_cb )
 			menu.insertItem( QIconSet(loadPixmap("cog.png")), "&Commands", commandsMenu )
+			
+			menu.insertItem( QIconSet(loadPixmap("script_gear.png")), "&Run WIS script", slot.wisrun_cb) 
+			
 			winetricksMenu = QPopupMenu(self)
 			
 			winetricksMenu.insertItem( QIconSet(loadPixmap("script_gear.png")), "&Call Winetricks", slot.winetricks_callback("") )
