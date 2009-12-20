@@ -8,15 +8,15 @@ winetricks wsh56js || fatal "winetricks failed"
 override_dlls native,builtin riched20 usp10
 
 info "Please select the installation file"
-SETUP="$(ask-file "Installer" "." "*.exe")"
+SETUP="$(ask_file "Installer" "." "*.exe")"
 [ -f "$SETUP" ] || fatal "Installer not found"
 wine "$SETUP" || fatal "Setup failed"
 
-find-import-lnk "Microsoft Office Excel 2007.lnk"
-find-import-lnk "Microsoft Office Word 2007.lnk"
-find-import-lnk "Microsoft Office PowerPoint 2007.lnk"
-find-import-lnk "Microsoft Office Outlook 2007.lnk"
-find-import-lnk "Microsoft Clip Organizer.lnk"
-find-import-lnk "Microsoft Office Picture Manager.lnk"
+find_import_lnk "Microsoft Office Excel 2007.lnk"
+find_import_lnk "Microsoft Office Word 2007.lnk"
+find_import_lnk "Microsoft Office PowerPoint 2007.lnk"
+find_import_lnk "Microsoft Office Outlook 2007.lnk"
+find_import_lnk "Microsoft Clip Organizer.lnk"
+find_import_lnk "Microsoft Office Picture Manager.lnk"
 
 info "Installation complete"

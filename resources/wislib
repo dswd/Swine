@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export VERSION="0.1"
+export VERSION="0.2"
 
 #-----------------------------------------
 #------------- Dialogs -------------------
@@ -58,11 +58,11 @@ error () {
   fatal "$@"
 }
 
-warning-no-gui () {
+warning_no_gui () {
   echo Warning: Please install zenity or kdialog for graphical dialogs >&2
 }
 
-ask-file() {
+ask_file() {
   title="$1"
   dir="$2"
   [ -z "$dir" ] && dir="."
@@ -76,7 +76,7 @@ ask-file() {
     zenity --fileselection --filename "$dir" --title "$title"
     return
   fi
-  warning-no-gui
+  warning_no_gui
   read -p "Filename:" file
   echo "$file"
   return
@@ -93,11 +93,34 @@ yesno () {
     zenity --question --text "$QUESTION" --title "$TITLE"
     return $?
   fi
-  warning-no-gui
+  warning_no_gui
   read -p "$QUESTION [yn]" res
   [ "$res" == "y" ] && return 0
   [ "$res" == "n" ] && return 1
   return 2
+}
+
+select_option () {
+  TEXT="$1"
+  shift
+  OPTIONS=("$@")
+  if [ -x `which kdialog` ]; then
+    OPT=()
+    i=0
+    while [ "" != "${OPTIONS[$i]}" ]; do 
+      OPT[$(($i*2))]="${OPTIONS[$i]}"
+      OPT[$(($i*2+1))]="${OPTIONS[$i]}"
+      i=$(($i+1))
+    done
+    kdialog --menu "$TEXT" "${OPT[@]}"
+    return $?
+  fi 
+  if [ -x `which zenity` ]; then
+    zenity --list --text "$TEXT" --column "Options" "${OPTIONS[@]}"
+    return $?
+  fi
+  warning_no_gui
+  exit -1  
 }
 
 #-----------------------------------------
@@ -120,8 +143,9 @@ wislib_version () {
 compare_version () {
   perl -e "
   @verA = split(/\\./, \"$1\");
-  @verB = split(/\\./, \"$2\");        
-  for my \$i (0 .. scalar(@verA)-1) {
+  @verB = split(/\\./, \"$2\");
+  scalar(@verA) > scalar(@verB) ? \$max = scalar(@verA) : \$max = scalar(@verB);
+  for my \$i (0 .. \$max-1) {
     exit 2 if (\$verA[\$i] < \$verB[\$i]);
     exit 1 if (\$verB[\$i] < \$verA[\$i]);
   }
@@ -164,14 +188,14 @@ winetricks () {
   $WINETRICKS "$@"
 }
 
-import-lnk () {
+import_lnk () {
   $SWINECLI --slot $SLOT --import-lnk "$1"
 }
 
-find-import-lnk () {
+find_import_lnk () {
   find $WINEPREFIX -name "$1" | while read f; do 
     echo "Importing $f"
-    import-lnk "$f"
+    import_lnk "$f"
   done
 } 
 
