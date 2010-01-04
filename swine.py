@@ -34,11 +34,13 @@ from ProgramDialog import *
 from MainWindow import *
 
 IMAGE_FOLDER = os.path.dirname(os.path.realpath(__file__)) + "/images/"
-def loadPixmap ( name ):
-	return QPixmap(QString(IMAGE_FOLDER+name))
+def loadPixmap ( name, folder=IMAGE_FOLDER ):
+	return QPixmap(QString(folder+"/"+name))
 
-def loadIcon ( name ):
-	pm = QPixmap ( name )
+def loadIcon ( name, folder=IMAGE_FOLDER ):
+	if os.path.exists ( name ) and not os.path.exists ( folder+"/"+name ):
+		folder = ""
+	pm = QPixmap ( folder+"/"+name )
 	if not pm or pm.isNull():
 		pm = loadPixmap("wabi.png")
 	return QPixmap ( pm.convertToImage().smoothScale(32,32,QImage.ScaleMin) )
@@ -49,8 +51,8 @@ class SwineSlotItem(QListBoxPixmap):
 		self.pixmap = loadPixmap("folder.png")
 		shortcut = self.slot.loadDefaultShortcut()
 		if shortcut:
-			if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ) :
-				self.pixmap = loadIcon ( shortcut.data["icon"] )
+			if shortcut.data.has_key("icon") :
+				self.pixmap = loadIcon ( shortcut.data["icon"], self.slot.getPath() )
 		QListBoxPixmap.__init__(self,parent,self.pixmap,unicode(slot.name))
 		self.listBox().sort()
 	def mainWindow(self):
@@ -123,8 +125,8 @@ class SwineShortcutItem(QIconViewItem):
 		QIconViewItem.__init__(self,parent,unicode(name),loadPixmap("wabi.png"))
 		self.setRenameEnabled(False)
 		self.setDragEnabled(False)
-		if shortcut.data.has_key("icon") and os.path.exists ( shortcut.data["icon"] ):
-			self.setPixmap ( loadIcon ( shortcut.data["icon"] ) )
+		if shortcut.data.has_key("icon"):
+			self.setPixmap ( loadIcon ( shortcut.data["icon"], self.shortcut.slot.getPath() ) )
 	def mainWindow(self):
 		return self.iconView().topLevelWidget()
 	def refreshShortcutList(self):
@@ -564,13 +566,13 @@ class SwineProgramDialog(ProgramDialog):
 		self.iconFile = QFileDialog.getOpenFileName( dirStr, "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
 		if not self.iconFile == None:
 			self.icon.setIconSet ( QIconSet ( loadIcon ( self.iconFile ) ) )
-			self.shortcut.data["icon"] = self.iconFile
+			self.shortcut.data["icon"] = relpath(str(self.iconFile),self.shortcut.slot.getPath())
 
 	def okButton_clicked(self):
 		if len(unicode(self.nameInput.text())) == 0:
 			raise SwineException ( "Shortcut name cannot be empty" )
 		self.shortcut.name = unicode(self.nameInput.text())
-		self.shortcut.data["icon"] = str(self.iconFile)
+		self.shortcut.data["icon"] = relpath(str(self.iconFile),self.shortcut.slot.getPath())
 		prog = []
 		prog.append(str(self.applicationInput.text()))
 		prog.extend(str2args(str(self.paramsInput.text())))
