@@ -1,0 +1,160 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>IconDialog</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>IconDialog</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>388</width>
+            <height>306</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>TITLE</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QIconView">
+            <property name="name">
+                <cstring>iconView</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>1</pointsize>
+                </font>
+            </property>
+            <property name="acceptDrops">
+                <bool>false</bool>
+            </property>
+            <property name="itemTextPos">
+                <enum>Bottom</enum>
+            </property>
+            <property name="arrangement">
+                <enum>LeftToRight</enum>
+            </property>
+            <property name="maxItemTextLength">
+                <number>0</number>
+            </property>
+            <property name="itemsMovable">
+                <bool>false</bool>
+            </property>
+            <property name="wordWrapIconText">
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout6</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>16</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>okButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>O&amp;K</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+K</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer3</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>16</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>cancelButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Cancel</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>16</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>cancelButton</sender>
+        <signal>clicked()</signal>
+        <receiver>IconDialog</receiver>
+        <slot>cancelButton_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>okButton</sender>
+        <signal>clicked()</signal>
+        <receiver>IconDialog</receiver>
+        <slot>okButton_clicked()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>okButton</tabstop>
+</tabstops>
+<slots>
+    <slot>saveButton_clicked()</slot>
+    <slot>icon_clicked()</slot>
+    <slot>fileSelectButton_clicked()</slot>
+    <slot>cancelButton_clicked()</slot>
+    <slot>fileSelectButton_2_clicked()</slot>
+    <slot>okButton_clicked()</slot>
+    <slot>exeSelectButton_clicked()</slot>
+    <slot>wdSelectButton_clicked()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

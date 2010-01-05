@@ -279,13 +279,14 @@ class Slot:
 			if os.path.splitext(file)[1].lower() == '.ico':
 				self.runNative (["icotool","-x","-o",iconsdir,iconsdir+"/"+file],wait=True)
 				os.remove(iconsdir+"/"+file)
+		return self.best_ico(os.listdir ( iconsdir ))
+		
 	
-	def createShortcutFromFile (self, file):
-		def parse_ico_name(f):
+	def best_ico (self, icons, nr=0):
+		def parse_ico_name(file):
 			import re
-			f = re.match ( "[^_]+_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)x([0-9]+)x([0-9]+).png", f )
+			f = re.match ( "[^_]+_([0-9]+)_([0-9]+)_([0-9]*_)*([0-9]+)x([0-9]+)x([0-9]+).png", file )
 			return ( int(f.group(1)), int(f.group(2)), int(f.group(4)), int(f.group(6)) )
-			
 		def ico_comp (x,y):
 			x_nr1, x_nr2, x_size, x_color = parse_ico_name(x)
 			y_nr1, y_nr2, y_size, y_color = parse_ico_name(y)
@@ -298,31 +299,29 @@ class Slot:
 			if x_color != y_color:
 				return -cmp(x_color,y_color)
 			return cmp(x_nr2,y_nr2)
-		
 		def ico_comp_nr (x,y):
 			x_nr1, x_nr2, x_size, x_color = parse_ico_name(x)
 			y_nr1, y_nr2, y_size, y_color = parse_ico_name(y)
 			if x_nr1 != y_nr1:
 				return cmp(x_nr1,y_nr1)
 			return cmp(x_nr2,y_nr2)
-		
 		def ico_filter (l, nr1, nr2):
 			def ico_filter_name (n, nr1, nr2):
 				n_nr1, n_nr2, n_size, n_color = parse_ico_name(n)
 				return n_nr1 == nr1 and n_nr2 == nr2
 			return filter ( lambda n: ico_filter_name (n, nr1, nr2), l)
-		
-		def best_ico (icons, nr):
-			if len(icons) >= nr:
-				icons.sort ( ico_comp_nr )
-				nr1, nr2, size, color = parse_ico_name(icons[nr])
-				icons = ico_filter ( icons, nr1, nr2 )
-			icons.sort ( ico_comp )
-			if len(icons) == 0:
-				return ""
-			else:
-				return icons[0]
-		
+		if len(icons) >= nr and nr >= 0:
+			icons.sort ( ico_comp_nr )
+			nr1, nr2, size, color = parse_ico_name(icons[nr])
+			icons = ico_filter ( icons, nr1, nr2 )
+		icons.sort ( ico_comp )
+		if len(icons) == 0:
+			return ""
+		else:
+			return icons[0]
+
+	
+	def createShortcutFromFile (self, file):				
 		if not os.path.exists ( file ):
 			file = self.winPathToUnix(file)
 		if not os.path.exists ( file ):
@@ -336,7 +335,9 @@ class Slot:
 		shortcut.data['working_directory']=lnk['working_directory']
 		#shortcut.data['description']=lnk['description']
 		if str(lnk['custom_icon']):
-			file = self.winPathToUnix(lnk['custom_icon'],"c:\windows")
+			# seems wrong
+			# file = self.winPathToUnix(lnk['custom_icon'],"c:\windows")
+			file = self.winPathToUnix(lnk['target'])
 		else:
 			file = self.winPathToUnix(lnk['target'])
 		iconsdir = self.getPath() + "/icons/" + os.path.basename(file)
@@ -344,7 +345,7 @@ class Slot:
 		if os.path.splitext(file)[1].lower() == '.exe':
 			self.extractExeIcons ( file, iconsdir )
 			icons = os.listdir ( iconsdir ) ;
-			shortcut.data['icon'] = iconsdir + "/" + best_ico ( icons, lnk['icon_number'] )
+			shortcut.data['icon'] = iconsdir + "/" + self.best_ico ( icons, lnk['icon_number'] )
 		else:
 			shortcut.data['icon'] = self.winPathToUnix ( file )
 		if not os.path.exists ( shortcut.data['icon'] ):
@@ -530,34 +531,14 @@ def str2args ( s ):
 	return s.split ( " " )
 
 def relpath(target, base=os.curdir):
-    """
-    Return a relative path to the target from either the current dir or an optional base dir.
-    Base can be a directory specified either as absolute or relative to current dir.
-    """
-
     if not os.path.exists(target):
-        raise OSError, 'Target does not exist: '+target
-
-    if not os.path.isdir(base):
-        raise OSError, 'Base is not a directory or does not exist: '+base
-
+	return target
     base_list = (os.path.abspath(base)).split(os.sep)
     target_list = (os.path.abspath(target)).split(os.sep)
-
-    # On the windows platform the target may be on a completely different drive from the base.
-    if os.name in ['nt','dos','os2'] and base_list[0] <> target_list[0]:
-        raise OSError, 'Target is on a different drive to base. Target: '+target_list[0].upper()+', base: '+base_list[0].upper()
-
-    # Starting from the filepath root, work out how much of the filepath is
-    # shared by base and target.
     for i in range(min(len(base_list), len(target_list))):
         if base_list[i] <> target_list[i]: break
     else:
-        # If we broke out of the loop, i is pointing to the first differing path elements.
-        # If we didn't break out of the loop, i is pointing to identical path elements.
-        # Increment i so that in all cases it points to the first differing path elements.
         i+=1
-
     rel_list = [os.pardir] * (len(base_list)-i) + target_list[i:]
     return os.path.join(*rel_list)
 

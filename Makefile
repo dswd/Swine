@@ -2,8 +2,8 @@
 	pyuic $< >$@
 
 rev = 0.5
-ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui
-ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py RunnerDialog.py
+ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDialog.ui
+ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py RunnerDialog.py IconDialog.py
 images = images/*.png
 py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py
 deb_dir = package-files/deb

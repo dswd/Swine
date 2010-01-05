@@ -32,6 +32,7 @@ from threading import Thread
 from AboutDialog import *
 from ProgramDialog import *
 from MainWindow import *
+from IconDialog import *
 
 IMAGE_FOLDER = os.path.dirname(os.path.realpath(__file__)) + "/images/"
 def loadPixmap ( name, folder=IMAGE_FOLDER ):
@@ -540,6 +541,29 @@ class SwineAboutDialog(AboutDialog):
 		self.versionLabel.setText ( "Swine Version " + VERSION )
 
 
+class SwineIconDialog(IconDialog):
+	
+	class Icon(QIconViewItem):
+		def __init__(self, parent, fileName, icon):
+			QIconViewItem.__init__(self, parent, str(icon.width()+icon.depth()).zfill(4) , icon)
+			self.fileName = fileName
+	
+	def __init__(self,iconDir="", parent = None,name = None,modal = False,fl = 0):
+		IconDialog.__init__(self,parent,name,modal,fl)
+		self.setCaption ( name )
+		self.iconDir = iconDir
+		self.iconFile = None
+		self.iconView.setSorting(True, False)
+		for icon in os.listdir ( self.iconDir ):
+			self.Icon(self.iconView,self.iconDir+"/"+icon,loadPixmap(icon,self.iconDir))
+		
+	def okButton_clicked(self):
+		self.iconFile = self.iconView.currentItem().fileName
+		self.accept()
+
+	def cancelButton_clicked(self):
+		self.close()
+
 
 class SwineProgramDialog(ProgramDialog):
 	def cancelButton_clicked(self):
@@ -563,7 +587,10 @@ class SwineProgramDialog(ProgramDialog):
 		dirStr = ""
 		if self.shortcut.iconsDir():
 			dirStr = self.shortcut.iconsDir()
-		self.iconFile = QFileDialog.getOpenFileName( dirStr, "Icon files (*.png *.PNG *.bmp *.BMP *.xpm *.XPM *.pnm *.PNM)", self )
+		dialog = SwineIconDialog ( dirStr, self.parent, "Select Icon" )
+		if dialog.exec_loop() == 1:
+			pass
+		self.iconFile = dialog.iconFile
 		if not self.iconFile == None:
 			self.icon.setIconSet ( QIconSet ( loadIcon ( self.iconFile ) ) )
 			self.shortcut.data["icon"] = relpath(str(self.iconFile),self.shortcut.slot.getPath())
@@ -587,6 +614,7 @@ class SwineProgramDialog(ProgramDialog):
 
 	def __init__(self,shortcut,parent = None,name = None,modal = False,fl = 0):
 		self.shortcut = shortcut
+		self.parent = parent
 		ProgramDialog.__init__(self,parent,name,modal,fl)
 		self.nameInput.setText ( shortcut.name )
 		self.setCaption ( name )
