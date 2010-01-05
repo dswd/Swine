@@ -281,6 +281,48 @@ class Slot:
 				os.remove(iconsdir+"/"+file)
 	
 	def createShortcutFromFile (self, file):
+		def parse_ico_name(f):
+			import re
+			f = re.match ( "[^_]+_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)x([0-9]+)x([0-9]+).png", f )
+			return ( int(f.group(1)), int(f.group(2)), int(f.group(4)), int(f.group(6)) )
+			
+		def ico_comp (x,y):
+			x_nr1, x_nr2, x_size, x_color = parse_ico_name(x)
+			y_nr1, y_nr2, y_size, y_color = parse_ico_name(y)
+			if x_size != y_size:
+				if x_size == 32:
+					return -1
+				if y_size == 32:
+					return 1
+				return -cmp(x_size,y_size)
+			if x_color != y_color:
+				return -cmp(x_color,y_color)
+			return cmp(x_nr2,y_nr2)
+		
+		def ico_comp_nr (x,y):
+			x_nr1, x_nr2, x_size, x_color = parse_ico_name(x)
+			y_nr1, y_nr2, y_size, y_color = parse_ico_name(y)
+			if x_nr1 != y_nr1:
+				return cmp(x_nr1,y_nr1)
+			return cmp(x_nr2,y_nr2)
+		
+		def ico_filter (l, nr1, nr2):
+			def ico_filter_name (n, nr1, nr2):
+				n_nr1, n_nr2, n_size, n_color = parse_ico_name(n)
+				return n_nr1 == nr1 and n_nr2 == nr2
+			return filter ( lambda n: ico_filter_name (n, nr1, nr2), l)
+		
+		def best_ico (icons, nr):
+			if len(icons) >= nr:
+				icons.sort ( ico_comp_nr )
+				nr1, nr2, size, color = parse_ico_name(icons[nr])
+				icons = ico_filter ( icons, nr1, nr2 )
+			icons.sort ( ico_comp )
+			if len(icons) == 0:
+				return ""
+			else:
+				return icons[0]
+		
 		if not os.path.exists ( file ):
 			file = self.winPathToUnix(file)
 		if not os.path.exists ( file ):
@@ -300,17 +342,9 @@ class Slot:
 		iconsdir = self.getPath() + "/icons/" + os.path.basename(file)
 		shortcut.data['iconsdir']="icons/" + os.path.basename(file)
 		if os.path.splitext(file)[1].lower() == '.exe':
-			self.extractExeIcons ( file, iconsdir, lnk['icon_number'] )
-			icons = os.listdir ( iconsdir )
-			if len(icons) == 0:
-				self.extractExeIcons ( file, iconsdir )
-				icons = os.listdir ( iconsdir )
-        			icons.sort()
-        		best = [ i for i in icons if i.find("32x32x8") > -1 ]
-			if len(best) >= 1:
-				shortcut.data['icon'] = iconsdir + "/" + best[0]
-			else:
-				shortcut.data['icon'] = iconsdir + "/" + icons[0]
+			self.extractExeIcons ( file, iconsdir )
+			icons = os.listdir ( iconsdir ) ;
+			shortcut.data['icon'] = iconsdir + "/" + best_ico ( icons, lnk['icon_number'] )
 		else:
 			shortcut.data['icon'] = self.winPathToUnix ( file )
 		if not os.path.exists ( shortcut.data['icon'] ):
