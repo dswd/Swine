@@ -37,6 +37,9 @@
             <property name="arrangement">
                 <enum>LeftToRight</enum>
             </property>
+            <property name="resizeMode">
+                <enum>Adjust</enum>
+            </property>
             <property name="maxItemTextLength">
                 <number>0</number>
             </property>
