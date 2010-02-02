@@ -584,8 +584,8 @@ class SwineProgramDialog(ProgramDialog):
 	def icon_clicked(self):
 		if not self.shortcut.data == {}:
 			self.shortcut.extractIcons()
-		dirStr = ""
-		if self.shortcut.iconsDir():
+		dirStr = self.shortcut.slot.getPath()
+		if self.shortcut.iconsDir() and os.path.exists(self.shortcut.iconsDir()):
 			dirStr = self.shortcut.iconsDir()
 		dialog = SwineIconDialog ( dirStr, self.parent, "Select Icon" )
 		if dialog.exec_loop() == 1:

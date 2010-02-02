@@ -121,6 +121,8 @@ class Shortcut:
 	def extractIcons (self):
 		file = self.slot.winPathToUnix(str2args(self.data["program"])[0])
 		iconsdir = self.slot.getPath() + "/icons/" + os.path.basename(file)
+		if not os.path.exists(file) and os.path.exists(file+".exe"):
+			file = file + ".exe"
 		if os.path.splitext(file)[1].lower() == '.exe':
 			self.data['iconsdir']="icons/" + os.path.basename(file)
 			self.slot.extractExeIcons ( file, iconsdir )
@@ -285,8 +287,10 @@ class Slot:
 	def best_ico (self, icons, nr=0):
 		def parse_ico_name(file):
 			import re
-			f = re.match ( "[^_]+_([0-9]+)_([0-9]+)_([0-9]*_)*([0-9]+)x([0-9]+)x([0-9]+).png", file )
-			return ( int(f.group(1)), int(f.group(2)), int(f.group(4)), int(f.group(6)) )
+			f = re.match ( ".*_([0-9]+)_(.*)_([0-9]+)x([0-9]+)x([0-9]+).png", file )
+			if f == None:
+				return ( 0, 0 ,0 ,0 )
+			return ( int(f.group(1)), f.group(2), int(f.group(3)), int(f.group(5)) )
 		def ico_comp (x,y):
 			x_nr1, x_nr2, x_size, x_color = parse_ico_name(x)
 			y_nr1, y_nr2, y_size, y_color = parse_ico_name(y)
