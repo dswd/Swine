@@ -199,23 +199,24 @@ find_import_lnk () {
   done
 } 
 
+regedit () {
+  ( echo "REGEDIT4"; echo; cat ) > "$TMP/swine.reg"
+  wine regedit "$TMP/swine.reg"
+  rm "$TMP/swine.reg"
+}
+
 int_override_dlls() {
   key="$1"
   shift
   mode=$1
   shift
   echo Using $mode override for following DLLs: $@
-  cat > "$TMP"/override-dll.reg <<_EOF_
-REGEDIT4
-
-[$key]
-_EOF_
-  while test "$1" != ""; do
-    echo "\"$1\"=\"$mode\"" >> "$TMP"/override-dll.reg
-    shift
-  done
-  wine regedit "$TMP"/override-dll.reg
-  rm "$TMP"/override-dll.reg
+  ( echo "[$key]"
+    while test "$1" != ""; do
+      echo "\"$1\"=\"$mode\"" >> "$TMP"/override-dll.reg
+      shift
+    done
+  ) | regedit
 }
 
 # mode dll dll ...
