@@ -118,7 +118,7 @@ Autors:		Dennis Schwerdel
 		Thomas Schmidt
 		Klaus Denker
 
-Homepage: 	http://swine.sourceforge.net</string>
+Homepage: 	http://github.com/dswd/swine</string>
                         </property>
                         <property name="wordWrap">
                             <enum>WidgetWidth</enum>
