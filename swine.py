@@ -717,10 +717,8 @@ win=None
 		
 def main(args):
 	ui=UIThread(args)
-	ui.start()
 	sys.excepthook=excepthook
-	while(1):
-		time.sleep(1)
+	ui.run()
 	
 def excepthook(excType, excValue, tracebackobj):
 	if excType == KeyboardInterrupt:
