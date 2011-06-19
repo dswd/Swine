@@ -1,0 +1,8 @@
+AboutDialog.py
+IconDialog.py
+MainWindow.py
+ProgramDialog.py
+RunnerDialog.py
+package-files/deb/swine*
+swine-*.tar.gz
+
