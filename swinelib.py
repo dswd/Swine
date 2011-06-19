@@ -201,6 +201,7 @@ class Slot:
 		if self.exists():
 			raise SwineException ("Slot already exists: " + unicode(self.name))
 		os.mkdir(self.getPath())
+		self.runWineboot()
 		self.loadConfig()
 		self.saveConfig()
 	
