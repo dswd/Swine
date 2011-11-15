@@ -1,7 +1,7 @@
 %.py : %.ui
 	pyuic $< >$@
 
-rev = 0.5
+rev = 0.6
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDialog.ui
 ui_files_py = MainWindow.py AboutDialog.py ProgramDialog.py RunnerDialog.py IconDialog.py
 images = images/*.png
@@ -9,8 +9,8 @@ py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py
 deb_dir = package-files/deb
 buildfiles = Makefile
 resources = resources/*
-sources = $(py_files) $(ui_files) $(images) README LICENSE $(buildfiles) winetricks $(resources)
-distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE winetricks $(resources)
+sources = $(py_files) $(ui_files) $(images) README LICENSE $(buildfiles) $(resources)
+distfiles = $(py_files) $(ui_files_py) $(images) README LICENSE $(resources)
 
 ALL: compile
 
@@ -51,7 +51,6 @@ install: compile
 	ln -s ../lib/swine/swine.py $(DESTDIR)/usr/bin/swine
 	ln -s ../lib/swine/swinecli.py $(DESTDIR)/usr/bin/swinecli
 	ln -s ../lib/swine/swinerun.py $(DESTDIR)/usr/bin/swinerun
-	install winetricks $(DESTDIR)/usr/bin/winetricks
 	mkdir -p $(DESTDIR)/usr/share/applications
 	cp resources/swine.desktop $(DESTDIR)/usr/share/applications/swine.desktop
 	cp resources/swine-extensions.desktop $(DESTDIR)/usr/share/applications/swine-extensions.desktop

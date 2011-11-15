@@ -24,7 +24,7 @@ import shortcutlib
 from tarfile import TarFile
 from subprocess import Popen
 
-VERSION = "0.5"
+VERSION = "0.6"
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
