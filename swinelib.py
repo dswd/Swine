@@ -112,7 +112,7 @@ class Shortcut:
   def getIcon(self):
     return os.path.join(self.slot.getPath(), self["icon"]) if self["icon"] else None
   def setIcon(self, icon):
-    if not os.path.exists(icon):
+    if not icon or not os.path.exists(icon):
       self['icon'] = None
     else:
       self['icon'] = relpath(icon, self.slot.getPath())
