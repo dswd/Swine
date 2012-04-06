@@ -475,7 +475,6 @@ class Slot:
     if log:
       with open(log, "w") as fp:
         fp.write(res.stderr_data)
-    print res.stderr_data
     return res
   def runWinecfg(self):
     return self.runWineTool(["wine", "winecfg"], wait=False)
