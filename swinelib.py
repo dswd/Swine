@@ -102,7 +102,7 @@ class Shortcut:
   def getProgram(self):
     if not self['program']:
       return []
-    return shlex.split(self['program'])
+    return map(lambda s: s.rstrip('\0'), shlex.split(self['program']))
   def setProgram(self, exePath, args):
     assert isinstance(exePath, str)
     if isinstance(args, str):
