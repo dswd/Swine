@@ -35,7 +35,9 @@ from swine import SwineSlotItem, loadIcon, excepthook, tr
 class NewSlotItem(QListWidgetItem):
   def __init__(self,parent):
     self.icon = loadIcon(":/icons/images/folder_grey.png")
-    QListWidgetItem.__init__(self,self.icon, " " + tr("Create new slot..."), parent)
+    QListWidgetItem.__init__(self, self.icon, " " + self.tr("Create new slot..."), parent)
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def mainWindow(self):
     return self.listWidget().topLevelWidget()
   def refreshShortcutList(self):
@@ -67,7 +69,7 @@ class SwineRunnerDialog(QMainWindow, Ui_RunnerDialog):
     if isinstance(item, SwineSlotItem):
       slot = item.slot
     elif isinstance(item, NewSlotItem):
-      (text, code) = QInputDialog.getText(self, tr("Create Slot"), tr("Name:"), text=tr("New Slot"))
+      (text, code) = QInputDialog.getText(self, self.tr("Create Slot"), self.tr("Name:"), text=self.tr("New Slot"))
       if code:
         slot = Slot(str(text))
         slot.create()
@@ -75,12 +77,12 @@ class SwineRunnerDialog(QMainWindow, Ui_RunnerDialog):
       self.hide()
       res = slot.runWin(self.args[1:], wait=True)
       if res.returncode:
-        dialog = QMessageBox(QMessageBox.Critical, tr("Error"), tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
+        dialog = QMessageBox(QMessageBox.Critical, self.tr("Error"), self.tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
         dialog.setDetailedText(res.stderr_data)
         dialog.adjustSize()
         dialog.exec_()
       else:
-        if QMessageBox.question(self, tr("Import shortcuts"), tr("Do you want to import program shortcuts?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
+        if QMessageBox.question(self, self.tr("Import shortcuts"), self.tr("Do you want to import program shortcuts?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
           slot.findShortcuts()
       self.close()
 

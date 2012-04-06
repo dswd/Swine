@@ -30,7 +30,7 @@ import shortcutlib, winetricks
 from tarfile import TarFile
 from subprocess import Popen
 
-def tr(s):
+def tr(s, context="@default"):
   return s
 
 class SwineException(Exception):
@@ -39,7 +39,7 @@ class SwineException(Exception):
 class Shortcut:
   def __init__(self, name, slot, data={}):
     if not name:
-      raise SwineException(tr("Shortcut name cannot be empty"))
+      raise SwineException(self.tr("Shortcut name cannot be empty"))
     self.name = unicode(name)
     if not data:
       self.data = {}
@@ -52,6 +52,8 @@ class Shortcut:
       import ast
       args = ast.literal_eval(self["program"])
       self.setProgram(args[0], args[1:])
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def __str__(self):
     return self.name
   def getSlot(self):
@@ -76,7 +78,7 @@ class Shortcut:
     self.removeMenuEntry()
   def rename(self, newname):
     if not newname:
-      raise SwineException (tr("Shortcut name cannot be empty"))
+      raise SwineException(self.tr("Shortcut name cannot be empty"))
     if newname == self.name:
       return
     self._removeData()
@@ -89,9 +91,9 @@ class Shortcut:
       self.createMenuEntry()
   def clone(self, newname):
     if not newname:
-      raise SwineException(tr("Shortcut name cannot be empty"))
+      raise SwineException(self.tr("Shortcut name cannot be empty"))
     if self.slot.hasShortcut(newname):
-      raise SwineException(tr("Shortcut already exists"))
+      raise SwineException(self.tr("Shortcut already exists"))
     shortcut = Shortcut(newname, self.slot, self.data.copy())
     shortcut.save()
     return shortcut
@@ -167,7 +169,7 @@ class Shortcut:
     if not os.path.exists(path):
       path = self.slot.winPathToUnix(path)
     if not os.path.exists(path):
-      raise Exception(tr("File does not exist"))
+      raise Exception(self.tr("File does not exist"))
     lnk = shortcutlib.readlnk(path)
     name = os.path.splitext(os.path.basename(path))[0]
     self.setProgram(lnk['target'], lnk['command_line_arguments'])
@@ -190,11 +192,13 @@ class Shortcut:
 class Slot:
   def __init__(self, name):
     if not name:
-      raise SwineException(tr("Slot name cannot be empty."))
+      raise SwineException(self.tr("Slot name cannot be empty."))
     assert isinstance(name, str)
     self.name = name
     self.config = None
     self.settings = None
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def __setitem__(self, key, value):
     self.settings[key]=value
   def __getitem__(self, key):
@@ -207,7 +211,7 @@ class Slot:
     return self.name
   def _storeShortcutData(self, shortcut, data):
     if not shortcut:
-      raise SwineException(tr("Shortcut name cannot be empty"))
+      raise SwineException(self.tr("Shortcut name cannot be empty"))
     assert isinstance(data, dict)
     if not self.config.has_section(shortcut):
       self.config.add_section(shortcut)
@@ -218,7 +222,7 @@ class Slot:
     self.saveConfig()
   def _removeShortcutData(self, shortcut):
     if not shortcut:
-      raise SwineException(tr("Shortcut name cannot be empty"))
+      raise SwineException(self.tr("Shortcut name cannot be empty"))
     if self.config.has_section(shortcut):
       self.config.remove_section(shortcut)
     if self.getDefaultShortcutName() == shortcut:
@@ -234,7 +238,7 @@ class Slot:
       drive += ":"
     path = os.path.join(self.getDosDrivesPath(), drive)
     if not os.path.exists(path):
-      raise SwineException(tr("%s does not exist") % drive)
+      raise SwineException(self.tr("%s does not exist") % drive)
     return path
   def getConfigFile(self):
     return os.path.join(self.getPath(), "swine.ini")
@@ -255,41 +259,41 @@ class Slot:
     return os.path.exists(self.getPath())
   def create(self):
     if self.exists():
-      raise SwineException(tr("Slot already exists: %s") % self.name)
+      raise SwineException(self.tr("Slot already exists: %s") % self.name)
     os.mkdir(self.getPath())
     self.runWineboot()
     self.loadConfig()
     self.saveConfig()
   def delete(self):
     if self.name == SWINE_DEFAULT_SLOT_NAME:
-      raise SwineException(tr("Default slot cannot be deleted"))
+      raise SwineException(self.tr("Default slot cannot be deleted"))
     if not self.exists():
-      raise SwineException(tr("Slot does not exist: %s") % self.name)
+      raise SwineException(self.tr("Slot does not exist: %s") % self.name)
     for s in self.getAllShortcuts():
       s.delete()
     shutil.rmtree(self.getPath())
   def clone(self, newname):
     if not newname:
-      raise SwineException(tr("Slot name cannot be empty"))
+      raise SwineException(self.tr("Slot name cannot be empty"))
     if not self.exists():
-      raise SwineException(tr("Slot does not exist: %s") % self.name)
+      raise SwineException(self.tr("Slot does not exist: %s") % self.name)
     assert isinstance(newname, str)
     slot = Slot(newname)
     if slot.exists():
-      raise SwineException(tr("Slot does already exist: %s") % newname)
+      raise SwineException(self.tr("Slot does already exist: %s") % newname)
     shutil.copytree(self.getPath(), slot.getPath(), True)
     slot.loadConfig()
     return slot
   def rename(self, newname):
     if not newname:
-      raise SwineException(tr("Slot name cannot be empty"))
+      raise SwineException(self.tr("Slot name cannot be empty"))
     if self.name == SWINE_DEFAULT_SLOT_NAME:
-      raise SwineException(tr("Default slot cannot be renamed"))
+      raise SwineException(self.tr("Default slot cannot be renamed"))
     if not self.exists():
-      raise SwineException(tr("Slot does not exist: %s") % self.name)
+      raise SwineException(self.tr("Slot does not exist: %s") % self.name)
     dummySlot = Slot(newname)
     if dummySlot.exists():
-      raise SwineException(tr("Slot does already exist: %s") % newname)
+      raise SwineException(self.tr("Slot does already exist: %s") % newname)
     shortcutMenus = []
     for s in self.getAllShortcuts():
       if s.hasMenuEntry():
@@ -501,13 +505,13 @@ class Slot:
     return proc.stdout_data.splitlines()[-1]
   def exportData(self, archive):
     if not archive:
-      raise SwineException(tr("File name cannot be empty"))
+      raise SwineException(self.tr("File name cannot be empty"))
     os.chdir(self.getPath())
     with TarFile.gzopen(archive, "w") as tar:
       tar.add(".") #recursive
   def importData(self, archive):
     if not archive:
-      raise SwineException(tr("File name cannot be empty"))
+      raise SwineException(self.tr("File name cannot be empty"))
     os.chdir(self.getPath())
     with TarFile.gzopen(archive, "r") as tar:
       tar.extractall(".")
@@ -516,7 +520,7 @@ class Slot:
     
 def importSlot(name, archive):
   if not archive:
-    raise SwineException(tr("File name cannot be empty"))
+    raise SwineException(self.tr("File name cannot be empty"))
   slot = Slot(name)
   slot.create()
   slot.importData(archive)

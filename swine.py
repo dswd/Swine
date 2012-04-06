@@ -46,8 +46,8 @@ def loadIcon (name, folder="", cache=True, scale=None):
 
   
   
-def tr(s):
-  return QApplication.translate("@default", s, None, QApplication.UnicodeUTF8)
+def tr(s, context="@default"):
+  return QApplication.translate(context, s, None, QApplication.UnicodeUTF8)
   
   
   
@@ -62,12 +62,14 @@ class SwineSlotItem(QListWidgetItem):
     QListWidgetItem.__init__(self, self.icon, unicode(slot.getName()), parent)
     self.setFlags(Qt.ItemIsEditable|Qt.ItemIsSelectable|Qt.ItemIsEnabled)
     self.listWidget().sortItems()
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def mainWindow(self):
     return self.listWidget().topLevelWidget()
   def refreshShortcutList(self):
     self.mainWindow().slotList_selectionChanged()
   def delete_cb(self):
-    if QMessageBox.warning(self.listWidget(), tr("Delete Slot"), tr("Are you sure ?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
+    if QMessageBox.warning(self.listWidget(), self.tr("Delete Slot"), self.tr("Are you sure ?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
       self.slot.delete()
       self.listWidget().takeItem(self.listWidget().row(self))
   def renameTo(self, name):
@@ -96,17 +98,17 @@ class SwineSlotItem(QListWidgetItem):
     if self.slot.loadDefaultShortcut():
       self.slot.loadDefaultShortcut().run()
   def export_cb(self):
-    path = QFileDialog.getSaveFileName(self.mainWindow(), tr("Select archive file"), "", tr("Swine Slots (*.swine *.tar.gz)"))
+    path = QFileDialog.getSaveFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if not path:
       return
     self.slot.exportData(str(path))
   def import_cb(self):
-    path = QFileDialog.getOpenFileName(self.mainWindow(), tr("Select archive file"), "", tr("Swine Slots (*.swine *.tar.gz)"))
+    path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if path:
       self.slot.importData(str(path))
       self.refreshShortcutList()
   def wisrun_cb(self):
-    path = QFileDialog.getOpenFileName(self.mainWindow(), tr("Select script file"), "", tr("WIS Scripts (*.wis)"))
+    path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select script file"), "", self.tr("WIS Scripts (*.wis)"))
     if path:
       self.slot.runWis(os.path.realpath(str(path)))
   def winetricks(self, tool):
@@ -126,6 +128,8 @@ class SwineShortcutItem(QListWidgetItem):
         self.setIcon(icon)
     self.setFlags(Qt.ItemIsEditable|Qt.ItemIsSelectable|Qt.ItemIsEnabled)
     self.updateDefaultState()
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def updateDefaultState(self):
     font = self.font()
     font.setBold(self.shortcut.isDefault())
@@ -150,7 +154,7 @@ class SwineShortcutItem(QListWidgetItem):
     shortcutItem = SwineShortcutItem(self.listWidget(), shortcut)
     shortcutItem.rename_cb()
   def edit_cb(self):
-    dialog = SwineShortcutDialog(self.shortcut, self.mainWindow(), tr("Edit Shortcut"))
+    dialog = SwineShortcutDialog(self.shortcut, self.mainWindow(), self.tr("Edit Shortcut"))
     if dialog.exec_():
       self.shortcut.rename(unicode(self.shortcut.getName()))
       if self.shortcut.isDefault():
@@ -164,10 +168,10 @@ class SwineShortcutItem(QListWidgetItem):
       shortcuts.item(i).updateDefaultState()
   def createMenuEntry_cb(self):
     self.shortcut.createMenuEntry()
-    QMessageBox.information(self.mainWindow(), tr("Menu Entry"), tr("Menu entry for %s has been created") % self.shortcut.getName())
+    QMessageBox.information(self.mainWindow(), self.tr("Menu Entry"), self.tr("Menu entry for %s has been created") % self.shortcut.getName())
   def removeMenuEntry_cb(self):
     self.shortcut.removeMenuEntry()
-    QMessageBox.information(self.mainWindow(), tr("Menu Entry"), tr("Menu entry for %s has been removed") % self.shortcut.getName())
+    QMessageBox.information(self.mainWindow(), self.tr("Menu Entry"), self.tr("Menu entry for %s has been removed") % self.shortcut.getName())
 
 
 
@@ -209,59 +213,59 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
       bar.addMenu(self.createShortcutMenu(shortcut, self))
     bar.addMenu(self.menuHelp)
   def createShortcutMenu(self, shortcut, parent):
-    menu = QMenu(tr("Shortcut"), parent)
-    menu.addAction(loadIcon(":/icons/images/application_add.png"), tr("New Shortcut"), self.createShortcut_cb)
+    menu = QMenu(self.tr("Shortcut"), parent)
+    menu.addAction(loadIcon(":/icons/images/application_add.png"), self.tr("New Shortcut"), self.createShortcut_cb)
     if shortcut:
       menu.addSeparator()
-      menu.addAction(loadIcon(":/icons/images/cog.png"), tr("Run"), shortcut.shortcut.run)
+      menu.addAction(loadIcon(":/icons/images/cog.png"), self.tr("Run"), shortcut.shortcut.run)
       menu.addSeparator()
-      menu.addAction(loadIcon(":/icons/images/lightning_add.png"), tr("Set Default"), shortcut.setDefault_cb)
+      menu.addAction(loadIcon(":/icons/images/lightning_add.png"), self.tr("Set Default"), shortcut.setDefault_cb)
       if shortcut.shortcut.hasMenuEntry():
-        menu.addAction(loadIcon(":/icons/images/lightning_delete.png"), tr("Remove Menu Entry"), shortcut.removeMenuEntry_cb)
+        menu.addAction(loadIcon(":/icons/images/lightning_delete.png"), self.tr("Remove Menu Entry"), shortcut.removeMenuEntry_cb)
       else:
-        menu.addAction(loadIcon(":/icons/images/lightning_add.png"), tr("Create Menu Entry"), shortcut.createMenuEntry_cb)
+        menu.addAction(loadIcon(":/icons/images/lightning_add.png"), self.tr("Create Menu Entry"), shortcut.createMenuEntry_cb)
       menu.addSeparator()
-      menu.addAction(loadIcon(":/icons/images/application_edit.png"), tr("Edit"), shortcut.edit_cb)
-      menu.addAction(loadIcon(":/icons/images/textfield_rename.png"), tr("Rename"), shortcut.rename_cb)
-      menu.addAction(loadIcon(":/icons/images/arrow_divide.png"), tr("Copy"), shortcut.copy_cb)
-      menu.addAction(loadIcon(":/icons/images/application_delete.png"), tr("Delete"), shortcut.delete_cb)
+      menu.addAction(loadIcon(":/icons/images/application_edit.png"), self.tr("Edit"), shortcut.edit_cb)
+      menu.addAction(loadIcon(":/icons/images/textfield_rename.png"), self.tr("Rename"), shortcut.rename_cb)
+      menu.addAction(loadIcon(":/icons/images/arrow_divide.png"), self.tr("Copy"), shortcut.copy_cb)
+      menu.addAction(loadIcon(":/icons/images/application_delete.png"), self.tr("Delete"), shortcut.delete_cb)
     return menu    
   def createSlotMenu(self, slot, parent):
-    menu = QMenu(tr("Slot"), parent)
-    menu.addAction(loadIcon(":/icons/images/drive_add.png"), tr("New Slot"), self.createSlot_cb)
-    menu.addAction(loadIcon(":/icons/images/package_add.png"), tr("Import Slot"), self.import_cb)
+    menu = QMenu(self.tr("Slot"), parent)
+    menu.addAction(loadIcon(":/icons/images/drive_add.png"), self.tr("New Slot"), self.createSlot_cb)
+    menu.addAction(loadIcon(":/icons/images/package_add.png"), self.tr("Import Slot"), self.import_cb)
     if slot:
       menu.addSeparator()
-      menu.addAction(loadIcon(":/icons/images/application_lightning.png"), tr("Run default"), slot.runDefault_cb)
-      menu.addAction(loadIcon(":/icons/images/application.png"), tr("Run..."), slot.run_cb)
+      menu.addAction(loadIcon(":/icons/images/application_lightning.png"), self.tr("Run default"), slot.runDefault_cb)
+      menu.addAction(loadIcon(":/icons/images/application.png"), self.tr("Run..."), slot.run_cb)
 
       menu.addSeparator()
 
-      toolsMenu = menu.addMenu(loadIcon(":/icons/images/wrench_orange.png"), tr("Tools"))
-      toolsMenu.addAction(loadIcon(":/icons/images/application_xp_terminal.png"), tr("Shell"), slot.shell_cb)
-      toolsMenu.addAction(loadIcon(":/icons/images/folder_explore.png"), tr("File Manager"), slot.filemanager_cb)
-      toolsMenu.addAction(loadIcon(":/icons/images/application_form_magnify.png"), tr("Taskmanager"), slot.taskmgr_cb)
+      toolsMenu = menu.addMenu(loadIcon(":/icons/images/wrench_orange.png"), self.tr("Tools"))
+      toolsMenu.addAction(loadIcon(":/icons/images/application_xp_terminal.png"), self.tr("Shell"), slot.shell_cb)
+      toolsMenu.addAction(loadIcon(":/icons/images/folder_explore.png"), self.tr("File Manager"), slot.filemanager_cb)
+      toolsMenu.addAction(loadIcon(":/icons/images/application_form_magnify.png"), self.tr("Taskmanager"), slot.taskmgr_cb)
       toolsMenu.addSeparator()
-      toolsMenu.addAction(loadIcon(":/icons/images/computer_edit.png"), tr("Winecfg"), slot.slot.runWinecfg )
-      toolsMenu.addAction(loadIcon(":/icons/images/wrench.png"), tr("Start Regedit"), slot.slot.runRegedit )
-      toolsMenu.addAction(loadIcon(":/icons/images/application_delete.png"), tr("Uninstall Software"), slot.slot.runUninstaller )
-      toolsMenu.addAction(loadIcon(":/icons/images/computer.png"), tr("Control-Center"), slot.slot.runWineControl )
+      toolsMenu.addAction(loadIcon(":/icons/images/computer_edit.png"), self.tr("Winecfg"), slot.slot.runWinecfg )
+      toolsMenu.addAction(loadIcon(":/icons/images/wrench.png"), self.tr("Start Regedit"), slot.slot.runRegedit )
+      toolsMenu.addAction(loadIcon(":/icons/images/application_delete.png"), self.tr("Uninstall Software"), slot.slot.runUninstaller )
+      toolsMenu.addAction(loadIcon(":/icons/images/computer.png"), self.tr("Control-Center"), slot.slot.runWineControl )
 
-      commandsMenu = menu.addMenu(loadIcon(":/icons/images/cog.png"), tr("Commands"))
-      commandsMenu.addAction(loadIcon(":/icons/images/drive_magnify.png"), tr("Import Shortcuts"), slot.searchShortcuts_cb)
-      commandsMenu.addAction(loadIcon(":/icons/images/arrow_refresh.png"), tr("Reboot wine"), slot.slot.runWineboot )
-      commandsMenu.addAction(loadIcon(":/icons/images/drive_cd.png"), tr("Eject CD"), slot.slot.runEject )
+      commandsMenu = menu.addMenu(loadIcon(":/icons/images/cog.png"), self.tr("Commands"))
+      commandsMenu.addAction(loadIcon(":/icons/images/drive_magnify.png"), self.tr("Import Shortcuts"), slot.searchShortcuts_cb)
+      commandsMenu.addAction(loadIcon(":/icons/images/arrow_refresh.png"), self.tr("Reboot wine"), slot.slot.runWineboot )
+      commandsMenu.addAction(loadIcon(":/icons/images/drive_cd.png"), self.tr("Eject CD"), slot.slot.runEject )
       commandsMenu.addSeparator()
-      commandsMenu.addAction(loadIcon(":/icons/images/package_go.png"), tr("Export"), slot.export_cb)
-      commandsMenu.addAction(loadIcon(":/icons/images/package_add.png"), tr("Import Data"), slot.import_cb)
+      commandsMenu.addAction(loadIcon(":/icons/images/package_go.png"), self.tr("Export"), slot.export_cb)
+      commandsMenu.addAction(loadIcon(":/icons/images/package_add.png"), self.tr("Import Data"), slot.import_cb)
       
-      menu.addAction(loadIcon(":/icons/images/script_gear.png"), tr("Run WIS script"), slot.wisrun_cb)
+      menu.addAction(loadIcon(":/icons/images/script_gear.png"), self.tr("Run WIS script"), slot.wisrun_cb)
       
       if winetricks.version:
-        winetricksMenu = menu.addMenu(loadIcon(":/icons/images/script_gear.png"), tr("Winetricks"))
-        winetricksMenu.addAction(loadIcon(":/icons/images/script_gear.png"), tr("Call Winetricks"), slot.winetricks_callback("") )
+        winetricksMenu = menu.addMenu(loadIcon(":/icons/images/script_gear.png"), self.tr("Winetricks"))
+        winetricksMenu.addAction(loadIcon(":/icons/images/script_gear.png"), self.tr("Call Winetricks"), slot.winetricks_callback("") )
       else:
-        menu.addAction(loadIcon(":/icons/images/script_gear.png"), tr("Winetricks is not installed"), lambda :reload(winetricks) and self.rebuildMenuBar())
+        menu.addAction(loadIcon(":/icons/images/script_gear.png"), self.tr("Winetricks is not installed"), lambda :reload(winetricks) and self.rebuildMenuBar())
       perPage = 20
       for sec in winetricks.sections():
         options = list(winetricks.options(sec))
@@ -282,10 +286,10 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
       
       defaultSlot = slot.slot.getName() == SWINE_DEFAULT_SLOT_NAME
       if not defaultSlot:
-        menu.addAction(loadIcon(":/icons/images/drive_rename.png"), tr("Rename"), slot.rename_cb)
-      menu.addAction(loadIcon(":/icons/images/arrow_divide.png"), tr("Copy"), slot.copy_cb)
+        menu.addAction(loadIcon(":/icons/images/drive_rename.png"), self.tr("Rename"), slot.rename_cb)
+      menu.addAction(loadIcon(":/icons/images/arrow_divide.png"), self.tr("Copy"), slot.copy_cb)
       if not defaultSlot:
-        menu.addAction(loadIcon(":/icons/images/drive_delete.png"), tr("Delete"), slot.delete_cb)
+        menu.addAction(loadIcon(":/icons/images/drive_delete.png"), self.tr("Delete"), slot.delete_cb)
     return menu
   def slotListKeyReleaseEvent(self,e):
     if e.key() == Qt.Key_Delete:
@@ -306,22 +310,22 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
   def slotList_itemRenamed(self, item):
     item.renameTo(item.text())
   def import_cb(self):
-    path = QFileDialog.getOpenFileName(self, tr("Select archive"), "", tr("Swine Slots (*.swine *.tar.gz)"))
+    path = QFileDialog.getOpenFileName(self, self.tr("Select archive"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if path:
-      (name, code) = QInputDialog.getText(self, tr("Import Slot"), tr("Name:"), QLineEdit.Normal, os.path.splitext(os.path.basename(str(path)))[0])
+      (name, code) = QInputDialog.getText(self, self.tr("Import Slot"), self.tr("Name:"), QLineEdit.Normal, os.path.splitext(os.path.basename(str(path)))[0])
       if code:
         slot = importSlot(str(name), str(path))
         SwineSlotItem(self.slotList, slot)
   def createShortcut_cb(self):
-    shortcut = Shortcut(tr("New Shortcut"), self.currentSlotItem().slot)
-    dialog = SwineShortcutDialog(shortcut, self, tr("New Shortcut"))
+    shortcut = Shortcut(self.tr("New Shortcut"), self.currentSlotItem().slot)
+    dialog = SwineShortcutDialog(shortcut, self, self.tr("New Shortcut"))
     if dialog.exec_():
       if self.currentSlotItem().slot.loadShortcut(shortcut.getName()):
-        raise SwineException(tr("Shortcut '%s' already exists") % shortcut.getName())
+        raise SwineException(self.tr("Shortcut '%s' already exists") % shortcut.getName())
       shortcut.save()
       self.slotList_selectionChanged()
   def createSlot_cb(self):
-    (name, code) = QInputDialog.getText(self, tr("Create Slot"), tr("Name:"), QLineEdit.Normal, tr("New Slot"))
+    (name, code) = QInputDialog.getText(self, self.tr("Create Slot"), self.tr("Name:"), QLineEdit.Normal, self.tr("New Slot"))
     if code:
       slot = Slot(str(name))
       slot.create()
@@ -415,7 +419,7 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
   def cancelButton_clicked(self):
     self.close()
   def exeSelectButton_clicked(self):
-    fileName = QFileDialog.getOpenFileName(self, tr("Executable selection"), self.shortcut.slot.getDosDrivesPath(), tr("Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)"))
+    fileName = QFileDialog.getOpenFileName(self, self.tr("Executable selection"), self.shortcut.slot.getDosDrivesPath(), self.tr("Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)"))
     if not fileName:
       return
     fileName = str(fileName)
@@ -432,7 +436,7 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
     dirStr = self.shortcut.getSlot().getPath()
     if self.shortcut._iconsDir() and os.path.exists(self.shortcut._iconsDir()):
       dirStr = self.shortcut._iconsDir()
-    dialog = SwineIconDialog(dirStr, self.parent, tr("Select Icon"))
+    dialog = SwineIconDialog(dirStr, self.parent, self.tr("Select Icon"))
     if dialog.exec_():
       pass
     self.iconFile = dialog.iconFile
@@ -441,7 +445,7 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
       self.shortcut.setIcon(self.iconFile)
   def okButton_clicked(self):
     if not self.nameInput.text():
-      raise SwineException(tr("Shortcut name cannot be empty"))
+      raise SwineException(self.tr("Shortcut name cannot be empty"))
     self.shortcut.rename(unicode(self.nameInput.text()))
     self.shortcut.setIcon(self.iconFile)
     self.shortcut.setProgram(str(self.applicationInput.text()), str(self.paramsInput.text()))
@@ -475,7 +479,7 @@ class SwineRunDialog(SwineProgramDialog):
     # status codes from include/winerror.h
     # 0: success
     if res.returncode:
-      dialog = QMessageBox(QMessageBox.Critical, tr("Error"), tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
+      dialog = QMessageBox(QMessageBox.Critical, self.tr("Error"), self.tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
       dialog.setDetailedText(res.stderr_data)
       dialog.adjustSize()
       dialog.exec_()
@@ -487,11 +491,12 @@ class SwineRunDialog(SwineProgramDialog):
       self.parent.slotList_selectionChanged()
     if self.winebootCheckBox.isChecked():
       self.slot.runWineboot()
-  def __init__(self, slot, parent, name=tr("Run Program")):
+  def __init__(self, slot, parent):
     self.slot = slot
-    self.shortcut = Shortcut(tr("Run Program"), slot)
+    name = tr("Run Program")
+    self.shortcut = Shortcut(name, slot)
     SwineProgramDialog.__init__(self, self.shortcut, parent, name)
-    self.okButton.setText(tr("Run"))
+    self.okButton.setText(self.tr("Run"))
     self.icon.hide()
     self.nameLabel.hide()
     self.nameInput.hide()
@@ -505,7 +510,7 @@ class SwineShortcutDialog(SwineProgramDialog):
     self.accept()
   def __init__(self, shortcut, parent, name):
     SwineProgramDialog.__init__(self, shortcut, parent, name)
-    self.okButton.setText(tr("Save"))
+    self.okButton.setText(self.tr("Save"))
     self.winebootCheckBox.hide()
     self.addShortcutsCheckBox.hide()
     self.logfileCheckBox.hide()
@@ -522,14 +527,14 @@ def excepthook(excType, excValue, tracebackobj):
   f = tb.tb_frame
   obj = f.f_locals.get("self", None)
   functionName = f.f_code.co_name
-  callStr = tr("%s (%s, line %d)") % (f.f_code.co_name, os.path.basename(f.f_code.co_filename), f.f_lineno)
+  callStr = str(tr("%s (%s, line %d)")) % (f.f_code.co_name, os.path.basename(f.f_code.co_filename), f.f_lineno)
   if obj:
     callStr = obj.__class__.__name__+"::"+callStr
   if excType == SwineException:
     excStr = str(excValue)
     QMessageBox.critical(QApplication.desktop(), tr("Error"), excStr)
   else:
-    excStr = tr("%s: %s\nin %s") % (excType.__name__, excValue, callStr)
+    excStr = str(tr("%s: %s\nin %s")) % (excType.__name__, excValue, callStr)
     QMessageBox.critical(QApplication.desktop(), tr("Error"), excStr)
 
 
