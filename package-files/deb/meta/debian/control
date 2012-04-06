@@ -1,14 +1,14 @@
 Source: swine
 Section: otherosfs
 Priority: extra
-Maintainer: Dennis Schwerdel <schwerdel+swine@goolgemail.com>
-Build-Depends: debhelper (>= 5), pyqt-tools
+Maintainer: Dennis Schwerdel <schwerdel+swine@googlemail.com>
+Build-Depends: debhelper (>= 5), pyqt4-dev-tools
 Standards-Version: 3.7.3
 
 Package: swine
 Architecture: all
-Depends: ${shlibs:Depends}, python-qt3, python, cabextract, wine, winetricks, xterm, icoutils
-Description: A graphical frontend for wine
+Depends: ${shlibs:Depends}, python-qt4, python (>= 2.6), cabextract, wine (>= 1.1), winetricks, xterm, icoutils
+Description: Graphical frontend for wine
  Swine is a graphical frontend for wine (windows-api emulation 
  for Linux) that can manage several slots. With Swine you can 
  install windows programs on Linux using a clean windows for 
@@ -17,6 +17,6 @@ Description: A graphical frontend for wine
 Source: swine
 Section: otherosfs
 Priority: extra
-Maintainer: Dennis Schwerdel <schwerdel+swine@goolgemail.com>
-Build-Depends: debhelper (>= 5), pyqt-tools
+Maintainer: Dennis Schwerdel <schwerdel+swine@googlemail.com>
+Build-Depends: debhelper (>= 5), pyqt4-dev-tools
 Standards-Version: 3.7.3

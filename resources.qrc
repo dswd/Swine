@@ -1,0 +1,45 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>images/application.png</file>
+    <file>images/application_add.png</file>
+    <file>images/application_delete.png</file>
+    <file>images/application_edit.png</file>
+    <file>images/application_form_magnify.png</file>
+    <file>images/application_lightning.png</file>
+    <file>images/application_xp_terminal.png</file>
+    <file>images/arrow_divide.png</file>
+    <file>images/arrow_refresh.png</file>
+    <file>images/cog.png</file>
+    <file>images/computer.png</file>
+    <file>images/computer_edit.png</file>
+    <file>images/cross.png</file>
+    <file>images/document-open-folder.png</file>
+    <file>images/document-open.png</file>
+    <file>images/drive_add.png</file>
+    <file>images/drive_cd.png</file>
+    <file>images/drive_delete.png</file>
+    <file>images/drive_magnify.png</file>
+    <file>images/drive_rename.png</file>
+    <file>images/folder.png</file>
+    <file>images/folder_explore.png</file>
+    <file>images/folder_grey.png</file>
+    <file>images/information.png</file>
+    <file>images/lightning_add.png</file>
+    <file>images/lightning_delete.png</file>
+    <file>images/package_add.png</file>
+    <file>images/package_go.png</file>
+    <file>images/pencil.png</file>
+    <file>images/pencil_add.png</file>
+    <file>images/plugin.png</file>
+    <file>images/plugin_add.png</file>
+    <file>images/script_gear.png</file>
+    <file>images/shape_flip_vertical.png</file>
+    <file>images/textfield_rename.png</file>
+    <file>images/wabi.png</file>
+    <file>images/wine.png</file>
+    <file>images/wrench.png</file>
+    <file>images/wrench_orange.png</file>
+    <file>images/document-open-folder.png</file>
+    <file>images/swine32.png</file>
+  </qresource>
+</RCC>

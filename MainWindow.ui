@@ -1,328 +1,422 @@
-<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
-<class>MainWindow</class>
-<widget class="QMainWindow">
-    <property name="name">
-        <cstring>MainWindow</cstring>
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>550</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Swine %s</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/images/swine32.png</normaloff>:/icons/images/swine32.png</iconset>
+  </property>
+  <widget class="QWidget" name="widget">
+   <layout class="QHBoxLayout">
+    <property name="spacing">
+     <number>0</number>
     </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>530</width>
-            <height>333</height>
-        </rect>
+    <property name="margin">
+     <number>0</number>
     </property>
-    <property name="caption">
-        <string>Swine VERSION</string>
-    </property>
-    <property name="icon">
-        <pixmap>image0</pixmap>
-    </property>
-    <hbox>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="QListBox">
-            <property name="name">
-                <cstring>slotList</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>7</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="maximumSize">
-                <size>
-                    <width>180</width>
-                    <height>32767</height>
-                </size>
-            </property>
-            <property name="mouseTracking">
-                <bool>false</bool>
-            </property>
-            <property name="acceptDrops">
-                <bool>false</bool>
-            </property>
-            <property name="lineWidth">
-                <number>1</number>
-            </property>
-            <property name="margin">
-                <number>0</number>
-            </property>
-            <property name="midLineWidth">
-                <number>0</number>
-            </property>
-            <property name="resizePolicy">
-                <enum>Manual</enum>
-            </property>
-            <property name="vScrollBarMode">
-                <enum>Auto</enum>
-            </property>
-            <property name="hScrollBarMode">
-                <enum>Auto</enum>
-            </property>
-            <property name="dragAutoScroll">
-                <bool>false</bool>
-            </property>
-            <property name="resizeMode" stdset="0">
-            </property>
-        </widget>
-        <widget class="QIconView">
-            <property name="name">
-                <cstring>shortcutList</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>7</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="mouseTracking">
-                <bool>false</bool>
-            </property>
-            <property name="acceptDrops">
-                <bool>false</bool>
-            </property>
-            <property name="resizePolicy">
-                <enum>Manual</enum>
-            </property>
-            <property name="dragAutoScroll">
-                <bool>false</bool>
-            </property>
-            <property name="resizeMode">
-                <enum>Adjust</enum>
-            </property>
-            <property name="itemsMovable">
-                <bool>false</bool>
-            </property>
-        </widget>
-    </hbox>
-</widget>
-<menubar>
-    <property name="name">
-        <cstring>menuBar</cstring>
-    </property>
-    <item text="&amp;Swine" name="Swine">
-        <action name="menuExitAction"/>
+    <item>
+     <widget class="QListWidget" name="slotList">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>180</width>
+        <height>32767</height>
+       </size>
+      </property>
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="midLineWidth">
+       <number>0</number>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="viewMode">
+       <enum>QListView::ListMode</enum>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="margin" stdset="0">
+       <number>0</number>
+      </property>
+      <property name="dragAutoScroll" stdset="0">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
-    <item text="&amp;Help" name="Help">
-        <action name="helpabout_SwineAction"/>
-        <action name="helpAbout_WineAction"/>
+    <item>
+     <widget class="QListWidget" name="shortcutList">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="flow">
+       <enum>QListView::LeftToRight</enum>
+      </property>
+      <property name="isWrapping" stdset="0">
+       <bool>true</bool>
+      </property>
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="viewMode">
+       <enum>QListView::ListMode</enum>
+      </property>
+      <property name="modelColumn">
+       <number>0</number>
+      </property>
+      <property name="uniformItemSizes">
+       <bool>true</bool>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="dragAutoScroll" stdset="0">
+       <bool>false</bool>
+      </property>
+      <property name="itemsMovable" stdset="0">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
-</menubar>
-<toolbars>
-</toolbars>
-<actions>
-    <action>
-        <property name="name">
-            <cstring>menunew_itemAction</cstring>
-        </property>
-        <property name="text">
-            <string>new item</string>
-        </property>
-        <property name="menuText">
-            <string>new item</string>
-        </property>
-    </action>
-    <action>
-        <property name="name">
-            <cstring>menumenuAction</cstring>
-        </property>
-        <property name="text">
-            <string>menu</string>
-        </property>
-        <property name="menuText">
-            <string>menu</string>
-        </property>
-    </action>
-    <action>
-        <property name="name">
-            <cstring>menumenuaAction</cstring>
-        </property>
-        <property name="text">
-            <string>a</string>
-        </property>
-        <property name="menuText">
-            <string>a</string>
-        </property>
-    </action>
-    <action>
-        <property name="name">
-            <cstring>menumenubAction</cstring>
-        </property>
-        <property name="text">
-            <string>b</string>
-        </property>
-        <property name="menuText">
-            <string>b</string>
-        </property>
-    </action>
-    <action>
-        <property name="name">
-            <cstring>helpabout_SwineAction</cstring>
-        </property>
-        <property name="iconSet">
-            <iconset>image1</iconset>
-        </property>
-        <property name="text">
-            <string>&amp;About Swine</string>
-        </property>
-        <property name="menuText">
-            <string>&amp;About Swine</string>
-        </property>
-        <property name="whatsThis">
-            <string></string>
-        </property>
-        <property name="accel">
-            <string></string>
-        </property>
-        <property name="visible">
-            <bool>true</bool>
-        </property>
-    </action>
-    <action>
-        <property name="name">
-            <cstring>menuExitAction</cstring>
-        </property>
-        <property name="iconSet">
-            <iconset>image2</iconset>
-        </property>
-        <property name="text">
-            <string>&amp;Exit</string>
-        </property>
-        <property name="menuText">
-            <string>&amp;Exit</string>
-        </property>
-        <property name="accel">
-            <string>Alt+F4</string>
-        </property>
-    </action>
-    <action>
-        <property name="name">
-            <cstring>helpAbout_WineAction</cstring>
-        </property>
-        <property name="iconSet">
-            <iconset>image3</iconset>
-        </property>
-        <property name="text">
-            <string>About &amp;Wine</string>
-        </property>
-        <property name="menuText">
-            <string>About &amp;Wine</string>
-        </property>
-    </action>
-</actions>
-<images>
-    <image name="image0">
-        <data format="PNG" length="2087">89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af4000007ee49444154588595976b7055d515c77ffb9c73cf2337f7de90dcc484249047e5218fa2bc549852abb450683bc24c33d5b11ddbaa6db5b6b61f9cdaa98e5374aad51947eb944ead8e4fc41951ec08881511a4589e0102012390a4799370731f27f779ceee87736122e49274cdecb9e79eb5f67ffdf75a6bafb3b7607c9902bc987f4e03196000d80b6c05fa2f9d209ffa8670a6c8d9a2cfae1d6eb54f97fdf5f8a942e0ca0408fc12d800dc02ac027e0abc06cc023603cf01e5a327d899d44baa268e2a76ee7d77501e3fb8f49a07efdef235632c706d1ce71a300f5837eadd10b03b3f4a805f001fe4891d3ab77a764058e256b20ed1fe0c99a8543f0f6a754a37871fde7ecbe672bfde690b655efba1d4e9f5f7fdebc9f108cc06e240b4807e18781cf827b01e58624eb76e2caa3282d8497cb64b3cee0eb72c3193965f9b1928f1cdb40c9d910cf49f4cde3991082c03f68d630370028801584662693caab6a4fbb3bdaa9d6e48e7d4a1c1c9fa8c1253405a92c2a1bf331d3fb5edfcc71321301f7866020416016d00bf2d7f2c5b5139b77faf82121b38b47565e90bdbd0469e324b342c4b23ab682406460e9cf8a2b5733c02065e0ace4d80c06a60bb7eefb686c455573fda100e435f0f91f4a49bbbebea4fafd53e7973ff2015a998556126fa293b65ff1d90e311985a679ad7a65cf79dbe4ce6fbc09951ba22e08e3ad3bc2723a5d6934ec781c71aaf0adc565f11a26f28427c28463a327cf65bb30e5e37a7d4b963f9d5ed67299a92cb0c1ead7c61efe43f5f00ba1281452bc261a6f9fdf3ffd1d575e8b86dbf01b46a42d45fe3f7dffaf5d2d2baf9c1202712099e686f7f0e18a90e594de1a09fff0e25c8a655f44ce4d8e4803ddd08a6c02cadc74a3210d13aee7dbee1249cbd32019f104ba75816e5bace037575a18e64f2e7b15c8e325da7da305015050568b56d80d701d4c19e96a35b5b37760dd9b174a26ce5bc921351c314abfcc10ca82150ced2dd6f7c0a1fc5c68d40a5ae2f2cf5f9483a0e08417d51118a10b852929312c77501688ec5be000e007cf0c7d50f8c8278eb4f8fcf684c6bcab569e95b94b3d162ddb9ce7f370736c2f98b4685089494eb7aa3a928a4f38eb252829480573d8610b4d9369de9f43b803316c8f2874e9e06963d7acfcc866c76c05cf762750f1c1c1e6d5388407599cf1714422085405caa95124551d8333c0cf066018c8bf2c8df5acf14d215225016f2f92ef3ebf9966842703e93e1602cd60c1cfa927ed77b5fa5a2eadb9845cb90d4225d07649b8c47363b0faedae0db96c84e8480a62b0a122e5f3da02b0a7b2211128ef3978b8edb0e37511cba1fddb8814965de34c7f50054758e90ce1af5e563f73b6d87ffa02e5db3f5c2bc425fc344c67511e4bb455eac608049e56186b3593e3a7fbe1d7843eeddde28073a76503fed4d2aaa6ec4f20bec1118198174da1bb60d761211ae9c2fae59bcc539fae1efc78b40c76026931260222508819492792b6f66d67757d0bc6b37abdfdefcec2bbfbeab5a56d7ee11e5d5152413902f58a40b990ca4539088c248c27ba79b88b20a4445c33a67dfdb3bd5456bf78c9967801ac3d8fb7063e3f542089c3c89ea9ac9ac78e85768a110b2bb3d2a2d7f5c995c5b235369a8aa45683ec8a4211183f8300c0f41cabeb87b100af88ba17106321adda5cc5abc4c2d4420e638295d88357303013445c154140ef6f6d11639d7bbf0c6c501511236454d5d501ed9874cda089f8e18e882fe2e38d7eb3977b29e5345f17e8580541252290894543f7ce7375f2d1801c0079c5a180cd6cf2e2ea62395624f24f2d2d0fe9d59ffb4e9774b1444d2862d1b215c059553e07c3f9c6985e21014073dc7aae68d0b9e5cd723d2380337175d7da56f4116f8647f2c56bf3f16eb067e2c5b3eeb235c71044541f47623cfb621b35914d342da51302dcf8faa81e5e7cb250c48e9f515e9422685e29b543cde792087d7e556cad6e65308e72d06bae978772f954a0e43016916217d3a683ee4e1cfc07110da18b0522201a92808c7855c160c9118ef50ba10784d9e397e0353a7b6503df57b727080687b07c3760a741d2141c6a3108b207b7b90c92428eae50de4c26e225f0f59c7c1303fbf5204aa8099c03d747cbe014bafe7ec69444f277367d679d175bc5e21cef582e6434809aaea6d39292f0394aa06992ce82a18d6196aa79fbe52047e8877203d4064f0490eec86b616507de00f423004c112afd8fc01a46e20633108042197fb72faa504018e61219271cfc6b4760b21dc42040ce037c041c0116bee5a8f14ef31a50e6a6aa02c0c811014073c22e1abbcd01a26a2fe2b1eb1d129d07d102a45c6a352b88eb7009ff13e78ad7806b0241fee22a00c7819a800ba2e825454af45721dc9d43a72d9665c57a2a98040a653c8c3fb10d7ce47a89a9706019806183a6473fb33c9d4935a2c22446812b8224671702778662d78b71c805ebcfd1fceffff0f70fd5821921f6e9c23239147444fe75a766c87865af8ceed5e0bd654709c3ee00954f58858def4b17ce5e94afc812e6a6a5542e59bc48c056b2f44e076e0581eb76a947380c5f9545c266279d3315156fe2e0b16e02e58bcd35d74d3062ccb2b40cb00582f56dcf68c58def431003ea31fd73d453004baf9fc051c053882b7dd7e07f48de1eb69e03d60fa659ad4c8a7a8c6a3ca8f7e76bb72d3ea2d188697efc4481f97dc27c40fee93f8f4268663b78986d93bc65a14c024e05ebcdb90bc648c006b0b4d94adfb7f225b764bb96b93945b5f6f2a64f7ffc85cbcf06f025a8108f06a4102cdbb96c87ddbfae4fbaf4ee4267551fe0723d1385eefe61edf0000000049454e44ae426082</data>
-    </image>
-    <image name="image1">
-        <data format="PNG" length="725">89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff610000029c49444154388da593cd6bdc6514859f779ad492693289692133b1e663da5469a10a2615a9204837428a7550a1a4edc285ab6c5570e57f2054b0bab21f5411635c0b564cc4e02cdc94310d639b34e6636a4c33c924fe66defbbef7ba1093d6e246cff272793870ce7166c6ff51d33f0f858f66f2a2e18c053dd7f0d2154c31b4027a3906bd36f1ce73b7eeff77f73b78f9e274c17bb9d097b1ec504f3b6dbb7701b09e0426cb77b9b1b4b58cb3d1e27b2f8e3d0438f561a9e013b974f2504bfa68772b8bab9eca7a425423d3b28b5c660fe5df6b8c7f736b8b26ce17df3f35b60d18fee046bf48983c79309d3bdcd54a71b64a08c2b19e0e30e3a7d9355cca7124bb975fd76a7cf5757909d3e78b1fbf763b05201a46fada2cf744b68da9f23d7ce2918632fc4c96e1c11c1204dff09416aaf4eecb3070b02d67898c00a4007c8c678ff776325bd94444108d440d7c3935cfd8d43c5e3c3e78369384b9950d4e3cd583f3feec760a3ef1dd1dad4d9497ab84189128982a232ff463c0d4f412a60a382aab1b0ce41ec362d2bde3a0e1313582810f0d3446548dd29d35fea807a20f44890409042f980362641b00717175ab4e67ba1967294c0d8d91bf1232a2045404154f26fd0877376a38a78b3b001fae4c9416e8d99f065508c6e9677b79f2f10e5af634337afa18224210a1af2bc3e4e42f805dd969623db93a7db3f6663edb9e1b1ad8cff7a5053eff6e864fafff8c49c04c318ca70f1f60aebac1ed5279c9c1d5078a34f8c66705abd52fbdf4cad174ffbe566ede5961e55e0d0dcaa3ed2d1c3ad0c95c7593eb5f7cbb856b3e5f1c7f6bec0100c0e0eb9f14307f217f249b3d713c4fe7dedd80f1db7a9d891f66982f95979d4b8d16c7df7eb8ca7f6be8d58b79b37806d37368bd0b539c7315e0b243aefd38feeebf8fe9bfe84fa83f827b2d5eeffa0000000049454e44ae426082</data>
-    </image>
-    <image name="image2">
-        <data format="PNG" length="651">89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff610000025249444154388d9d935f4b145118c69f73664667767666db5ca4964a44886224906e82a8b0408220bab32cca922084282ac98fd155f45d2a85a23ec1085de562ceee6ca1aebaee1ee73d7fbad05637f1a21e3817e7e53c3fcefb9cf3c218837f5962722ab77fcfb15f33b30398998d7088b627a72243d9e3d6f8c4e53fb53dc0ccec002cab62388ff5f3970720db0f1e45e03ce641f046134d6fdebc75760fb06b466f2fe0ba00e7b19c7eda8188fb0f2330165b791f3da5129c301cd7198dad5d1be3cc1803bc7aed1aadb7e0799c0501f4c60674a3012ddac39a2418e7310f033861012259c6762d559ac82bcebda71d0000fdec856b946a32cfb37858805a6f40aeadc290841504700a21c4720291a6ca48ca17e73e0800e80000403e9976b5544d9ecb5976f108a034a035a015449240a4f51df3fc4771304400f6bbb7c210e5696545831450a9008b8b805210b5546bcabacc070000a089861803879200112025202598c5b9ce68e8eff35d80f69d7b111862cbcb0192807219281f07a4446fa100cbb6e2fac8f9ae27ee64d0ba7d37629cc576ce87138668d7aa10f5bad244cc2d1ee57ef9185ab514ad6a15d96673b8fc6d61a17383d6f844c4188b6d2f0727f0d14e76d2d619e50d91bf95246af3fb2272a53e78a512ec1e275e1e1c8a00c0deedbb9f3b366034da490ded9f756548e6fbbe7c1200909e1bc93793a469b2cc727c1f8c7318a5fa012c745a58bf7e63943bce1c6dac6b4dd22f7dfddc9576f5f419d728d5ec09024bacae5e3db954990780ae495bb97465f4d7858bee6193f86360d05d3a716a747fadeb23fd8f7e03bf9e75c9cb73019f0000000049454e44ae426082</data>
-    </image>
-    <image name="image3">
-        <data format="PNG" length="415">89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff610000016649444154388d9592214f03411085bf23235634a462654155905079a20259790251920a122a10888afe840a7ec08913151535284c45492a9015a750881315882359813871e2c4268b29a5a5dc512659b1d9f7decc7b3bdee9f1315575757bebce5b2d168b05278d068f9389b7fdee550984d3a90b82001121cff3cd31c6701d041ec05155f7f97c8e880050abd5d05aa3944229b5c1481979f9faea3aed364551a094a2280ac6e331ef69ba63a354c018c3b05e27f27d661f1f5c6a4d0d78f9812bb510c73102d481bed6d44510e0e1f9f93081244900b0eb0c2cf094e7b4cfce767ea132442b8258bbbe586ec2700f532ad0ebf5bec922d8bb3b86fdbef713571aa2d69ac16a4543294651c4fd60b047868a458a93c4359b4db4c8afc43f2de4794eb7dbade2fe2ef096652e31c645517490c04e06a330745fab0b90a6e9ff26e8743a2c974b7cdf0760369b618ac2c549e20e9ae0a2d5da0496a6a9cbb20c6beddef26cd7277db580e43385ac300000000049454e44ae426082</data>
-    </image>
-</images>
-<connections>
-    <connection>
-        <sender>slotList</sender>
-        <signal>selectionChanged()</signal>
-        <receiver>MainWindow</receiver>
-        <slot>slotList_selectionChanged()</slot>
-    </connection>
-    <connection>
-        <sender>shortcutList</sender>
-        <signal>returnPressed(QIconViewItem*)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>shortcutList_itemExceuted(QIconViewItem*)</slot>
-    </connection>
-    <connection>
-        <sender>shortcutList</sender>
-        <signal>doubleClicked(QIconViewItem*)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>shortcutList_itemExceuted(QIconViewItem*)</slot>
-    </connection>
-    <connection>
-        <sender>shortcutList</sender>
-        <signal>rightButtonClicked(QIconViewItem*,const QPoint&amp;)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>shortcutList_rightButtonClicked(QIconViewItem*,const QPoint&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>helpabout_SwineAction</sender>
-        <signal>activated()</signal>
-        <receiver>MainWindow</receiver>
-        <slot>helpabout_SwineAction_activated()</slot>
-    </connection>
-    <connection>
-        <sender>menuExitAction</sender>
-        <signal>activated()</signal>
-        <receiver>MainWindow</receiver>
-        <slot>menuExitAction_activated()</slot>
-    </connection>
-    <connection>
-        <sender>shortcutList</sender>
-        <signal>selectionChanged()</signal>
-        <receiver>MainWindow</receiver>
-        <slot>shortcutList_selectionChanged()</slot>
-    </connection>
-    <connection>
-        <sender>helpAbout_WineAction</sender>
-        <signal>activated()</signal>
-        <receiver>MainWindow</receiver>
-        <slot>helpAbout_WineAction_activated()</slot>
-    </connection>
-    <connection>
-        <sender>slotList</sender>
-        <signal>rightButtonClicked(QListBoxItem*,const QPoint&amp;)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>slotList_rightButtonClicked(QListBoxItem*,const QPoint&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>slotList</sender>
-        <signal>returnPressed(QListBoxItem*)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>slotList_itemExecuted(QListBoxItem*)</slot>
-    </connection>
-    <connection>
-        <sender>slotList</sender>
-        <signal>doubleClicked(QListBoxItem*)</signal>
-        <receiver>MainWindow</receiver>
-        <slot>slotList_itemExecuted(QListBoxItem*)</slot>
-    </connection>
-</connections>
-<slots>
-    <slot>slotList_selectionChanged( QIconViewItem * )</slot>
-    <slot>slotList_selectionChanged()</slot>
-    <slot>slotList_itemRenamed( QIconViewItem * )</slot>
-    <slot>slotList_itemRenamed( QIconViewItem *, const QString &amp; )</slot>
-    <slot>shortcutList_itemExceuted( QIconViewItem * )</slot>
-    <slot>shortcutList_itemRenamed( QIconViewItem *, const QString &amp; )</slot>
-    <slot>slotList_rightButtonClicked( QIconViewItem *, const QPoint &amp; )</slot>
-    <slot>testSlot()</slot>
-    <slot>shortcutList_rightButtonClicked( QIconViewItem *, const QPoint &amp; )</slot>
-    <slot>slotList_doubleClicked( QIconViewItem * )</slot>
-    <slot>slotList_itemExecuted( QIconViewItem * )</slot>
-    <slot>shortcutList_selectionChanged( QIconViewItem * )</slot>
-    <slot>helpabout_SwineAction_activated()</slot>
-    <slot>menuExitAction_activated()</slot>
-    <slot>shortcutList_selectionChanged()</slot>
-    <slot>helpAbout_WineAction_activated()</slot>
-    <slot>slotList_returnPressed( QListBoxItem * )</slot>
-    <slot>slotList_doubleClicked( QListBoxItem * )</slot>
-    <slot>slotList_rightButtonClicked( QListBoxItem *, const QPoint &amp; )</slot>
-    <slot>slotList_itemExecuted( QListBoxItem * )</slot>
-</slots>
-<functions>
-    <function>quit()</function>
-</functions>
-<layoutdefaults spacing="2" margin="1"/>
-</UI>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>550</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSwine">
+    <property name="title">
+     <string>Swine</string>
+    </property>
+    <addaction name="menuExitAction"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="helpabout_SwineAction"/>
+    <addaction name="helpAbout_WineAction"/>
+   </widget>
+   <addaction name="menuSwine"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="helpabout_SwineAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/information.png</normaloff>:/icons/images/information.png</iconset>
+   </property>
+   <property name="text">
+    <string>About Swine</string>
+   </property>
+   <property name="whatsThis">
+    <string/>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>helpabout_SwineAction</cstring>
+   </property>
+  </action>
+  <action name="menuExitAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/cross.png</normaloff>:/icons/images/cross.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+F4</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>menuExitAction</cstring>
+   </property>
+  </action>
+  <action name="helpAbout_WineAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/wine.png</normaloff>:/icons/images/wine.png</iconset>
+   </property>
+   <property name="text">
+    <string>About Wine</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>helpAbout_WineAction</cstring>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="2" margin="1"/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>helpabout_SwineAction</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>helpabout_SwineAction_activated()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuExitAction</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>menuExitAction_activated()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>shortcutList</sender>
+   <signal>selectionChanged()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>shortcutList_selectionChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>helpAbout_WineAction</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>helpAbout_WineAction_activated()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>slotList</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slotList_rightButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>slotList</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slotList_itemExecuted()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>slotList</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slotList_selectionChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>89</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>shortcutList</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>shortcutList_rightButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>shortcutList</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>shortcutList_itemExecuted()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>shortcutList</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>shortcutList_selectionChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>slotList</sender>
+   <signal>itemChanged(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slotList_itemRenamed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>89</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>shortcutList</sender>
+   <signal>itemChanged(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>shortcutList_itemRenamed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slotList_selectionChanged()</slot>
+  <slot>slotList_itemExecuted()</slot>
+  <slot>slotList_rightButtonClicked()</slot>
+  <slot>shortcutList_rightButtonClicked()</slot>
+  <slot>shortcutList_itemExecuted()</slot>
+  <slot>shortcutList_selectionChanged()</slot>
+  <slot>slotList_itemRenamed()</slot>
+  <slot>shortcutList_itemRenamed()</slot>
+ </slots>
+</ui>

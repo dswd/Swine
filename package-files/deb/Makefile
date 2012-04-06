@@ -10,11 +10,11 @@ unpack: swine_$(rev).orig.tar.gz
 	find swine-$(rev) -name .svn -exec rm -rf \{\} \; || true
 
 build: unpack
-	cd swine-$(rev); debuild; cd ..
+	cd swine-$(rev); debuild -b -us -uc; cd ..
 
 rebuild: swine_$(rev).dsc
 	dpkg-source -x swine_$(rev).dsc
-	cd swine-$(rev); debuild binary; cd ..
+	cd swine-$(rev); debuild -b -us -uc; cd ..
 
 clean:
 	rm -rf swine-$(rev)*

@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 ############################################################################
-#    Copyright (C) 2007 by Dennis Schwerdel, Thomas Schmidt                #
+#    Copyright (C) 2012 by Dennis Schwerdel, Thomas Schmidt                #
 #                                                                          #
 #                                                                          #
 #    This program is free software; you can redistribute it and or modify  #
@@ -17,3 +18,22 @@
 #    Free Software Foundation, Inc.,                                       #
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
+
+import os 
+
+os.environ['PATH'] += ":" + os.path.dirname(__file__)
+
+VERSION = "0.7-rc1"
+
+HOME_PATH = os.getenv("HOME")
+SWINE_PATH = os.path.join(HOME_PATH, ".swine")
+SWINE_SLOT_PATH = SWINE_PATH
+SWINE_DEFAULT_SLOT_NAME = "DEFAULT"
+SWINE_DEFAULT_SLOT_PATH = os.path.join(SWINE_PATH, SWINE_DEFAULT_SLOT_NAME)
+SWINE_DEFAULT_SECTION = "__SYSTEM__"
+WINE_PATH = os.path.join(HOME_PATH, ".wine")
+WINETRICKS = "winetricks"
+REAL_PATH = os.path.dirname(os.path.realpath(__file__))
+WISRUN = os.path.join(REAL_PATH, "/wisrun")
+DESKTOP_MENU_DIR = os.path.join(HOME_PATH, ".local/share/applications/swine")
+TRANSLATION_DIRS = ["translations", "/usr/share/swine/translations", "/usr/local/share/swine/translations"]

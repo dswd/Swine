@@ -1,29 +1,16 @@
 Dependencies
 ============
 Swine needs the following packages:
-- wine (Version 0.9.28 tested)
-- qt-3 (Version 3.3.8 tested)
-- python (Version 2.4 tested)
-- pyqt (Version 3.14.1 tested)
-- cabextract (Version 1.2-2 tested)
-- xterm (Version 229 tested)
-- icoutils
+- wine (Version 1.3.23 tested)
+- qt-4 (Version 4.7.4 tested)
+- python (Version 2.6 and 2.7 tested)
+- python-qt4 (Version 4.8.5 tested)
+- cabextract (Version 1.4 tested)
+- xterm (Version 271 tested)
+- icoutils (Version 0.29.1 tested)
 
 Included Works
 ==============
-Winetricks
-	Quick and dirty script to download and install various
-	redistributable runtime libraries
-	Current maintainers: Austin English, Dan Kegel
-	Copyright 2007, 2008, 2009 Google (Dan Kegel, dank@kegel.com)
-	Copyright 2008, 2009 Austin English (austinenglish@gmail.com)
-	Thanks to Detlef Riekenberg for lots of updates
-	Thanks to Saulius Krasuckas for corrections and suggestions
-	Thanks to Erik Inge BolsÃ¸ for several patches
-	Thanks to Hugh Perkins for the directplay patch
-	Please report problems at http://code.google.com/p/winezeug/issues
-	See also http://wiki.winehq.org/winetricks
-	Licensed under the GNU Lesser General Public License
 Silk Icon Set 1.3
 	This is the Iconset used by Swine
 	Copyright (c)   Mark James	
@@ -34,7 +21,6 @@ Silk Icon Set 1.3
 Compiling the sources
 =====================
 In the source distribution the ui-files need to be compiled in py-files.
-Also the executable winresdump has to be compiled.
 The following steps are needed:
 - make
 

@@ -1,3 +1,15 @@
+swine (0.7-rc1) unstable; urgency=low
+
+  * QT4 migration         
+  * Automatic winetricks menu creation
+  * Major rewrite of all code
+  * Moved images to resource file 
+  * Internationalization support
+  * German translation
+  * Bugfix: using /UNIX when calling start with a unix path
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Fri, 06 Apr 2012 09:48:06 +0200
+
 swine (0.6) unstable; urgency=low
 
   * Verswion 0.6

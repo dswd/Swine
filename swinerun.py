@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 ############################################################################
-#    Copyright (C) 2007 by Dennis Schwerdel, Thomas Schmidt                #
+#    Copyright (C) 2007-2012 by Dennis Schwerdel, Thomas Schmidt           #
 #                                                                          #
 #                                                                          #
 #    This program is free software; you can redistribute it and or modify  #
@@ -26,124 +26,79 @@ sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 import swinelib
 import time
 from swinelib import *
-from qt import *
+from PyQt4.QtGui import *
+from PyQt4.QtCore import Qt, QTranslator, QLocale
 from threading import Thread
 from RunnerDialog import *
-from swine import SwineSlotItem
+from swine import SwineSlotItem, loadIcon, excepthook, tr
 
-IMAGE_FOLDER = os.path.dirname(os.path.realpath(__file__)) + "/images/"
-def loadPixmap ( name ):
-	return QPixmap(QString(IMAGE_FOLDER+name))
+class NewSlotItem(QListWidgetItem):
+  def __init__(self,parent):
+    self.icon = loadIcon(":/icons/images/folder_grey.png")
+    QListWidgetItem.__init__(self,self.icon, " " + tr("Create new slot..."), parent)
+  def mainWindow(self):
+    return self.listWidget().topLevelWidget()
+  def refreshShortcutList(self):
+    self.mainWindow().slotList_selectionChanged()
 
-def loadIcon ( name ):
-	pm = QPixmap ( name )
-	pm.setMask ( pm.createHeuristicMask() )
-	if not pm or pm.isNull():
-		pm = loadPixmap("wabi.png")
-	return QPixmap ( pm.convertToImage().smoothScale(32,32,QImage.ScaleMin) )
+class SwineRunnerDialog(QMainWindow, Ui_RunnerDialog):
+  def __init__(self, args):
+    QMainWindow.__init__(self)
+    self.setupUi(self)
+    self.setWindowTitle(str(self.windowTitle()) % VERSION)
+    self.args = args
+  def currentSlotItem(self):
+    item = self.slots.currentItem()
+    if item and item.isSelected():
+      return item
+    return None    
+  def rebuildSlotList(self):
+    self.slots.clear()
+    NewSlotItem(self.slots)
+    for slot in getAllSlots():
+      SwineSlotItem(self.slots, slot)
+    self.slots.setCurrentRow(0)
+  def slots_itemExecuted(self, item):
+    self.execute(item)      
+  def selectButton_clicked(self):
+    self.execute(self.currentSlotItem())
+  def execute(self, item):
+    slot = None
+    if isinstance(item, SwineSlotItem):
+      slot = item.slot
+    elif isinstance(item, NewSlotItem):
+      (text, code) = QInputDialog.getText(self, tr("Create Slot"), tr("Name:"), text=tr("New Slot"))
+      if code:
+        slot = Slot(str(text))
+        slot.create()
+    if slot:
+      self.hide()
+      res = slot.runWin(self.args[1:], wait=True)
+      if res.returncode:
+        dialog = QMessageBox(QMessageBox.Critical, tr("Error"), tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
+        dialog.setDetailedText(res.stderr_data)
+        dialog.adjustSize()
+        dialog.exec_()
+      else:
+        if QMessageBox.question(self, tr("Import shortcuts"), tr("Do you want to import program shortcuts?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
+          slot.findShortcuts()
+      self.close()
 
-class NewSlotItem(QListBoxPixmap):
-	def __init__(self,parent):
-		self.pixmap = loadPixmap("folder_grey.png")
-		QListBoxPixmap.__init__(self,parent,self.pixmap,"Create new slot...")
-	def mainWindow(self):
-		return self.listBox().topLevelWidget()
-	def refreshShortcutList(self):
-		self.mainWindow().slotList_selectionChanged()
-
-class SwineRunnerDialog(RunnerDialog):
-	def currentSlotItem(self):
-		item = self.slots.selectedItem()
-		if item and item.isSelected():
-			return item
-		return None
-		
-	def rebuildSlotList(self):
-		self.slots.clear()
-		for slot in getAllSlots():
-			SwineSlotItem(self.slots,slot)
-		NewSlotItem(self.slots)
-		self.slots.setCurrentItem ( self.slots.firstItem() )
-
-	def slots_itemExecuted(self,item):
-		self.execute(item)
-			
-	def selectButton_clicked(self):
-		self.execute(self.currentSlotItem())
-		
-	def execute(self,item):
-		slot = None
-		if item.__class__ == SwineSlotItem:
-			slot = item.slot
-		elif item.__class__ == NewSlotItem:
-			result = QInputDialog.getText ( "Create Slot", "Name:", QLineEdit.Normal, "New Slot" )
-			if result[1]:
-				slot = Slot(str(result[0]))
-				slot.create()
-		if slot:
-			self.hide()
-			slot.runWin(self.args[1:], wait=True)
-			self.close()
-
-	def excepthook(self, excType, excValue, tracebackobj):
-		tb = tracebackobj
-		while not tb.tb_next == None:
-			tb = tb.tb_next
-		f = tb.tb_frame
-		obj = f.f_locals.get("self", None)
-		functionName = f.f_code.co_name
-		callStr = f.f_code.co_name+" (" + os.path.basename(f.f_code.co_filename) + ", line "+str(f.f_lineno)+")"
-		if obj:
-			callStr = obj.__class__.__name__+"::"+callStr
-		if excType == SwineException:
-			excStr = str(excValue)
-			QMessageBox.critical (self, "Error", excStr )
-		else:
-			excStr = str(excType.__name__) + ": " + str(excValue) + "\nin " + callStr
-			QMessageBox.critical (self, "Error", excStr )
-
-	def __init__(self,args,parent = None,name = None,fl = 0):
-		RunnerDialog.__init__(self,parent,name,fl)
-		self.setCaption ( "Swine " + VERSION )
-		self.args = args
-
-class UIThread(Thread):
-	def __init__(self,args):
-		Thread.__init__(self)
-		self.args=args
-
-	def run(self):
-		app=QApplication(self.args)
-		global win
-		win=SwineRunnerDialog(self.args)
-		win.show()
-		sys.excepthook=excepthook
-		win.rebuildSlotList()
-		app.connect(app, SIGNAL("lastWindowClosed()"), app, SLOT("quit()"))
-		app.connect(app, SIGNAL("lastWindowClosed()"), self.quit)
-		app.exec_loop()
-
-	def quit(self):
-		QApplication.exit(0)
-		sys.exit(0)
-
-
-win=None
-		
 def main(args):
-	ui=UIThread(args)
-	ui.start()
-	sys.excepthook=excepthook
-	while(1):
-		time.sleep(1)
-	
-def excepthook(excType, excValue, tracebackobj):
-	if excType == KeyboardInterrupt:
-		sys.exit(0)
-	else:
-		global win
-		win.excepthook(excType, excValue, tracebackobj)
-
+  swinelib.tr = tr
+  app=QApplication(args)
+  for path in TRANSLATION_DIRS:
+    translator = QTranslator()
+    translator.load(QLocale().name(), path)
+    if not translator.isEmpty():
+      app.installTranslator(translator)
+      break
+  win=SwineRunnerDialog(args)
+  win.show()
+  sys.excepthook=excepthook
+  win.rebuildSlotList()
+  sys.exit(app.exec_())
+  
 if __name__=="__main__":
-	if len(sys.argv) > 1:
-		main(sys.argv)
+  if len(sys.argv) > 1:
+    main(sys.argv)
