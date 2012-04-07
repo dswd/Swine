@@ -397,7 +397,7 @@ class Slot:
         n_nr1, n_nr2, n_size, n_color = parseIcoName(n)
         return n_nr1 == nr1 and n_nr2 == nr2
       return filter(lambda n: icoFilterName(n, nr1, nr2), l)
-    if len(icons) >= nr and nr >= 0:
+    if len(icons) > nr and nr >= 0:
       icons.sort(icoCmpNr)
       nr1, nr2, size, color = parseIcoName(icons[nr])
       icons = icoFilter(icons, nr1, nr2)
