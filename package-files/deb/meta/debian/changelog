@@ -1,3 +1,14 @@
+swine (0.7-rc2) unstable; urgency=low
+
+  * Reimplemented LNK parser
+  * Migrated from ini files to json
+  * Using descriptions from LNK shortcuts
+  * Winetricks cache is readable now
+  * Fixed problem with icon extraction and invalid icon index
+  * Fixed translation bug in winetricks caching
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Sat, 07 Apr 2012 12:02:32 +0200
+
 swine (0.7-rc1) unstable; urgency=low
 
   * QT4 migration         
