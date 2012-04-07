@@ -18,190 +18,93 @@
 #    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
 ############################################################################
 
-import os, stat, array
+import struct, collections
 
-DWORD=4
-QWORD=8
+LnkFlags = collections.namedtuple("LnkFlags", ["customIcon", "commandLineArgs", "workingDirectory", "relativePath", "description", "pointsToFileDir", "shellIdList"])
 
-def bytes2long(bytes):
-	return bytes[3]*256+bytes[2]*256+bytes[1]*256+bytes[0]
+FileAttributes = collections.namedtuple("FileAttributes", ["offline", "compressed", "reparse", "sparse", "temporary", "normal", "ntfsEfs", "archive", "directory", "volumeLabel", "system", "hidden", "readOnly"])
 
-def getbit(value,number):
-	return (value>>number) & 1
+SW_HIDE = 0
+SW_NORMAL = 1
+SW_SHOWMINIMIZED = 2
+SW_SHOWMAXIMIZED = 3
+SW_SHOWNOACTIVE = 4
+SW_SHOW = 5
+SW_MINIMIZE = 6
+SW_SHOWMINNOACTIVE = 7
+SW_SHOWNA = 8
+SW_RESTORE = 9
+SW_SHOWDEFAULT = 10
 
-def readlnk(filename):
-	fileobj = open(filename, mode='rb')
-	size = os.lstat(filename)[stat.ST_SIZE]
-	data = array.array("B")
-	data.read ( fileobj, size )
-	shortcut = {}
-	shortcut['magic_number'] = bytes2long(data[0x0:0x0+DWORD])
-	if not shortcut['magic_number'] == ord("L"):
-		raise Exception("Magic number must be 76 ('L')")
-	shortcut['GUID'] = data[0x4:0x4+16]
-	if not shortcut['GUID'] == array.array ("B", [0x1, 0x14, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0xC0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46 ] ):
-		raise Exception("GUID must be 0114 0200 0000 0000 C000 0000 0000 0046")
-	flags = bytes2long(data[0x14:0x14+DWORD])
-	shortcut['flags'] = {
-		"shell_item_id_present": getbit(flags,0),
-		"file_or_directory": getbit(flags,1),
-		"description": getbit(flags,2),
-		"relative_path": getbit(flags,3),
-		"working_directory": getbit(flags,4),
-		"command_line_arguments": getbit(flags,5),
-		"custom_icon": getbit(flags,6)
-	}
-	file_attr = bytes2long(data[0x18:0x18+DWORD])
-	shortcut['file_attr'] = {
-		"read_only": getbit(file_attr,0),
-		"hidden": getbit(file_attr,1),
-		"system_file": getbit(file_attr,2),
-		"volume_label": getbit(file_attr,3),
-		"directory": getbit(file_attr,4),
-		"archive": getbit(file_attr,5),
-		"encrypted": getbit(file_attr,6),
-		"normal": getbit(file_attr,7),
-		"temporary": getbit(file_attr,8),
-		"sparse_file": getbit(file_attr,9),
-		"reparse_point_data": getbit(file_attr,10),
-		"compressed": getbit(file_attr,11),
-		"offline": getbit(file_attr,12),
-	}
-	shortcut['creation_time'] = data[0x1C:0x1C+QWORD]
-	shortcut['modification_time'] = data[0x24:0x24+QWORD]
-	shortcut['access_time'] = data[0x2C:0x2C+QWORD]
-	shortcut['file_length'] = bytes2long(data[0x34:0x34+DWORD])
-	shortcut['icon_number'] = bytes2long(data[0x38:0x38+DWORD])
-	shortcut['show_wnd'] = bytes2long(data[0x3C:0x3C+DWORD])
-	shortcut['hot_key'] = bytes2long(data[0x40:0x40+DWORD])
-	if not data[0x44:0x44+2*DWORD] == array.array("B",[0,0,0,0,0,0,0,0]):
-		raise Exception("0x44-0x4C must be 00 00 00 00 00 00 00 00")
-	start = 0x4C
-	if shortcut['flags']['shell_item_id_present']:
-		start += data[0x4C]+data[0x4D]*256+2	
-	file_location = {}
-	file_location['total_length'] = bytes2long(data[start+0x0:start+0x0+DWORD])
-	if not bytes2long(data[start+0x4:start+0x4+DWORD]) == 0x1C:
-		raise Exception("0x04-0x08 of file_location must be 0x1C")
-	flags = bytes2long(data[start+0x08:start+0x08+DWORD])
-	file_location['flags'] = {
-		'on_local_volume': getbit ( flags, 0 ),
-		'on_network_drive': getbit ( flags, 1 )
-	}
-	file_location['local_volume_info_offset'] = bytes2long(data[start+0xC:start+0xC+DWORD])
-	file_location['base_pathname_offset'] = bytes2long(data[start+0x10:start+0x10+DWORD])
-	file_location['network_volume_info_offset'] = bytes2long(data[start+0x14:start+0x14+DWORD])
-	file_location['remaining_pathname_offset'] = bytes2long(data[start+0x18:start+0x18+DWORD])
-	local_volume = {}
-	
-	if file_location['flags']['on_local_volume']:
-		block = start + file_location['local_volume_info_offset']
-		local_volume['length'] = bytes2long(data[block+0x0:block+0x0+DWORD])
-		local_volume['type'] = bytes2long(data[block+0x4:block+0x4+DWORD])
-		local_volume['serial_number'] = bytes2long(data[block+0x8:block+0x8+DWORD])
-		if not bytes2long(data[block+0xC:block+0xC+DWORD]) == 0x10:
-			raise Exception("0x0C-0x10 of local_volume_info must be 0x10")
-		index = block + 0x10
-		name = ""
-		while not data[index] == 0:
-			name += chr(data[index])
-			index = index + 1
-		local_volume['volume_label'] = name
-		index = start + file_location['base_pathname_offset']
-		name = ""
-		while not data[index] == 0:
-			name += chr(data[index])
-			index = index + 1
-		local_volume['base_pathname'] = name
-	
-	network_volume = {}
-	if file_location['flags']['on_network_drive']:
-		block = start + file_location['network_volume_info_offset']
-		network_volume['length'] = bytes2long(data[block+0x0:block+0x0+DWORD])
-		index = block + 0x14
-		name = ""
-		while not data[index] == 0:
-			name += chr(data[index])
-			index = index + 1
-		network_volume['volume_label'] = name
-	
-	index = start + file_location['remaining_pathname_offset']
-	name = ""
-	while not data[index] == 0:
-		name += chr(data[index])
-		index = index + 1
-	file_location['remaining_pathname'] = name
-	
-	start += file_location['total_length']
-	
-	if shortcut['flags']['description']:
-		name = ""
-		for i in range(0,2*(data[start]+256*data[start+1])):
-			if i % 2 == 0:
-				name += chr(data[start+2+i]+data[start+2+i+1]*256)
-		start += i + 2 + 1
-		shortcut['description']=str(name[:-1])
-	else:
-		shortcut['description']=""
+LnkFile = collections.namedtuple("LnkFile", ["lnkFlags", "timeCreate", "timeAccess", "timeModify", "fileLength", "iconIndex", "showWindow", "hotkey", "fileAttributes", "target", "description", "relativePath", "workingDirectory", "commandLineArgs", "customIcon"])
 
-	if shortcut['flags']['relative_path']:
-		name = ""
-		for i in range(0,2*(data[start]+256*data[start+1])):
-			if i % 2 == 0:
-				name += chr(data[start+2+i]+data[start+2+i+1]*256)
-		start += i + 2 + 1
-		shortcut['relative_path']=name
-	else:
-		shortcut['relative_path']=""
-		
-	if shortcut['flags']['working_directory']:
-		name = ""
-		for i in range(0,2*(data[start]+256*data[start+1])):
-			if i % 2 == 0:
-				name += chr(data[start+2+i]+data[start+2+i+1]*256)
-		start += i + 2 + 1
-		shortcut['working_directory']=str(name[:-1])
-	else:
-		shortcut['working_directory']=""
-		
-	if shortcut['flags']['command_line_arguments']:
-		name = ""
-		for i in range(0,2*(data[start]+256*data[start+1])):
-			if i % 2 == 0:
-				name += chr(data[start+2+i]+data[start+2+i+1]*256)
-		start += i + 2 + 1
-		shortcut['command_line_arguments']=str(name[:-1])
-	else:
-		shortcut['command_line_arguments']=""
-	
-	if shortcut['flags']['custom_icon']:
-		name = ""
-		for i in range(0,2*(data[start]+256*data[start+1])):
-			if i % 2 == 0:
-				name += chr(data[start+2+i]+data[start+2+i+1]*256)
-		start += i + 2 + 1
-		shortcut['custom_icon']=str(name[:-1])
-	else:
-		shortcut['custom_icon']=""
+def getBits(byte):
+  return map(bool,(byte&0x80, byte&0x40, byte&0x20, byte&0x10, byte&0x08, byte&0x04, byte&0x02, byte&0x01))
 
-	file_location['network_volume'] = network_volume
-	file_location['local_volume'] = local_volume
-	shortcut['file_location'] = file_location
-	
-	if shortcut['file_location']['flags']['on_local_volume']:
-		shortcut['target'] = shortcut['file_location']['local_volume']['base_pathname']
-	elif shortcut['file_location']['flags']['on_network_drive']:
-		shortcut['target'] = shortcut['file_location']['network_volume']['volume_label']
-	shortcut['target'] += shortcut['file_location']['remaining_pathname']
-	return shortcut
-
-def lnkinfo ( filename ):
-	print "Filename: " + filename
-	lnk = readlnk ( filename )
-	print "Target: " + lnk['target']
-	print "Arguments: " + str(lnk['command_line_arguments'])
-	print "Working directory: " + str(lnk['working_directory'])
-	print "Relative path: " + str(lnk['relative_path'])
-	print "Description: " + str(lnk['description'])
-	print "Icon ID: " + str(lnk['icon_number'])
-	print "Custom Icon: " + str(lnk['custom_icon'])
+def winTimeToUnix(time):
+  return int(time * 0.0000001 - 11644473600)
+  
+def readLnkFromFp(fp):
+  (magic,) = struct.unpack("B3x", fp.read(4))
+  if magic != 0x4c:
+    raise Exception("Not valid LNK format")
+  (guid, lnkFlags) = struct.unpack("<16sB3x", fp.read(20))
+  lnkFlags = LnkFlags(*(getBits(lnkFlags)[1:]))
+  if lnkFlags.pointsToFileDir:
+    (byte1, byte2) = struct.unpack("<2B2x", fp.read(4))
+    fileAttributes = FileAttributes(*(getBits(byte1)[3:]+getBits(byte2)))
+  fp.seek(0x1c)
+  (timeCreate, timeAccess, timeModify) = map(winTimeToUnix, struct.unpack("<3d", fp.read(24)))
+  (fileLength, iconIndex, showWindow, hotkey) = struct.unpack("<IIBI", fp.read(13))
+  fp.seek(0x4c)
+  if lnkFlags.shellIdList:
+    (itemIdLen,) = struct.unpack("<H", fp.read(2))
+    itemId = fp.read(itemIdLen)
+  start = fp.tell()
+  (structLength, firstOffset, volumeFlags, localVolumeTableOffset, basePathOffset, networkVolumeTableOffset, remainingPathOffset) = struct.unpack("<2IB3x4I", fp.read(28))
+  onLocalVolume = bool(volumeFlags)
+  assert firstOffset == 0x1c
+  if onLocalVolume:
+    fp.seek(start+localVolumeTableOffset)
+    (volLength, volType, volSerial, volOffset) = struct.unpack("<IIII", fp.read(16))
+    assert volOffset == 0x10
+    fp.seek(start+localVolumeTableOffset+volOffset)
+    (volumeName, basePathName) = fp.read(remainingPathOffset-(localVolumeTableOffset+volOffset)).rstrip("\x00").split("\x00")
+    target = basePathName
+  else:
+    fp.seek(start+networkVolumeTableOffset)
+    (length,) = struct.unpack("<I16x", fp.read(20))
+    volumeName = fp.read(length)
+    target = volumeName
+  fp.seek(start+remainingPathOffset)
+  remainingPath = fp.read(structLength-remainingPathOffset).rstrip("\x00")
+  target += remainingPath
+  description = None
+  if lnkFlags.description:
+    (length,) = struct.unpack("<H", fp.read(2))
+    description = fp.read(length*2).decode("UTF-16").rstrip("\x00")
+  relativePath = None
+  if lnkFlags.relativePath:
+    (length,) = struct.unpack("<H", fp.read(2))
+    relativePath = fp.read(length*2).decode("UTF-16").rstrip("\x00")
+  workingDirectory = None
+  if lnkFlags.workingDirectory:
+    (length,) = struct.unpack("<H", fp.read(2))
+    workingDirectory = fp.read(length*2).decode("UTF-16").rstrip("\x00")
+  commandLineArgs = None
+  if lnkFlags.commandLineArgs:
+    (length,) = struct.unpack("<H", fp.read(2))
+    commandLineArgs = fp.read(length*2).decode("UTF-16").rstrip("\x00")
+  customIcon = None
+  if lnkFlags.customIcon:
+    (length,) = struct.unpack("<H", fp.read(2))
+    customIcon = fp.read(length*2).decode("UTF-16").rstrip("\x00")
+  return LnkFile(lnkFlags=lnkFlags, timeCreate=timeCreate, timeAccess=timeAccess, timeModify=timeModify, fileLength=fileLength, iconIndex=iconIndex, showWindow=showWindow, hotkey=hotkey, fileAttributes=fileAttributes, target=target, description=description, relativePath=relativePath, workingDirectory=workingDirectory, commandLineArgs=commandLineArgs, customIcon=customIcon)
+    
+def readLnk(filename):
+  with open(filename, "rb") as fp:
+    return readLnkFromFp(fp)
+    
+if __name__ == "__main__":
+  import sys
+  print readLnk(sys.argv[1])

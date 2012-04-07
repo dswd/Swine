@@ -107,9 +107,9 @@ class Shortcut:
     return map(lambda s: s.rstrip('\0'), shlex.split(self['program']))
   def setProgram(self, exePath, args):
     assert isinstance(exePath, str)
+    assert isinstance(args, (str, list))
     if isinstance(args, str):
       args = shlex.split(args)
-    assert isinstance(args, list)
     self['program'] = " ".join(map(repr, [exePath]+args))
   def getIcon(self):
     return os.path.join(self.slot.getPath(), self["icon"]) if self["icon"] else None
@@ -170,20 +170,20 @@ class Shortcut:
       path = self.slot.winPathToUnix(path)
     if not os.path.exists(path):
       raise Exception(self.tr("File does not exist"))
-    lnk = shortcutlib.readlnk(path)
+    lnk = shortcutlib.readLnk(path)
     name = os.path.splitext(os.path.basename(path))[0]
-    self.setProgram(lnk['target'], lnk['command_line_arguments'])
-    self.setWorkingDirectory(lnk['working_directory'])
-    if lnk['custom_icon']:
-      iconPath = self.slot.winPathToUnix(lnk['custom_icon'],"c:\windows")
+    self.setProgram(lnk.target, str(lnk.commandLineArgs) if lnk.commandLineArgs else "")
+    self.setWorkingDirectory(str(lnk.workingDirectory) if lnk.workingDirectory else "")
+    if lnk.customIcon:
+      iconPath = self.slot.winPathToUnix(str(lnk.customIcon), "c:\windows")
     else:
-      iconPath = self.slot.winPathToUnix(lnk['target'])
+      iconPath = self.slot.winPathToUnix(lnk.target)
     iconsdir = os.path.join(self.slot.getPath(), "icons", os.path.basename(iconPath))
     self['iconsdir'] = os.path.join("icons", os.path.basename(iconPath))
     if os.path.splitext(iconPath)[1].lower() == '.exe':
       self.slot.extractExeIcons(iconPath, iconsdir)
       icons = os.listdir(iconsdir)
-      self.setIcon(os.path.join(iconsdir, self.slot.bestIco(icons, lnk['icon_number'])))
+      self.setIcon(os.path.join(iconsdir, self.slot.bestIco(icons, lnk.iconIndex)))
     else:
       self.setIcon(self.slot.winPathToUnix(iconPath))
 
@@ -394,10 +394,7 @@ class Slot:
   def findShortcutsCallback(self, shortcuts, dirname, fnames):
     for fname in fnames:
       if os.path.splitext(fname)[1].lower() == ".lnk":
-        try:
-          shortcuts.append(self.createShortcutFromFile(os.path.join(dirname,fname)))
-        except Exception, inst:
-          print os.path.join(dirname,fname) + ": " + str(inst)
+        shortcuts.append(self.createShortcutFromFile(os.path.join(dirname,fname)))
   def findShortcuts(self, exeonly=False):
     shortcuts = []
     os.path.walk(os.path.join(self.getPath(), "drive_c"), self.findShortcutsCallback, shortcuts)
