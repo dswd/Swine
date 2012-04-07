@@ -30,7 +30,6 @@ SWINE_PATH = os.path.join(HOME_PATH, ".swine")
 SWINE_SLOT_PATH = SWINE_PATH
 SWINE_DEFAULT_SLOT_NAME = "DEFAULT"
 SWINE_DEFAULT_SLOT_PATH = os.path.join(SWINE_PATH, SWINE_DEFAULT_SLOT_NAME)
-SWINE_DEFAULT_SECTION = "__SYSTEM__"
 WINE_PATH = os.path.join(HOME_PATH, ".wine")
 WINETRICKS = "winetricks"
 REAL_PATH = os.path.dirname(os.path.realpath(__file__))

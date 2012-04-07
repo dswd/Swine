@@ -409,9 +409,9 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
         if icon:
           self.icon.setIcon(icon)
           self.iconFile = shortcut.getIcon()
-      self.applicationInput.setText(shortcut.getProgram()[0])
+      self.applicationInput.setText(shortcut.getProgram())
       self.workingDirectoryInput.setText(shortcut.getWorkingDirectory())
-      self.paramsInput.setText(" ".join(map(repr, shortcut.getProgram()[1:])))
+      self.paramsInput.setText(" ".join(map(repr, shortcut.getArguments())))
       self.desktopCheckBox.setChecked(bool(shortcut.getDesktop()))
       if shortcut.getDesktop():
         self.desktopResolution.setCurrentText(shortcut.getDesktop().split(",")[1])
@@ -448,7 +448,8 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
       raise SwineException(self.tr("Shortcut name cannot be empty"))
     self.shortcut.rename(unicode(self.nameInput.text()))
     self.shortcut.setIcon(self.iconFile)
-    self.shortcut.setProgram(str(self.applicationInput.text()), str(self.paramsInput.text()))
+    self.shortcut.setProgram(str(self.applicationInput.text()))
+    self.shortcut.setArguments(str(self.paramsInput.text()))
     self.shortcut.setWorkingDirectory(str(self.workingDirectoryInput.text()))
     if self.desktopCheckBox.isChecked():
       self.shortcut.setDesktop("default,"+str(self.desktopResolution.currentText()))
@@ -462,7 +463,7 @@ class SwineRunDialog(SwineProgramDialog):
   def okButton_clicked(self):
     SwineProgramDialog.okButton_clicked(self)
     self.hide()
-    prog = self.shortcut.getProgram()
+    prog = [self.shortcut.getProgram()]+self.shortcut.getArguments()
     wait = False
     if self.addShortcutsCheckBox.isChecked() or self.winebootCheckBox.isChecked():
       wait = True
@@ -550,7 +551,7 @@ def main(args):
       break
   win=SwineMainWindow()
   win.show()
-  sys.excepthook=excepthook
+  #sys.excepthook=excepthook
   win.shortcutList.clear()
   win.rebuildSlotList()
   sys.exit(app.exec_())

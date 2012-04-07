@@ -25,10 +25,18 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 from config import *
-import os, shutil, ConfigParser, array, pipes, urllib, subprocess, codecs, shlex
+import os, shutil, array, pipes, urllib, subprocess, codecs, shlex, json
 import shortcutlib, winetricks
 from tarfile import TarFile
 from subprocess import Popen
+
+try:
+  from collections import OrderedDict
+  def json_load(fp):
+    return json.load(fp, object_pairs_hook=OrderedDict)
+except: #Python 2.6
+  OrderedDict = dict
+  json_load = json.load
 
 class SwineException(Exception):
   pass
@@ -44,11 +52,6 @@ class Shortcut:
       self.data = data
     assert slot and isinstance(slot, Slot)
     self.slot = slot
-    if self["program"] and self["program"].startswith("["):
-      #code for old program format
-      import ast
-      args = ast.literal_eval(self["program"])
-      self.setProgram(args[0], args[1:])
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def __str__(self):
@@ -99,15 +102,17 @@ class Shortcut:
   def setDefault(self):
     self.slot.setDefaultShortcut(self)
   def getProgram(self):
-    if not self['program']:
-      return []
-    return map(lambda s: s.rstrip('\0'), shlex.split(self['program']))
-  def setProgram(self, exePath, args):
-    assert isinstance(exePath, str)
+    return self['program']
+  def setProgram(self, prog):
+    assert isinstance(prog, str)
+    self["program"] = prog
+  def getArguments(self):
+    return self["arguments"] if self["arguments"] else []
+  def setArguments(self, args):
     assert isinstance(args, (str, list))
     if isinstance(args, str):
       args = shlex.split(args)
-    self['program'] = " ".join(map(repr, [exePath]+args))
+    self['arguments'] = args
   def getIcon(self):
     return os.path.join(self.slot.getPath(), self["icon"]) if self["icon"] else None
   def setIcon(self, icon):
@@ -130,7 +135,7 @@ class Shortcut:
       return os.path.join(self.slot.getPath(), self["iconsdir"])
     return None
   def _exePath(self):
-    path = self.slot.winPathToUnix(self.getProgram()[0])
+    path = self.slot.winPathToUnix(self.getProgram())
     if not os.path.exists(path) and os.path.exists(path+".exe"):
       path += ".exe"
     return path
@@ -157,7 +162,7 @@ class Shortcut:
     if self.hasMenuEntry():
       os.remove(self._menuEntryPath())
   def run(self, wait=False, args=[]):
-    prog = self.getProgram()
+    prog = [self.getProgram()]+self.getArguments()
     workingDirectory = self['working_directory']
     runInTerminal = self["interminal"] and int(self["interminal"]) == 1
     desktop = self["desktop"]
@@ -169,7 +174,8 @@ class Shortcut:
       raise Exception(self.tr("File does not exist"))
     lnk = shortcutlib.readLnk(path)
     name = os.path.splitext(os.path.basename(path))[0]
-    self.setProgram(lnk.target, str(lnk.commandLineArgs) if lnk.commandLineArgs else "")
+    self.setProgram(lnk.target)
+    self.setArguments(str(lnk.commandLineArgs) if lnk.commandLineArgs else "")
     self.setWorkingDirectory(str(lnk.workingDirectory) if lnk.workingDirectory else "")
     if lnk.customIcon:
       iconPath = self.slot.winPathToUnix(str(lnk.customIcon), "c:\windows")
@@ -192,8 +198,8 @@ class Slot:
       raise SwineException(self.tr("Slot name cannot be empty."))
     assert isinstance(name, str)
     self.name = name
-    self.config = None
-    self.settings = None
+    self.settings = {}
+    self.shortcutData = {}
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def __setitem__(self, key, value):
@@ -210,20 +216,15 @@ class Slot:
     if not shortcut:
       raise SwineException(self.tr("Shortcut name cannot be empty"))
     assert isinstance(data, dict)
-    if not self.config.has_section(shortcut):
-      self.config.add_section(shortcut)
-    for o in self.config.options(shortcut):
-      self.config.remove_option(shortcut, o)
-    for k, v in data.iteritems():
-      self.config.set(shortcut, k, v)
+    self.shortcutData[shortcut] = data
     self.saveConfig()
   def _removeShortcutData(self, shortcut):
     if not shortcut:
       raise SwineException(self.tr("Shortcut name cannot be empty"))
-    if self.config.has_section(shortcut):
-      self.config.remove_section(shortcut)
+    if shortcut in self.shortcutData:
+      del self.shortcutData[shortcut]
     if self.getDefaultShortcutName() == shortcut:
-      self.setDefaultShortcutName(shortcut)
+      self.setDefaultShortcutName(None)
     self.saveConfig()
   def getPath(self):
     return os.path.join(SWINE_SLOT_PATH, self.name)
@@ -237,21 +238,45 @@ class Slot:
     if not os.path.exists(path):
       raise SwineException(self.tr("%s does not exist") % drive)
     return path
-  def getConfigFile(self):
+  def getOldConfigFile(self):
     return os.path.join(self.getPath(), "swine.ini")
+  def getConfigFile(self):
+    return os.path.join(self.getPath(), "swine_slot.conf")
+  def migrateOldConfig(self):
+    import ConfigParser, ast
+    config = ConfigParser.ConfigParser()
+    if os.path.exists(self.getOldConfigFile()):
+      with codecs.open(self.getOldConfigFile(), "r", "utf8") as fp:
+        config.readfp(fp)
+    if not config.has_section("__SYSTEM__"):
+      config.add_section("__SYSTEM__")
+    self.settings = dict(config.items("__SYSTEM__"))
+    for name in config.sections():
+      if name != "__SYSTEM__":
+        dat = dict(config.items(name))
+        if dat["program"] and dat["program"].startswith("["):
+          args = ast.literal_eval(dat["program"])
+        else:
+          args = shlex.split(str(dat["program"]))
+        dat["program"] = args[0]
+        if "\\\\" in dat["program"]:
+          dat["program"] = ast.literal_eval('"'+dat["program"]+'"')
+        dat["arguments"] = args[1:]
+        self.shortcutData[name] = dat 
   def loadConfig(self):
-    self.config = ConfigParser.ConfigParser()
-    if os.path.exists(self.getConfigFile()):
-      with codecs.open(self.getConfigFile(), "r", "utf8") as fp:
-        self.config.readfp(fp)
-    if not self.config.has_section(SWINE_DEFAULT_SECTION):
-      self.config.add_section(SWINE_DEFAULT_SECTION)
-    self.settings = dict(self.config.items(SWINE_DEFAULT_SECTION))
+    if os.path.exists(self.getOldConfigFile()):
+      self.migrateOldConfig()
+      self.saveConfig()
+      os.rename(self.getOldConfigFile(), self.getOldConfigFile()+".old")
+    if not os.path.exists(self.getConfigFile()):
+      return
+    with open(self.getConfigFile(), "r") as fp:
+      self.config = json_load(fp)
+      self.settings = self.config.get("settings", {})
+      self.shortcutData = self.config.get("shortcuts", {})
   def saveConfig(self):
-    for k, v in self.settings.iteritems():
-      self.config.set(SWINE_DEFAULT_SECTION, k, v)
     with open(self.getConfigFile(), "w") as fp:
-      self.config.write(fp)
+      json.dump({"settings": self.settings, "shortcuts": self.shortcutData}, fp, indent=2)
   def exists(self):
     return os.path.exists(self.getPath())
   def create(self):
@@ -302,18 +327,17 @@ class Slot:
       s.createMenuEntry()
   def getAllShortcuts(self):
     shortcuts = []
-    for section in self.config.sections():
-      if not section == SWINE_DEFAULT_SECTION:
-        shortcuts.append(self.loadShortcut(section))
+    for name in self.shortcutData:
+      shortcuts.append(self.loadShortcut(name))
     return shortcuts
   def hasShortcut(self, name):
     assert name
-    return self.config.has_section(name)
+    return name in self.shortcutData
   def loadShortcut(self,name):
     assert name
     if not self.hasShortcut(name):
       return None
-    return Shortcut(name, self, dict(self.config.items(name)))
+    return Shortcut(name, self, dict(self.shortcutData[name]))
   def getDefaultShortcutName(self):
     return self['default_shortcut']
   def setDefaultShortcutName(self, name):
