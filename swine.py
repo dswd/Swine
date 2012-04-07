@@ -126,6 +126,8 @@ class SwineShortcutItem(QListWidgetItem):
       icon = loadIcon(shortcut.getIcon(), folder=shortcut.slot.getPath(), cache=False, scale=(32,32))
       if icon:
         self.setIcon(icon)
+    if shortcut["description"]:
+      self.setToolTip(shortcut["description"])
     self.setFlags(Qt.ItemIsEditable|Qt.ItemIsSelectable|Qt.ItemIsEnabled)
     self.updateDefaultState()
   def tr(self, s):

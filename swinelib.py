@@ -177,6 +177,8 @@ class Shortcut:
     self.setProgram(lnk.target)
     self.setArguments(str(lnk.commandLineArgs) if lnk.commandLineArgs else "")
     self.setWorkingDirectory(str(lnk.workingDirectory) if lnk.workingDirectory else "")
+    if lnk.description:
+      self["description"] = lnk.description
     if lnk.customIcon:
       iconPath = self.slot.winPathToUnix(str(lnk.customIcon), "c:\windows")
     else:
