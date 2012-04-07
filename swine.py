@@ -521,24 +521,20 @@ class SwineShortcutDialog(SwineProgramDialog):
 
 
 
-def excepthook(excType, excValue, tracebackobj):
+def excepthook(excType, excValue, tracebackObj):
   if excType == KeyboardInterrupt:
     sys.exit(0)
-  tb = tracebackobj
-  while tb and tb.tb_next:
-    tb = tb.tb_next
-  f = tb.tb_frame
-  obj = f.f_locals.get("self", None)
-  functionName = f.f_code.co_name
-  callStr = str(tr("%s (%s, line %d)")) % (f.f_code.co_name, os.path.basename(f.f_code.co_filename), f.f_lineno)
-  if obj:
-    callStr = obj.__class__.__name__+"::"+callStr
   if excType == SwineException:
-    excStr = str(excValue)
-    QMessageBox.critical(QApplication.desktop(), tr("Error"), excStr)
-  else:
-    excStr = str(tr("%s: %s\nin %s")) % (excType.__name__, excValue, callStr)
-    QMessageBox.critical(QApplication.desktop(), tr("Error"), excStr)
+    return QMessageBox.critical(QApplication.desktop(), tr("Error"), str(excValue))
+  import traceback, sys
+  tracebackStr = "".join(traceback.format_tb(tracebackObj))
+  excStr = str(tr("%s: %s")) % (excType.__name__, excValue)
+  detailStr = excStr+"\n"+tracebackStr
+  print >>sys.stderr, detailStr
+  dialog = QMessageBox(QMessageBox.Critical, tr("Error"), excStr, QMessageBox.Ok, QApplication.desktop(), Qt.Dialog)
+  dialog.setDetailedText(detailStr)
+  dialog.adjustSize()
+  dialog.exec_()
 
 
 
@@ -553,7 +549,7 @@ def main(args):
       break
   win=SwineMainWindow()
   win.show()
-  #sys.excepthook=excepthook
+  sys.excepthook=excepthook
   win.shortcutList.clear()
   win.rebuildSlotList()
   sys.exit(app.exec_())
