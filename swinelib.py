@@ -30,9 +30,6 @@ import shortcutlib, winetricks
 from tarfile import TarFile
 from subprocess import Popen
 
-def tr(s, context="@default"):
-  return s
-
 class SwineException(Exception):
   pass
 
