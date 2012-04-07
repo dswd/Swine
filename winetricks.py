@@ -43,7 +43,7 @@ def loadCache():
 def saveCache():
   cache[VERSION_FIELD] = version
   with open(CACHEFILE, "w") as fp:
-    json.dump(cache, fp)
+    json.dump(cache, fp, indent=2)
   
 def call(args):
   if isinstance(args, str):
