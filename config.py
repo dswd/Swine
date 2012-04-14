@@ -39,4 +39,4 @@ SWINE_WEBSITE = "http://dswd.github.com/Swine"
 APPDB_WEBSITE = "http://appdb.winehq.org"
 
 def tr(s, context="@default"):
-  return s
+  return unicode(s)

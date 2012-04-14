@@ -104,13 +104,13 @@ class Shortcut:
   def getProgram(self):
     return self['program']
   def setProgram(self, prog):
-    assert isinstance(prog, str)
+    assert isinstance(prog, (str, unicode))
     self["program"] = prog
   def getArguments(self):
     return self["arguments"] if self["arguments"] else []
   def setArguments(self, args):
-    assert isinstance(args, (str, list))
-    if isinstance(args, str):
+    assert isinstance(args, (str, unicode, list))
+    if isinstance(args, (str, unicode)):
       args = shlex.split(args)
     self['arguments'] = args
   def getIcon(self):
@@ -123,7 +123,7 @@ class Shortcut:
   def getWorkingDirectory(self):
     return self["working_directory"]
   def setWorkingDirectory(self, path):
-    assert isinstance(path, str)
+    assert isinstance(path, (str, unicode))
     self["working_directory"] = path
   def getDesktop(self):
     return self["desktop"]
@@ -301,7 +301,7 @@ class Slot:
       raise SwineException(self.tr("Slot name cannot be empty"))
     if not self.exists():
       raise SwineException(self.tr("Slot does not exist: %s") % self.name)
-    assert isinstance(newname, str)
+    assert isinstance(newname, (str, unicode))
     slot = Slot(newname)
     if slot.exists():
       raise SwineException(self.tr("Slot does already exist: %s") % newname)
@@ -464,7 +464,7 @@ class Slot:
     """Run a winetricks command
     This is only a wrapper for runNative
     """
-    return self.runWineTool(["xterm", "-T", "Winetricks %s" % prog, "-hold", "-e", winetricks.WINETRICKS, str(prog)])
+    return self.runWineTool(["xterm", "-T", "Winetricks %s" % prog, "-hold", "-e", winetricks.WINETRICKS, unicode(prog)])
   def runWin(self, prog, workingDirectory=".", wait=False, runInTerminal=False, desktop=None, debug=None, log=None):
     """Run a windows program
     Parameters:

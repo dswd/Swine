@@ -47,7 +47,7 @@ def loadIcon (name, folder="", cache=True, scale=None):
   
   
 def tr(s, context="@default"):
-  return QApplication.translate(context, s, None, QApplication.UnicodeUTF8)
+  return unicode(QApplication.translate(context, s, None, QApplication.UnicodeUTF8))
   
   
   
@@ -73,7 +73,7 @@ class SwineSlotItem(QListWidgetItem):
       self.slot.delete()
       self.listWidget().takeItem(self.listWidget().row(self))
   def renameTo(self, name):
-    if name != self.slot.getName():
+    if unicode(name) != unicode(self.slot.getName()):
       self.slot.rename(unicode(name))
       self.setText(name)
       self.listWidget().sortItems()
@@ -101,16 +101,16 @@ class SwineSlotItem(QListWidgetItem):
     path = QFileDialog.getSaveFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if not path:
       return
-    self.slot.exportData(str(path))
+    self.slot.exportData(unicode(path))
   def import_cb(self):
     path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if path:
-      self.slot.importData(str(path))
+      self.slot.importData(unicode(path))
       self.refreshShortcutList()
   def wisrun_cb(self):
     path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select script file"), "", self.tr("WIS Scripts (*.wis)"))
     if path:
-      self.slot.runWis(os.path.realpath(str(path)))
+      self.slot.runWis(os.path.realpath(unicode(path)))
   def winetricks(self, tool):
     self.slot.runWinetricks(tool)
   def winetricks_callback(self, tool):
@@ -181,10 +181,12 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
   def __init__(self):
     QMainWindow.__init__(self)
     self.setupUi(self)
-    self.setWindowTitle(str(self.windowTitle()) % VERSION)
-    self.winetricksVersion.setText(str(self.tr("Version: %s")) % winetricks.version) 
+    self.setWindowTitle(unicode(self.windowTitle()) % VERSION)
+    self.winetricksVersion.setText(self.tr("Version: %s") % winetricks.version) 
     self.slotList.keyReleaseEvent = self.slotListKeyReleaseEvent
     self.shortcutList.keyReleaseEvent = self.shortcutListKeyReleaseEvent
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def currentSlotItem(self):
     item = self.slotList.currentItem()
     if item and item.isSelected():
@@ -316,9 +318,9 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
   def import_cb(self):
     path = QFileDialog.getOpenFileName(self, self.tr("Select archive"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if path:
-      (name, code) = QInputDialog.getText(self, self.tr("Import Slot"), self.tr("Name:"), QLineEdit.Normal, os.path.splitext(os.path.basename(str(path)))[0])
+      (name, code) = QInputDialog.getText(self, self.tr("Import Slot"), self.tr("Name:"), QLineEdit.Normal, os.path.splitext(os.path.basename(unicode(path)))[0])
       if code:
-        slot = importSlot(str(name), str(path))
+        slot = importSlot(unicode(name), unicode(path))
         SwineSlotItem(self.slotList, slot)
   def createShortcut_cb(self):
     shortcut = Shortcut(self.tr("New Shortcut"), self.currentSlotItem().slot)
@@ -328,7 +330,7 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
   def createSlot_cb(self):
     (name, code) = QInputDialog.getText(self, self.tr("Create Slot"), self.tr("Name:"), QLineEdit.Normal, self.tr("New Slot"))
     if code:
-      slot = Slot(str(name))
+      slot = Slot(unicode(name))
       slot.create()
       SwineSlotItem(self.slotList, slot)
   def shortcutList_rightButtonClicked(self, point):
@@ -353,8 +355,8 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
     webbrowser.open(APPDB_WEBSITE)
   def downloadWinetricks(self):
     winetricks.download()
-    self.winetricksVersion.setText(str(self.tr("Version: %s")) % winetricks.version) 
-    QMessageBox.information(self, self.tr("Winetricks"), str(self.tr("Winetricks has been updated to version %s")) % winetricks.version)
+    self.winetricksVersion.setText(self.tr("Version: %s") % winetricks.version) 
+    QMessageBox.information(self, self.tr("Winetricks"), self.tr("Winetricks has been updated to version %s") % winetricks.version)
   def menuExitAction_activated(self):
     self.close()
   def slotList_selectionChanged(self):
@@ -375,7 +377,9 @@ class SwineAboutDialog(QDialog, Ui_AboutDialog):
   def __init__(self, parent):
     QDialog.__init__(self, parent)
     self.setupUi(self)
-    self.versionLabel.setText(str(self.versionLabel.text()) % VERSION)
+    self.versionLabel.setText(unicode(self.versionLabel.text()) % VERSION)
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
 
 
 
@@ -394,6 +398,8 @@ class SwineIconDialog(QDialog,Ui_IconDialog):
       image = loadIcon(icon, self.iconDir, cache=False)
       if image:
         self.Icon(self.iconView, os.path.join(self.iconDir, icon), image)
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def okButton_clicked(self):
     item = self.iconView.currentItem()
     self.iconFile = item.fileName if item else None
@@ -427,20 +433,22 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
       if shortcut.getDesktop():
         self.desktopResolution.setCurrentText(shortcut.getDesktop().split(",")[1])
       self.runInTerminalCheckBox.setChecked(bool(self.shortcut["interminal"]))
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def cancelButton_clicked(self):
     self.close()
   def exeSelectButton_clicked(self):
     fileName = QFileDialog.getOpenFileName(self, self.tr("Executable selection"), self.shortcut.slot.getDosDrivesPath(), self.tr("Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)"))
     if not fileName:
       return
-    fileName = str(fileName)
+    fileName = unicode(fileName)
     self.applicationInput.setText(self.shortcut.getSlot().unixPathToWin(fileName))
-    if not str(self.workingDirectoryInput.text()):
+    if not unicode(self.workingDirectoryInput.text()):
       self.workingDirectoryInput.setText(self.shortcut.getSlot().unixPathToWin(os.path.dirname(fileName)))
   def wdSelectButton_clicked(self):
     fileName = QFileDialog.getExistingDirectory(self, self.shortcut.getSlot().getDosDrivesPath())
     if fileName:
-      self.workingDirectoryInput.setText(self.shortcut.getSlot().unixPathToWin(str(fileName)))
+      self.workingDirectoryInput.setText(self.shortcut.getSlot().unixPathToWin(unicode(fileName)))
   def icon_clicked(self):
     if self.shortcut.getProgram():
       self.shortcut.extractIcons()
@@ -459,11 +467,11 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
       raise SwineException(self.tr("Shortcut name cannot be empty"))
     self.shortcut.rename(unicode(self.nameInput.text()))
     self.shortcut.setIcon(self.iconFile)
-    self.shortcut.setProgram(str(self.applicationInput.text()))
-    self.shortcut.setArguments(str(self.paramsInput.text()))
-    self.shortcut.setWorkingDirectory(str(self.workingDirectoryInput.text()))
+    self.shortcut.setProgram(unicode(self.applicationInput.text()))
+    self.shortcut.setArguments(unicode(self.paramsInput.text()))
+    self.shortcut.setWorkingDirectory(unicode(self.workingDirectoryInput.text()))
     if self.desktopCheckBox.isChecked():
-      self.shortcut.setDesktop("default,"+str(self.desktopResolution.currentText()))
+      self.shortcut.setDesktop("default,"+unicode(self.desktopResolution.currentText()))
     else:
       self.shortcut.setDesktop("")
     self.shortcut["interminal"] = "1" if self.runInTerminalCheckBox.isChecked() else ""
@@ -513,6 +521,8 @@ class SwineRunDialog(SwineProgramDialog):
     self.nameLabel.hide()
     self.nameInput.hide()
     self.adjustSize()
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
 
 
 
@@ -527,6 +537,8 @@ class SwineShortcutDialog(SwineProgramDialog):
     self.addShortcutsCheckBox.hide()
     self.logfileCheckBox.hide()
     self.adjustSize()
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
 
 
 
@@ -534,7 +546,7 @@ def excepthook(excType, excValue, tracebackObj):
   if excType == KeyboardInterrupt:
     sys.exit(0)
   if excType == SwineException:
-    return QMessageBox.critical(QApplication.desktop(), tr("Error"), str(excValue))
+    return QMessageBox.critical(QApplication.desktop(), tr("Error"), unicode(excValue))
   import traceback, sys
   tracebackStr = "".join(traceback.format_tb(tracebackObj))
   excStr = "%s: %s" % (excType.__name__, excValue)

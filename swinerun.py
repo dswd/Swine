@@ -47,8 +47,10 @@ class SwineRunnerDialog(QMainWindow, Ui_RunnerDialog):
   def __init__(self, args):
     QMainWindow.__init__(self)
     self.setupUi(self)
-    self.setWindowTitle(str(self.windowTitle()) % VERSION)
+    self.setWindowTitle(unicode(self.windowTitle()) % VERSION)
     self.args = args
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
   def currentSlotItem(self):
     item = self.slots.currentItem()
     if item and item.isSelected():
@@ -71,7 +73,7 @@ class SwineRunnerDialog(QMainWindow, Ui_RunnerDialog):
     elif isinstance(item, NewSlotItem):
       (text, code) = QInputDialog.getText(self, self.tr("Create Slot"), self.tr("Name:"), text=self.tr("New Slot"))
       if code:
-        slot = Slot(str(text))
+        slot = Slot(unicode(text))
         slot.create()
     if slot:
       self.hide()
