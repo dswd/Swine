@@ -19,7 +19,7 @@ CONTENT
 <h2>Installing on Debian-based systems</h2>
 <p>For systems like Debian, Ubuntu, etc. there is a package repository which can be installed by adding the line <tt>deb http://dswd.github.com/Swine/repository/deb stable main</tt> to <tt>/etc/apt/sources.list</tt>.</p>
 
-<h3>Repository installation</h3>
+<h3>Installation commands</h3>
 <pre><code>$ sudo apt-add-repository 'deb http://dswd.github.com/Swine/repository/deb stable main'
 $ sudo apt-get update
 $ sudo apt-get install swine
