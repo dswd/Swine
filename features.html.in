@@ -12,6 +12,11 @@ menu_entry(Wine tools,#tools)
 menu_entry(Winetricks,#winetricks)
 menu_entry(Localization,#localization)
 MENU_END
+<h1>Help needed</h1>
+<div class="featurebox_side">
+Please help translating Swine into your native language on the <a href="http://crowdin.net/project/swine">Translation page</a>
+</div>
+
 
 CONTENT
 

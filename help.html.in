@@ -8,6 +8,7 @@ LEFT_SIDE
 MENU_BEGIN
 menu_entry(EXTERNAL Github page,https://github.com/dswd/Swine)
 menu_entry(EXTERNAL Wiki,https://github.com/dswd/Swine/wiki)
+menu_entry(EXTERNAL Translate Swine,http://crowdin.net/project/swine)
 menu_entry(EXTERNAL Fork Swine,https://github.com/dswd/Swine/fork_select)
 menu_entry(EXTERNAL Tickets,https://github.com/dswd/Swine/issues)
 SUBMENU_BEGIN
@@ -37,8 +38,9 @@ CONTENT
 <h1>Swine help</h1>
 <p>When software does not run, this is in nearly all cases not a problem with Swine but either with wine or your wine setup. The wine AppDB contains an extensive list of Windows software that does or does not run in wine together with hints on how to make it run if possible.
 <p>Swine bugs (e.g. Swine errors or Windows software that runs in wine but not in Swine) can be reported using the project issue tracker. The Swine wiki will also be filled with useful information on Swine usage and tips and tricks for running and managing software using it.</p>
-
+ 
 <h2>Contributing to Swine</h2>
 <p>Swine is an open-source project (GPL 2) managed on github. The project is open to contributions of any kind like bug reports, feature requests, patches or code contributions. Please use tickets for bug reports and feature requests and provide code in the github way (fork the project and submit a pull request).</p>
+<p>Please help translating Swine to your native language using the translation page.</p>
 
 #include <footer.html>
