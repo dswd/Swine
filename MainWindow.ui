@@ -157,7 +157,11 @@
      <string>About</string>
     </property>
     <addaction name="helpabout_SwineAction"/>
+    <addaction name="actionSwine_Website"/>
+    <addaction name="separator"/>
     <addaction name="helpAbout_WineAction"/>
+    <addaction name="actionWine_Appdb"/>
+    <addaction name="separator"/>
     <addaction name="helpAbout_Winetricks"/>
    </widget>
    <widget class="QMenu" name="menuWinetricks">
@@ -222,7 +226,7 @@
   <action name="helpAbout_Winetricks">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/images/wine.png</normaloff>:/icons/images/wine.png</iconset>
+     <normaloff>:/icons/images/world_go.png</normaloff>:/icons/images/world_go.png</iconset>
    </property>
    <property name="text">
     <string>About Winetricks</string>
@@ -244,6 +248,24 @@
    </property>
    <property name="text">
     <string>Download winetricks</string>
+   </property>
+  </action>
+  <action name="actionSwine_Website">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/world_go.png</normaloff>:/icons/images/world_go.png</iconset>
+   </property>
+   <property name="text">
+    <string>Swine Website</string>
+   </property>
+  </action>
+  <action name="actionWine_Appdb">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/world_go.png</normaloff>:/icons/images/world_go.png</iconset>
+   </property>
+   <property name="text">
+    <string>Wine AppDB</string>
    </property>
   </action>
  </widget>
@@ -476,6 +498,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionSwine_Website</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openSwineWebsite()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWine_Appdb</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openAppdbWebsite()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slotList_selectionChanged()</slot>
@@ -490,5 +544,7 @@
   <slot>showWineHelp()</slot>
   <slot>showWinetricksHelp()</slot>
   <slot>downloadWinetricks()</slot>
+  <slot>openSwineWebsite()</slot>
+  <slot>openAppdbWebsite()</slot>
  </slots>
 </ui>

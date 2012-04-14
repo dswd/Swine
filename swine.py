@@ -25,7 +25,7 @@ import os, sys, traceback
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 import swinelib
-import time
+import time, webbrowser
 from PyQt4.QtGui import *
 from PyQt4.QtCore import Qt, QTranslator, QLocale
 from swinelib import *
@@ -350,6 +350,10 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
     loadDefaultSlot().runWin(["winver"])  
   def showWinetricksHelp(self):
     winetricks.showHelp()
+  def openSwineWebsite(self):
+    webbrowser.open(SWINE_WEBSITE)
+  def openAppdbWebsite(self):
+    webbrowser.open(APPDB_WEBSITE)
   def downloadWinetricks(self):
     winetricks.download()
     self.winetricksVersion.setText(str(self.tr("Version: %s")) % winetricks.version) 

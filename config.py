@@ -23,7 +23,7 @@ import os
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
-VERSION = "0.7-rc2"
+VERSION = "0.7-rc3"
 
 HOME_PATH = os.getenv("HOME")
 SWINE_PATH = os.path.join(HOME_PATH, ".swine")
@@ -35,6 +35,8 @@ REAL_PATH = os.path.dirname(os.path.realpath(__file__))
 WISRUN = os.path.join(REAL_PATH, "/wisrun")
 DESKTOP_MENU_DIR = os.path.join(HOME_PATH, ".local/share/applications/swine")
 TRANSLATION_DIRS = ["translations", "/usr/share/swine/translations", "/usr/local/share/swine/translations"]
+SWINE_WEBSITE = "http://dswd.github.com/Swine"
+APPDB_WEBSITE = "http://appdb.winehq.org"
 
 def tr(s, context="@default"):
   return s
