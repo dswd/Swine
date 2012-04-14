@@ -3,12 +3,12 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="swine.py" line="508"/>
+        <location filename="swine.py" line="516"/>
         <source>Run Program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="543"/>
+        <location filename="swine.py" line="555"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -310,197 +310,197 @@
 <context>
     <name>SwineMainWindow</name>
     <message>
-        <location filename="swine.py" line="356"/>
+        <location filename="swine.py" line="358"/>
         <source>Version: %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="220"/>
+        <location filename="swine.py" line="222"/>
         <source>Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="325"/>
+        <location filename="swine.py" line="327"/>
         <source>New Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="224"/>
+        <location filename="swine.py" line="226"/>
         <source>Run</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="226"/>
+        <location filename="swine.py" line="228"/>
         <source>Set Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="228"/>
+        <location filename="swine.py" line="230"/>
         <source>Remove Menu Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="230"/>
+        <location filename="swine.py" line="232"/>
         <source>Create Menu Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="232"/>
+        <location filename="swine.py" line="234"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="293"/>
+        <location filename="swine.py" line="295"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="294"/>
+        <location filename="swine.py" line="296"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="296"/>
+        <location filename="swine.py" line="298"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="238"/>
+        <location filename="swine.py" line="240"/>
         <source>Slot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="329"/>
+        <location filename="swine.py" line="331"/>
         <source>New Slot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="319"/>
+        <location filename="swine.py" line="321"/>
         <source>Import Slot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="243"/>
+        <location filename="swine.py" line="245"/>
         <source>Run default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="244"/>
+        <location filename="swine.py" line="246"/>
         <source>Run...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="248"/>
+        <location filename="swine.py" line="250"/>
         <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="249"/>
+        <location filename="swine.py" line="251"/>
         <source>Shell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="250"/>
+        <location filename="swine.py" line="252"/>
         <source>File Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="251"/>
+        <location filename="swine.py" line="253"/>
         <source>Taskmanager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="253"/>
+        <location filename="swine.py" line="255"/>
         <source>Winecfg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="254"/>
+        <location filename="swine.py" line="256"/>
         <source>Start Regedit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="255"/>
+        <location filename="swine.py" line="257"/>
         <source>Uninstall Software</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="256"/>
+        <location filename="swine.py" line="258"/>
         <source>Control-Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="258"/>
+        <location filename="swine.py" line="260"/>
         <source>Commands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="259"/>
+        <location filename="swine.py" line="261"/>
         <source>Import Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="260"/>
+        <location filename="swine.py" line="262"/>
         <source>Reboot wine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="261"/>
+        <location filename="swine.py" line="263"/>
         <source>Eject CD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="263"/>
+        <location filename="swine.py" line="265"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="264"/>
+        <location filename="swine.py" line="266"/>
         <source>Import Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="266"/>
+        <location filename="swine.py" line="268"/>
         <source>Run WIS script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="357"/>
+        <location filename="swine.py" line="359"/>
         <source>Winetricks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="270"/>
+        <location filename="swine.py" line="272"/>
         <source>Call Winetricks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="272"/>
+        <location filename="swine.py" line="274"/>
         <source>Winetricks is not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="317"/>
+        <location filename="swine.py" line="319"/>
         <source>Select archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="317"/>
+        <location filename="swine.py" line="319"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="329"/>
+        <location filename="swine.py" line="331"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="329"/>
+        <location filename="swine.py" line="331"/>
         <source>Create Slot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="357"/>
+        <location filename="swine.py" line="359"/>
         <source>Winetricks has been updated to version %s</source>
         <translation type="unfinished"></translation>
     </message>
@@ -508,22 +508,22 @@
 <context>
     <name>SwineProgramDialog</name>
     <message>
-        <location filename="swine.py" line="433"/>
+        <location filename="swine.py" line="441"/>
         <source>Executable selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="433"/>
+        <location filename="swine.py" line="441"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="450"/>
+        <location filename="swine.py" line="458"/>
         <source>Select Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="459"/>
+        <location filename="swine.py" line="467"/>
         <source>Shortcut name cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -531,17 +531,17 @@
 <context>
     <name>SwineRunDialog</name>
     <message>
-        <location filename="swine.py" line="494"/>
+        <location filename="swine.py" line="502"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="494"/>
+        <location filename="swine.py" line="502"/>
         <source>Execution failed with code %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="511"/>
+        <location filename="swine.py" line="519"/>
         <source>Run</source>
         <translation type="unfinished"></translation>
     </message>
@@ -549,37 +549,37 @@
 <context>
     <name>SwineRunnerDialog</name>
     <message>
-        <location filename="swinerun.py" line="72"/>
+        <location filename="swinerun.py" line="74"/>
         <source>Create Slot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="72"/>
+        <location filename="swinerun.py" line="74"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="72"/>
+        <location filename="swinerun.py" line="74"/>
         <source>New Slot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="80"/>
+        <location filename="swinerun.py" line="82"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="80"/>
+        <location filename="swinerun.py" line="82"/>
         <source>Execution failed with code %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="85"/>
+        <location filename="swinerun.py" line="87"/>
         <source>Import shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="85"/>
+        <location filename="swinerun.py" line="87"/>
         <source>Do you want to import program shortcuts?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -587,7 +587,7 @@
 <context>
     <name>SwineShortcutDialog</name>
     <message>
-        <location filename="swine.py" line="525"/>
+        <location filename="swine.py" line="535"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>

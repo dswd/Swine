@@ -113,7 +113,7 @@
         <translation type="obsolete">Verknüpfungsname darf nicht leer sein</translation>
     </message>
     <message>
-        <location filename="swine.py" line="543"/>
+        <location filename="swine.py" line="555"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -123,7 +123,7 @@
         <translation type="obsolete">Ausführung abgebrochen mit Fehlernummer %s</translation>
     </message>
     <message>
-        <location filename="swine.py" line="508"/>
+        <location filename="swine.py" line="516"/>
         <source>Run Program</source>
         <translation>Programm ausführen</translation>
     </message>
@@ -693,182 +693,182 @@ in %s</translation>
 <context>
     <name>SwineMainWindow</name>
     <message>
-        <location filename="swine.py" line="220"/>
+        <location filename="swine.py" line="222"/>
         <source>Shortcut</source>
         <translation>Verknüpfung</translation>
     </message>
     <message>
-        <location filename="swine.py" line="325"/>
+        <location filename="swine.py" line="327"/>
         <source>New Shortcut</source>
         <translation>Neue Verknüpfung</translation>
     </message>
     <message>
-        <location filename="swine.py" line="224"/>
+        <location filename="swine.py" line="226"/>
         <source>Run</source>
         <translation>ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="226"/>
+        <location filename="swine.py" line="228"/>
         <source>Set Default</source>
         <translation>Als Standard setzen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="228"/>
+        <location filename="swine.py" line="230"/>
         <source>Remove Menu Entry</source>
         <translation>Menüeintrag entfernen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="230"/>
+        <location filename="swine.py" line="232"/>
         <source>Create Menu Entry</source>
         <translation>Menüeintrag erstellen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="232"/>
+        <location filename="swine.py" line="234"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="swine.py" line="293"/>
+        <location filename="swine.py" line="295"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="294"/>
+        <location filename="swine.py" line="296"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="296"/>
+        <location filename="swine.py" line="298"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="238"/>
+        <location filename="swine.py" line="240"/>
         <source>Slot</source>
         <translation>Slot</translation>
     </message>
     <message>
-        <location filename="swine.py" line="329"/>
+        <location filename="swine.py" line="331"/>
         <source>New Slot</source>
         <translation>Neuer Slot</translation>
     </message>
     <message>
-        <location filename="swine.py" line="319"/>
+        <location filename="swine.py" line="321"/>
         <source>Import Slot</source>
         <translation>Slot importieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="243"/>
+        <location filename="swine.py" line="245"/>
         <source>Run default</source>
         <translation>Standard ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="244"/>
+        <location filename="swine.py" line="246"/>
         <source>Run...</source>
         <translation>Ausführen...</translation>
     </message>
     <message>
-        <location filename="swine.py" line="248"/>
+        <location filename="swine.py" line="250"/>
         <source>Tools</source>
         <translation>Werkzeuge</translation>
     </message>
     <message>
-        <location filename="swine.py" line="249"/>
+        <location filename="swine.py" line="251"/>
         <source>Shell</source>
         <translation>Kommandozeile</translation>
     </message>
     <message>
-        <location filename="swine.py" line="250"/>
+        <location filename="swine.py" line="252"/>
         <source>File Manager</source>
         <translation>Dateimanager</translation>
     </message>
     <message>
-        <location filename="swine.py" line="251"/>
+        <location filename="swine.py" line="253"/>
         <source>Taskmanager</source>
         <translation>Prozessmanager</translation>
     </message>
     <message>
-        <location filename="swine.py" line="253"/>
+        <location filename="swine.py" line="255"/>
         <source>Winecfg</source>
         <translation>Winecfg</translation>
     </message>
     <message>
-        <location filename="swine.py" line="254"/>
+        <location filename="swine.py" line="256"/>
         <source>Start Regedit</source>
         <translation>Regedit ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="255"/>
+        <location filename="swine.py" line="257"/>
         <source>Uninstall Software</source>
         <translation>Software deinstallieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="256"/>
+        <location filename="swine.py" line="258"/>
         <source>Control-Center</source>
         <translation>Control-Center</translation>
     </message>
     <message>
-        <location filename="swine.py" line="258"/>
+        <location filename="swine.py" line="260"/>
         <source>Commands</source>
         <translation>Befehle</translation>
     </message>
     <message>
-        <location filename="swine.py" line="259"/>
+        <location filename="swine.py" line="261"/>
         <source>Import Shortcuts</source>
         <translation>Verknüpfungen importieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="260"/>
+        <location filename="swine.py" line="262"/>
         <source>Reboot wine</source>
         <translation>Wine neustarten</translation>
     </message>
     <message>
-        <location filename="swine.py" line="261"/>
+        <location filename="swine.py" line="263"/>
         <source>Eject CD</source>
         <translation>CD auswerfen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="263"/>
+        <location filename="swine.py" line="265"/>
         <source>Export</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="264"/>
+        <location filename="swine.py" line="266"/>
         <source>Import Data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="266"/>
+        <location filename="swine.py" line="268"/>
         <source>Run WIS script</source>
         <translation>WIS-Skript ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="357"/>
+        <location filename="swine.py" line="359"/>
         <source>Winetricks</source>
         <translation>Winetricks</translation>
     </message>
     <message>
-        <location filename="swine.py" line="270"/>
+        <location filename="swine.py" line="272"/>
         <source>Call Winetricks</source>
         <translation>Winetricks ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="272"/>
+        <location filename="swine.py" line="274"/>
         <source>Winetricks is not installed</source>
         <translation>Winetricks ist nicht installiert</translation>
     </message>
     <message>
-        <location filename="swine.py" line="317"/>
+        <location filename="swine.py" line="319"/>
         <source>Select archive</source>
         <translation>Archiv auswählen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="317"/>
+        <location filename="swine.py" line="319"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
         <translation>Swine Slots (*.swine *.tar.gz)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="329"/>
+        <location filename="swine.py" line="331"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
@@ -878,17 +878,17 @@ in %s</translation>
         <translation type="obsolete">Verknüpfung &apos;%s&apos; existiert bereits</translation>
     </message>
     <message>
-        <location filename="swine.py" line="329"/>
+        <location filename="swine.py" line="331"/>
         <source>Create Slot</source>
         <translation>Slot erstellen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="356"/>
+        <location filename="swine.py" line="358"/>
         <source>Version: %s</source>
         <translation>Version: %s</translation>
     </message>
     <message>
-        <location filename="swine.py" line="357"/>
+        <location filename="swine.py" line="359"/>
         <source>Winetricks has been updated to version %s</source>
         <translation>Winetricks wurde auf version %s upgedatet</translation>
     </message>
@@ -896,22 +896,22 @@ in %s</translation>
 <context>
     <name>SwineProgramDialog</name>
     <message>
-        <location filename="swine.py" line="433"/>
+        <location filename="swine.py" line="441"/>
         <source>Executable selection</source>
         <translation>Programmauswahl</translation>
     </message>
     <message>
-        <location filename="swine.py" line="433"/>
+        <location filename="swine.py" line="441"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation>Ausführbare Dateien (*.exe *.EXE);;Installationsarchive (*.msi *.MSI);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="450"/>
+        <location filename="swine.py" line="458"/>
         <source>Select Icon</source>
         <translation>Icon auswählen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="459"/>
+        <location filename="swine.py" line="467"/>
         <source>Shortcut name cannot be empty</source>
         <translation>Verknüpfungsname darf nicht leer sein</translation>
     </message>
@@ -919,12 +919,12 @@ in %s</translation>
 <context>
     <name>SwineRunDialog</name>
     <message>
-        <location filename="swine.py" line="494"/>
+        <location filename="swine.py" line="502"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="swine.py" line="494"/>
+        <location filename="swine.py" line="502"/>
         <source>Execution failed with code %s</source>
         <translation>Ausführung abgebrochen mit Fehlernummer %s</translation>
     </message>
@@ -934,7 +934,7 @@ in %s</translation>
         <translation type="obsolete">Programm ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="511"/>
+        <location filename="swine.py" line="519"/>
         <source>Run</source>
         <translation>ausführen</translation>
     </message>
@@ -942,37 +942,37 @@ in %s</translation>
 <context>
     <name>SwineRunnerDialog</name>
     <message>
-        <location filename="swinerun.py" line="72"/>
+        <location filename="swinerun.py" line="74"/>
         <source>Create Slot</source>
         <translation>Slot erstellen</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="72"/>
+        <location filename="swinerun.py" line="74"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="72"/>
+        <location filename="swinerun.py" line="74"/>
         <source>New Slot</source>
         <translation>Neuer Slot</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="80"/>
+        <location filename="swinerun.py" line="82"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="80"/>
+        <location filename="swinerun.py" line="82"/>
         <source>Execution failed with code %s</source>
         <translation>Ausführung abgebrochen mit Fehlernummer %s</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="85"/>
+        <location filename="swinerun.py" line="87"/>
         <source>Import shortcuts</source>
         <translation>Verknüpfungen importieren</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="85"/>
+        <location filename="swinerun.py" line="87"/>
         <source>Do you want to import program shortcuts?</source>
         <translation>Wollen sie Verknüpfungen importieren?</translation>
     </message>
@@ -980,7 +980,7 @@ in %s</translation>
 <context>
     <name>SwineShortcutDialog</name>
     <message>
-        <location filename="swine.py" line="525"/>
+        <location filename="swine.py" line="535"/>
         <source>Save</source>
         <translation>speichern</translation>
     </message>
