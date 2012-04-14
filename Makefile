@@ -1,4 +1,4 @@
-rev = 0.7-rc2
+rev = 0.7-rc3
 
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDialog.ui
 ui_files_py = ${ui_files:.ui=.py}
@@ -8,7 +8,7 @@ py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py config.py
 deb_dir = package-files/deb
 buildfiles = Makefile
 resources = resources/* images/*
-lang = de_DE
+lang = xx de
 lang_ts = $(addprefix lang/,$(addsuffix .ts,$(lang)))
 lang_qm = $(addprefix translations/,$(addsuffix .qm,$(lang)))
 sources = $(py_files) $(ui_files) $(qrc_files) README LICENSE $(buildfiles) $(resources)
@@ -34,6 +34,12 @@ deb-rebuild: swine-$(rev)-src.tar.gz
 	cd $(deb_dir); export rev=$(rev); make rebuild
 
 $(lang_ts): $(ui_files_py) $(py_files)
+
+lang/xx.ts: $(ui_files_py) $(py_files)
+	mkdir -p lang
+	-rm lang/xx.ts
+	pylupdate4 $(ui_files_py) $(py_files) -ts $@
+
 lang/%: $(ui_files_py) $(py_files)
 	mkdir -p lang
 	pylupdate4 $(ui_files_py) $(py_files) -ts $@

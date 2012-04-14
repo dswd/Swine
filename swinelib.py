@@ -198,7 +198,7 @@ class Slot:
   def __init__(self, name):
     if not name:
       raise SwineException(self.tr("Slot name cannot be empty."))
-    assert isinstance(name, str)
+    assert isinstance(name, (str, unicode))
     self.name = name
     self.settings = {}
     self.shortcutData = {}

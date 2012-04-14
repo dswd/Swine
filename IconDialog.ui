@@ -79,9 +79,6 @@
        <property name="text">
         <string>OK</string>
        </property>
-       <property name="shortcut">
-        <string comment="ok button shortcut">Alt+K</string>
-       </property>
       </widget>
      </item>
      <item>

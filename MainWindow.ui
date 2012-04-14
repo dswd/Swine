@@ -238,7 +238,13 @@
      <normaloff>:/icons/images/information.png</normaloff>:/icons/images/information.png</iconset>
    </property>
    <property name="text">
-    <string>DUMMY</string>
+    <string notr="true">VERSION_DUMMY</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">VERSION_DUMMY</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">VERSION_DUMMY</string>
    </property>
   </action>
   <action name="actionDownload_winetricks">

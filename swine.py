@@ -324,9 +324,6 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
     shortcut = Shortcut(self.tr("New Shortcut"), self.currentSlotItem().slot)
     dialog = SwineShortcutDialog(shortcut, self, self.tr("New Shortcut"))
     if dialog.exec_():
-      if self.currentSlotItem().slot.loadShortcut(shortcut.getName()):
-        raise SwineException(self.tr("Shortcut '%s' already exists") % shortcut.getName())
-      shortcut.save()
       self.slotList_selectionChanged()
   def createSlot_cb(self):
     (name, code) = QInputDialog.getText(self, self.tr("Create Slot"), self.tr("Name:"), QLineEdit.Normal, self.tr("New Slot"))
@@ -540,7 +537,7 @@ def excepthook(excType, excValue, tracebackObj):
     return QMessageBox.critical(QApplication.desktop(), tr("Error"), str(excValue))
   import traceback, sys
   tracebackStr = "".join(traceback.format_tb(tracebackObj))
-  excStr = str(tr("%s: %s")) % (excType.__name__, excValue)
+  excStr = "%s: %s" % (excType.__name__, excValue)
   detailStr = excStr+"\n"+tracebackStr
   print >>sys.stderr, detailStr
   dialog = QMessageBox(QMessageBox.Critical, tr("Error"), excStr, QMessageBox.Ok, QApplication.desktop(), Qt.Dialog)
