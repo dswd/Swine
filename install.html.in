@@ -1,0 +1,40 @@
+#define TITLE Swine - Install
+#define SECTION_INSTALL
+#include <header.html>
+
+LEFT_SIDE
+
+<h1>Downloads</h1>
+<ul class="menu">
+<li><a href="https://github.com/dswd/Swine/downloads"><font face="verdana">&rarr;</font> Downloads page</a></li>
+<li><a href="https://github.com/dswd/Swine/tags"><font face="verdana">&rarr;</font> Download tags</a></li>
+<li><font face="verdana">&rarr;</font> Latest source</li>
+<ul>
+  <li><a href="https://github.com/dswd/Swine/tarball/master">as tarball</a></li>
+  <li><a href="https://github.com/dswd/Swine/zipball/master">as zip-file</a></li>
+</ul>
+</ul>
+
+CONTENT
+
+<h1>Installing Swine</h1>
+
+<h2>Installing on Debian-based systems</h2>
+<p>For systems like Debian, Ubuntu, etc. there is a package repository which can be installed by adding the line <tt>deb http://dswd.github.com/Swine/repository/deb stable main</tt> to <tt>/etc/apt/sources.list</tt>.</p>
+
+<h3>Repository installation</h3>
+<pre><code>$ sudo apt-add-repository 'deb http://dswd.github.com/Swine/repository/deb stable main'
+$ sudo apt-get update
+$ sudo apt-get install swine
+</code></pre>
+
+<h2>Installing from source</h2>
+<p>Swine can be easily installed from source and only needs <i>PyQt4</i> and <i>Qt4 Linguist tools</i> to be built and additionally <i>Python</i>, <i>Wine</i>, <i>Icoutils</i> and <i>Cabextract</i> to run.
+
+<h3>Build and installation commands</h3>
+<pre><code>$ make
+$ make install
+</code></pre>
+
+
+#include <footer.html>

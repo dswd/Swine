@@ -2,12 +2,22 @@
 #define SECTION_FEATURES
 #include <header.html>
 
+RIGHT_SIDE
+
+<h1>Chapters</h1>
+<ul class="menu">
+<li><a href="#slots">Slots</a></li>
+<li><a href="#shortcuts">Shortcuts</a></li>
+<li><a href="#tools">Wine tools</a></li>
+<li><a href="#winetricks">Winetricks</a></li>
+</ul>
+
 CONTENT
 
 <h1>Swine features</h1>
 
-<h2>Slots</h2>
-<p>Swine manages different Windows installations using the WINE_PREFIX method. Different software can be installed in separate slots which makes the maintenance much easier. Different slots can emulate different Windows versions and have different libraries installed. This is especially handy for software that needs a highly customized environment (e.g. games).</p>
+<h2><a name="slots"></a>Slots</h2>
+<p>Swine manages different Windows installations using the <i>Wine-Prefix</i> method. Different software can be installed in separate slots which makes the maintenance much easier. Different slots can emulate different Windows versions and have different libraries installed. This is especially handy for software that needs a highly customized environment (e.g. games).</p>
 <ul>
 <li>Easy slot creation and removal</li>
 <li>Run programs in a slot</li>
@@ -15,17 +25,33 @@ CONTENT
 <li>Export slots to archives containing all files and configuration</li>
 </ul>
 
-<h2>Shortcuts</h2>
+<h2><a name="shortcuts"></a>Shortcuts</h2>
+<p>For each slot, Swine manages a list of shortcuts to Windows programs. Users can create shortcuts for commonly used programs including a working directory and arguments.</p>
 <ul>
-<li>Manually create shortcuts (with working directory and arguments)</li>
+<li>Manually create shortcuts (with working directory, arguments and icon)</li>
 <li>Automatically import shortcuts from Windows menu entries (LNK-files)</li>
 <li>Create KDE/Gnome menu entries for shortcuts</li> 
 </ul>
 
-<h2>Supported wine tools</h2>
+<h2><a name="tools"></a>Wine tools</h2>
+<p>Swine supports a lot of useful wine tools so that users do not have to type in commands manually any more.</p>
+<ul>
+<li>Wine configuration (winecfg)</li>
+<li>File manager</li>
+<li>Task manager</li>
+<li>Software manager</li>
+<li>Registry editor (regedit)</li>
+<li>Command line shell (cmd.exe)</li>
+<li>Simulated wine reboot</li>
+<li>Eject cd drive</li>
+</ul>
 
-<h2>Winetricks integration</h2>
-
-<h2>Other features</h2>
+<h2><a name="winetricks"></a>Winetricks</h2>
+<p>Winetricks offers automated installation routines for a wide range of applications and libraries. Swine has an integrated support for winetricks.</p>
+<ul>
+<li>Automatic winetricks path discovery</li>
+<li>Winetricks download (no root permissions needed)</li>
+<li>All winetricks commands available from slot menu</li>
+</ul>
 
 #include <footer.html>

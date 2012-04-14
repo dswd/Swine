@@ -62,6 +62,7 @@ A:hover {
   float: left;
   width: 160px;
   background: #F1F6FE url('../img/side_bg.gif') bottom left repeat-x;
+  color: #333333;
 }
 
 #right_side {
@@ -69,6 +70,7 @@ A:hover {
   float: right;
   width: 160px;
   background: #F1F6FE url('../img/side_bg.gif') bottom left repeat-x;
+  color: #333333;
 }
 
 #content {
@@ -79,11 +81,11 @@ A:hover {
 }
 
 #footer {
-  height: 50px;
   background-color: #4E7DD1;
+  margin-top: 1cm;
+  padding: 2mm;
   clear: both;
   text-align: center;
-  padding-top:12px;
   color: #B6CEF9;
   font-family: verdana, arial, sans-serif;
   font-size: 11px;
@@ -141,21 +143,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #content h1 {
-  margin-top:5px; margin-bottom: 10px;
+  margin-top: 2mm;
+  margin-bottom: 5mm;
   font-size: 24px;
   line-height: 24px;
   color: #2153AA;
 }
 
 #content h2 {
-  margin-top:5px; margin-bottom: 10px;
+  margin-top: 7mm;
+  margin-bottom: 2mm;
   font-size: 18px;
   line-height: 18px;
   color: #2153AA;
 }
 
 #content h3 {
-  margin-top:0px;margin-bottom:0px;
+  margin-top: 5mm;
+  margin-bottom: 0px;
   font-size: 14px;
   line-height: 12px;
   color: #2153AA;
@@ -207,6 +212,23 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid #FFFFFF;
 }
 
+ul.menu {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+ul.menu li {
+  font-size: 13px;
+  line-height: 18px;
+}
+ul.menu > li {
+  padding-left: 3mm;
+}
+
+a, a:hover, a:visited {
+  color: #00f
+}
+
 .float_left {
   float: left;
   margin-right: 10px;
@@ -222,7 +244,6 @@ h1, h2, h3, h4, h5, h6 {
   margin:0px;
   padding:10px;
   border: 1px solid #DFE8F7;
-  font-family: verdana, arial, sans-serif;
   font-size: 11px;
   line-height: 18px;
   color: #333333;

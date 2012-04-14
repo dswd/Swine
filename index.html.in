@@ -2,11 +2,31 @@
 #define SECTION_MAIN
 #include <header.html>
 
+LEFT_SIDE
+
+<h1>External links</h1>
+<ul class="menu">
+  <li><a href="htts://www.winehq.org"><font face="verdana">&rarr;</font> Wine Homepage</a></li>
+  <li><a href="http://www.winetricks.org"><font face="verdana">&rarr;</font> Winetricks</a></li>
+  <li><a href="http://apdb.winehq.org"><font face="verdana">&rarr;</font> Wine AppDB</a></li>
+</ul>
+
 CONTENT
 
-<h3>Swine introduction</h3>
+<h1>Swine overview</h1>
 
-Screenshot + description
+<img class="float_right" src="img/screenshot1.png"/>
+<p>Swine is a graphical wine frontend, that makes it easy to install and run Windows software on Linux systems. Swine uses a modern QT4 interface to offer most of the wine command-line tools to users.</p>
+
+<h2>Swine concepts</h2>
+<p>Swine manages different Windows installations using the <i>Wine-Prefix</i> method. Different software can be installed in separate <i>slots</i> which makes the maintenance much easier. Different slots can emulate different Windows versions and have different libraries installed. This is especially handy for software that needs a highly customized environment (e.g. games).</p>
+<p>For each slot, Swine manages a list of <i>shortcuts</i> to Windows programs. Users can create shortcuts for commonly used programs including a working directory and arguments.</p>
+
+<h2>Information about wine</h2>
+<p>Wine is a software environment for Linux that enables the execution of Windows software. Wine uses public specifications and reverse engineering to provide a compatible version of the Windows API without using any code from Microsoft, i.e. wine users do not need a Windows license. Wines compatibility is constantly being improved and wine is already able to run lots of Windows software. The Wine AppDB contains an extensive list of applications together with hints on how to run them.</p>
+
+<h2>Winetricks</h2>
+<p>Winetricks offers automated installation routines for a wide range of applications and libraries. Swine has an integrated support for winetricks.</p>
 
 
 #include <footer.html>
