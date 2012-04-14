@@ -10,6 +10,7 @@ menu_entry(Slots,#slots)
 menu_entry(Shortcuts,#shortcuts)
 menu_entry(Wine tools,#tools)
 menu_entry(Winetricks,#winetricks)
+menu_entry(Localization,#localization)
 MENU_END
 
 CONTENT
@@ -52,6 +53,13 @@ CONTENT
 <li>Automatic winetricks path discovery</li>
 <li>Winetricks download (no root permissions needed)</li>
 <li>All winetricks commands available from slot menu</li>
+</ul>
+
+<h2><a name="localization"></a>Localization</h2>
+Swine is available in the following languages:
+<ul>
+<li>English</li>
+<li>German</li>
 </ul>
 
 #include <footer.html>
