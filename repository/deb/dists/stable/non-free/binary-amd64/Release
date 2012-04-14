@@ -1,0 +1,7 @@
+Archive: stable
+Version: 6.0
+Component: non-free
+Origin: swine
+Label: stable
+Architecture: amd64
+Description: Swine repository

@@ -1,0 +1,31 @@
+#define TITLE Swine - Features
+#define SECTION_FEATURES
+#include <header.html>
+
+CONTENT
+
+<h1>Swine features</h1>
+
+<h2>Slots</h2>
+<p>Swine manages different Windows installations using the WINE_PREFIX method. Different software can be installed in separate slots which makes the maintenance much easier. Different slots can emulate different Windows versions and have different libraries installed. This is especially handy for software that needs a highly customized environment (e.g. games).</p>
+<ul>
+<li>Easy slot creation and removal</li>
+<li>Run programs in a slot</li>
+<li>Different wine config per slot</li>
+<li>Export slots to archives containing all files and configuration</li>
+</ul>
+
+<h2>Shortcuts</h2>
+<ul>
+<li>Manually create shortcuts (with working directory and arguments)</li>
+<li>Automatically import shortcuts from Windows menu entries (LNK-files)</li>
+<li>Create KDE/Gnome menu entries for shortcuts</li> 
+</ul>
+
+<h2>Supported wine tools</h2>
+
+<h2>Winetricks integration</h2>
+
+<h2>Other features</h2>
+
+#include <footer.html>

@@ -1,0 +1,7 @@
+#define TITLE Swine - Screenshots
+#define SECTION_SCREENSHOTS
+#include <header.html>
+
+CONTENT
+
+#include <footer.html>

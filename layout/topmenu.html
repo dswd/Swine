@@ -1,0 +1,34 @@
+#define menu_active(name,url) <li id="active"><a href="url" id="current">name</a></li>
+#define menu_inactive(name,url) <li><a href="url">name</a></li>
+
+#ifdef SECTION_MAIN
+menu_active(Main,index.html)
+#else
+menu_inactive(Main,index.html)
+#endif
+
+#ifdef SECTION_FEATURES
+menu_active(Features,features.html)
+#else
+menu_inactive(Features,features.html)
+#endif
+
+#ifdef SECTION_INSTALLATION
+menu_active(Installation,installation.html)
+#else
+menu_inactive(Installation,installation.html)
+#endif
+
+#ifdef SECTION_SCREENSHOTS
+menu_active(Screenshots,screenshots.html)
+#else
+menu_inactive(Screenshots,screenshots.html)
+#endif
+
+#ifdef SECTION_CONTRIBUTE
+menu_active(Contribute,contribute.html)
+#else
+menu_inactive(Contribute,contribute.html)
+#endif
+
+menu_inactive(Github page,http://github.com/dswd/Swine)

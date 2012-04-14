@@ -1,0 +1,7 @@
+Archive: stable
+Version: 6.0
+Component: non-free
+Origin: swine
+Label: squeeze
+Architecture: source
+Description: Swine repository

@@ -1,0 +1,7 @@
+Archive: stable
+Version: 5.0
+Component: non-free
+Origin: swine
+Label: lenny
+Architecture: source
+Description: Swine repository

@@ -1,0 +1,12 @@
+#define TITLE Swine
+#define SECTION_MAIN
+#include <header.html>
+
+CONTENT
+
+<h3>Swine introduction</h3>
+
+Screenshot + description
+
+
+#include <footer.html>

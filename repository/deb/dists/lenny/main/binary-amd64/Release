@@ -1,0 +1,7 @@
+Archive: stable
+Version: 5.0
+Component: main
+Origin: swine
+Label: lenny
+Architecture: amd64
+Description: Swine repository

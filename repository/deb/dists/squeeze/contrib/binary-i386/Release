@@ -1,0 +1,7 @@
+Archive: stable
+Version: 6.0
+Component: contrib
+Origin: swine
+Label: squeeze
+Architecture: i386
+Description: Swine repository

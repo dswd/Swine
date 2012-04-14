@@ -1,0 +1,29 @@
+Origin: swine
+Label: lenny
+Codename: lenny
+Version: 5.0
+Suite: stable
+Description: Swine repository
+Architectures: i386 amd64 source
+Components: main contrib non-free
+UDebComponents: main
+
+Origin: swine
+Label: squeeze
+Codename: squeeze
+Version: 6.0
+Suite: stable
+Description: Swine repository
+Architectures: i386 amd64 source
+Components: main contrib non-free
+UDebComponents: main
+
+Origin: swine
+Label: stable
+Codename: stable
+Version: 6.0
+Suite: stable
+Description: Swine repository
+Architectures: i386 amd64 source
+Components: main contrib non-free
+UDebComponents: main

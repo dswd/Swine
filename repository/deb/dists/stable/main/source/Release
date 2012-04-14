@@ -1,0 +1,7 @@
+Archive: stable
+Version: 6.0
+Component: main
+Origin: swine
+Label: stable
+Architecture: source
+Description: Swine repository
