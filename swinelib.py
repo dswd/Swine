@@ -128,7 +128,7 @@ class Shortcut:
   def getDesktop(self):
     return self["desktop"]
   def setDesktop(self, desktop):
-    assert isinstance(desktop, str)
+    assert isinstance(desktop, (str, unicode))
     self["desktop"] = desktop
   def _iconsDir(self):
     if self["iconsdir"]:
@@ -476,7 +476,7 @@ class Slot:
       log: if this is set, wine stderr output will be written to that file
       desktop: if this is set, program will be run in a window
     """
-    if not os.path.splitext(prog[0])[1].lower() == ".exe":
+    if "." in prog[0] and not prog[0].lower().endswith(".exe"):
       prog.insert(0, "start")
       if os.path.exists(prog[1]): #Path is unix path
         prog.insert(1, "/UNIX")

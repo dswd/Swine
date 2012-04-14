@@ -468,10 +468,10 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
     self.shortcut.rename(unicode(self.nameInput.text()))
     self.shortcut.setIcon(self.iconFile)
     self.shortcut.setProgram(unicode(self.applicationInput.text()))
-    self.shortcut.setArguments(unicode(self.paramsInput.text()))
-    self.shortcut.setWorkingDirectory(unicode(self.workingDirectoryInput.text()))
+    self.shortcut.setArguments(str(self.paramsInput.text()))
+    self.shortcut.setWorkingDirectory(str(self.workingDirectoryInput.text()))
     if self.desktopCheckBox.isChecked():
-      self.shortcut.setDesktop("default,"+unicode(self.desktopResolution.currentText()))
+      self.shortcut.setDesktop("main,%s" % unicode(self.desktopResolution.currentText()))
     else:
       self.shortcut.setDesktop("")
     self.shortcut["interminal"] = "1" if self.runInTerminalCheckBox.isChecked() else ""
