@@ -8,7 +8,7 @@ LEFT_SIDE
 MENU_BEGIN
 menu_entry(EXTERNAL Github page,https://github.com/dswd/Swine)
 menu_entry(EXTERNAL Wiki,https://github.com/dswd/Swine/wiki)
-menu_entry(EXTERNAL Translate Swine,https://www.transifex.net/projects/p/Swine)
+menu_entry(EXTERNAL Translate Swine,https://www.transifex.net/projects/p/Swine/resource/swine-messages)
 menu_entry(EXTERNAL Fork Swine,https://github.com/dswd/Swine/fork_select)
 menu_entry(EXTERNAL Tickets,https://github.com/dswd/Swine/issues)
 SUBMENU_BEGIN

@@ -6,11 +6,11 @@ RIGHT_SIDE
 
 <h1>Screenshots</h1>
 MENU_BEGIN
-menu_entry(Main window,#img1)
-menu_entry(Main window with menu,#img2)
+menu_entry(Main window 1,#img1)
+menu_entry(Main window 2,#img2)
 menu_entry(Slot menu,#img3)
-menu_entry(Tools submenu of slot menu,#img4)
-menu_entry(Commands submenu of slot menu,#img5)
+menu_entry(Tools submenu,#img4)
+menu_entry(Commands submenu,#img5)
 menu_entry(Shortcut menu,#img6)
 menu_entry(Program dialog,#img7)
 menu_entry(Run dialog,#img8)
