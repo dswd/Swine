@@ -1,4 +1,4 @@
-CPP = cpp -undef -x c -nostdinc -P -traditional-cpp -Ilayout -Wundef
+CPP = cpp -undef -x c -nostdinc -P -traditional-cpp -Wundef -imacros layout/definitions.html -Ilayout
 
 LAYOUT = layout/*.html
 PAGES_IN = $(shell find . -name '*.html.in')

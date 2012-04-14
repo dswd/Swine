@@ -5,17 +5,18 @@
 LEFT_SIDE
 
 <h1>External links</h1>
-<ul class="menu">
-  <li><a href="htts://www.winehq.org"><font face="verdana">&rarr;</font> Wine Homepage</a></li>
-  <li><a href="http://www.winetricks.org"><font face="verdana">&rarr;</font> Winetricks</a></li>
-  <li><a href="http://apdb.winehq.org"><font face="verdana">&rarr;</font> Wine AppDB</a></li>
-</ul>
+MENU_BEGIN
+menu_entry(EXTERNAL Wine Homepage,htts://www.winehq.org)
+menu_entry(EXTERNAL Winetricks,http://www.winetricks.org)
+menu_entry(EXTERNAL Wine AppDB,http://apdb.winehq.org)
+MENU_END
+
 
 CONTENT
 
 <h1>Swine overview</h1>
 
-<img class="float_right" src="img/screenshot1.png"/>
+<img class="float_right" src="img/screenshot2.png" width="400"/>
 <p>Swine is a graphical wine frontend, that makes it easy to install and run Windows software on Linux systems. Swine uses a modern QT4 interface to offer most of the wine command-line tools to users.</p>
 
 <h2>Swine concepts</h2>

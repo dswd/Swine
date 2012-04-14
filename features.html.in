@@ -5,12 +5,12 @@
 RIGHT_SIDE
 
 <h1>Chapters</h1>
-<ul class="menu">
-<li><a href="#slots">Slots</a></li>
-<li><a href="#shortcuts">Shortcuts</a></li>
-<li><a href="#tools">Wine tools</a></li>
-<li><a href="#winetricks">Winetricks</a></li>
-</ul>
+MENU_BEGIN
+menu_entry(Slots,#slots)
+menu_entry(Shortcuts,#shortcuts)
+menu_entry(Wine tools,#tools)
+menu_entry(Winetricks,#winetricks)
+MENU_END
 
 CONTENT
 

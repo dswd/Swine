@@ -5,15 +5,12 @@
 LEFT_SIDE
 
 <h1>Downloads</h1>
-<ul class="menu">
-<li><a href="https://github.com/dswd/Swine/downloads"><font face="verdana">&rarr;</font> Downloads page</a></li>
-<li><a href="https://github.com/dswd/Swine/tags"><font face="verdana">&rarr;</font> Download tags</a></li>
-<li><font face="verdana">&rarr;</font> Latest source</li>
-<ul>
-  <li><a href="https://github.com/dswd/Swine/tarball/master">as tarball</a></li>
-  <li><a href="https://github.com/dswd/Swine/zipball/master">as zip-file</a></li>
-</ul>
-</ul>
+MENU_BEGIN
+menu_entry(EXTERNAL Downloads page,https://github.com/dswd/Swine/downloads)
+menu_entry(EXTERNAL Source releases,https://github.com/dswd/Swine/tags)
+menu_entry(EXTERNAL Latest source,https://github.com/dswd/Swine/tarball/master)
+MENU_END
+
 
 CONTENT
 
