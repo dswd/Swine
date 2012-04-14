@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!--
+Copyright: Darren Hester 2006, http://www.designsbydarren.com
+License: Released Under the "Creative Commons License", 
+http://creativecommons.org/licenses/by-nc/2.5/
+-->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta name="description" content="Swine is a wine frontend using slots" />
+  <meta name="keywords" content="wine frontend, emulation, windows, linux" />
+  <title>Swine - Install</title>
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+<div id="page_wrapper">
+
+<div id="header_wrapper">
+
+<div id="header">
+  <img src="img/swine.png" class="float_right" height="80"/>
+  <h1>S<font color="#FFDF8C">wine</font></h1>
+  <h2>Slotted wine frontend</h2>
+</div>
+
+<div id="navcontainer">
+  <ul id="navlist">
+<li><a href="index.html">Main</a></li>
+
+<li><a href="features.html">Features</a></li>
+
+<li><a href="screenshots.html">Screenshots</a></li>
+
+<li id="active"><a href="install.html" id="current">Install</a></li>
+
+<li><a href="help.html">Help</a></li>
+
+<li><a href="http://github.com/dswd/Swine"><font face="verdana">&rarr;</font> Github page</a></li>
+  </ul>
+</div>
+
+</div><div id="left_side">
+
+<h1>Downloads</h1>
+<ul class="menu">
+<li><a href="https://github.com/dswd/Swine/downloads"><font face="verdana">&rarr;</font> Downloads page</a></li>
+<li><a href="https://github.com/dswd/Swine/tags"><font face="verdana">&rarr;</font> Source releases</a></li>
+<li><a href="https://github.com/dswd/Swine/tarball/master"><font face="verdana">&rarr;</font> Latest source</a></li>
+</ul>
+
+
+</div><div id="content">
+
+<h1>Installing Swine</h1>
+
+<h2>Installing on Debian-based systems</h2>
+<p>For systems like Debian, Ubuntu, etc. there is a package repository which can be installed by adding the line <tt>deb http://dswd.github.com/Swine/repository/deb stable main</tt> to <tt>/etc/apt/sources.list</tt>.</p>
+
+<h3>Installation commands</h3>
+<pre><code>$ sudo apt-add-repository 'deb http://dswd.github.com/Swine/repository/deb stable main'
+$ sudo apt-get update
+$ sudo apt-get install swine
+</code></pre>
+
+<h2>Installing from source</h2>
+<p>Swine can be easily installed from source and only needs <i>PyQt4</i> and <i>Qt4 Linguist tools</i> to be built and additionally <i>Python</i>, <i>Wine</i>, <i>Icoutils</i> and <i>Cabextract</i> to run.
+
+<h3>Build and installation commands</h3>
+<pre><code>$ make
+$ make install
+</code></pre>
+
+
+</div>
+
+<div id="footer">
+  <img src="img/bitcoin16.png" valign="middle"> Donations accepted: <a href="bitcoin:1G8fXGTTqeNLmELk72Z9Fx3QzHBqXwzyU9?amount=1.0&amp;label=Swine Donation">1G8fXGTTqeNLmELk72Z9Fx3QzHBqXwzyU9</a>
+  <br/>
+  Template provided by: <a href="http://www.designsbydarren.com" target="_blank">DesignsByDarren.com</a>
+</div>
+
+</div>
+
+</body>
+
+</html>
