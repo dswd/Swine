@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>images/script_save.png</file>
     <file>images/application.png</file>
     <file>images/application_add.png</file>
     <file>images/application_delete.png</file>

@@ -32,7 +32,16 @@ except: #Python 2.6
 
 CACHEFILE = os.path.join(SWINE_PATH, "winetricks.cache")
 VERSION_FIELD = "_version"
+WINETRICKS = "winetricks"
 
+def discover():
+  global WINETRICKS
+  for path in [SWINE_PATH] + os.environ['PATH'].split(":"):
+    path = os.path.join(path, "winetricks")
+    if os.path.exists(path):
+      WINETRICKS = path
+      break
+      
 def loadCache():
   cache = {}
   if os.path.exists(CACHEFILE):
@@ -45,15 +54,25 @@ def saveCache():
   with open(CACHEFILE, "w") as fp:
     json.dump(cache, fp, indent=2)
   
-def call(args):
+def call(args, plain=False, shell=False):
   if isinstance(args, str):
     args = [args]
-  proc = subprocess.Popen([WINETRICKS]+args, stdout=subprocess.PIPE)
+  if not plain:
+    args = [WINETRICKS]+args
+  proc = subprocess.Popen(args, stdout=subprocess.PIPE, shell=shell)
   (stdout, stderr) = proc.communicate()
   if proc.returncode:
     raise Exception(tr("Command failed: %s") % stderr)
   return stdout
 
+def showHelp():
+  call("help")
+
+def download():
+  dst = os.path.join(SWINE_PATH, "winetricks")
+  call("wget http://winetricks.org/winetricks --quiet -O %(path)s && chmod +x %(path)s" % {"path": dst}, plain=True, shell=True)
+  init()
+  
 def getCacheVersion():
   return cache.get(VERSION_FIELD, None)
     
@@ -74,23 +93,28 @@ def sections():
 def options(section):
   return cache[section].iteritems()
 
-cache = loadCache()
-try:
-  version = call("--version").strip()
-except:
-  version = None
-if version:
-  if getCacheVersion() != version:
-    print >>sys.stderr, tr("Loading winetricks entries...")
-    loadOptions()
+def init():
+  global cache, version
+  cache = loadCache()
+  discover()
+  try:
+    version = call("--version").strip()
+  except:
+    version = None
+  if version:
+    if getCacheVersion() != version:
+      print >>sys.stderr, tr("Loading winetricks entries...")
+      loadOptions()
+      saveCache()
+  else:
+    print >>sys.stderr, tr("WARNING: Winetricks binary not found")
+    cache = {}
     saveCache()
-else:
-  print >>sys.stderr, tr("WARNING: Winetricks binary not found")
-  cache = {}
-  saveCache()
   
 def debug():
   for sec in sections():
     print sec
     for (name, desc) in options(sec):
       print "\t%s\t%s" % (name, desc)
+      
+init()

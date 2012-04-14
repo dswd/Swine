@@ -3,194 +3,194 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Delete Slot</source>
         <translation type="obsolete">Slot löschen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Are you sure ?</source>
         <translation type="obsolete">Sind sie sicher?</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Select archive file</source>
         <translation type="obsolete">Archiv-Datei auswählen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
         <translation type="obsolete">Swine Slots (*.swine *.tar.gz)</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Select script file</source>
         <translation type="obsolete">Skript-Datei auswählen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>WIS Scripts (*.wis)</source>
         <translation type="obsolete">WIS Skripte (*.wis)</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Edit Shortcut</source>
         <translation type="obsolete">Verknüpfung bearbeiten</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Menu Entry</source>
         <translation type="obsolete">Menüeintrag</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Menu entry for %s has been created</source>
         <translation type="obsolete">Menüeintrag für %s wurde erstellt</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Menu entry for %s has been removed</source>
         <translation type="obsolete">Menüeintrag für %s wurde gelöscht</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Run default</source>
         <translation type="obsolete">Standard ausführen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Select archive</source>
         <translation type="obsolete">Archiv auswählen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Import Slot</source>
         <translation type="obsolete">Slot importieren</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Name:</source>
         <translation type="obsolete">Name:</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>New Shortcut</source>
         <translation type="obsolete">Neue Verknüpfung</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Shortcut &apos;%s&apos; already exists</source>
         <translation type="obsolete">Verknüpfung &apos;%s&apos; existiert bereits</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Create Slot</source>
         <translation type="obsolete">Slot erstellen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>New Slot</source>
         <translation type="obsolete">Neuer Slot</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Executable selection</source>
         <translation type="obsolete">Programmauswahl</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation type="obsolete">Ausführbare Dateien (*.exe *.EXE);;Installationsarchive (*.msi *.MSI);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Select Icon</source>
         <translation type="obsolete">Icon auswählen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Shortcut name cannot be empty</source>
         <translation type="obsolete">Verknüpfungsname darf nicht leer sein</translation>
     </message>
     <message>
-        <location filename="swine.py" line="541"/>
+        <location filename="swine.py" line="542"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Execution failed with code %s</source>
         <translation type="obsolete">Ausführung abgebrochen mit Fehlernummer %s</translation>
     </message>
     <message>
-        <location filename="swine.py" line="499"/>
+        <location filename="swine.py" line="507"/>
         <source>Run Program</source>
         <translation>Programm ausführen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Run</source>
         <translation type="obsolete">ausführen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Save</source>
         <translation type="obsolete">speichern</translation>
     </message>
     <message>
-        <location filename="swine.py" line="533"/>
+        <location filename="" line="0"/>
         <source>%s (%s, line %d)</source>
-        <translation>%s (%s, Zeile %d)</translation>
+        <translation type="obsolete">%s (%s, Zeile %d)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="540"/>
+        <location filename="" line="0"/>
         <source>%s: %s
 in %s</source>
-        <translation>%s: %s
+        <translation type="obsolete">%s: %s
 in %s</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Create new slot...</source>
         <translation type="obsolete">Neuen Slot erstellen...</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Import shortcuts</source>
         <translation type="obsolete">Verknüpfungen importieren</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Do you want to import program shortcuts?</source>
         <translation type="obsolete">Wollen sie Verknüpfungen importieren?</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Shortcut already exists</source>
         <translation type="obsolete">Verknüpfung existiert bereits</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>File does not exist</source>
         <translation type="obsolete">Datei existiert nicht</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Slot name cannot be empty.</source>
         <translation type="obsolete">Slot-Name darf nicht leer sein.</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>%s does not exist</source>
         <translation type="obsolete">%s existiert nicht</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Slot already exists: %s</source>
         <translation type="obsolete">Slot existiert bereits: %s</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Default slot cannot be deleted</source>
         <translation type="obsolete">Standard-Slot kann nicht gelöscht werden</translation>
     </message>
@@ -200,22 +200,22 @@ in %s</translation>
         <translation>Slot existiert nicht: %s</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Slot name cannot be empty</source>
         <translation type="obsolete">Slot-Name darf nicht leer sein</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Slot does already exist: %s</source>
         <translation type="obsolete">Slot existiert bereits: %s</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Default slot cannot be renamed</source>
         <translation type="obsolete">Standard-Slot kann nicht umbenannt werden</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>File name cannot be empty</source>
         <translation type="obsolete">Dateiname darf nicht leer sein</translation>
     </message>
@@ -230,159 +230,164 @@ in %s</translation>
         <translation>%s mit %s verknüpft</translation>
     </message>
     <message>
-        <location filename="winetricks.py" line="54"/>
+        <location filename="winetricks.py" line="65"/>
         <source>Command failed: %s</source>
         <translation>Befehl fehlgeschalgen: %s</translation>
     </message>
     <message>
-        <location filename="winetricks.py" line="84"/>
+        <location filename="winetricks.py" line="106"/>
         <source>Loading winetricks entries...</source>
         <translation>Lade Winetricks-Einträge...</translation>
     </message>
     <message>
-        <location filename="winetricks.py" line="88"/>
+        <location filename="winetricks.py" line="110"/>
         <source>WARNING: Winetricks binary not found</source>
         <translation>WARNUNG: Wintricks-Programm nicht gefunden</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Shortcut</source>
         <translation type="obsolete">Verknüpfung</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Set Default</source>
         <translation type="obsolete">Als Standard setzen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Remove Menu Entry</source>
         <translation type="obsolete">Menüeintrag entfernen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Create Menu Entry</source>
         <translation type="obsolete">Menüeintrag erstellen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Edit</source>
         <translation type="obsolete">Bearbeiten</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Rename</source>
         <translation type="obsolete">Umbenennen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Copy</source>
         <translation type="obsolete">Kopieren</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Delete</source>
         <translation type="obsolete">Löschen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Slot</source>
         <translation type="obsolete">Slot</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Run...</source>
         <translation type="obsolete">Ausführen...</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Tools</source>
         <translation type="obsolete">Werkzeuge</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Shell</source>
         <translation type="obsolete">Kommandozeile</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>File Manager</source>
         <translation type="obsolete">Dateimanager</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Taskmanager</source>
         <translation type="obsolete">Prozessmanager</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Winecfg</source>
         <translation type="obsolete">Winecfg</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Start Regedit</source>
         <translation type="obsolete">Regedit ausführen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Uninstall Software</source>
         <translation type="obsolete">Software deinstallieren</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Control-Center</source>
         <translation type="obsolete">Control-Center</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Commands</source>
         <translation type="obsolete">Befehle</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Import Shortcuts</source>
         <translation type="obsolete">Verknüpfungen importieren</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Reboot wine</source>
         <translation type="obsolete">Wine rebooten</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Eject CD</source>
         <translation type="obsolete">CD auswerfen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Export</source>
         <translation type="obsolete">Exportieren</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Import Data</source>
         <translation type="obsolete">Daten importieren</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Run WIS script</source>
         <translation type="obsolete">WIS-Skript ausführen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Winetricks</source>
         <translation type="obsolete">Winetricks</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Call Winetricks</source>
         <translation type="obsolete">Winetricks ausführen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Winetricks is not installed</source>
         <translation type="obsolete">Winetricks ist nicht installiert</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="539"/>
+        <source>%s: %s</source>
+        <translation>%s: %s</translation>
     </message>
 </context>
 <context>
@@ -421,7 +426,7 @@ in %s</translation>
 <context>
     <name>IconDialog</name>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">O&amp;K</translation>
     </message>
@@ -455,44 +460,69 @@ in %s</translation>
         <translation>Swine</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="82"/>
+        <location filename="" line="0"/>
         <source>Help</source>
-        <translation>Hilfe</translation>
+        <translation type="obsolete">Hilfe</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="89"/>
+        <location filename="MainWindow.py" line="92"/>
         <source>About Swine</source>
         <translation>Über Swine</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>&amp;About Swine</source>
         <translation type="obsolete">&amp;Über Swine</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="99"/>
+        <location filename="MainWindow.py" line="102"/>
         <source>Exit</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>&amp;Exit</source>
         <translation type="obsolete">&amp;Schließen</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="100"/>
+        <location filename="MainWindow.py" line="103"/>
         <source>Alt+F4</source>
         <translation>Alt+F4</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="107"/>
+        <location filename="MainWindow.py" line="110"/>
         <source>About Wine</source>
         <translation>Über Wine</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>About &amp;Wine</source>
         <translation type="obsolete">Über &amp;Wine</translation>
+    </message>
+    <message>
+        <location filename="MainWindow.py" line="115"/>
+        <source>About Winetricks</source>
+        <translation>Über Winetricks</translation>
+    </message>
+    <message>
+        <location filename="MainWindow.py" line="82"/>
+        <source>About</source>
+        <translation>Über</translation>
+    </message>
+    <message>
+        <location filename="MainWindow.py" line="85"/>
+        <source>Winetricks</source>
+        <translation>Winetricks</translation>
+    </message>
+    <message>
+        <location filename="MainWindow.py" line="125"/>
+        <source>Download winetricks</source>
+        <translation>Winetricks herunterladen</translation>
+    </message>
+    <message>
+        <location filename="MainWindow.py" line="119"/>
+        <source>DUMMY</source>
+        <translation>DUMMY</translation>
     </message>
 </context>
 <context>
@@ -653,215 +683,225 @@ in %s</translation>
 <context>
     <name>SwineMainWindow</name>
     <message>
-        <location filename="swine.py" line="218"/>
+        <location filename="swine.py" line="220"/>
         <source>Shortcut</source>
         <translation>Verknüpfung</translation>
     </message>
     <message>
-        <location filename="swine.py" line="323"/>
+        <location filename="swine.py" line="325"/>
         <source>New Shortcut</source>
         <translation>Neue Verknüpfung</translation>
     </message>
     <message>
-        <location filename="swine.py" line="222"/>
+        <location filename="swine.py" line="224"/>
         <source>Run</source>
         <translation>ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="224"/>
+        <location filename="swine.py" line="226"/>
         <source>Set Default</source>
         <translation>Als Standard setzen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="226"/>
+        <location filename="swine.py" line="228"/>
         <source>Remove Menu Entry</source>
         <translation>Menüeintrag entfernen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="228"/>
+        <location filename="swine.py" line="230"/>
         <source>Create Menu Entry</source>
         <translation>Menüeintrag erstellen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="230"/>
+        <location filename="swine.py" line="232"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="swine.py" line="291"/>
+        <location filename="swine.py" line="293"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="292"/>
+        <location filename="swine.py" line="294"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="294"/>
+        <location filename="swine.py" line="296"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="236"/>
+        <location filename="swine.py" line="238"/>
         <source>Slot</source>
         <translation>Slot</translation>
     </message>
     <message>
-        <location filename="swine.py" line="330"/>
+        <location filename="swine.py" line="332"/>
         <source>New Slot</source>
         <translation>Neuer Slot</translation>
     </message>
     <message>
-        <location filename="swine.py" line="317"/>
+        <location filename="swine.py" line="319"/>
         <source>Import Slot</source>
         <translation>Slot importieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="241"/>
+        <location filename="swine.py" line="243"/>
         <source>Run default</source>
         <translation>Standard ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="242"/>
+        <location filename="swine.py" line="244"/>
         <source>Run...</source>
         <translation>Ausführen...</translation>
     </message>
     <message>
-        <location filename="swine.py" line="246"/>
+        <location filename="swine.py" line="248"/>
         <source>Tools</source>
         <translation>Werkzeuge</translation>
     </message>
     <message>
-        <location filename="swine.py" line="247"/>
+        <location filename="swine.py" line="249"/>
         <source>Shell</source>
         <translation>Kommandozeile</translation>
     </message>
     <message>
-        <location filename="swine.py" line="248"/>
+        <location filename="swine.py" line="250"/>
         <source>File Manager</source>
         <translation>Dateimanager</translation>
     </message>
     <message>
-        <location filename="swine.py" line="249"/>
+        <location filename="swine.py" line="251"/>
         <source>Taskmanager</source>
         <translation>Prozessmanager</translation>
     </message>
     <message>
-        <location filename="swine.py" line="251"/>
+        <location filename="swine.py" line="253"/>
         <source>Winecfg</source>
         <translation>Winecfg</translation>
     </message>
     <message>
-        <location filename="swine.py" line="252"/>
+        <location filename="swine.py" line="254"/>
         <source>Start Regedit</source>
         <translation>Regedit ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="253"/>
+        <location filename="swine.py" line="255"/>
         <source>Uninstall Software</source>
         <translation>Software deinstallieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="254"/>
+        <location filename="swine.py" line="256"/>
         <source>Control-Center</source>
         <translation>Control-Center</translation>
     </message>
     <message>
-        <location filename="swine.py" line="256"/>
+        <location filename="swine.py" line="258"/>
         <source>Commands</source>
         <translation>Befehle</translation>
     </message>
     <message>
-        <location filename="swine.py" line="257"/>
+        <location filename="swine.py" line="259"/>
         <source>Import Shortcuts</source>
         <translation>Verknüpfungen importieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="258"/>
+        <location filename="swine.py" line="260"/>
         <source>Reboot wine</source>
         <translation>Wine neustarten</translation>
     </message>
     <message>
-        <location filename="swine.py" line="259"/>
+        <location filename="swine.py" line="261"/>
         <source>Eject CD</source>
         <translation>CD auswerfen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="261"/>
+        <location filename="swine.py" line="263"/>
         <source>Export</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="262"/>
+        <location filename="swine.py" line="264"/>
         <source>Import Data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="swine.py" line="264"/>
+        <location filename="swine.py" line="266"/>
         <source>Run WIS script</source>
         <translation>WIS-Skript ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="267"/>
+        <location filename="swine.py" line="356"/>
         <source>Winetricks</source>
         <translation>Winetricks</translation>
     </message>
     <message>
-        <location filename="swine.py" line="268"/>
+        <location filename="swine.py" line="270"/>
         <source>Call Winetricks</source>
         <translation>Winetricks ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="270"/>
+        <location filename="swine.py" line="272"/>
         <source>Winetricks is not installed</source>
         <translation>Winetricks ist nicht installiert</translation>
     </message>
     <message>
-        <location filename="swine.py" line="315"/>
+        <location filename="swine.py" line="317"/>
         <source>Select archive</source>
         <translation>Archiv auswählen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="315"/>
+        <location filename="swine.py" line="317"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
         <translation>Swine Slots (*.swine *.tar.gz)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="330"/>
+        <location filename="swine.py" line="332"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
     <message>
-        <location filename="swine.py" line="326"/>
+        <location filename="swine.py" line="328"/>
         <source>Shortcut &apos;%s&apos; already exists</source>
         <translation>Verknüpfung &apos;%s&apos; existiert bereits</translation>
     </message>
     <message>
-        <location filename="swine.py" line="330"/>
+        <location filename="swine.py" line="332"/>
         <source>Create Slot</source>
         <translation>Slot erstellen</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="355"/>
+        <source>Version: %s</source>
+        <translation>Version: %s</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="356"/>
+        <source>Winetricks has been updated to version %s</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SwineProgramDialog</name>
     <message>
-        <location filename="swine.py" line="424"/>
+        <location filename="swine.py" line="432"/>
         <source>Executable selection</source>
         <translation>Programmauswahl</translation>
     </message>
     <message>
-        <location filename="swine.py" line="424"/>
+        <location filename="swine.py" line="432"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation>Ausführbare Dateien (*.exe *.EXE);;Installationsarchive (*.msi *.MSI);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="441"/>
+        <location filename="swine.py" line="449"/>
         <source>Select Icon</source>
         <translation>Icon auswählen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="450"/>
+        <location filename="swine.py" line="458"/>
         <source>Shortcut name cannot be empty</source>
         <translation>Verknüpfungsname darf nicht leer sein</translation>
     </message>
@@ -869,22 +909,22 @@ in %s</translation>
 <context>
     <name>SwineRunDialog</name>
     <message>
-        <location filename="swine.py" line="485"/>
+        <location filename="swine.py" line="493"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="swine.py" line="485"/>
+        <location filename="swine.py" line="493"/>
         <source>Execution failed with code %s</source>
         <translation>Ausführung abgebrochen mit Fehlernummer %s</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Run Program</source>
         <translation type="obsolete">Programm ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="502"/>
+        <location filename="swine.py" line="510"/>
         <source>Run</source>
         <translation>ausführen</translation>
     </message>
@@ -930,22 +970,22 @@ in %s</translation>
 <context>
     <name>SwineShortcutDialog</name>
     <message>
-        <location filename="swine.py" line="516"/>
+        <location filename="swine.py" line="524"/>
         <source>Save</source>
         <translation>speichern</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>%s (%s, line %d)</source>
         <translation type="obsolete">%s (%s, Zeile %d)</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Fehler</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>%s: %s
 in %s</source>
         <translation type="obsolete">%s: %s
@@ -975,7 +1015,7 @@ in %s</translation>
         <translation>Menüeintrag für %s wurde gelöscht</translation>
     </message>
     <message>
-        <location filename="" line="33427968"/>
+        <location filename="" line="0"/>
         <source>Delete Slot</source>
         <translation type="obsolete">Slot löschen</translation>
     </message>

@@ -464,7 +464,7 @@ class Slot:
     """Run a winetricks command
     This is only a wrapper for runNative
     """
-    return self.runWineTool(["xterm", "-T", "Winetricks %s" % prog, "-hold", "-e", WINETRICKS, str(prog)])
+    return self.runWineTool(["xterm", "-T", "Winetricks %s" % prog, "-hold", "-e", winetricks.WINETRICKS, str(prog)])
   def runWin(self, prog, workingDirectory=".", wait=False, runInTerminal=False, desktop=None, debug=None, log=None):
     """Run a windows program
     Parameters:

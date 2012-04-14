@@ -31,7 +31,6 @@ SWINE_SLOT_PATH = SWINE_PATH
 SWINE_DEFAULT_SLOT_NAME = "DEFAULT"
 SWINE_DEFAULT_SLOT_PATH = os.path.join(SWINE_PATH, SWINE_DEFAULT_SLOT_NAME)
 WINE_PATH = os.path.join(HOME_PATH, ".wine")
-WINETRICKS = "winetricks"
 REAL_PATH = os.path.dirname(os.path.realpath(__file__))
 WISRUN = os.path.join(REAL_PATH, "/wisrun")
 DESKTOP_MENU_DIR = os.path.join(HOME_PATH, ".local/share/applications/swine")
