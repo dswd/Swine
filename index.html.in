@@ -6,7 +6,7 @@ LEFT_SIDE
 
 <h1>External links</h1>
 MENU_BEGIN
-menu_entry(EXTERNAL Wine Homepage,htts://www.winehq.org)
+menu_entry(EXTERNAL Wine Homepage,http://www.winehq.org)
 menu_entry(EXTERNAL Winetricks,http://www.winetricks.org)
 menu_entry(EXTERNAL Wine AppDB,http://apdb.winehq.org)
 MENU_END
