@@ -171,7 +171,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top:1px;
   margin-bottom:0px;
   text-align:center;
-  padding: 5px 0 1mm 0;
+  padding: 5px 0;
   margin-left: 0;
   border-bottom: 1px solid #0F3974;
   font: bold 14px Verdana, sans-serif;
@@ -181,6 +181,7 @@ h1, h2, h3, h4, h5, h6 {
 {
   list-style: none;
   margin: 0;
+  padding: 0;
   display: inline;
 }
 
