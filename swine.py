@@ -54,12 +54,14 @@ def tr(s, context="@default"):
 class SwineSlotItem(QListWidgetItem):
   def __init__(self, parent, slot):
     self.slot = slot
-    self.icon = loadIcon(":/icons/images/folder.png")
     shortcut = slot.loadDefaultShortcut()
+    self.iconObj = None
     if shortcut:
       if shortcut.getIcon():
-        self.icon = loadIcon(shortcut.getIcon(), folder=slot.getPath(), cache=False, scale=(32,32))
-    QListWidgetItem.__init__(self, self.icon, unicode(slot.getName()), parent)
+        self.iconObj = loadIcon(shortcut.getIcon(), folder=slot.getPath(), cache=False, scale=(32,32))
+    if not self.iconObj:
+      self.iconObj = loadIcon(":/icons/images/folder.png")
+    QListWidgetItem.__init__(self, self.iconObj, unicode(slot.getName()), parent)
     self.setFlags(Qt.ItemIsEditable|Qt.ItemIsSelectable|Qt.ItemIsEnabled)
     self.listWidget().sortItems()
   def tr(self, s):

@@ -571,6 +571,7 @@ def init():
     print tr("symlinked %s to %s") % (SWINE_DEFAULT_SLOT_PATH, WINE_PATH)
   global WINE_WRAPPER
   WINE_WRAPPER = "text" in os.popen('file `which wine`', 'r').read()
+  winetricks.init()
 
 def getAllSlots():
   slist = os.listdir(SWINE_SLOT_PATH)

@@ -116,5 +116,3 @@ def debug():
     print sec
     for (name, desc) in options(sec):
       print "\t%s\t%s" % (name, desc)
-      
-init()
