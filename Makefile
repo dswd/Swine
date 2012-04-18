@@ -1,4 +1,4 @@
-rev = 0.7-rc3
+rev = 0.7-rc4
 
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDialog.ui
 ui_files_py = ${ui_files:.ui=.py}

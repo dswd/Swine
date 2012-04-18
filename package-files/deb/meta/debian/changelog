@@ -1,3 +1,10 @@
+swine (0.7-rc4) unstable; urgency=low
+
+  * Fixed bug on startup without swine folder
+  * Fixed bug when displaying slots without proper icon
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Wed, 18 Apr 2012 21:08:19 +0200
+
 swine (0.7-rc3) unstable; urgency=low
 
   * Added links to swine website and wine appdb
