@@ -4,7 +4,7 @@ swine (0.7-rc3) unstable; urgency=low
   * Added winetricks menu including winetricks download capability
   * Improved exception handler
 
- -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Tue, 10 Apr 2012 22:55:15 +0200
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Tue, 14 Apr 2012 22:55:15 +0200
 
 swine (0.7-rc2) unstable; urgency=low
 
