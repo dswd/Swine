@@ -142,8 +142,8 @@ class Shortcut:
   def extractIcons(self):
     path = self._exePath()
     if os.path.splitext(path)[1].lower() == '.exe':
-      self['iconsdir'] = os.path.join("icons", os.path.basename(path))
-      self.slot.extractExeIcons(path, self._iconsDir())
+      self['iconsdir'] = self.slot.iconsDirRel(path)
+      self.slot.extractExeIcons(path, self.slot.iconsDir(path))
   def _menuEntryPath(self):
     return os.path.join(DESKTOP_MENU_DIR, "%s-%s.desktop" % (self.slot.getName(), self.name))
   def hasMenuEntry(self):
@@ -355,6 +355,10 @@ class Slot:
       return self.loadShortcut(self.getDefaultShortcutName())
     except:
       return None
+  def iconsDir(self, path):
+    return os.path.join(self.getPath(), self.iconsDirRel(path))
+  def iconsDirRel(self, path):
+    return os.path.join("icons", os.path.basename(path))
   def extractExeIcons(self, path, iconsdir, onlyNr=None):
     if not os.path.exists(iconsdir):
       os.makedirs(iconsdir)

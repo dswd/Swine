@@ -452,18 +452,19 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
     if fileName:
       self.workingDirectoryInput.setText(self.shortcut.getSlot().unixPathToWin(unicode(fileName)))
   def icon_clicked(self):
-    if self.shortcut.getProgram():
-      self.shortcut.extractIcons()
-    dirStr = self.shortcut.getSlot().getPath()
-    if self.shortcut._iconsDir() and os.path.exists(self.shortcut._iconsDir()):
-      dirStr = self.shortcut._iconsDir()
-    dialog = SwineIconDialog(dirStr, self.parent, self.tr("Select Icon"))
+    prog = unicode(self.applicationInput.text())
+    if not prog:
+      return
+    workDir = str(self.workingDirectoryInput.text())
+    prog = self.shortcut.getSlot().winPathToUnix(prog, basedir=workDir)
+    iconsDir = self.shortcut.getSlot().iconsDir(prog)
+    bestIco = self.shortcut.getSlot().extractExeIcons(prog, iconsDir)
+    dialog = SwineIconDialog(iconsDir, self.parent, self.tr("Select Icon"))
     if dialog.exec_():
       pass
     self.iconFile = dialog.iconFile
     if self.iconFile:
       self.icon.setIcon(loadIcon(self.iconFile))
-      self.shortcut.setIcon(self.iconFile)
   def okButton_clicked(self):
     if not self.nameInput.text():
       raise SwineException(self.tr("Shortcut name cannot be empty"))
