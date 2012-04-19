@@ -25,7 +25,7 @@ import os, sys, traceback
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 import swinelib
-import time, webbrowser
+import time, webbrowser, pipes
 from PyQt4.QtGui import *
 from PyQt4.QtCore import Qt, QTranslator, QLocale
 from swinelib import *
@@ -430,7 +430,7 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
           self.iconFile = shortcut.getIcon()
       self.applicationInput.setText(shortcut.getProgram())
       self.workingDirectoryInput.setText(shortcut.getWorkingDirectory())
-      self.paramsInput.setText(" ".join(map(repr, shortcut.getArguments())))
+      self.paramsInput.setText(" ".join(map(pipes.quote, shortcut.getArguments())))
       self.desktopCheckBox.setChecked(bool(shortcut.getDesktop()))
       if shortcut.getDesktop():
         self.desktopResolution.setCurrentText(shortcut.getDesktop().split(",")[1])
