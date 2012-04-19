@@ -14,7 +14,15 @@ http://creativecommons.org/licenses/by-nc/2.5/
   <title>Swine - Screenshots</title>
   <link href="css/style.css" type="text/css" rel="stylesheet" />
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="socialshareprivacy/jquery.socialshareprivacy.min.js"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function($){
+      if($('#socialshareprivacy').length > 0){
+        $('#socialshareprivacy').socialSharePrivacy(); 
+      }
+    });
+  </script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-31009099-1']);
@@ -100,6 +108,7 @@ http://creativecommons.org/licenses/by-nc/2.5/
 <h3><a href="img8"></a>Run dialog</h3>
 <img src="img/run_dialog1.png"/>
 
+  <div id="socialshareprivacy"></div>
 </div>
 
 <div id="footer">
