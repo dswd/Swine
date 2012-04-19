@@ -1,4 +1,4 @@
-rev = 0.7-rc4
+rev = $(shell ./version.sh)
 
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDialog.ui
 ui_files_py = ${ui_files:.ui=.py}
