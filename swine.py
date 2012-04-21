@@ -273,7 +273,7 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
         winetricksMenu = menu.addMenu(loadIcon(":/icons/images/script_gear.png"), self.tr("Winetricks"))
         winetricksMenu.addAction(loadIcon(":/icons/images/script_gear.png"), self.tr("Call Winetricks"), slot.winetricks_callback("") )
       else:
-        menu.addAction(loadIcon(":/icons/images/script_gear.png"), self.tr("Winetricks is not installed"), lambda :reload(winetricks) and self.rebuildMenuBar())
+        menu.addAction(loadIcon(":/icons/images/script_gear.png"), self.tr("Winetricks is not installed"), lambda :winetricks.init() and self.rebuildMenuBar())
       perPage = 20
       for sec in winetricks.sections():
         options = list(winetricks.options(sec))
