@@ -1,3 +1,9 @@
+swine (0.7-rc5) unstable; urgency=low
+
+  * Fixed several bugs
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Sat, 21 Apr 2012 09:26:36 +0200
+
 swine (0.7-rc4) unstable; urgency=low
 
   * Fixed bug on startup without swine folder
