@@ -14,7 +14,15 @@ http://creativecommons.org/licenses/by-nc/2.5/
   <title>Swine - Contribute</title>
   <link href="css/style.css" type="text/css" rel="stylesheet" />
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="socialshareprivacy/jquery.socialshareprivacy.min.js"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function($){
+      if($('#socialshareprivacy').length > 0){
+        $('#socialshareprivacy').socialSharePrivacy(); 
+      }
+    });
+  </script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-31009099-1']);
@@ -98,6 +106,7 @@ Please do not submit bug reports about software that does not run (except if it 
 <p>Swine is an open-source project (GPL 2) managed on github. The project is open to contributions of any kind like bug reports, feature requests, patches or code contributions. Please use tickets for bug reports and feature requests and provide code in the github way (fork the project and submit a pull request).</p>
 <p>Please help translating Swine to your native language using the translation page.</p>
 
+  <div id="socialshareprivacy"></div>
 </div>
 
 <div id="footer">

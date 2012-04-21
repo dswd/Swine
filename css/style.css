@@ -76,7 +76,7 @@ a:hover {
 
 #footer {
   background-color: #4E7DD1;
-  margin-top: 1cm;
+  margin-top: 0mm; /* 1cm removed for social buttons */
   padding: 2mm;
   clear: both;
   text-align: center;
