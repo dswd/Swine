@@ -1,3 +1,9 @@
+swine (0.7.0-2) unstable; urgency=low
+
+  * Small bugfix for languages
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Sat, 28 Apr 2012 12:14:23 +0200
+
 swine (0.7.0-1) unstable; urgency=low
 
   * Added Hebrew translation, thanks to Yaron Shahrabani

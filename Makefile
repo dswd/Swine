@@ -11,7 +11,7 @@ resources = resources/* images/*
 lang = xx de he
 lang_ts = $(addprefix lang/,$(addsuffix .ts,$(lang)))
 lang_qm = $(addprefix translations/,$(addsuffix .qm,$(lang)))
-sources = $(py_files) $(ui_files) $(qrc_files) README LICENSE version.sh $(buildfiles) $(resources)
+sources = $(py_files) $(ui_files) $(qrc_files) README LICENSE version.sh $(buildfiles) $(resources) $(lang_ts)
 distfiles = $(py_files) $(ui_files_py) $(qrc_files_py) README LICENSE version.sh $(resources) $(lang_qm)
 
 .SUFFIXES: _rc.py .qrc .py .ui
