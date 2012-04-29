@@ -104,7 +104,10 @@ def init():
   if version:
     if getCacheVersion() != version:
       print >>sys.stderr, tr("Loading winetricks entries...")
-      loadOptions()
+      try:
+        loadOptions()
+      except:
+        cache = {}
       saveCache()
   else:
     print >>sys.stderr, tr("WARNING: Winetricks binary not found")
