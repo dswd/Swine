@@ -450,12 +450,12 @@ in %s</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="MainWindow.py" line="21"/>
+        <location filename="MainWindow.py" line="160"/>
         <source>Swine %s</source>
         <translation>Swine %s</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="79"/>
+        <location filename="MainWindow.py" line="161"/>
         <source>Swine</source>
         <translation>Swine</translation>
     </message>
@@ -465,7 +465,7 @@ in %s</translation>
         <translation type="obsolete">Hilfe</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="92"/>
+        <location filename="MainWindow.py" line="164"/>
         <source>About Swine</source>
         <translation>Über Swine</translation>
     </message>
@@ -475,7 +475,7 @@ in %s</translation>
         <translation type="obsolete">&amp;Über Swine</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="102"/>
+        <location filename="MainWindow.py" line="165"/>
         <source>Exit</source>
         <translation>Schließen</translation>
     </message>
@@ -485,12 +485,12 @@ in %s</translation>
         <translation type="obsolete">&amp;Schließen</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="103"/>
+        <location filename="MainWindow.py" line="166"/>
         <source>Alt+F4</source>
         <translation>Alt+F4</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="110"/>
+        <location filename="MainWindow.py" line="167"/>
         <source>About Wine</source>
         <translation>Über Wine</translation>
     </message>
@@ -500,22 +500,22 @@ in %s</translation>
         <translation type="obsolete">Über &amp;Wine</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="117"/>
+        <location filename="MainWindow.py" line="168"/>
         <source>About Winetricks</source>
         <translation>Über Winetricks</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="82"/>
+        <location filename="MainWindow.py" line="162"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="85"/>
+        <location filename="MainWindow.py" line="163"/>
         <source>Winetricks</source>
         <translation>Winetricks</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="129"/>
+        <location filename="MainWindow.py" line="169"/>
         <source>Download winetricks</source>
         <translation>Winetricks herunterladen</translation>
     </message>
@@ -525,12 +525,12 @@ in %s</translation>
         <translation type="obsolete">DUMMY</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="133"/>
+        <location filename="MainWindow.py" line="170"/>
         <source>Swine Website</source>
         <translation>Swine Website</translation>
     </message>
     <message>
-        <location filename="MainWindow.py" line="137"/>
+        <location filename="MainWindow.py" line="171"/>
         <source>Wine AppDB</source>
         <translation>Wine AppDB</translation>
     </message>
