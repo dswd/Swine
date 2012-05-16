@@ -564,13 +564,11 @@ def relpath(target, base=os.curdir):
   return os.path.join(*rel_list)
 
 def init():
-  if not os.path.exists(SWINE_PATH):
-    os.mkdir(SWINE_PATH)
-    print tr("created %s") % SWINE_PATH
-  if not os.path.exists(SWINE_SLOT_PATH):
-    os.mkdir(SWINE_SLOT_PATH)
-    print tr("created %s") % SWINE_SLOT_PATH
-  if not os.path.exists(SWINE_DEFAULT_SLOT_PATH) and os.path.exists(WINE_PATH):
+  for path in [WINE_PATH, SWINE_PATH, SWINE_SLOT_PATH]:
+    if not os.path.exists(path):
+      os.mkdir(path)
+      print tr("created %s") % path
+  if not os.path.exists(SWINE_DEFAULT_SLOT_PATH):
     os.symlink(WINE_PATH, SWINE_DEFAULT_SLOT_PATH)
     print tr("symlinked %s to %s") % (SWINE_DEFAULT_SLOT_PATH, WINE_PATH)
   global WINE_WRAPPER
