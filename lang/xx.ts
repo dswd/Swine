@@ -29,7 +29,10 @@
     </message>
     <message>
         <location filename="winetricks.py" line="65"/>
-        <source>Command failed: %s</source>
+        <source>Command failed: %s
+Return code: %d
+Output: %s
+Error: %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -38,7 +41,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="winetricks.py" line="110"/>
+        <location filename="winetricks.py" line="113"/>
         <source>WARNING: Winetricks binary not found</source>
         <translation type="unfinished"></translation>
     </message>

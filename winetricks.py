@@ -62,7 +62,7 @@ def call(args, plain=False, shell=False):
   proc = subprocess.Popen(args, stdout=subprocess.PIPE, shell=shell)
   (stdout, stderr) = proc.communicate()
   if proc.returncode:
-    raise Exception(tr("Command failed: %s") % stderr)
+    raise Exception(tr("Command failed: %s\nReturn code: %d\nOutput: %s\nError: %s") % (" ".join(args), proc.returncode, stdout, stderr))
   return stdout
 
 def showHelp():

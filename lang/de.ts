@@ -232,7 +232,7 @@ in %s</translation>
     <message>
         <location filename="winetricks.py" line="65"/>
         <source>Command failed: %s</source>
-        <translation>Befehl fehlgeschalgen: %s</translation>
+        <translation type="obsolete">Befehl fehlgeschalgen: %s</translation>
     </message>
     <message>
         <location filename="winetricks.py" line="106"/>
@@ -240,7 +240,7 @@ in %s</translation>
         <translation>Lade Winetricks-Einträge...</translation>
     </message>
     <message>
-        <location filename="winetricks.py" line="110"/>
+        <location filename="winetricks.py" line="113"/>
         <source>WARNING: Winetricks binary not found</source>
         <translation>WARNUNG: Wintricks-Programm nicht gefunden</translation>
     </message>
@@ -388,6 +388,14 @@ in %s</translation>
         <location filename="swine.py" line="540"/>
         <source>%s: %s</source>
         <translation type="obsolete">%s: %s</translation>
+    </message>
+    <message>
+        <location filename="winetricks.py" line="65"/>
+        <source>Command failed: %s
+Return code: %d
+Output: %s
+Error: %s</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
