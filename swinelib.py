@@ -30,6 +30,12 @@ import shortcutlib, winetricks
 from tarfile import TarFile
 from subprocess import Popen
 
+U_SEP = '/'
+W_SEP = '\\'
+D_SEP = ':'
+DIR_UP = '..'
+DIR_CUR = '.'
+
 try:
   from collections import OrderedDict
   def json_load(fp):
@@ -518,15 +524,50 @@ class Slot:
     return self.runWineTool(["wine", "control"], wait=False)
   def runEject(self):
     return self.runWin(["wine", "eject"], wait=False)
-  def winPathToUnix(self, path, basedir=None):
-    if basedir:
-      basedir = self.winPathToUnix(basedir)
-    return self.runWinePath(["wine", "winepath", "-u", path], basedir)
-  def unixPathToWin(self, path, basedir=None):
-    return self.runWinePath(["wine", "winepath", "-w", path], basedir)
-  def runWinePath(self, prog, basedir):
-    proc = self.runWineTool(prog, wait=True, stdout=subprocess.PIPE, cwd=basedir)
-    return proc.stdout_data.splitlines()[-1]
+  def isWindowsPath(path):
+    return W_SEP in path
+  def _normalizePath(self, path, sep):
+    res = []
+    for el in path.split(sep):
+      if el == DIR_CUR:
+        continue
+      elif el == DIR_UP:
+        if res:
+          res.pop()
+      else:
+        res.append(el)
+    return sep.join(res)
+  def winPathToUnix(self, winPath, basedir=None):
+    if (D_SEP + W_SEP) in winPath: #path is absolute
+      drive, rest = winPath.split(D_SEP + W_SEP)
+      rest = _normalizePath(rest, W_SEP)
+      rest = rest.replace(W_SEP, U_SEP)
+      unixPath = DRIVES + U_SEP + drive + D_SEP + U_SEP + rest
+    else:
+      rest = winPath.replace(W_SEP, U_SEP)
+      basePath = self.winPathToUnix(basedir) if basedir else os.path.curdir
+      unixPath = basePath + U_SEP + rest
+    return os.path.realpath(unixPath)
+  def unixPathToWin(self, unixPath, basedir=None, drive=None):
+    if not os.path.isabs(unixPath) and basedir:
+      unixPath = basedir + U_SEP + unixPath
+    if drive:
+      unixPath = os.path.realpath(unixPath)
+      drivePath = os.path.realpath(self.getDosDrivesPath() + U_SEP + drive + D_SEP)
+      rel = os.path.relpath(unixPath, drivePath)
+      if not rel.startswith(DIR_UP):
+        rel = rel.replace(U_SEP, W_SEP)
+        return drive + D_SEP + W_SEP + rel
+    else:
+      path = None
+      for drive in os.listdir(self.getDosDrivesPath()):
+        driveName = drive.replace(D_SEP, '')
+        p = self.unixPathToWin(unixPath, drive=driveName)
+        if not p:
+          continue
+        if not path or len(p) < len(path):
+          path = p
+      return path
   def exportData(self, archive):
     if not archive:
       raise SwineException(self.tr("File name cannot be empty"))
