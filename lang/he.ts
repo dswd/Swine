@@ -13,17 +13,17 @@
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="572"/>
+        <location filename="swinelib.py" line="611"/>
         <source>created %s</source>
         <translation>%s נוצר</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="575"/>
+        <location filename="swinelib.py" line="614"/>
         <source>symlinked %s to %s</source>
         <translation>%s קושר סימבולית אל %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="592"/>
+        <location filename="swinelib.py" line="631"/>
         <source>Slot does not exist: %s</source>
         <translation>החריץ לא קיים: %s</translation>
     </message>
@@ -247,17 +247,17 @@ Error: %s</source>
 <context>
     <name>Shortcut</name>
     <message>
-        <location filename="swinelib.py" line="94"/>
+        <location filename="swinelib.py" line="100"/>
         <source>Shortcut name cannot be empty</source>
         <translation>שם קיצור הדרך לא יכול להישאר ריק</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="96"/>
+        <location filename="swinelib.py" line="102"/>
         <source>Shortcut already exists</source>
         <translation>קיצור הדרך כבר קיים</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="174"/>
+        <location filename="swinelib.py" line="180"/>
         <source>File does not exist</source>
         <translation>הקובץ לא קיים</translation>
     </message>
@@ -265,52 +265,52 @@ Error: %s</source>
 <context>
     <name>Slot</name>
     <message>
-        <location filename="swinelib.py" line="200"/>
+        <location filename="swinelib.py" line="206"/>
         <source>Slot name cannot be empty.</source>
         <translation>שם החריץ לא יכול להישאר ריק.</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="225"/>
+        <location filename="swinelib.py" line="231"/>
         <source>Shortcut name cannot be empty</source>
         <translation>שם קיצור הדרך לא יכול להישאר ריק</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="241"/>
+        <location filename="swinelib.py" line="247"/>
         <source>%s does not exist</source>
         <translation>%s לא קיים</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="286"/>
+        <location filename="swinelib.py" line="292"/>
         <source>Slot already exists: %s</source>
         <translation>החריץ כבר קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="293"/>
+        <location filename="swinelib.py" line="299"/>
         <source>Default slot cannot be deleted</source>
         <translation>לא ניתן למחוק את חריץ בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="317"/>
+        <location filename="swinelib.py" line="323"/>
         <source>Slot does not exist: %s</source>
         <translation>החריץ אינו קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="313"/>
+        <location filename="swinelib.py" line="319"/>
         <source>Slot name cannot be empty</source>
         <translation>שם החריץ לא יכול להישאר ריק</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="320"/>
+        <location filename="swinelib.py" line="326"/>
         <source>Slot does already exist: %s</source>
         <translation>החריץ כבר קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="315"/>
+        <location filename="swinelib.py" line="321"/>
         <source>Default slot cannot be renamed</source>
         <translation>לא ניתן לשנות את שם חריץ בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="547"/>
+        <location filename="swinelib.py" line="588"/>
         <source>File name cannot be empty</source>
         <translation>שם הקובץ לא יכול להיות ריק</translation>
     </message>

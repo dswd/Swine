@@ -1,3 +1,14 @@
+swine (0.7.1) unstable; urgency=low
+
+  * Bugfix release
+  * Moved path conversion to python code (closes #2)
+  * Creating missing .wine directory on first start
+  * More detailed winetricks error message
+  * Fixed truncated shortcut entries
+  * No longer crashing if winetricks loading fails (issue #4)
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Thu, 17 May 2012 00:52:13 +0200
+
 swine (0.7.0-2) unstable; urgency=low
 
   * Small bugfix for languages
