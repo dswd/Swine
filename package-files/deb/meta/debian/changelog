@@ -1,3 +1,9 @@
+swine (0.7.1-1) unstable; urgency=low
+
+  * Added French translation, thanks to Stéphane Aulery
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Thu, 17 May 2012 09:43:39 +0200
+
 swine (0.7.1) unstable; urgency=low
 
   * Bugfix release
