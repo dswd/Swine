@@ -1,3 +1,9 @@
+swine (0.7.2) unstable; urgency=low
+
+  * Fixed bug in path conversion code
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Fri, 18 May 2012 14:42:08 +0200
+
 swine (0.7.1-1) unstable; urgency=low
 
   * Added French translation, thanks to Stéphane Aulery
