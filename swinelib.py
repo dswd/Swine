@@ -540,9 +540,9 @@ class Slot:
   def winPathToUnix(self, winPath, basedir=None):
     if (D_SEP + W_SEP) in winPath: #path is absolute
       drive, rest = winPath.split(D_SEP + W_SEP)
-      rest = _normalizePath(rest, W_SEP)
+      rest = self._normalizePath(rest, W_SEP)
       rest = rest.replace(W_SEP, U_SEP)
-      unixPath = DRIVES + U_SEP + drive + D_SEP + U_SEP + rest
+      unixPath = self.getDosDrivesPath() + U_SEP + drive + D_SEP + U_SEP + rest
     else:
       rest = winPath.replace(W_SEP, U_SEP)
       basePath = self.winPathToUnix(basedir) if basedir else os.path.curdir
