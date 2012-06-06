@@ -196,7 +196,7 @@ class Shortcut:
       icons = os.listdir(iconsdir)
       self.setIcon(os.path.join(iconsdir, self.slot.bestIco(icons, lnk.iconIndex)))
     else:
-      self.setIcon(self.slot.winPathToUnix(iconPath))
+      self.setIcon(iconPath)
 
     
     
