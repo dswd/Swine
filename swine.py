@@ -34,6 +34,7 @@ from AboutDialog import *
 from ProgramDialog import *
 from IconDialog import *
 from MainWindow import *
+from ShortcutImport import *
 
 def loadIcon (name, folder="", cache=True, scale=None):
   path = os.path.join(folder, name)
@@ -51,7 +52,18 @@ def tr(s, context="@default"):
   
   
   
-class SwineSlotItem(QListWidgetItem):
+class IconListItem(QListWidgetItem):
+  def __init__(self, parent, name, icon=None, description=None, **kwargs):
+    QListWidgetItem.__init__(self, icon, name, parent)
+    if description:
+      self.setToolTip(description)
+    self.__dict__.update(kwargs)
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
+
+
+
+class SwineSlotItem(IconListItem):
   def __init__(self, parent, slot):
     self.slot = slot
     shortcut = slot.loadDefaultShortcut()
@@ -61,7 +73,7 @@ class SwineSlotItem(QListWidgetItem):
         self.iconObj = loadIcon(shortcut.getIcon(), folder=slot.getPath(), cache=False, scale=(32,32))
     if not self.iconObj:
       self.iconObj = loadIcon(":/icons/images/folder.png")
-    QListWidgetItem.__init__(self, self.iconObj, unicode(slot.getName()), parent)
+    IconListItem.__init__(self, parent, unicode(slot.getName()), self.iconObj)
     self.setFlags(Qt.ItemIsEditable|Qt.ItemIsSelectable|Qt.ItemIsEnabled)
     self.listWidget().sortItems()
   def tr(self, s):
@@ -86,7 +98,7 @@ class SwineSlotItem(QListWidgetItem):
     slotItem = SwineSlotItem(self.listWidget(), slot)
     slotItem.rename_cb()
   def searchShortcuts_cb(self):
-    self.slot.findShortcuts()
+    SwineShortcutImportDialog(self.slot, self.mainWindow()).exec_()
     self.refreshShortcutList()
   def run_cb(self):
     SwineRunDialog(self.slot, self.mainWindow()).show()
@@ -120,16 +132,15 @@ class SwineSlotItem(QListWidgetItem):
 
 
 
-class SwineShortcutItem(QListWidgetItem):
+class SwineShortcutItem(IconListItem):
   def __init__(self, parent, shortcut):
-    QListWidgetItem.__init__(self, loadIcon(":/icons/images/wabi.png"), shortcut.getName(), parent)
     self.shortcut = shortcut
+    self.iconObj = None
     if shortcut.getIcon():
-      icon = loadIcon(shortcut.getIcon(), folder=shortcut.slot.getPath(), cache=False, scale=(32,32))
-      if icon:
-        self.setIcon(icon)
-    if shortcut["description"]:
-      self.setToolTip(shortcut["description"])
+      self.iconObj = loadIcon(shortcut.getIcon(), folder=shortcut.slot.getPath(), cache=False, scale=(32,32))
+    if not self.iconObj:
+      self.iconObj = loadIcon(":/icons/images/wabi.png")
+    IconListItem.__init__(self, parent, shortcut.getName(), self.iconObj, shortcut["description"])
     self.setFlags(Qt.ItemIsEditable|Qt.ItemIsSelectable|Qt.ItemIsEnabled)
     self.updateDefaultState()
   def tr(self, s):
@@ -385,7 +396,7 @@ class SwineAboutDialog(QDialog, Ui_AboutDialog):
 
 
 
-class SwineIconDialog(QDialog,Ui_IconDialog):  
+class SwineIconDialog(QDialog,Ui_IconDialog):
   class Icon(QListWidgetItem):
     def __init__(self, parent, fileName, icon):
       QListWidgetItem.__init__(self, icon, "", parent)
@@ -399,7 +410,7 @@ class SwineIconDialog(QDialog,Ui_IconDialog):
     for icon in os.listdir(self.iconDir):
       image = loadIcon(icon, self.iconDir, cache=False)
       if image:
-        self.Icon(self.iconView, os.path.join(self.iconDir, icon), image)
+        IconListItem(self.iconView, name="", icon=image, fileName=os.path.join(self.iconDir, icon))
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def okButton_clicked(self):
@@ -486,9 +497,7 @@ class SwineRunDialog(SwineProgramDialog):
     SwineProgramDialog.okButton_clicked(self)
     self.hide()
     prog = [self.shortcut.getProgram()]+self.shortcut.getArguments()
-    wait = False
-    if self.addShortcutsCheckBox.isChecked() or self.winebootCheckBox.isChecked():
-      wait = True
+    wait = True
     workingDirectory = self.shortcut.getWorkingDirectory()
     runInTerminal = bool(self.shortcut["interminal"])
     log = None
@@ -509,15 +518,14 @@ class SwineRunDialog(SwineProgramDialog):
     # 2: exe-file not found
     # 3: exe-path not found
     # 126: mod not found (path invalid)
-    if self.addShortcutsCheckBox.isChecked():
-      self.slot.findShortcuts()
-      self.parent.slotList_selectionChanged()
     if self.winebootCheckBox.isChecked():
       self.slot.runWineboot()
+    if SwineShortcutImportDialog(self.slot, self, onlyNew=True).exec_():
+      self.parent.slotList_selectionChanged()
   def __init__(self, slot, parent):
     self.slot = slot
     name = tr("Run Program")
-    self.shortcut = Shortcut(name, slot)
+    self.shortcut = Shortcut(name, slot, virtual=True)
     SwineProgramDialog.__init__(self, self.shortcut, parent, name)
     self.okButton.setText(self.tr("Run"))
     self.icon.hide()
@@ -537,11 +545,36 @@ class SwineShortcutDialog(SwineProgramDialog):
     SwineProgramDialog.__init__(self, shortcut, parent, name)
     self.okButton.setText(self.tr("Save"))
     self.winebootCheckBox.hide()
-    self.addShortcutsCheckBox.hide()
     self.logfileCheckBox.hide()
     self.adjustSize()
   def tr(self, s):
     return tr(s, self.__class__.__name__)
+
+
+    
+class SwineShortcutImportDialog(QDialog, Ui_ShortcutImport):
+  def __init__(self, slot, parent, onlyNew=False):
+    QDialog.__init__(self, parent)
+    self.setupUi(self)
+    self.slot = slot
+    self.lnkFiles = self.slot.findLnkFiles(onlyNew=onlyNew)
+    for fname in self.lnkFiles:
+      fname = slot.winPathToUnix(fname)
+      shortcut = slot.createShortcutFromFile(fname)
+      SwineShortcutItem(self.shortcutList, shortcut)
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
+  def exec_(self):
+    if self.lnkFiles:
+      return QDialog.exec_(self)
+  def importShortcuts(self):
+    items = self.shortcutList.selectedItems()
+    for item in items:
+      item.shortcut.save()
+    if items:
+      self.accept()
+    else:
+      self.reject()
 
 
 

@@ -30,7 +30,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import Qt, QTranslator, QLocale
 from threading import Thread
 from RunnerDialog import *
-from swine import SwineSlotItem, loadIcon, excepthook, tr
+from swine import SwineSlotItem, SwineShortcutImportDialog, loadIcon, excepthook, tr
 
 class NewSlotItem(QListWidgetItem):
   def __init__(self,parent):
@@ -84,8 +84,7 @@ class SwineRunnerDialog(QMainWindow, Ui_RunnerDialog):
         dialog.adjustSize()
         dialog.exec_()
       else:
-        if QMessageBox.question(self, self.tr("Import shortcuts"), self.tr("Do you want to import program shortcuts?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
-          slot.findShortcuts()
+        SwineShortcutImportDialog(slot, self, onlyNew=True).exec_()
       self.close()
 
 def main(args):

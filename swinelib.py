@@ -48,7 +48,7 @@ class SwineException(Exception):
   pass
 
 class Shortcut:
-  def __init__(self, name, slot, data={}):
+  def __init__(self, name, slot, data={}, virtual=False):
     if not name:
       raise SwineException(self.tr("Shortcut name cannot be empty"))
     self.name = unicode(name)
@@ -58,6 +58,7 @@ class Shortcut:
       self.data = data
     assert slot and isinstance(slot, Slot)
     self.slot = slot
+    self.virtual = virtual
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def __str__(self):
@@ -68,7 +69,8 @@ class Shortcut:
     return self.name
   def __setitem__(self, key, value):
     self.data[key]=value
-    self.save()
+    if not self.virtual:
+      self.save()
   def __getitem__(self, key):
     return self.data.get(key, None)
   def __delitem__(self, key):
@@ -78,6 +80,7 @@ class Shortcut:
   def _removeData(self):
     self.slot._removeShortcutData(self.name)
   def save(self):
+    self.virtual = False
     self._storeData()
   def delete(self):
     self._removeData()
@@ -420,22 +423,21 @@ class Slot:
       return icons[0]
   def createShortcutFromFile(self, path):
     name = os.path.splitext(os.path.basename(path))[0]
-    shortcut = Shortcut(name, self)
+    shortcut = Shortcut(name, self, virtual=True)
     shortcut.readFromLnk(path)
-    shortcut.save()
     return shortcut
-  def findShortcutsCallback(self, shortcuts, dirname, fnames):
-    for fname in fnames:
-      if os.path.splitext(fname)[1].lower() == ".lnk":
-        shortcuts.append(self.createShortcutFromFile(os.path.join(dirname,fname)))
-  def findShortcuts(self, exeonly=False):
-    shortcuts = []
-    os.path.walk(os.path.join(self.getPath(), "drive_c"), self.findShortcutsCallback, shortcuts)
-    if exeonly:
-      for shortcut in shortcuts:
-        if not os.path.splitext(shortcut.getProgram()[0])[1].lower() == '.exe':
-          shortcuts.remove(shortcut)
-    return shortcuts
+  def findLnkFiles(self, onlyNew=False):
+    files = []
+    for root, dnames, fnames in os.walk(os.path.join(self.getPath(), "drive_c")):
+      for fname in fnames:
+        if os.path.splitext(fname)[1].lower() == ".lnk":
+          files.append(self.unixPathToWin(os.path.join(root,fname)))
+    oldfiles = self["known_lnk_files"]
+    self["known_lnk_files"] = files
+    self.saveConfig()
+    if oldfiles and onlyNew:
+      files = list(set(files) - set(oldfiles))
+    return files
   def runNative(self, prog, cwd=None, wait=False, env=None, stdin=None, stdout=None, stderr=None):
     """Run any native program (no windows binaries)
     Parameters:

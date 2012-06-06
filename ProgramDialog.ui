@@ -166,39 +166,6 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="addShortcutsCheckBox">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Add new shortcuts</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" colspan="2">
-      <widget class="QCheckBox" name="logfileCheckBox">
-       <property name="text">
-        <string>Log to wine.log</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" colspan="2">
-      <widget class="QCheckBox" name="winebootCheckBox">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Reboot wine</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0" colspan="2">
       <layout class="QHBoxLayout">
        <item>
@@ -236,6 +203,26 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="1" column="1" colspan="2">
+      <widget class="QCheckBox" name="winebootCheckBox">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Reboot wine</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="logfileCheckBox">
+       <property name="text">
+        <string>Log to wine.log</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
