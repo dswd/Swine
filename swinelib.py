@@ -460,7 +460,7 @@ class Slot:
     env = os.environ.copy()
     env["WINEPREFIX"] = self.getPath()
     env["WINEDEBUG"] = "err+all,warn-all,fixme-all,trace-all"
-    #env["WINEDLLOVERRIDES"] = "winemenubuilder.exe=d" #do not add shortcuts to desktop or menu
+    env["WINEDLLOVERRIDES"] = "winemenubuilder.exe=d" #do not add shortcuts to desktop or menu
     global WINE_WRAPPER
     if WINE_WRAPPER and os.path.exists(self.getPath()):
       open(os.path.join(self.getPath(), ".no_prelaunch_window_flag"),"wc").close()
