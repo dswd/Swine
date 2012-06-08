@@ -579,11 +579,11 @@ class SwineShortcutImportDialog(QDialog, Ui_ShortcutImport):
 
 
 def excepthook(excType, excValue, tracebackObj):
+  import traceback, sys
   if excType == KeyboardInterrupt:
     sys.exit(0)
   if excType == SwineException:
     return QMessageBox.critical(QApplication.desktop(), tr("Error"), unicode(excValue))
-  import traceback, sys
   tracebackStr = "".join(traceback.format_tb(tracebackObj))
   excStr = "%s: %s" % (excType.__name__, excValue)
   detailStr = excStr+"\n"+tracebackStr
