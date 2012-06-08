@@ -1,6 +1,0 @@
-yesno "Do you want to install Elster 2008 ?" || exit -1
-download https://download.elster.de/download/2008/ElsterFormular2008-Setup.exe $TMP/ElsterFormular2008-Setup.exe b7421b57def5f8ce51e27e19fd556ef3c800d3f6
-winetricks vcrun6 msxml4 vcrun2005 || fatal "Winetricks failed"
-wine $TMP/ElsterFormular2008-Setup.exe || fatal "Elster setup failed"
-find_import_lnk "ElsterFormular 2008-2009.lnk"
-info "Installation complete"

@@ -69,7 +69,7 @@ clean:
 
 install: compile
 	mkdir -p $(DESTDIR)/usr/lib/swine
-	cp $(py_files) $(ui_files_py) $(qrc_files_py) resources/wislib resources/wisrun $(DESTDIR)/usr/lib/swine
+	cp $(py_files) $(ui_files_py) $(qrc_files_py) $(DESTDIR)/usr/lib/swine
 	mkdir -p $(DESTDIR)/usr/share/swine/translations
 	cp $(lang_qm) $(DESTDIR)/usr/share/swine/translations
 	mkdir -p $(DESTDIR)/usr/share/swine/images

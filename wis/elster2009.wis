@@ -1,7 +1,0 @@
-yesno "Do you want to install Elster 2009 ?" || exit -1
-require_min_wine_version 1.1.38
-download https://download.elster.de/download/2009/ElsterFormular2009-Setup.exe $TMP/ElsterFormular2009-Setup.exe fd2528590e7e353558c369c300363e6924c10fda
-winetricks vcrun6 || fatal "Winetricks failed"
-wine $TMP/ElsterFormular2009-Setup.exe || fatal "Elster setup failed"
-find_import_lnk "ElsterFormular 2009-2010.lnk"
-info "Installation complete"

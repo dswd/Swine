@@ -121,10 +121,10 @@ class SwineSlotItem(IconListItem):
     if path:
       self.slot.importData(unicode(path))
       self.refreshShortcutList()
-  def wisrun_cb(self):
-    path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select script file"), "", self.tr("WIS Scripts (*.wis)"))
+  def verbrun_cb(self):
+    path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select script file"), "", self.tr("Winetricks scripts (*.verb)"))
     if path:
-      self.slot.runWis(os.path.realpath(unicode(path)))
+      self.slot.runVerb(os.path.realpath(unicode(path)))
   def winetricks(self, tool):
     self.slot.runWinetricks(tool)
   def winetricks_callback(self, tool):
@@ -278,7 +278,7 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
       commandsMenu.addAction(loadIcon(":/icons/images/package_go.png"), self.tr("Export"), slot.export_cb)
       commandsMenu.addAction(loadIcon(":/icons/images/package_add.png"), self.tr("Import Data"), slot.import_cb)
       
-      menu.addAction(loadIcon(":/icons/images/script_gear.png"), self.tr("Run WIS script"), slot.wisrun_cb)
+      menu.addAction(loadIcon(":/icons/images/script_gear.png"), self.tr("Run winetricks script"), slot.verbrun_cb)
       
       if winetricks.version:
         winetricksMenu = menu.addMenu(loadIcon(":/icons/images/script_gear.png"), self.tr("Winetricks"))

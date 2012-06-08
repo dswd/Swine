@@ -467,11 +467,8 @@ class Slot:
     if debug:
       env["WINEDEBUG"] = debug
     return self.runNative(prog, cwd, wait, env, stdin, stdout, stderr)
-  def runWis(self, wisFile):
-    env = os.environ
-    env["WINEPREFIX"] = self.getPath()
-    env["SLOT"] = self.name
-    return self.runNative(["xterm", "-T", "WIS", "-hold", "-e", WISRUN, wisFile], cwd=".", wait=True, env=env)
+  def runVerb(self, verbFile):
+    return self.runWineTool(["xterm", "-T", "Verb %s" % verbFile, "-hold", "-e", winetricks.WINETRICKS, "--gui", "--no-isolate", verbFile])
   def runWinetricks(self, prog):
     """Run a winetricks command
     This is only a wrapper for runNative
