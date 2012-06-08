@@ -27,3 +27,15 @@ The following steps are needed:
 ## Installation
 
     # make install
+
+## Translation
+Swine has been translated into the following languages:
+
+- English (Source language)
+- German (Dennis Schwerdel)
+- French (Stéphane Aulery)
+- Spanish, Castilian (Josué González)
+- Hebrew (Yaron Shahrabani)
+
+
+Please help translating Swine into your native language on https://www.transifex.net/projects/p/Swine/resource/swine-messages
