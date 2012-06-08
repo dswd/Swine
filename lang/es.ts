@@ -13,17 +13,17 @@
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="614"/>
+        <location filename="swinelib.py" line="611"/>
         <source>created %s</source>
         <translation>creado %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="617"/>
+        <location filename="swinelib.py" line="614"/>
         <source>symlinked %s to %s</source>
         <translation>symlinked %s a %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="634"/>
+        <location filename="swinelib.py" line="631"/>
         <source>Slot does not exist: %s</source>
         <translation>La ranura no existe: %s</translation>
     </message>
@@ -263,52 +263,52 @@ Error: %s</translation>
 <context>
     <name>ShortcutImport</name>
     <message>
-        <location filename="ShortcutImport.py" line="114"/>
+        <location filename="ShortcutImport.py" line="71"/>
         <source>Import shortcuts</source>
         <translation type="unfinished">Importar acceso directo</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="116"/>
         <source>About Swine</source>
-        <translation type="unfinished">Acerca de Swine</translation>
+        <translation type="obsolete">Acerca de Swine</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="117"/>
         <source>Exit</source>
-        <translation type="unfinished">Salir</translation>
+        <translation type="obsolete">Salir</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="118"/>
         <source>Alt+F4</source>
-        <translation type="unfinished">Alt+F4</translation>
+        <translation type="obsolete">Alt+F4</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="119"/>
         <source>About Wine</source>
-        <translation type="unfinished">Acerca de Wine</translation>
+        <translation type="obsolete">Acerca de Wine</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="120"/>
         <source>About Winetricks</source>
-        <translation type="unfinished">Acerca de Winetricks</translation>
+        <translation type="obsolete">Acerca de Winetricks</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="121"/>
         <source>Download winetricks</source>
-        <translation type="unfinished">Descargar Winetricks</translation>
+        <translation type="obsolete">Descargar Winetricks</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="122"/>
         <source>Swine Website</source>
-        <translation type="unfinished">Sitio Web de Swine</translation>
+        <translation type="obsolete">Sitio Web de Swine</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="123"/>
         <source>Wine AppDB</source>
-        <translation type="unfinished">Wine AppDB</translation>
+        <translation type="obsolete">Wine AppDB</translation>
     </message>
     <message>
-        <location filename="ShortcutImport.py" line="115"/>
+        <location filename="ShortcutImport.py" line="72"/>
         <source>Select shortcuts to import:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -361,7 +361,7 @@ Error: %s</translation>
         <translation>La ranura por defecto no se puede renombrar</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="591"/>
+        <location filename="swinelib.py" line="588"/>
         <source>File name cannot be empty</source>
         <translation>El nombre de archivo no puede estar vacío</translation>
     </message>
@@ -521,7 +521,7 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="281"/>
         <source>Run WIS script</source>
-        <translation>Ejecutar script WIS</translation>
+        <translation type="obsolete">Ejecutar script WIS</translation>
     </message>
     <message>
         <location filename="swine.py" line="372"/>
@@ -562,6 +562,11 @@ Error: %s</translation>
         <location filename="swine.py" line="372"/>
         <source>Winetricks has been updated to version %s</source>
         <translation>Winetricks se ha actualizado a la versión %s</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="281"/>
+        <source>Run winetricks script</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -705,7 +710,12 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="125"/>
         <source>WIS Scripts (*.wis)</source>
-        <translation>Scripts WIS (*.wis)</translation>
+        <translation type="obsolete">Scripts WIS (*.wis)</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="125"/>
+        <source>Winetricks scripts (*.verb)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

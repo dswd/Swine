@@ -13,17 +13,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="614"/>
+        <location filename="swinelib.py" line="611"/>
         <source>created %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="617"/>
+        <location filename="swinelib.py" line="614"/>
         <source>symlinked %s to %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="634"/>
+        <location filename="swinelib.py" line="631"/>
         <source>Slot does not exist: %s</source>
         <translation type="unfinished"></translation>
     </message>
@@ -255,53 +255,13 @@ Error: %s</source>
 <context>
     <name>ShortcutImport</name>
     <message>
-        <location filename="ShortcutImport.py" line="114"/>
+        <location filename="ShortcutImport.py" line="71"/>
         <source>Import shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ShortcutImport.py" line="115"/>
+        <location filename="ShortcutImport.py" line="72"/>
         <source>Select shortcuts to import:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ShortcutImport.py" line="116"/>
-        <source>About Swine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ShortcutImport.py" line="117"/>
-        <source>Exit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ShortcutImport.py" line="118"/>
-        <source>Alt+F4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ShortcutImport.py" line="119"/>
-        <source>About Wine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ShortcutImport.py" line="120"/>
-        <source>About Winetricks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ShortcutImport.py" line="121"/>
-        <source>Download winetricks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ShortcutImport.py" line="122"/>
-        <source>Swine Website</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ShortcutImport.py" line="123"/>
-        <source>Wine AppDB</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -353,7 +313,7 @@ Error: %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="591"/>
+        <location filename="swinelib.py" line="588"/>
         <source>File name cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -512,7 +472,7 @@ Error: %s</source>
     </message>
     <message>
         <location filename="swine.py" line="281"/>
-        <source>Run WIS script</source>
+        <source>Run winetricks script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -685,7 +645,7 @@ Error: %s</source>
     </message>
     <message>
         <location filename="swine.py" line="125"/>
-        <source>WIS Scripts (*.wis)</source>
+        <source>Winetricks scripts (*.verb)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

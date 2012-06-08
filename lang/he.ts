@@ -13,17 +13,17 @@
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="614"/>
+        <location filename="swinelib.py" line="611"/>
         <source>created %s</source>
         <translation>%s נוצר</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="617"/>
+        <location filename="swinelib.py" line="614"/>
         <source>symlinked %s to %s</source>
         <translation>%s קושר סימבולית אל %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="634"/>
+        <location filename="swinelib.py" line="631"/>
         <source>Slot does not exist: %s</source>
         <translation>החריץ לא קיים: %s</translation>
     </message>
@@ -265,52 +265,52 @@ Error: %s</source>
 <context>
     <name>ShortcutImport</name>
     <message>
-        <location filename="ShortcutImport.py" line="114"/>
+        <location filename="ShortcutImport.py" line="71"/>
         <source>Import shortcuts</source>
         <translation type="unfinished">יבוא קיצורי דרך</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="116"/>
         <source>About Swine</source>
-        <translation type="unfinished">על אודות Swine</translation>
+        <translation type="obsolete">על אודות Swine</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="117"/>
         <source>Exit</source>
-        <translation type="unfinished">יציאה</translation>
+        <translation type="obsolete">יציאה</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="118"/>
         <source>Alt+F4</source>
-        <translation type="unfinished">Alt+F4</translation>
+        <translation type="obsolete">Alt+F4</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="119"/>
         <source>About Wine</source>
-        <translation type="unfinished">על אודות Wine</translation>
+        <translation type="obsolete">על אודות Wine</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="120"/>
         <source>About Winetricks</source>
-        <translation type="unfinished">על אודות Winetricks</translation>
+        <translation type="obsolete">על אודות Winetricks</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="121"/>
         <source>Download winetricks</source>
-        <translation type="unfinished">הורדת winetricks</translation>
+        <translation type="obsolete">הורדת winetricks</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="122"/>
         <source>Swine Website</source>
-        <translation type="unfinished">אתר הבית של Swine</translation>
+        <translation type="obsolete">אתר הבית של Swine</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="123"/>
         <source>Wine AppDB</source>
-        <translation type="unfinished">מסד היישומים של Wine</translation>
+        <translation type="obsolete">מסד היישומים של Wine</translation>
     </message>
     <message>
-        <location filename="ShortcutImport.py" line="115"/>
+        <location filename="ShortcutImport.py" line="72"/>
         <source>Select shortcuts to import:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -363,7 +363,7 @@ Error: %s</source>
         <translation>לא ניתן לשנות את שם חריץ בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="591"/>
+        <location filename="swinelib.py" line="588"/>
         <source>File name cannot be empty</source>
         <translation>שם הקובץ לא יכול להיות ריק</translation>
     </message>
@@ -523,7 +523,7 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="281"/>
         <source>Run WIS script</source>
-        <translation>הפעלת סקריפט WIS</translation>
+        <translation type="obsolete">הפעלת סקריפט WIS</translation>
     </message>
     <message>
         <location filename="swine.py" line="372"/>
@@ -564,6 +564,11 @@ Error: %s</source>
         <location filename="swine.py" line="372"/>
         <source>Winetricks has been updated to version %s</source>
         <translation>גרסת Winetrick עודכנה ל־%s</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="281"/>
+        <source>Run winetricks script</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -706,7 +711,12 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="125"/>
         <source>WIS Scripts (*.wis)</source>
-        <translation>סקריפטים של WIS‏ (‎*.wis)</translation>
+        <translation type="obsolete">סקריפטים של WIS‏ (‎*.wis)</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="125"/>
+        <source>Winetricks scripts (*.verb)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
