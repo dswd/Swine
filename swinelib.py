@@ -463,6 +463,7 @@ class Slot:
     """
     env = os.environ.copy()
     env["WINEPREFIX"] = self.getPath()
+    env["WINEARCH"] = "win32"
     env["WINEDEBUG"] = "err+all,warn-all,fixme-all,trace-all"
     env["WINEDLLOVERRIDES"] = "winemenubuilder.exe=d" #do not add shortcuts to desktop or menu
     global WINE_WRAPPER
