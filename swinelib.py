@@ -541,16 +541,28 @@ class Slot:
         res.append(el)
     return sep.join(res)
   def winPathToUnix(self, winPath, basedir=None):
+    #Handle case-sensitive ambiguities by using existing files/folders when possible
     if (D_SEP + W_SEP) in winPath: #path is absolute
       drive, rest = winPath.split(D_SEP + W_SEP)
       drive = drive.lower()
-      rest = self._normalizePath(rest, W_SEP)
-      rest = rest.replace(W_SEP, U_SEP)
-      unixPath = self.getDosDrivesPath() + U_SEP + drive + D_SEP + U_SEP + rest
+      unixPath = self.getDosDrivesPath() + U_SEP + drive + D_SEP
     else:
       rest = winPath.replace(W_SEP, U_SEP)
-      basePath = self.winPathToUnix(basedir) if basedir else os.path.curdir
-      unixPath = basePath + U_SEP + rest
+      unixPath = self.winPathToUnix(basedir) if basedir else os.path.curdir
+    winEls = rest.split(W_SEP)
+    for el in winEls:
+      if not os.path.exists(unixPath) or os.path.exists(unixPath + U_SEP + el):
+        unixPath += U_SEP + el
+      else:
+        if "~" in el:
+          globStr = "".join([char if char.upper() == char.lower() else "[%s%s]" % (char.upper(), char.lower()) for char in el.split("~")[0]]) + "*"
+        else:
+          globStr = "".join([char if char.upper() == char.lower() else "[%s%s]" % (char.upper(), char.lower()) for char in el])
+        cands = glob.glob(unixPath + U_SEP + globStr)
+        if len(cands) == 1:
+          unixPath = cands[0]
+        else:
+          unixPath += U_SEP + el
     return os.path.realpath(unixPath)
   def unixPathToWin(self, unixPath, basedir=None, drive=None):
     if not os.path.isabs(unixPath) and basedir:
