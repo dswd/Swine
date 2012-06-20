@@ -52,17 +52,6 @@ def tr(s, context="@default"):
   
   
   
-def runShortcut(shortcut):
-  res = shortcut.run()
-  app = QApplication.desktop()
-  if res.returncode:
-    dialog = QMessageBox(QMessageBox.Critical, tr("Error"), tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, app)
-    dialog.setDetailedText(res.stderr_data)
-    dialog.adjustSize()
-    dialog.exec_()
-  
-  
-  
 class IconListItem(QListWidgetItem):
   def __init__(self, parent, name, icon=None, description=None, **kwargs):
     QListWidgetItem.__init__(self, icon, name, parent)
@@ -121,7 +110,7 @@ class SwineSlotItem(IconListItem):
     self.slot.runWin(["taskmgr.exe"])
   def runDefault_cb(self):
     if self.slot.loadDefaultShortcut():
-      runShortcut(self.slot.loadDefaultShortcut())
+      self.mainWindow.runShortcut(self.slot.loadDefaultShortcut())
   def export_cb(self):
     path = QFileDialog.getSaveFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if not path:
@@ -166,7 +155,7 @@ class SwineShortcutItem(IconListItem):
     #Attention: this invalidates the current object as the underlying C++ object is removed
     self.mainWindow().slotList_selectionChanged()
   def run_cb(self):
-    runShortcut(self.shortcut)
+    self.mainWindow().runShortcut(self.shortcut)
   def delete_cb(self):
     self.shortcut.delete()
     self.listWidget().takeItem(self.listWidget().row(self))
@@ -395,11 +384,20 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
   def shortcutList_selectionChanged(self):
     self.rebuildMenuBar()
   def shortcutList_itemExecuted(self, item):
-    runShortcut(item.shortcut)
+    self.runShortcut(item.shortcut)
   def slotList_itemExecuted(self, item):
     slot = item.slot
     if slot.loadDefaultShortcut():
-      runShortcut(slot.loadDefaultShortcut())
+      self.runShortcut(slot.loadDefaultShortcut())
+  def runShortcut(self, shortcut):
+    res = shortcut.run()
+    if res.returncode:
+      dialog = QMessageBox(QMessageBox.Critical, self.tr("Error"), self.tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
+      dialog.setDetailedText(res.stderr_data)
+      dialog.adjustSize()
+      dialog.exec_()
+    if SwineShortcutImportDialog(shortcut.slot, self, onlyNew=True).exec_():
+      self.slotList_selectionChanged()
 
 
 
@@ -513,35 +511,11 @@ class SwineRunDialog(SwineProgramDialog):
   def okButton_clicked(self):
     SwineProgramDialog.okButton_clicked(self)
     self.hide()
-    prog = [self.shortcut.getProgram()]+self.shortcut.getArguments()
-    wait = True
-    workingDirectory = self.shortcut.getWorkingDirectory()
-    runInTerminal = bool(self.shortcut["interminal"])
-    log = None
-    if self.logfileCheckBox.isChecked():
-      log = os.path.join(self.slot.getPath(), "wine.log")
-    debug = "err+all,warn-all,fixme+all,trace-all"
-    desktop = None
-    if self.shortcut.getDesktop():
-      desktop = self.shortcut.getDesktop()
-    res = self.slot.runWin(prog, wait=wait, workingDirectory=workingDirectory, runInTerminal=runInTerminal, log=log, debug=debug, desktop=desktop)
-    # status codes from include/winerror.h
-    # 0: success
-    if res.returncode:
-      dialog = QMessageBox(QMessageBox.Critical, self.tr("Error"), self.tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
-      dialog.setDetailedText(res.stderr_data)
-      dialog.adjustSize()
-      dialog.exec_()
-    # 2: exe-file not found
-    # 3: exe-path not found
-    # 126: mod not found (path invalid)
-    if self.winebootCheckBox.isChecked():
-      self.slot.runWineboot()
-    if SwineShortcutImportDialog(self.slot, self, onlyNew=True).exec_():
-      self.parent.slotList_selectionChanged()
+    self.parent.runShortcut(self.shortcut)
   def __init__(self, slot, parent):
     self.slot = slot
     name = tr("Run Program")
+    self.parent = parent
     self.shortcut = Shortcut(name, slot, virtual=True)
     SwineProgramDialog.__init__(self, self.shortcut, parent, name)
     self.okButton.setText(self.tr("Run"))
@@ -561,8 +535,6 @@ class SwineShortcutDialog(SwineProgramDialog):
   def __init__(self, shortcut, parent, name):
     SwineProgramDialog.__init__(self, shortcut, parent, name)
     self.okButton.setText(self.tr("Save"))
-    self.winebootCheckBox.hide()
-    self.logfileCheckBox.hide()
     self.adjustSize()
   def tr(self, s):
     return tr(s, self.__class__.__name__)

@@ -25,7 +25,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 from config import *
-import os, shutil, array, pipes, urllib, subprocess, codecs, shlex, json
+import os, shutil, array, pipes, urllib, subprocess, codecs, shlex, json, glob
 import shortcutlib, winetricks
 from tarfile import TarFile
 from subprocess import Popen
@@ -297,7 +297,6 @@ class Slot:
   def create(self):
     if self.exists():
       raise SwineException(self.tr("Slot already exists: %s") % self.name)
-    os.mkdir(self.getPath())
     self.runWineboot()
     self.loadConfig()
     self.saveConfig()
@@ -519,7 +518,7 @@ class Slot:
   def runRegedit(self):
     return self.runWineTool(["wine", "regedit"], wait=False)
   def runWineboot(self):
-    return self.runWineTool(["wine", "wineboot"], wait=False)
+    return self.runWineTool(["wine", "wineboot"], wait=True)
   def runWinefile(self, directory="C:"):
     return self.runWineTool(["wine", "winefile", directory], wait=False)
   def runUninstaller(self):
