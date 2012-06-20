@@ -13,17 +13,17 @@
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="627"/>
+        <location filename="swinelib.py" line="628"/>
         <source>created %s</source>
         <translation>%s נוצר</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="630"/>
+        <location filename="swinelib.py" line="631"/>
         <source>symlinked %s to %s</source>
         <translation>%s קושר סימבולית אל %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="647"/>
+        <location filename="swinelib.py" line="648"/>
         <source>Slot does not exist: %s</source>
         <translation>החריץ לא קיים: %s</translation>
     </message>
@@ -368,7 +368,7 @@ Error: %s</source>
         <translation>לא ניתן לשנות את שם חריץ בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="604"/>
+        <location filename="swinelib.py" line="605"/>
         <source>File name cannot be empty</source>
         <translation>שם הקובץ לא יכול להיות ריק</translation>
     </message>

@@ -13,17 +13,17 @@
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="627"/>
+        <location filename="swinelib.py" line="628"/>
         <source>created %s</source>
         <translation>creado %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="630"/>
+        <location filename="swinelib.py" line="631"/>
         <source>symlinked %s to %s</source>
         <translation>symlinked %s a %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="647"/>
+        <location filename="swinelib.py" line="648"/>
         <source>Slot does not exist: %s</source>
         <translation>La ranura no existe: %s</translation>
     </message>
@@ -366,7 +366,7 @@ Error: %s</translation>
         <translation>La ranura por defecto no se puede renombrar</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="604"/>
+        <location filename="swinelib.py" line="605"/>
         <source>File name cannot be empty</source>
         <translation>El nombre de archivo no puede estar vacío</translation>
     </message>

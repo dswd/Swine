@@ -13,17 +13,17 @@
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="627"/>
+        <location filename="swinelib.py" line="628"/>
         <source>created %s</source>
         <translation>%s wurde erstellt</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="630"/>
+        <location filename="swinelib.py" line="631"/>
         <source>symlinked %s to %s</source>
         <translation>%s mit %s verknüpft</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="647"/>
+        <location filename="swinelib.py" line="648"/>
         <source>Slot does not exist: %s</source>
         <translation>Slot existiert nicht: %s</translation>
     </message>
@@ -321,7 +321,7 @@ Fehlermeldung: %s</translation>
         <translation>Standard-Slot kann nicht umbenannt werden</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="604"/>
+        <location filename="swinelib.py" line="605"/>
         <source>File name cannot be empty</source>
         <translation>Dateiname darf nicht leer sein</translation>
     </message>
