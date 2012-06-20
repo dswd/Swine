@@ -70,7 +70,7 @@ def showHelp():
 
 def download():
   dst = os.path.join(SWINE_PATH, "winetricks")
-  call("wget http://winetricks.org/winetricks --quiet -O %(path)s && chmod +x %(path)s" % {"path": dst}, plain=True, shell=True)
+  call("curl http://winetricks.org/winetricks --silent --remote-time --time-cond %(path)s -o %(path)s && chmod +x %(path)s" % {"path": dst}, plain=True, shell=True)
   init()
   
 def getCacheVersion():

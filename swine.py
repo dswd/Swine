@@ -380,9 +380,13 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
   def openAppdbWebsite(self):
     webbrowser.open(APPDB_WEBSITE)
   def downloadWinetricks(self):
+    oldVersion = winetricks.version
     winetricks.download()
-    self.winetricksVersion.setText(self.tr("Version: %s") % winetricks.version) 
-    QMessageBox.information(self, self.tr("Winetricks"), self.tr("Winetricks has been updated to version %s") % winetricks.version)
+    self.winetricksVersion.setText(self.tr("Version: %s") % winetricks.version)
+    if winetricks.version == oldVersion:
+      QMessageBox.information(self, self.tr("Winetricks"), self.tr("Winetricks is already at version %s") % winetricks.version)
+    else:
+      QMessageBox.information(self, self.tr("Winetricks"), self.tr("Winetricks has been updated to version %s") % winetricks.version)
   def menuExitAction_activated(self):
     self.close()
   def slotList_selectionChanged(self):
