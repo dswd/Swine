@@ -181,7 +181,11 @@ class Shortcut:
       path = self.slot.winPathToUnix(path)
     if not os.path.exists(path):
       raise Exception(self.tr("File does not exist"))
-    lnk = shortcutlib.readLnk(path)
+    try:
+      lnk = shortcutlib.readLnk(path)
+    except:
+      print >>sys.stderr, "Failed to read %s" % path
+      raise
     name = os.path.splitext(os.path.basename(path))[0]
     self.setProgram(lnk.target)
     self.setArguments(str(lnk.commandLineArgs) if lnk.commandLineArgs else "")
