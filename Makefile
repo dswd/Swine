@@ -11,7 +11,7 @@ resources = resources/* images/*
 lang = xx de he fr es
 lang_ts = $(addprefix lang/,$(addsuffix .ts,$(lang)))
 lang_qm = $(addprefix translations/,$(addsuffix .qm,$(lang)))
-sources = $(py_files) $(ui_files) $(qrc_files) README LICENSE version.sh $(buildfiles) $(resources) $(lang_ts)
+sources = $(py_files) $(ui_files) $(qrc_files) README.md LICENSE version.sh $(buildfiles) $(resources) $(lang_ts)
 distfiles = $(py_files) $(ui_files_py) $(qrc_files_py) README LICENSE version.sh $(resources) $(lang_qm)
 
 .SUFFIXES: _rc.py .qrc .py .ui
@@ -32,6 +32,9 @@ deb-build: swine-$(rev)-src.tar.gz
 
 deb-rebuild: swine-$(rev)-src.tar.gz
 	cd $(deb_dir); export rev=$(rev); make rebuild
+
+README: README.md
+	cp README.md README
 
 $(lang_ts): $(ui_files_py) $(py_files)
 
@@ -61,7 +64,7 @@ swine-$(rev)-src.tar.gz: $(sources) $(buildfiles)
 	tar -czvf swine-$(rev)-src.tar.gz swine-$(rev)
 	rm -r swine-$(rev)
 
-compile: $(ui_files_py) $(qrc_files_py) $(lang_qm)
+compile: $(ui_files_py) $(qrc_files_py) $(lang_qm) README
 dist: swine-$(rev).tar.gz swine-$(rev)-src.tar.gz
 
 clean:
