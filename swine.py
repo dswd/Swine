@@ -52,6 +52,17 @@ def tr(s, context="@default"):
   
   
   
+def runShortcut(shortcut):
+  res = shortcut.run()
+  app = QApplication.desktop()
+  if res.returncode:
+    dialog = QMessageBox(QMessageBox.Critical, tr("Error"), tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, app)
+    dialog.setDetailedText(res.stderr_data)
+    dialog.adjustSize()
+    dialog.exec_()
+  
+  
+  
 class IconListItem(QListWidgetItem):
   def __init__(self, parent, name, icon=None, description=None, **kwargs):
     QListWidgetItem.__init__(self, icon, name, parent)
@@ -110,7 +121,7 @@ class SwineSlotItem(IconListItem):
     self.slot.runWin(["taskmgr.exe"])
   def runDefault_cb(self):
     if self.slot.loadDefaultShortcut():
-      self.slot.loadDefaultShortcut().run()
+      runShortcut(self.slot.loadDefaultShortcut())
   def export_cb(self):
     path = QFileDialog.getSaveFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if not path:
@@ -154,6 +165,8 @@ class SwineShortcutItem(IconListItem):
   def refreshShortcutList(self):
     #Attention: this invalidates the current object as the underlying C++ object is removed
     self.mainWindow().slotList_selectionChanged()
+  def run_cb(self):
+    runShortcut(self.shortcut)
   def delete_cb(self):
     self.shortcut.delete()
     self.listWidget().takeItem(self.listWidget().row(self))
@@ -236,7 +249,7 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
     menu.addAction(loadIcon(":/icons/images/application_add.png"), self.tr("New Shortcut"), self.createShortcut_cb)
     if shortcut:
       menu.addSeparator()
-      menu.addAction(loadIcon(":/icons/images/cog.png"), self.tr("Run"), shortcut.shortcut.run)
+      menu.addAction(loadIcon(":/icons/images/cog.png"), self.tr("Run"), shortcut.run_cb)
       menu.addSeparator()
       menu.addAction(loadIcon(":/icons/images/lightning_add.png"), self.tr("Set Default"), shortcut.setDefault_cb)
       if shortcut.shortcut.hasMenuEntry():
@@ -378,11 +391,11 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
   def shortcutList_selectionChanged(self):
     self.rebuildMenuBar()
   def shortcutList_itemExecuted(self, item):
-    item.shortcut.run()
+    runShortcut(item.shortcut)
   def slotList_itemExecuted(self, item):
     slot = item.slot
     if slot.loadDefaultShortcut():
-      slot.loadDefaultShortcut().run()
+      runShortcut(slot.loadDefaultShortcut())
 
 
 
