@@ -3,6 +3,13 @@ IconDialog.py
 MainWindow.py
 ProgramDialog.py
 RunnerDialog.py
+Settings.py
+ShortcutImport.py
+SlotSettings.py
+resources_rc.py
+README
 package-files/deb/swine*
 swine-*.tar.gz
-
+*.pyc
+*.verb
+translations
