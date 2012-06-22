@@ -64,36 +64,20 @@ def save():
   with open(SWINE_CONFIG, "w") as fp:
     json.dump(_config, fp, indent=2)
 
-
-def store(key, value):
+_defaults = {
+  "wine_paths": {},
+  "default_wine_path": None,
+  "allow_menu_entry_creation": False,
+  "auto_import_shortcuts": True,
+  "debug_line": "err+all,warn-all,fixme-all,trace-all",
+  "architecture": "win32",
+}
+    
+def setValue(key, value):
   _config[key]=value
   
-def get(key, default=None):
-  return _config.get(key, default)
+def getValue(key):
+  return _config.get(key, _defaults.get(key, None))
 
 def delete(key):
   del _config[key]
-
-def getWinePaths():
-  return get("wine_paths", {})
-  
-def setWinePaths(paths):
-  store("wine_paths", paths)
-
-def getDefaultWinePath():
-  return get("default_wine_path", None)
-  
-def setDefaultWinePath(path):
-  store("default_wine_path", path)
-  
-def getAllowMenuEntryCreation():
-  return get("allow_menu_entry_creation", False)
-  
-def setAllowMenuEntryCreation(allow):
-  store("allow_menu_entry_creation", allow)
-
-def getAutoImportShortcuts():
-  return get("auto_import_shortcuts", True)
-  
-def setAutoImportShortcuts(flag):
-  store("auto_import_shortcuts", flag)
