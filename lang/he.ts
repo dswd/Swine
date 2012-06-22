@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="he" sourcelanguage="">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="he" version="2.0">
 <context>
     <name>@default</name>
+    <message>
+        <location filename="swine.py" line="524"/>
+        <source>Run Program</source>
+        <translation>הרצת תכנית</translation>
+    </message>
     <message>
         <location filename="swine.py" line="675"/>
         <source>Error</source>
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="59"/>
-        <source>Execution failed with code %s</source>
-        <translation type="obsolete">ההפעלה נכשלה עם הקוד %s</translation>
-    </message>
-    <message>
-        <location filename="swine.py" line="524"/>
-        <source>Run Program</source>
-        <translation>הרצת תכנית</translation>
+        <location filename="swinelib.py" line="645"/>
+        <source>Config could not be loaded</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swinelib.py" line="649"/>
@@ -38,7 +37,7 @@
 Return code: %d
 Output: %s
 Error: %s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="winetricks.py" line="106"/>
@@ -49,11 +48,6 @@ Error: %s</source>
         <location filename="winetricks.py" line="113"/>
         <source>WARNING: Winetricks binary not found</source>
         <translation>אזהרה: הקובץ הבינרי של Winetricks לא נמצא</translation>
-    </message>
-    <message>
-        <location filename="swinelib.py" line="645"/>
-        <source>Config could not be loaded</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -167,7 +161,7 @@ Error: %s</source>
     <message>
         <location filename="MainWindow.py" line="180"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -211,16 +205,6 @@ Error: %s</source>
         <translation>שולחן עבודה:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="169"/>
-        <source>Reboot wine</source>
-        <translation type="obsolete">הפעלת wine מחדש</translation>
-    </message>
-    <message>
-        <location filename="ProgramDialog.py" line="170"/>
-        <source>Log to wine.log</source>
-        <translation type="obsolete">רישום אל wine.log</translation>
-    </message>
-    <message>
         <location filename="ProgramDialog.py" line="161"/>
         <source>OK</source>
         <translation>אישור</translation>
@@ -252,54 +236,44 @@ Error: %s</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="Settings.py" line="122"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Settings.py" line="123"/>
-        <source>Default wine path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Settings.py" line="124"/>
-        <source>Allow menu entry creation</source>
-        <translation type="unfinished"></translation>
+        <source>Settings</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="125"/>
-        <source>Automatically import shortcuts</source>
-        <translation type="unfinished"></translation>
+        <source>Default wine path</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="126"/>
-        <source>Debug line</source>
-        <translation type="unfinished"></translation>
+        <source>Allow menu entry creation</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="127"/>
-        <source>Wine architecture</source>
-        <translation type="unfinished"></translation>
+        <source>Automatically import shortcuts</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="128"/>
-        <source>win32</source>
-        <translation type="unfinished"></translation>
+        <source>Debug line</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="129"/>
-        <source>win64</source>
-        <translation type="unfinished"></translation>
+        <source>Wine architecture</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="130"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="131"/>
         <source>Wine paths</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -330,7 +304,7 @@ Error: %s</source>
     <message>
         <location filename="ShortcutImport.py" line="72"/>
         <source>Select shortcuts to import:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -391,17 +365,17 @@ Error: %s</source>
     <message>
         <location filename="SlotSettings.py" line="54"/>
         <source>Slot settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="SlotSettings.py" line="55"/>
         <source>Wine path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="SlotSettings.py" line="56"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -559,7 +533,7 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="287"/>
         <source>Run winetricks script</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swine.py" line="383"/>
@@ -575,6 +549,11 @@ Error: %s</source>
         <location filename="swine.py" line="293"/>
         <source>Winetricks is not installed</source>
         <translation>Winetricks לא מותקנים</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="313"/>
+        <source>Settings</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swine.py" line="339"/>
@@ -599,7 +578,7 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="381"/>
         <source>Winetricks is already at version %s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swine.py" line="383"/>
@@ -607,19 +586,14 @@ Error: %s</source>
         <translation>גרסת Winetrick עודכנה ל־%s</translation>
     </message>
     <message>
-        <location filename="swine.py" line="313"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="swine.py" line="400"/>
         <source>Error</source>
-        <translation type="unfinished">שגיאה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swine.py" line="400"/>
         <source>Execution failed with code %s</source>
-        <translation type="unfinished">ההפעלה נכשלה עם הקוד %s</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -647,16 +621,6 @@ Error: %s</source>
 </context>
 <context>
     <name>SwineRunDialog</name>
-    <message>
-        <location filename="swine.py" line="531"/>
-        <source>Error</source>
-        <translation type="obsolete">שגיאה</translation>
-    </message>
-    <message>
-        <location filename="swine.py" line="531"/>
-        <source>Execution failed with code %s</source>
-        <translation type="obsolete">ההפעלה נכשלה עם הקוד %s</translation>
-    </message>
     <message>
         <location filename="swine.py" line="528"/>
         <source>Run</source>
@@ -752,7 +716,7 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="129"/>
         <source>Winetricks scripts (*.verb)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -760,12 +724,12 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="622"/>
         <source>Wine path selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swine.py" line="628"/>
         <source>No wine binary found in %s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

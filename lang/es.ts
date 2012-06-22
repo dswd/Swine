@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="es" sourcelanguage="">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.0">
 <context>
     <name>@default</name>
+    <message>
+        <location filename="swine.py" line="524"/>
+        <source>Run Program</source>
+        <translation>Iniciar programa</translation>
+    </message>
     <message>
         <location filename="swine.py" line="675"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="swine.py" line="59"/>
-        <source>Execution failed with code %s</source>
-        <translation type="obsolete">La ejecución falló con el código %s</translation>
-    </message>
-    <message>
-        <location filename="swine.py" line="524"/>
-        <source>Run Program</source>
-        <translation>Iniciar programa</translation>
+        <location filename="swinelib.py" line="645"/>
+        <source>Config could not be loaded</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swinelib.py" line="649"/>
@@ -52,11 +51,6 @@ Error: %s</translation>
         <location filename="winetricks.py" line="113"/>
         <source>WARNING: Winetricks binary not found</source>
         <translation>ADVERTENCIA: No se encontró binario de Winetricks</translation>
-    </message>
-    <message>
-        <location filename="swinelib.py" line="645"/>
-        <source>Config could not be loaded</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -170,7 +164,7 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="180"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -214,16 +208,6 @@ Error: %s</translation>
         <translation>Escritorio:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="169"/>
-        <source>Reboot wine</source>
-        <translation type="obsolete">Reiniciar wine</translation>
-    </message>
-    <message>
-        <location filename="ProgramDialog.py" line="170"/>
-        <source>Log to wine.log</source>
-        <translation type="obsolete">Registrar en wine.log</translation>
-    </message>
-    <message>
         <location filename="ProgramDialog.py" line="161"/>
         <source>OK</source>
         <translation>OK</translation>
@@ -255,54 +239,44 @@ Error: %s</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="Settings.py" line="122"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Settings.py" line="123"/>
-        <source>Default wine path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Settings.py" line="124"/>
-        <source>Allow menu entry creation</source>
-        <translation type="unfinished"></translation>
+        <source>Settings</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="125"/>
-        <source>Automatically import shortcuts</source>
-        <translation type="unfinished"></translation>
+        <source>Default wine path</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="126"/>
-        <source>Debug line</source>
-        <translation type="unfinished"></translation>
+        <source>Allow menu entry creation</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="127"/>
-        <source>Wine architecture</source>
-        <translation type="unfinished"></translation>
+        <source>Automatically import shortcuts</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="128"/>
-        <source>win32</source>
-        <translation type="unfinished"></translation>
+        <source>Debug line</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="129"/>
-        <source>win64</source>
-        <translation type="unfinished"></translation>
+        <source>Wine architecture</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="130"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="131"/>
         <source>Wine paths</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -394,17 +368,17 @@ Error: %s</translation>
     <message>
         <location filename="SlotSettings.py" line="54"/>
         <source>Slot settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="SlotSettings.py" line="55"/>
         <source>Wine path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="SlotSettings.py" line="56"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -580,6 +554,11 @@ Error: %s</translation>
         <translation>Winetricks no está instalado</translation>
     </message>
     <message>
+        <location filename="swine.py" line="313"/>
+        <source>Settings</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="swine.py" line="339"/>
         <source>Select archive</source>
         <translation>Seleccione archivo</translation>
@@ -602,7 +581,7 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="381"/>
         <source>Winetricks is already at version %s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swine.py" line="383"/>
@@ -610,19 +589,14 @@ Error: %s</translation>
         <translation>Winetricks se ha actualizado a la versión %s</translation>
     </message>
     <message>
-        <location filename="swine.py" line="313"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="swine.py" line="400"/>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swine.py" line="400"/>
         <source>Execution failed with code %s</source>
-        <translation type="unfinished">La ejecución falló con el código %s</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -651,16 +625,6 @@ Error: %s</translation>
 </context>
 <context>
     <name>SwineRunDialog</name>
-    <message>
-        <location filename="swine.py" line="531"/>
-        <source>Error</source>
-        <translation type="obsolete">Error</translation>
-    </message>
-    <message>
-        <location filename="swine.py" line="531"/>
-        <source>Execution failed with code %s</source>
-        <translation type="obsolete">La ejecución falló con el código %s</translation>
-    </message>
     <message>
         <location filename="swine.py" line="528"/>
         <source>Run</source>
@@ -764,12 +728,12 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="622"/>
         <source>Wine path selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="swine.py" line="628"/>
         <source>No wine binary found in %s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

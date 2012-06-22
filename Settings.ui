@@ -96,12 +96,12 @@
         <widget class="QComboBox" name="architecture">
          <item>
           <property name="text">
-           <string>win32</string>
+           <string notr="true">win32</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>win64</string>
+           <string notr="true">win64</string>
           </property>
          </item>
         </widget>

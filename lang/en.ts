@@ -237,43 +237,33 @@ Error: %s</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="Settings.py" line="122"/>
+        <location filename="Settings.py" line="124"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Settings.py" line="123"/>
+        <location filename="Settings.py" line="125"/>
         <source>Default wine path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Settings.py" line="124"/>
+        <location filename="Settings.py" line="126"/>
         <source>Allow menu entry creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Settings.py" line="125"/>
+        <location filename="Settings.py" line="127"/>
         <source>Automatically import shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Settings.py" line="126"/>
+        <location filename="Settings.py" line="128"/>
         <source>Debug line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Settings.py" line="127"/>
-        <source>Wine architecture</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Settings.py" line="128"/>
-        <source>win32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Settings.py" line="129"/>
-        <source>win64</source>
+        <source>Wine architecture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
