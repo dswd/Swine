@@ -37,6 +37,7 @@ DESKTOP_MENU_DIR = os.path.join(HOME_PATH, ".local/share/applications/swine")
 TRANSLATION_DIRS = ["translations", "/usr/share/swine/translations", "/usr/local/share/swine/translations"]
 SWINE_WEBSITE = "http://dswd.github.com/Swine"
 APPDB_WEBSITE = "http://appdb.winehq.org"
+WINE_PATH_CANDIDATES = ["/opt/*[wW]ine*", "/opt/*[wW]ine*/*", "/usr/local", "/usr/local/*[wW]ine*", "/usr/local/*[wW]ine*/*", "/home/*/.PlayOnLinux/wine/*", "/home/*/.PlayOnLinux/wine/*/*"]
 
 def tr(s, context="@default"):
   return unicode(s)
@@ -73,6 +74,18 @@ def get(key, default=None):
 def delete(key):
   del _config[key]
 
+def getWinePaths():
+  return get("wine_paths", {})
+  
+def setWinePaths(paths):
+  store("wine_paths", paths)
+
+def getDefaultWinePath():
+  return get("default_wine_path", None)
+  
+def setDefaultWinePath(path):
+  store("default_wine_path", path)
+  
 def getAllowMenuEntryCreation():
   return get("allow_menu_entry_creation", False)
   

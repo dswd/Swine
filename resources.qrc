@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file>images/add.png</file>
+    <file>images/find.png</file>
     <file>images/world_go.png</file>
     <file>images/script_save.png</file>
     <file>images/application.png</file>

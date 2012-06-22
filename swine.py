@@ -587,15 +587,51 @@ class SwineSettingsDialog(QDialog, Ui_Settings):
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def load(self):
+    self._addWinePath("System", swinelib.getWineVersion(None))
+    for path, version in config.getWinePaths().iteritems():
+      self._addWinePath(path, version)
+    self._winePathsChanged()
+    self.defaultWinePath.setCurrentIndex(max(0, self.defaultWinePath.findData(config.getDefaultWinePath())))
     self.allowMenuEntryCreation.setChecked(config.getAllowMenuEntryCreation())
     self.autoImportShortcuts.setChecked(config.getAutoImportShortcuts())
+  def _winePaths(self):
+    return dict([(item.path, item.version) for item in self.winePathsList.findItems("/", Qt.MatchStartsWith)])
   def save(self):
+    config.setWinePaths(self._winePaths())
+    config.setDefaultWinePath(str(self.defaultWinePath.itemData(self.defaultWinePath.currentIndex()).toString()))
     config.setAllowMenuEntryCreation(self.allowMenuEntryCreation.isChecked())
     config.setAutoImportShortcuts(self.autoImportShortcuts.isChecked())
     config.save()
+  def _winePathsChanged(self):
+    selected = self.defaultWinePath.currentText()
+    self.defaultWinePath.clear()
+    self.defaultWinePath.addItem("System [%s]" % swinelib.getWineVersion(None), None)
+    for path, version in self._winePaths().iteritems():
+      self.defaultWinePath.addItem("%s [%s]" % (path, version), path)
+    self.defaultWinePath.setCurrentIndex(max(0, self.defaultWinePath.findText(selected)))
+  def _addWinePath(self, path, version):
+    self.winePathsList.addItem(SwineSettingsDialog.WinePathItem(path, version))
   def accept(self):
     self.save()
     QDialog.accept(self)
+  def addWinePath(self):
+    path = QFileDialog.getExistingDirectory(self, self.tr("Wine path selection"), "/")
+    if not path:
+      return
+    path = unicode(path)
+    version = swinelib.getWineVersion(path)
+    if not version:
+      raise SwineException(self.tr("No wine binary found in %s") % path)
+    self._addWinePath(path, version)
+    self._winePathsChanged()
+  def removeWinePath(self):
+    self.winePathsList.takeItem(self.winePathsList.currentRow())
+    self._winePathsChanged()
+  def findWinePaths(self):
+    for path in swinelib.findWinePaths():
+      version = swinelib.getWineVersion(path)
+      self._addWinePath(path, version)
+    self._winePathsChanged()
 
 
 
@@ -608,9 +644,14 @@ class SwineSlotSettingsDialog(QDialog, Ui_SlotSettings):
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def load(self):
-    pass
+    self.winePath.clear()
+    self.winePath.addItem("System [%s]" % swinelib.getWineVersion(None), None)
+    for path in config.getWinePaths():
+      version = swinelib.getWineVersion(path)
+      self.winePath.addItem("%s [%s]" % (path, version), path)
+    self.winePath.setCurrentIndex(max(0, self.winePath.findData(self.slot.getWinePath())))
   def save(self):
-    pass
+    self.slot.setWinePath(str(self.winePath.itemData(self.winePath.currentIndex()).toString()))
   def accept(self):
     self.save()
     QDialog.accept(self)
