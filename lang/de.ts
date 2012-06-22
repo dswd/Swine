@@ -13,17 +13,17 @@
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="628"/>
+        <location filename="swinelib.py" line="627"/>
         <source>created %s</source>
         <translation>%s wurde erstellt</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="631"/>
+        <location filename="swinelib.py" line="630"/>
         <source>symlinked %s to %s</source>
         <translation>%s mit %s verknüpft</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="648"/>
+        <location filename="swinelib.py" line="647"/>
         <source>Slot does not exist: %s</source>
         <translation>Slot existiert nicht: %s</translation>
     </message>
@@ -296,32 +296,32 @@ Fehlermeldung: %s</translation>
         <translation>Slot existiert bereits: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="306"/>
+        <location filename="swinelib.py" line="305"/>
         <source>Default slot cannot be deleted</source>
         <translation>Standard-Slot kann nicht gelöscht werden</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="330"/>
+        <location filename="swinelib.py" line="329"/>
         <source>Slot does not exist: %s</source>
         <translation>Slot existiert nicht: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="326"/>
+        <location filename="swinelib.py" line="325"/>
         <source>Slot name cannot be empty</source>
         <translation>Slot-Name darf nicht leer sein</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="333"/>
+        <location filename="swinelib.py" line="332"/>
         <source>Slot does already exist: %s</source>
         <translation>Slot existiert bereits: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="328"/>
+        <location filename="swinelib.py" line="327"/>
         <source>Default slot cannot be renamed</source>
         <translation>Standard-Slot kann nicht umbenannt werden</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="605"/>
+        <location filename="swinelib.py" line="604"/>
         <source>File name cannot be empty</source>
         <translation>Dateiname darf nicht leer sein</translation>
     </message>

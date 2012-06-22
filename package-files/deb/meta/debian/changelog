@@ -1,3 +1,13 @@
+swine (0.8) unstable; urgency=low
+
+  * Added shortcut import dialog
+  * Added support for winetricks verbs and removed wislib
+  * Improved winetricks download
+  * Forcing new prefixes to be 32-bit
+  * Lots of bugfixes
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Wed, 20 Jun 2012 21:05:27 +0200
+
 swine (0.7.2-1) unstable; urgency=low
 
   * Added Spanish translation, thanks to Josué González
