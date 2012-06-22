@@ -1,6 +1,6 @@
 rev = $(shell ./version.sh)
 
-ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDialog.ui ShortcutImport.ui
+ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDialog.ui ShortcutImport.ui Settings.ui SlotSettings.ui
 ui_files_py = ${ui_files:.ui=.py}
 qrc_files = resources.qrc
 qrc_files_py = ${qrc_files:.qrc=_rc.py}

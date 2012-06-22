@@ -25,6 +25,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 from config import *
+import config
 import os, shutil, array, pipes, urllib, subprocess, codecs, shlex, json, glob
 import shortcutlib, winetricks
 from tarfile import TarFile
@@ -35,14 +36,6 @@ W_SEP = '\\'
 D_SEP = ':'
 DIR_UP = '..'
 DIR_CUR = '.'
-
-try:
-  from collections import OrderedDict
-  def json_load(fp):
-    return json.load(fp, object_pairs_hook=OrderedDict)
-except: #Python 2.6
-  OrderedDict = dict
-  json_load = json.load
 
 class SwineException(Exception):
   pass
@@ -464,7 +457,8 @@ class Slot:
     env["WINEPREFIX"] = self.getPath()
     env["WINEARCH"] = "win32"
     env["WINEDEBUG"] = "err+all,warn-all,fixme-all,trace-all"
-    env["WINEDLLOVERRIDES"] = "winemenubuilder.exe=d" #do not add shortcuts to desktop or menu
+    if not config.getAllowMenuEntryCreation():
+      env["WINEDLLOVERRIDES"] = "winemenubuilder.exe=d" #do not add shortcuts to desktop or menu
     global WINE_WRAPPER
     if WINE_WRAPPER and os.path.exists(self.getPath()):
       open(os.path.join(self.getPath(), ".no_prelaunch_window_flag"),"wc").close()
@@ -621,6 +615,12 @@ def relpath(target, base=os.curdir):
   return os.path.join(*rel_list)
 
 def init():
+  try:
+    config.load()
+  except:
+    import traceback
+    traceback.print_exc()
+    print >>sys.stderr, tr("Config could not be loaded")
   for path in [WINE_PATH, SWINE_PATH, SWINE_SLOT_PATH]:
     if not os.path.exists(path):
       os.mkdir(path)
@@ -630,6 +630,8 @@ def init():
     print tr("symlinked %s to %s") % (SWINE_DEFAULT_SLOT_PATH, WINE_PATH)
   global WINE_WRAPPER
   WINE_WRAPPER = "text" in os.popen('file `which wine`', 'r').read()
+  global defaultSlot
+  defaultSlot = loadDefaultSlot()
   winetricks.init()
 
 def getAllSlots():

@@ -24,7 +24,7 @@
 import os, sys, traceback
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
-import swinelib
+import swinelib, config
 import time, webbrowser, pipes
 from PyQt4.QtGui import *
 from PyQt4.QtCore import Qt, QTranslator, QLocale
@@ -35,6 +35,8 @@ from ProgramDialog import *
 from IconDialog import *
 from MainWindow import *
 from ShortcutImport import *
+from Settings import *
+from SlotSettings import *
 
 def loadIcon (name, folder="", cache=True, scale=None):
   path = os.path.join(folder, name)
@@ -111,6 +113,8 @@ class SwineSlotItem(IconListItem):
   def runDefault_cb(self):
     if self.slot.loadDefaultShortcut():
       self.mainWindow.runShortcut(self.slot.loadDefaultShortcut())
+  def settings_cb(self):
+    SwineSlotSettingsDialog(self.mainWindow(), self.slot).exec_()
   def export_cb(self):
     path = QFileDialog.getSaveFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if not path:
@@ -306,6 +310,7 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
       menu.addSeparator()
       
       defaultSlot = slot.slot.getName() == SWINE_DEFAULT_SLOT_NAME
+      menu.addAction(loadIcon(":/icons/images/wrench.png"), self.tr("Settings"), slot.settings_cb)
       if not defaultSlot:
         menu.addAction(loadIcon(":/icons/images/drive_rename.png"), self.tr("Rename"), slot.rename_cb)
       menu.addAction(loadIcon(":/icons/images/arrow_divide.png"), self.tr("Copy"), slot.copy_cb)
@@ -398,6 +403,8 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
       dialog.exec_()
     if SwineShortcutImportDialog(shortcut.slot, self, onlyNew=True).exec_():
       self.slotList_selectionChanged()
+  def settingsDialog(self):
+    SwineSettingsDialog(self).exec_()
 
 
 
@@ -567,6 +574,49 @@ class SwineShortcutImportDialog(QDialog, Ui_ShortcutImport):
 
 
 
+class SwineSettingsDialog(QDialog, Ui_Settings):
+  class WinePathItem(QListWidgetItem):
+    def __init__(self, path, version):
+      self.path = path
+      self.version = version
+      QListWidgetItem.__init__(self, "%s [%s]" % (path, version))
+  def __init__(self, parent):
+    QDialog.__init__(self, parent)
+    self.setupUi(self)
+    self.load()
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
+  def load(self):
+    self.allowMenuEntryCreation.setChecked(config.getAllowMenuEntryCreation())
+    self.autoImportShortcuts.setChecked(config.getAutoImportShortcuts())
+  def save(self):
+    config.setAllowMenuEntryCreation(self.allowMenuEntryCreation.isChecked())
+    config.setAutoImportShortcuts(self.autoImportShortcuts.isChecked())
+    config.save()
+  def accept(self):
+    self.save()
+    QDialog.accept(self)
+
+
+
+class SwineSlotSettingsDialog(QDialog, Ui_SlotSettings):
+  def __init__(self, parent, slot):
+    QDialog.__init__(self, parent)
+    self.slot = slot
+    self.setupUi(self)
+    self.load()
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
+  def load(self):
+    pass
+  def save(self):
+    pass
+  def accept(self):
+    self.save()
+    QDialog.accept(self)
+
+    
+    
 def excepthook(excType, excValue, tracebackObj):
   import traceback, sys
   if excType == KeyboardInterrupt:

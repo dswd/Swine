@@ -84,7 +84,8 @@ class SwineRunnerDialog(QMainWindow, Ui_RunnerDialog):
         dialog.adjustSize()
         dialog.exec_()
       else:
-        SwineShortcutImportDialog(slot, self, onlyNew=True).exec_()
+        if config.getAutoImportShortcuts():
+          SwineShortcutImportDialog(slot, self, onlyNew=True).exec_()
       self.close()
 
 def main(args):

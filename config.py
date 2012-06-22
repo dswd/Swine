@@ -27,6 +27,7 @@ VERSION="0.8" #no spaces here, line is interpreted by bash
 
 HOME_PATH = os.getenv("HOME")
 SWINE_PATH = os.path.join(HOME_PATH, ".swine")
+SWINE_CONFIG = os.path.join(SWINE_PATH, "swine.conf")
 SWINE_SLOT_PATH = SWINE_PATH
 SWINE_DEFAULT_SLOT_NAME = "DEFAULT"
 SWINE_DEFAULT_SLOT_PATH = os.path.join(SWINE_PATH, SWINE_DEFAULT_SLOT_NAME)
@@ -39,3 +40,47 @@ APPDB_WEBSITE = "http://appdb.winehq.org"
 
 def tr(s, context="@default"):
   return unicode(s)
+
+import json
+try:
+  from collections import OrderedDict
+  def json_load(fp):
+    return json.load(fp, object_pairs_hook=OrderedDict)
+except: #Python 2.6
+  OrderedDict = dict
+  json_load = json.load
+
+_config = {}
+  
+def load():
+  if not os.path.exists(SWINE_CONFIG):
+    return
+  with open(SWINE_CONFIG, "r") as fp:
+    global _config
+    _config = json_load(fp)
+
+def save():
+  with open(SWINE_CONFIG, "w") as fp:
+    json.dump(_config, fp, indent=2)
+
+
+def store(key, value):
+  _config[key]=value
+  
+def get(key, default=None):
+  return _config.get(key, default)
+
+def delete(key):
+  del _config[key]
+
+def getAllowMenuEntryCreation():
+  return get("allow_menu_entry_creation", False)
+  
+def setAllowMenuEntryCreation(allow):
+  store("allow_menu_entry_creation", allow)
+
+def getAutoImportShortcuts():
+  return get("auto_import_shortcuts", True)
+  
+def setAutoImportShortcuts(flag):
+  store("auto_import_shortcuts", flag)

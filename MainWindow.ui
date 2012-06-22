@@ -147,6 +147,8 @@
     <property name="title">
      <string>Swine</string>
     </property>
+    <addaction name="actionSettings"/>
+    <addaction name="separator"/>
     <addaction name="menuExitAction"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -269,6 +271,15 @@
    </property>
    <property name="text">
     <string>Wine AppDB</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/wrench.png</normaloff>:/icons/images/wrench.png</iconset>
+   </property>
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>
@@ -533,6 +544,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionSettings</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>settingsDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slotList_selectionChanged()</slot>
@@ -549,5 +576,6 @@
   <slot>downloadWinetricks()</slot>
   <slot>openSwineWebsite()</slot>
   <slot>openAppdbWebsite()</slot>
+  <slot>settingsDialog()</slot>
  </slots>
 </ui>
