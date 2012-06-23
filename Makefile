@@ -50,7 +50,7 @@ lang/%: $(ui_files_py) $(py_files)
 $(lang_qm): $(lang_ts)
 translations/%.qm: lang/%.ts
 	mkdir -p translations
-	lrelease-qt4 $< -qm $@
+	lrelease-qt4 $< -compress -qm $@
 
 swine-$(rev).tar.gz: compile $(distfiles)
 	mkdir swine-$(rev)

@@ -464,7 +464,7 @@ class Slot:
     proc = Popen(prog, stdin=stdin, stderr=stderr, stdout=stdout, cwd=cwd, env=env)
     (proc.stdout_data, proc.stderr_data) = proc.communicate() if wait else (None, None)
     return proc
-  def runWineTool(self, prog, cwd=None, wait=False, stdin=None, stdout=None, stderr=None, debug=None, winePath=None):
+  def runWineTool(self, prog, cwd=None, wait=True, stdin=None, stdout=None, stderr=None, debug=None, winePath=False):
     """Run a wine tool (eg wine itself) with prefix and debug environment set
     This is only a wrapper for runNative
     """
@@ -479,13 +479,15 @@ class Slot:
       open(os.path.join(self.getPath(), ".no_prelaunch_window_flag"),"wc").close()
     if winePath is False:
       winePath = self.getWinePath()
+    print winePath
     if winePath:
       binPaths = filter(os.path.exists, (os.path.join(winePath, binDir) for binDir in ["bin", "usr/bin"]))
       if binPaths:
-        env["PATH"] = "%s:%s" % (":".join(binPaths), os.environ["PATH"])
+        env["PATH"] = os.pathsep.join(binPaths+[os.environ["PATH"]])
+        env["WINE"] = filter(os.path.exists, [os.path.join(p, "wine") for p in env["PATH"].split(os.pathsep)])[0]
       libPaths = filter(os.path.exists, (os.path.join(winePath, binDir) for binDir in ["lib", "usr/lib", "lib64", "usr/lib64"]))
       if libPaths:
-        env["LD_LIBRARY_PATH"] = "%s:%s" % (":".join(libPaths), os.environ.get("LD_LIBRARY_PATH", "/usr/lib:/lib:/usr/lib64:/lib64"))
+        env["LD_LIBRARY_PATH"] = os.pathsep.join(libPaths+[os.environ.get("LD_LIBRARY_PATH", os.pathsep.join(["/usr/lib","/lib","/usr/lib64","/lib64"]))])
     return self.runNative(prog, cwd, wait, env, stdin, stdout, stderr)
   def runVerb(self, verbFile):
     return self.runWineTool(["xterm", "-T", "Verb %s" % verbFile, "-hold", "-e", winetricks.WINETRICKS, "--gui", "--no-isolate", verbFile])

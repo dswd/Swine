@@ -77,7 +77,11 @@ class SwineRunnerDialog(QMainWindow, Ui_RunnerDialog):
         slot.create()
     if slot:
       self.hide()
-      res = slot.runWin(self.args[1:], wait=True)
+      (filename, args) = (self.args[1], self.args[2:])
+      if filename.lower().endswith(".verb"):
+        res = slot.runVerb(os.path.abspath(filename))
+      else:
+        res = slot.runWin([filename]+args, wait=True)
       if res.returncode:
         dialog = QMessageBox(QMessageBox.Critical, self.tr("Error"), self.tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
         dialog.setDetailedText(res.stderr_data)

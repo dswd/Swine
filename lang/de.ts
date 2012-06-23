@@ -1,4 +1,5 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="2.0" language="de" sourcelanguage="">
 <context>
     <name>@default</name>
     <message>
@@ -239,44 +240,34 @@ Fehlermeldung: %s</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="Settings.py" line="122"/>
+        <location filename="Settings.py" line="124"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="123"/>
+        <location filename="Settings.py" line="125"/>
         <source>Default wine path</source>
         <translation>Standard wine-Pfad</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="124"/>
+        <location filename="Settings.py" line="126"/>
         <source>Allow menu entry creation</source>
         <translation>Erstellen von Menueinträgen erlauben</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="125"/>
+        <location filename="Settings.py" line="127"/>
         <source>Automatically import shortcuts</source>
         <translation>Shortcuts automatisch importieren</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="126"/>
+        <location filename="Settings.py" line="128"/>
         <source>Debug line</source>
         <translation>Debug-Einstellungen</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="127"/>
+        <location filename="Settings.py" line="129"/>
         <source>Wine architecture</source>
         <translation>Wine-Architektur</translation>
-    </message>
-    <message>
-        <location filename="Settings.py" line="128"/>
-        <source>win32</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="Settings.py" line="129"/>
-        <source>win64</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="Settings.py" line="130"/>
