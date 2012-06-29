@@ -13,22 +13,22 @@
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="645"/>
+        <location filename="swinelib.py" line="647"/>
         <source>Config could not be loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="649"/>
+        <location filename="swinelib.py" line="651"/>
         <source>created %s</source>
         <translation>créé %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="652"/>
+        <location filename="swinelib.py" line="654"/>
         <source>symlinked %s to %s</source>
         <translation>lien symbolique de %s vers %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="671"/>
+        <location filename="swinelib.py" line="673"/>
         <source>Slot does not exist: %s</source>
         <translation>Le slot n&apos;existe pas : %s</translation>
     </message>
@@ -359,7 +359,7 @@ Erreur : %s</translation>
         <translation>Le slot par défaut ne peut être renommer</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="620"/>
+        <location filename="swinelib.py" line="622"/>
         <source>File name cannot be empty</source>
         <translation>Le nom de fichier ne peut pas être vide</translation>
     </message>
@@ -649,12 +649,12 @@ Erreur : %s</translation>
         <translation>Nouveau slot</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="82"/>
+        <location filename="swinerun.py" line="86"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="82"/>
+        <location filename="swinerun.py" line="86"/>
         <source>Execution failed with code %s</source>
         <translation>L&apos;exécution a échoué avec le code %s</translation>
     </message>

@@ -13,22 +13,22 @@
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="645"/>
+        <location filename="swinelib.py" line="647"/>
         <source>Config could not be loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="649"/>
+        <location filename="swinelib.py" line="651"/>
         <source>created %s</source>
         <translation>creado %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="652"/>
+        <location filename="swinelib.py" line="654"/>
         <source>symlinked %s to %s</source>
         <translation>symlinked %s a %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="671"/>
+        <location filename="swinelib.py" line="673"/>
         <source>Slot does not exist: %s</source>
         <translation>La ranura no existe: %s</translation>
     </message>
@@ -359,7 +359,7 @@ Error: %s</translation>
         <translation>La ranura por defecto no se puede renombrar</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="620"/>
+        <location filename="swinelib.py" line="622"/>
         <source>File name cannot be empty</source>
         <translation>El nombre de archivo no puede estar vacío</translation>
     </message>
@@ -650,12 +650,12 @@ Error: %s</translation>
         <translation>Nueva ranura</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="82"/>
+        <location filename="swinerun.py" line="86"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="swinerun.py" line="82"/>
+        <location filename="swinerun.py" line="86"/>
         <source>Execution failed with code %s</source>
         <translation>La ejecución falló con el código %s</translation>
     </message>

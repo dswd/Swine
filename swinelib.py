@@ -163,7 +163,7 @@ class Shortcut:
   def removeMenuEntry(self):
     if self.hasMenuEntry():
       os.remove(self._menuEntryPath())
-  def run(self, wait=False, args=[]):
+  def run(self, wait=True, args=[]):
     prog = [self.getProgram()]+self.getArguments()
     workingDirectory = self['working_directory']
     runInTerminal = self["interminal"] and int(self["interminal"]) == 1
@@ -189,16 +189,6 @@ class Shortcut:
       iconPath = self.slot.winPathToUnix(str(lnk.customIcon), "c:\windows")
     else:
       iconPath = self.slot.winPathToUnix(lnk.target)
-    if not os.path.exists(iconPath):
-      globStr = ""
-      for char in iconPath:
-        if char.lower() != char.upper():
-          globStr += "[%s%s]" % (char.lower(), char.upper())
-        else:
-          globStr += char
-      paths = glob.glob(globStr)
-      if len(paths) == 1:
-        iconPath = paths[0]
     iconsdir = os.path.join(self.slot.getPath(), "icons", os.path.basename(iconPath))
     self['iconsdir'] = os.path.join("icons", os.path.basename(iconPath))
     if os.path.splitext(iconPath)[1].lower() == '.exe':
@@ -449,7 +439,7 @@ class Slot:
     if oldfiles and onlyNew:
       files = list(set(files) - set(oldfiles))
     return files
-  def runNative(self, prog, cwd=None, wait=False, env=None, stdin=None, stdout=None, stderr=None):
+  def runNative(self, prog, cwd=None, wait=True, env=None, stdin=None, stdout=None, stderr=None):
     """Run any native program (no windows binaries)
     Parameters:
       prog: this is the program with all paramters as a list
@@ -496,7 +486,7 @@ class Slot:
     This is only a wrapper for runNative
     """
     return self.runWineTool(["xterm", "-T", "Winetricks %s" % prog, "-hold", "-e", winetricks.WINETRICKS, unicode(prog)])
-  def runWin(self, prog, workingDirectory=".", wait=False, runInTerminal=False, desktop=None, debug=None, log=None, winePath=False):
+  def runWin(self, prog, workingDirectory=".", wait=True, runInTerminal=False, desktop=None, debug=None, log=None, winePath=False):
     """Run a windows program
     Parameters:
       prog: this is the program with all paramters as a list
@@ -532,19 +522,19 @@ class Slot:
         fp.write(res.stderr_data)
     return res
   def runWinecfg(self, winePath=False):
-    return self.runWineTool(["wine", "winecfg"], wait=False, winePath=winePath)
+    return self.runWineTool(["wine", "winecfg"], wait=True, winePath=winePath)
   def runRegedit(self, winePath=False):
-    return self.runWineTool(["wine", "regedit"], wait=False, winePath=winePath)
+    return self.runWineTool(["wine", "regedit"], wait=True, winePath=winePath)
   def runWineboot(self, winePath=False):
-    return self.runWineTool(["wine", "wineboot"], wait=False, winePath=winePath)
+    return self.runWineTool(["wine", "wineboot"], wait=True, winePath=winePath)
   def runWinefile(self, directory="C:", winePath=False):
-    return self.runWineTool(["wine", "winefile", directory], wait=False, winePath=winePath)
+    return self.runWineTool(["wine", "winefile", directory], wait=True, winePath=winePath)
   def runUninstaller(self, winePath=False):
-    return self.runWineTool(["wine", "uninstaller"], wait=False, winePath=winePath)
+    return self.runWineTool(["wine", "uninstaller"], wait=True, winePath=winePath)
   def runWineControl(self, winePath=False):
-    return self.runWineTool(["wine", "control"], wait=False, winePath=winePath)
+    return self.runWineTool(["wine", "control"], wait=True, winePath=winePath)
   def runEject(self, winePath=False):
-    return self.runWin(["wine", "eject"], wait=False, winePath=winePath)
+    return self.runWin(["wine", "eject"], wait=True, winePath=winePath)
   def isWindowsPath(path):
     return W_SEP in path
   def _normalizePath(self, path, sep):
