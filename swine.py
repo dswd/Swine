@@ -137,8 +137,14 @@ class SwineSlotItem(IconListItem):
     path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select script file"), "", self.tr("Winetricks scripts (*.verb)"))
     if path:
       self.slot.runVerb(os.path.realpath(unicode(path)))
+      if config.getValue("auto_import_shortcuts"):
+        SwineShortcutImportDialog(self.slot, self.mainWindow(), onlyNew=True).exec_()
+        self.refreshShortcutList()
   def winetricks(self, tool):
     self.slot.runWinetricks(tool)
+    if config.getValue("auto_import_shortcuts"):
+      SwineShortcutImportDialog(self.slot, self.mainWindow(), onlyNew=True).exec_()
+      self.refreshShortcutList()
   def winetricks_callback(self, tool):
     return lambda :self.winetricks(tool)
 
@@ -530,6 +536,9 @@ class SwineRunDialog(SwineProgramDialog):
     SwineProgramDialog.okButton_clicked(self)
     self.hide()
     self.parent.runShortcut(self.shortcut)
+    if config.getValue("auto_import_shortcuts"):
+      SwineShortcutImportDialog(self.shortcut.slot, self, onlyNew=True).exec_()
+      self.parent.slotList_selectionChanged()
   def __init__(self, slot, parent):
     self.slot = slot
     name = tr("Run Program")

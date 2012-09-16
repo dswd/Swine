@@ -1,3 +1,9 @@
+swine (1.0-1) unstable; urgency=low
+
+  * Last minute bugfix
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Sun, 16 Sep 2012 23:29:30 +0200
+
 swine (1.0) unstable; urgency=low
 
   * Support for multiple wine versions

@@ -422,6 +422,7 @@ class Slot:
     env["WINEDEBUG"] = debug if debug else self["debug_line"]
     if not self["allow_menu_entry_creation"]:
       env["WINEDLLOVERRIDES"] = "winemenubuilder.exe=d" #do not add shortcuts to desktop or menu
+    env["WINETRICKS_OPT_SHAREDPREFIX"] = "1" #disable wintricks prefix management
     global WINE_WRAPPER
     if WINE_WRAPPER and os.path.exists(self.getPath()):
       open(os.path.join(self.getPath(), ".no_prelaunch_window_flag"),"wc").close()
