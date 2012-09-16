@@ -26,7 +26,7 @@ sys.setdefaultencoding("utf-8")
 
 from config import *
 import config
-import os, shutil, array, pipes, urllib, subprocess, codecs, shlex, json, glob, base64
+import os, shutil, array, pipes, urllib, subprocess, codecs, shlex, json, glob, base64, hashlib
 import shortcutlib, winetricks, icolib
 from tarfile import TarFile
 from subprocess import Popen
@@ -117,19 +117,27 @@ class Shortcut:
     self['arguments'] = args
   def getIcon(self):
     if self["icon"]:
+      path = os.path.join(self.slot.getPath(), self["icon"])
+      if os.path.exists(path):
+        with open(path, "r") as fp:
+          return fp.read()
       try:
         return base64.b64decode(self["icon"])
       except:
         pass
-      path = os.path.join(self.slot.getPath(), self["icon"])
-      if os.path.exists(path):
-        with open(path, "r") as fp:
-          data = fp.read()
-          self.setIcon(data)
-          return data
     return None
   def setIcon(self, icon):
-    self['icon'] = base64.b64encode(icon) if icon else None
+    if icon:
+      path = os.path.join(self.slot.getPath(), "icons")
+      if not os.path.exists(path):
+        os.mkdir(path)
+      name = hashlib.md5(icon).hexdigest() + ".png"
+      path = os.path.join(path, name)
+      with open(path, "wb") as fp:
+        fp.write(icon)
+      self['icon'] = os.path.join(self.slot.getPath(), "icons", name)
+    else:
+      self["icon"] = None
   def getWorkingDirectory(self):
     return self["working_directory"]
   def setWorkingDirectory(self, path):
