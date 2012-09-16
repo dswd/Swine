@@ -389,6 +389,14 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
       QMessageBox.information(self, self.tr("Winetricks"), self.tr("Winetricks is already at version %s") % winetricks.version)
     else:
       QMessageBox.information(self, self.tr("Winetricks"), self.tr("Winetricks has been updated to version %s") % winetricks.version)
+  def checkWinetricks(self):
+    version = winetricks.getCacheVersion()
+    if not version:
+      if QMessageBox.question(self, self.tr("Winetricks"), self.tr("Winetricks not found. Do you want to download Winetricks now ?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
+        self.downloadWinetricks()
+    elif time.mktime(time.strptime(version, "%Y%m%d")) < time.time() - 3*30*24*60*60:
+      if QMessageBox.question(self, self.tr("Winetricks"), self.tr("Winetricks is quite old, version %s. Do you want to update Winetricks now ?") % version, QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
+        self.downloadWinetricks()
   def menuExitAction_activated(self):
     self.close()
   def slotList_selectionChanged(self):
@@ -696,6 +704,7 @@ def main(args):
   sys.excepthook=excepthook
   win.shortcutList.clear()
   win.rebuildSlotList()
+  win.checkWinetricks()
   sys.exit(app.exec_())
   
 if __name__=="__main__":

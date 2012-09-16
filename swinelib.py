@@ -419,7 +419,6 @@ class Slot:
       open(os.path.join(self.getPath(), ".no_prelaunch_window_flag"),"wc").close()
     if winePath is False:
       winePath = self.getWinePath()
-    print winePath
     if winePath:
       binPaths = filter(os.path.exists, (os.path.join(winePath, binDir) for binDir in ["bin", "usr/bin"]))
       if binPaths:
