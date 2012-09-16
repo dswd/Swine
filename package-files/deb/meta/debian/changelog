@@ -1,3 +1,11 @@
+swine (1.0) unstable; urgency=low
+
+  * Support for multiple wine versions
+  * Settings dialog
+  * Improved icon handling
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Sun, 16 Sep 2012 22:50:20 +0200
+
 swine (0.8) unstable; urgency=low
 
   * Added shortcut import dialog

@@ -392,10 +392,10 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
   def checkWinetricks(self):
     version = winetricks.getCacheVersion()
     if not version:
-      if QMessageBox.question(self, self.tr("Winetricks"), self.tr("Winetricks not found. Do you want to download Winetricks now ?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
+      if QMessageBox.question(self, self.tr("Winetricks"), self.tr("Winetricks not found. Do you want to download Winetricks now?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
         self.downloadWinetricks()
     elif time.mktime(time.strptime(version, "%Y%m%d")) < time.time() - 3*30*24*60*60:
-      if QMessageBox.question(self, self.tr("Winetricks"), self.tr("Winetricks is quite old, version %s. Do you want to update Winetricks now ?") % version, QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
+      if QMessageBox.question(self, self.tr("Winetricks"), self.tr("Winetricks is quite old, version %s. Do you want to update Winetricks now?") % version, QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
         self.downloadWinetricks()
   def menuExitAction_activated(self):
     self.close()

@@ -4,7 +4,7 @@ ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDia
 ui_files_py = ${ui_files:.ui=.py}
 qrc_files = resources.qrc
 qrc_files_py = ${qrc_files:.qrc=_rc.py}
-py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py config.py winetricks.py
+py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py icolib.py config.py winetricks.py
 deb_dir = package-files/deb
 buildfiles = Makefile
 resources = resources/* images/*
