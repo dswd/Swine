@@ -3,32 +3,32 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="swine.py" line="524"/>
+        <location filename="swine.py" line="527"/>
         <source>Run Program</source>
         <translation>הרצת תכנית</translation>
     </message>
     <message>
-        <location filename="swine.py" line="675"/>
+        <location filename="swine.py" line="678"/>
         <source>Error</source>
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="647"/>
+        <location filename="swinelib.py" line="580"/>
         <source>Config could not be loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="651"/>
+        <location filename="swinelib.py" line="584"/>
         <source>created %s</source>
         <translation>%s נוצר</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="654"/>
+        <location filename="swinelib.py" line="587"/>
         <source>symlinked %s to %s</source>
         <translation>%s קושר סימבולית אל %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="673"/>
+        <location filename="swinelib.py" line="606"/>
         <source>Slot does not exist: %s</source>
         <translation>החריץ לא קיים: %s</translation>
     </message>
@@ -87,12 +87,12 @@ Error: %s</source>
 <context>
     <name>IconDialog</name>
     <message>
-        <location filename="IconDialog.py" line="65"/>
+        <location filename="IconDialog.py" line="64"/>
         <source>OK</source>
         <translation>אישור</translation>
     </message>
     <message>
-        <location filename="IconDialog.py" line="66"/>
+        <location filename="IconDialog.py" line="65"/>
         <source>Cancel</source>
         <translation>ביטול</translation>
     </message>
@@ -290,7 +290,7 @@ Error: %s</source>
         <translation>קיצור הדרך כבר קיים</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="176"/>
+        <location filename="swinelib.py" line="175"/>
         <source>File does not exist</source>
         <translation>הקובץ לא קיים</translation>
     </message>
@@ -311,52 +311,52 @@ Error: %s</source>
 <context>
     <name>Slot</name>
     <message>
-        <location filename="swinelib.py" line="216"/>
+        <location filename="swinelib.py" line="206"/>
         <source>Slot name cannot be empty.</source>
         <translation>שם החריץ לא יכול להישאר ריק.</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="241"/>
+        <location filename="swinelib.py" line="231"/>
         <source>Shortcut name cannot be empty</source>
         <translation>שם קיצור הדרך לא יכול להישאר ריק</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="257"/>
+        <location filename="swinelib.py" line="247"/>
         <source>%s does not exist</source>
         <translation>%s לא קיים</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="302"/>
+        <location filename="swinelib.py" line="292"/>
         <source>Slot already exists: %s</source>
         <translation>החריץ כבר קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="308"/>
+        <location filename="swinelib.py" line="298"/>
         <source>Default slot cannot be deleted</source>
         <translation>לא ניתן למחוק את חריץ בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="332"/>
+        <location filename="swinelib.py" line="322"/>
         <source>Slot does not exist: %s</source>
         <translation>החריץ אינו קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="328"/>
+        <location filename="swinelib.py" line="318"/>
         <source>Slot name cannot be empty</source>
         <translation>שם החריץ לא יכול להישאר ריק</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="335"/>
+        <location filename="swinelib.py" line="325"/>
         <source>Slot does already exist: %s</source>
         <translation>החריץ כבר קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="330"/>
+        <location filename="swinelib.py" line="320"/>
         <source>Default slot cannot be renamed</source>
         <translation>לא ניתן לשנות את שם חריץ בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="622"/>
+        <location filename="swinelib.py" line="555"/>
         <source>File name cannot be empty</source>
         <translation>שם הקובץ לא יכול להיות ריק</translation>
     </message>
@@ -382,217 +382,217 @@ Error: %s</source>
 <context>
     <name>SwineMainWindow</name>
     <message>
-        <location filename="swine.py" line="379"/>
+        <location filename="swine.py" line="387"/>
         <source>Version: %s</source>
         <translation>גרסה: %s</translation>
     </message>
     <message>
-        <location filename="swine.py" line="241"/>
+        <location filename="swine.py" line="249"/>
         <source>Shortcut</source>
         <translation>קיצור דרך</translation>
     </message>
     <message>
-        <location filename="swine.py" line="347"/>
+        <location filename="swine.py" line="355"/>
         <source>New Shortcut</source>
         <translation>קיצור דרך חדש</translation>
     </message>
     <message>
-        <location filename="swine.py" line="245"/>
+        <location filename="swine.py" line="253"/>
         <source>Run</source>
         <translation>הפעלה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="247"/>
+        <location filename="swine.py" line="255"/>
         <source>Set Default</source>
         <translation>הגדרת בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swine.py" line="249"/>
+        <location filename="swine.py" line="257"/>
         <source>Remove Menu Entry</source>
         <translation>הסרת רשומה מהתפריט</translation>
     </message>
     <message>
-        <location filename="swine.py" line="251"/>
+        <location filename="swine.py" line="259"/>
         <source>Create Menu Entry</source>
         <translation>יצירת רשומה בתפריט</translation>
     </message>
     <message>
-        <location filename="swine.py" line="253"/>
+        <location filename="swine.py" line="261"/>
         <source>Edit</source>
         <translation>עריכה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="315"/>
+        <location filename="swine.py" line="323"/>
         <source>Rename</source>
         <translation>שינוי שם</translation>
     </message>
     <message>
-        <location filename="swine.py" line="316"/>
+        <location filename="swine.py" line="324"/>
         <source>Copy</source>
         <translation>העתקה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="318"/>
+        <location filename="swine.py" line="326"/>
         <source>Delete</source>
         <translation>מחיקה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="259"/>
+        <location filename="swine.py" line="267"/>
         <source>Slot</source>
         <translation>חריץ</translation>
     </message>
     <message>
-        <location filename="swine.py" line="351"/>
+        <location filename="swine.py" line="359"/>
         <source>New Slot</source>
         <translation>חריץ חדש</translation>
     </message>
     <message>
-        <location filename="swine.py" line="341"/>
+        <location filename="swine.py" line="349"/>
         <source>Import Slot</source>
         <translation>יבוא חריץ</translation>
     </message>
     <message>
-        <location filename="swine.py" line="264"/>
+        <location filename="swine.py" line="272"/>
         <source>Run default</source>
         <translation>הפעלת בררת מחדל</translation>
     </message>
     <message>
-        <location filename="swine.py" line="265"/>
+        <location filename="swine.py" line="273"/>
         <source>Run...</source>
         <translation>הפעלה...</translation>
     </message>
     <message>
-        <location filename="swine.py" line="269"/>
+        <location filename="swine.py" line="277"/>
         <source>Tools</source>
         <translation>כלים</translation>
     </message>
     <message>
-        <location filename="swine.py" line="270"/>
+        <location filename="swine.py" line="278"/>
         <source>Shell</source>
         <translation>מעטפת</translation>
     </message>
     <message>
-        <location filename="swine.py" line="271"/>
+        <location filename="swine.py" line="279"/>
         <source>File Manager</source>
         <translation>מנהל קבצים</translation>
     </message>
     <message>
-        <location filename="swine.py" line="272"/>
+        <location filename="swine.py" line="280"/>
         <source>Taskmanager</source>
         <translation>מנהל משימות</translation>
     </message>
     <message>
-        <location filename="swine.py" line="274"/>
+        <location filename="swine.py" line="282"/>
         <source>Winecfg</source>
         <translation>תצורת Wine‎ ‏(winecfg)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="275"/>
+        <location filename="swine.py" line="283"/>
         <source>Start Regedit</source>
         <translation>הפעלת עורך רישום המערכת (regedit)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="276"/>
+        <location filename="swine.py" line="284"/>
         <source>Uninstall Software</source>
         <translation>הסרת תוכנות</translation>
     </message>
     <message>
-        <location filename="swine.py" line="277"/>
+        <location filename="swine.py" line="285"/>
         <source>Control-Center</source>
         <translation>מרכז הבקרה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="279"/>
+        <location filename="swine.py" line="287"/>
         <source>Commands</source>
         <translation>פקודות</translation>
     </message>
     <message>
-        <location filename="swine.py" line="280"/>
+        <location filename="swine.py" line="288"/>
         <source>Import Shortcuts</source>
         <translation>יבוא קיצורי דרך</translation>
     </message>
     <message>
-        <location filename="swine.py" line="281"/>
+        <location filename="swine.py" line="289"/>
         <source>Reboot wine</source>
         <translation>הפעלת wine מחדש</translation>
     </message>
     <message>
-        <location filename="swine.py" line="282"/>
+        <location filename="swine.py" line="290"/>
         <source>Eject CD</source>
         <translation>שליפת התקליטור</translation>
     </message>
     <message>
-        <location filename="swine.py" line="284"/>
+        <location filename="swine.py" line="292"/>
         <source>Export</source>
         <translation>יצוא</translation>
     </message>
     <message>
-        <location filename="swine.py" line="285"/>
+        <location filename="swine.py" line="293"/>
         <source>Import Data</source>
         <translation>יבוא נתונים</translation>
     </message>
     <message>
-        <location filename="swine.py" line="287"/>
+        <location filename="swine.py" line="295"/>
         <source>Run winetricks script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="383"/>
+        <location filename="swine.py" line="391"/>
         <source>Winetricks</source>
         <translation>Winetricks</translation>
     </message>
     <message>
-        <location filename="swine.py" line="291"/>
+        <location filename="swine.py" line="299"/>
         <source>Call Winetricks</source>
         <translation>הפעלת Winetricks</translation>
     </message>
     <message>
-        <location filename="swine.py" line="293"/>
+        <location filename="swine.py" line="301"/>
         <source>Winetricks is not installed</source>
         <translation>Winetricks לא מותקנים</translation>
     </message>
     <message>
-        <location filename="swine.py" line="313"/>
+        <location filename="swine.py" line="321"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="339"/>
+        <location filename="swine.py" line="347"/>
         <source>Select archive</source>
         <translation>בחירת ארכיון</translation>
     </message>
     <message>
-        <location filename="swine.py" line="339"/>
+        <location filename="swine.py" line="347"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
         <translation>חריצי Swine ‏(‎*.swine *.tar.gz)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="351"/>
+        <location filename="swine.py" line="359"/>
         <source>Name:</source>
         <translation>שם:</translation>
     </message>
     <message>
-        <location filename="swine.py" line="351"/>
+        <location filename="swine.py" line="359"/>
         <source>Create Slot</source>
         <translation>יצירת חריץ</translation>
     </message>
     <message>
-        <location filename="swine.py" line="381"/>
+        <location filename="swine.py" line="389"/>
         <source>Winetricks is already at version %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="383"/>
+        <location filename="swine.py" line="391"/>
         <source>Winetricks has been updated to version %s</source>
         <translation>גרסת Winetrick עודכנה ל־%s</translation>
     </message>
     <message>
-        <location filename="swine.py" line="400"/>
+        <location filename="swine.py" line="408"/>
         <source>Error</source>
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="400"/>
+        <location filename="swine.py" line="408"/>
         <source>Execution failed with code %s</source>
         <translation>ההפעלה נכשלה עם הקוד %s</translation>
     </message>
@@ -600,22 +600,22 @@ Error: %s</source>
 <context>
     <name>SwineProgramDialog</name>
     <message>
-        <location filename="swine.py" line="476"/>
+        <location filename="swine.py" line="480"/>
         <source>Executable selection</source>
         <translation>בחירה הניתנת להרצה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="476"/>
+        <location filename="swine.py" line="480"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation>תכניות של Windows ‏(‎*.exe *.EXE)‏;;תכניות התקנה שלWindows‏ (‎*.msi *.MSI);;כל הקבצים (*)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="495"/>
+        <location filename="swine.py" line="498"/>
         <source>Select Icon</source>
         <translation>נא לבחור בסמל</translation>
     </message>
     <message>
-        <location filename="swine.py" line="503"/>
+        <location filename="swine.py" line="506"/>
         <source>Shortcut name cannot be empty</source>
         <translation>שם קיצור הדרך לא יכול להישאר ריק</translation>
     </message>
@@ -623,7 +623,7 @@ Error: %s</source>
 <context>
     <name>SwineRunDialog</name>
     <message>
-        <location filename="swine.py" line="528"/>
+        <location filename="swine.py" line="531"/>
         <source>Run</source>
         <translation>הפעלה</translation>
     </message>
@@ -659,7 +659,7 @@ Error: %s</source>
 <context>
     <name>SwineShortcutDialog</name>
     <message>
-        <location filename="swine.py" line="544"/>
+        <location filename="swine.py" line="547"/>
         <source>Save</source>
         <translation>שמירה</translation>
     </message>
@@ -667,22 +667,22 @@ Error: %s</source>
 <context>
     <name>SwineShortcutItem</name>
     <message>
-        <location filename="swine.py" line="178"/>
+        <location filename="swine.py" line="186"/>
         <source>Edit Shortcut</source>
         <translation>עריכת קיצורי דרך</translation>
     </message>
     <message>
-        <location filename="swine.py" line="195"/>
+        <location filename="swine.py" line="203"/>
         <source>Menu Entry</source>
         <translation>רשומה בתפריט</translation>
     </message>
     <message>
-        <location filename="swine.py" line="192"/>
+        <location filename="swine.py" line="200"/>
         <source>Menu entry for %s has been created</source>
         <translation>נוצרה רשומה בתפריט עבור %s</translation>
     </message>
     <message>
-        <location filename="swine.py" line="195"/>
+        <location filename="swine.py" line="203"/>
         <source>Menu entry for %s has been removed</source>
         <translation>רשומת התפריט עבור %s הוסרה</translation>
     </message>
@@ -690,32 +690,32 @@ Error: %s</source>
 <context>
     <name>SwineSlotItem</name>
     <message>
-        <location filename="swine.py" line="88"/>
+        <location filename="swine.py" line="96"/>
         <source>Delete Slot</source>
         <translation>מחיקת חריץ</translation>
     </message>
     <message>
-        <location filename="swine.py" line="88"/>
+        <location filename="swine.py" line="96"/>
         <source>Are you sure ?</source>
         <translation>אכן לעשות זאת ?</translation>
     </message>
     <message>
-        <location filename="swine.py" line="124"/>
+        <location filename="swine.py" line="132"/>
         <source>Select archive file</source>
         <translation>בחירת קובץ ארכיון</translation>
     </message>
     <message>
-        <location filename="swine.py" line="124"/>
+        <location filename="swine.py" line="132"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
         <translation>חריצי Swine‏ (‎*.swine *.tar.gz)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="129"/>
+        <location filename="swine.py" line="137"/>
         <source>Select script file</source>
         <translation>בחירת קובץ סקריפט</translation>
     </message>
     <message>
-        <location filename="swine.py" line="129"/>
+        <location filename="swine.py" line="137"/>
         <source>Winetricks scripts (*.verb)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -723,12 +723,12 @@ Error: %s</source>
 <context>
     <name>WinePathItem</name>
     <message>
-        <location filename="swine.py" line="622"/>
+        <location filename="swine.py" line="625"/>
         <source>Wine path selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="628"/>
+        <location filename="swine.py" line="631"/>
         <source>No wine binary found in %s</source>
         <translation type="unfinished"></translation>
     </message>

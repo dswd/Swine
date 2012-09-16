@@ -24,7 +24,7 @@
 import os, sys, traceback
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
-import swinelib, config
+import swinelib, config, icolib
 import time, webbrowser, pipes
 from PyQt4.QtGui import *
 from PyQt4.QtCore import Qt, QTranslator, QLocale
@@ -47,6 +47,14 @@ def loadIcon (name, folder="", cache=True, scale=None):
     icon = icon.scaled(scale[0], scale[1], aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
   return QIcon(icon)
 
+def loadIconFromData (data, scale=None):
+  icon = QPixmap()
+  icon.loadFromData(data)
+  if not icon or icon.isNull():
+    return None
+  if scale:
+    icon = icon.scaled(scale[0], scale[1], aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
+  return QIcon(icon)
   
   
 def tr(s, context="@default"):
@@ -72,7 +80,7 @@ class SwineSlotItem(IconListItem):
     self.iconObj = None
     if shortcut:
       if shortcut.getIcon():
-        self.iconObj = loadIcon(shortcut.getIcon(), folder=slot.getPath(), cache=False, scale=(32,32))
+        self.iconObj = loadIconFromData(shortcut.getIcon())
     if not self.iconObj:
       self.iconObj = loadIcon(":/icons/images/folder.png")
     IconListItem.__init__(self, parent, unicode(slot.getName()), self.iconObj)
@@ -141,7 +149,7 @@ class SwineShortcutItem(IconListItem):
     self.shortcut = shortcut
     self.iconObj = None
     if shortcut.getIcon():
-      self.iconObj = loadIcon(shortcut.getIcon(), folder=shortcut.slot.getPath(), cache=False, scale=(32,32))
+        self.iconObj = loadIconFromData(shortcut.getIcon())
     if not self.iconObj:
       self.iconObj = loadIcon(":/icons/images/wabi.png")
     IconListItem.__init__(self, parent, shortcut.getName(), self.iconObj, shortcut["description"])
@@ -419,25 +427,21 @@ class SwineAboutDialog(QDialog, Ui_AboutDialog):
 
 
 class SwineIconDialog(QDialog,Ui_IconDialog):
-  class Icon(QListWidgetItem):
-    def __init__(self, parent, fileName, icon):
-      QListWidgetItem.__init__(self, icon, "", parent)
-      self.fileName = fileName
-  def __init__(self,iconDir, parent, name):
+  def __init__(self, icons, parent, name):
     QDialog.__init__(self, parent)
     self.setupUi(self)
     self.setWindowTitle(name)
-    self.iconDir = iconDir
-    self.iconFile = None
-    for icon in os.listdir(self.iconDir):
-      image = loadIcon(icon, self.iconDir, cache=False)
+    self.icons = icons
+    self.iconData = None
+    for icon in icons:
+      image = loadIconFromData(icon.data, scale=(32, 32))
       if image:
-        IconListItem(self.iconView, name="", icon=image, fileName=os.path.join(self.iconDir, icon))
+        IconListItem(self.iconView, "%dx%d %d-bit" % (icon.width, icon.height, icon.bits), image, iconData=icon.data)
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def okButton_clicked(self):
     item = self.iconView.currentItem()
-    self.iconFile = item.fileName if item else None
+    self.iconData = item.iconData if item else None
     self.accept()
   def cancelButton_clicked(self):
     self.close()
@@ -452,15 +456,15 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
     self.setupUi(self)
     self.nameInput.setText(shortcut.getName())
     self.setWindowTitle(name)
-    self.iconFile = ""
+    self.iconData = None
     self.paramsInput.setText("")
     if shortcut.getProgram():
       self.nameInput.setEnabled(False)
       if shortcut.getIcon():
-        icon = loadIcon(shortcut.getIcon(), folder=shortcut.slot.getPath(), cache=False, scale=(32,32))
+        icon = loadIconFromData(shortcut.getIcon(), scale=(32,32))
         if icon:
           self.icon.setIcon(icon)
-          self.iconFile = shortcut.getIcon()
+          self.iconData = shortcut.getIcon()
       self.applicationInput.setText(shortcut.getProgram())
       self.workingDirectoryInput.setText(shortcut.getWorkingDirectory())
       self.paramsInput.setText(" ".join(map(pipes.quote, shortcut.getArguments())))
@@ -490,19 +494,18 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
       return
     workDir = str(self.workingDirectoryInput.text())
     prog = self.shortcut.getSlot().winPathToUnix(prog, basedir=workDir)
-    iconsDir = self.shortcut.getSlot().iconsDir(prog)
-    bestIco = self.shortcut.getSlot().extractExeIcons(prog, iconsDir)
-    dialog = SwineIconDialog(iconsDir, self.parent, self.tr("Select Icon"))
+    icons = icolib.readExeIcons(prog)
+    dialog = SwineIconDialog(icons, self.parent, self.tr("Select Icon"))
     if dialog.exec_():
       pass
-    self.iconFile = dialog.iconFile
-    if self.iconFile:
-      self.icon.setIcon(loadIcon(self.iconFile))
+    self.iconData = dialog.iconData
+    if self.iconData:
+      self.icon.setIcon(loadIconFromData(self.iconData))
   def okButton_clicked(self):
     if not self.nameInput.text():
       raise SwineException(self.tr("Shortcut name cannot be empty"))
     self.shortcut.rename(unicode(self.nameInput.text()))
-    self.shortcut.setIcon(self.iconFile)
+    self.shortcut.setIcon(self.iconData)
     self.shortcut.setProgram(unicode(self.applicationInput.text()))
     self.shortcut.setArguments(str(self.paramsInput.text()))
     self.shortcut.setWorkingDirectory(str(self.workingDirectoryInput.text()))
@@ -511,7 +514,7 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
     else:
       self.shortcut.setDesktop("")
     self.shortcut["interminal"] = "1" if self.runInTerminalCheckBox.isChecked() else ""
-
+    #TODO: update slot icon if this is default shortcut
 
 
 class SwineRunDialog(SwineProgramDialog):

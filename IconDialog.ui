@@ -22,7 +22,6 @@
     <widget class="QListWidget" name="iconView">
      <property name="font">
       <font>
-       <pointsize>1</pointsize>
        <stylestrategy>NoAntialias</stylestrategy>
        <kerning>false</kerning>
       </font>

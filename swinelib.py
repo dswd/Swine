@@ -26,8 +26,8 @@ sys.setdefaultencoding("utf-8")
 
 from config import *
 import config
-import os, shutil, array, pipes, urllib, subprocess, codecs, shlex, json, glob
-import shortcutlib, winetricks
+import os, shutil, array, pipes, urllib, subprocess, codecs, shlex, json, glob, base64
+import shortcutlib, winetricks, icolib
 from tarfile import TarFile
 from subprocess import Popen
 
@@ -116,12 +116,20 @@ class Shortcut:
       args = shlex.split(args)
     self['arguments'] = args
   def getIcon(self):
-    return os.path.join(self.slot.getPath(), self["icon"]) if self["icon"] else None
+    if self["icon"]:
+      try:
+        return base64.b64decode(self["icon"])
+      except:
+        pass
+      path = os.path.join(self.slot.getPath(), self["icon"])
+      if os.path.exists(path):
+        with open(path, "r") as fp:
+          data = fp.read()
+          self.setIcon(data)
+          return data
+    return None
   def setIcon(self, icon):
-    if not icon or not os.path.exists(icon):
-      self['icon'] = None
-    else:
-      self['icon'] = relpath(icon, self.slot.getPath())
+    self['icon'] = base64.b64encode(icon) if icon else None
   def getWorkingDirectory(self):
     return self["working_directory"]
   def setWorkingDirectory(self, path):
@@ -132,37 +140,35 @@ class Shortcut:
   def setDesktop(self, desktop):
     assert isinstance(desktop, (str, unicode))
     self["desktop"] = desktop
-  def _iconsDir(self):
-    if self["iconsdir"]:
-      return os.path.join(self.slot.getPath(), self["iconsdir"])
-    return None
   def _exePath(self):
     path = self.slot.winPathToUnix(self.getProgram())
     if not os.path.exists(path) and os.path.exists(path+".exe"):
       path += ".exe"
     return path
-  def extractIcons(self):
-    path = self._exePath()
-    if os.path.splitext(path)[1].lower() == '.exe':
-      self['iconsdir'] = self.slot.iconsDirRel(path)
-      self.slot.extractExeIcons(path, self.slot.iconsDir(path))
   def _menuEntryPath(self):
     return os.path.join(DESKTOP_MENU_DIR, "%s-%s.desktop" % (self.slot.getName(), self.name))
+  def _menuEntryIconPath(self):
+    return os.path.join(DESKTOP_MENU_DIR, "%s-%s.png" % (self.slot.getName(), self.name))
   def hasMenuEntry(self):
     return os.path.exists(self._menuEntryPath())
   def createMenuEntry(self):
     if not os.path.exists(DESKTOP_MENU_DIR):
       os.mkdir(DESKTOP_MENU_DIR)
+    if self.getIcon():
+      with open(self._menuEntryIconPath(), "wb") as fp:
+        fp.write(self.getIcon())
     with open(self._menuEntryPath(), "w") as fp:
       fp.write("[Desktop Entry]\nEncoding=UTF-8\nVersion=1.0\n")
       fp.write("Name=%s: %s\n" % (self.slot.getName(), self.name))
       fp.write("Type=Application\n")
-      fp.write("Exec=swinecli --slot %r --shortcut %r --translate-paths --run %U\n" % (self.slot.getName(), self.name))
-      fp.write("Icon=%s\n" % self["icon"])
+      fp.write("Exec=swinecli --slot %r --shortcut %r --translate-paths --run %%U\n" % (str(self.slot.getName()), str(self.name)))
+      if self.getIcon():
+        fp.write("Icon=%s\n" % self._menuEntryIconPath())
       fp.write("Categories=Wine;\n")
   def removeMenuEntry(self):
     if self.hasMenuEntry():
       os.remove(self._menuEntryPath())
+      os.remove(self._menuEntryIconPath())
   def run(self, wait=True, args=[]):
     prog = [self.getProgram()]+self.getArguments()
     workingDirectory = self['working_directory']
@@ -189,14 +195,15 @@ class Shortcut:
       iconPath = self.slot.winPathToUnix(str(lnk.customIcon), "c:\windows")
     else:
       iconPath = self.slot.winPathToUnix(lnk.target)
-    iconsdir = os.path.join(self.slot.getPath(), "icons", os.path.basename(iconPath))
-    self['iconsdir'] = os.path.join("icons", os.path.basename(iconPath))
     if os.path.splitext(iconPath)[1].lower() == '.exe':
-      self.slot.extractExeIcons(iconPath, iconsdir)
-      icons = os.listdir(iconsdir)
-      self.setIcon(os.path.join(iconsdir, self.slot.bestIco(icons, lnk.iconIndex)))
+      icons = icolib.readExeIcons(iconPath, lnk.iconIndex)
+      if not icons:
+        icons = icolib.readExeIcons(iconPath)
     else:
-      self.setIcon(iconPath)
+      icons = icolib.readIcoIcons(iconPath)
+    bestIco = icolib.bestIcon(icons)
+    if bestIco:
+      self.setIcon(bestIco.data)
 
     
     
@@ -365,63 +372,6 @@ class Slot:
       return self.loadShortcut(self.getDefaultShortcutName())
     except:
       return None
-  def iconsDir(self, path):
-    return os.path.join(self.getPath(), self.iconsDirRel(path))
-  def iconsDirRel(self, path):
-    return os.path.join("icons", os.path.basename(path))
-  def extractExeIcons(self, path, iconsdir, onlyNr=None):
-    if not os.path.exists(iconsdir):
-      os.makedirs(iconsdir)
-    if onlyNr == None:
-      self.runNative(["wrestool", "-x", "-t14", "--output", iconsdir, path], wait=True)
-    else:
-      self.runNative(["wrestool", "-x", "-t14", "-n%d" % onlyNr, "--output", iconsdir, path], wait=True)
-    files = os.listdir(iconsdir)
-    for icon in files:
-      if os.path.splitext(icon)[1].lower() == '.ico':
-        iconPath = os.path.join(iconsdir, icon)
-        self.runNative(["icotool", "-x", "-o", iconsdir, iconPath], wait=True)
-        os.remove(iconPath)
-    return self.bestIco(os.listdir(iconsdir))
-  def bestIco(self, icons, nr=0):
-    def parseIcoName(name):
-      import re
-      f = re.match(".*_([0-9]+)_(.*)_([0-9]+)x([0-9]+)x([0-9]+).png", name)
-      if not f:
-        return (0, 0, 0, 0)
-      return (int(f.group(1)), f.group(2), int(f.group(3)), int(f.group(5)))
-    def icoCmp(x,y):
-      x_nr1, x_nr2, x_size, x_color = parseIcoName(x)
-      y_nr1, y_nr2, y_size, y_color = parseIcoName(y)
-      if x_size != y_size:
-        if x_size == 32:
-          return -1
-        if y_size == 32:
-          return 1
-        return -cmp(x_size,y_size)
-      if x_color != y_color:
-        return -cmp(x_color,y_color)
-      return cmp(x_nr2,y_nr2)
-    def icoCmpNr(x,y):
-      x_nr1, x_nr2, x_size, x_color = parseIcoName(x)
-      y_nr1, y_nr2, y_size, y_color = parseIcoName(y)
-      if x_nr1 != y_nr1:
-        return cmp(x_nr1,y_nr1)
-      return cmp(x_nr2,y_nr2)
-    def icoFilter(l, nr1, nr2):
-      def icoFilterName(n, nr1, nr2):
-        n_nr1, n_nr2, n_size, n_color = parseIcoName(n)
-        return n_nr1 == nr1 and n_nr2 == nr2
-      return filter(lambda n: icoFilterName(n, nr1, nr2), l)
-    if len(icons) > nr and nr >= 0:
-      icons.sort(icoCmpNr)
-      nr1, nr2, size, color = parseIcoName(icons[nr])
-      icons = icoFilter(icons, nr1, nr2)
-    icons.sort(icoCmp)
-    if not icons:
-      return ""
-    else:
-      return icons[0]
   def createShortcutFromFile(self, path):
     name = os.path.splitext(os.path.basename(path))[0]
     shortcut = Shortcut(name, self, virtual=True)
@@ -666,7 +616,7 @@ def loadSlot(name):
 
 def loadDefaultSlot():
   return loadSlot(SWINE_DEFAULT_SLOT_NAME)
-
+  
 def getWineVersion(path):
   if path:
     valid = True
