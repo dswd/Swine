@@ -3,7 +3,7 @@ Label: stable
 Suite: stable
 Codename: stable
 Version: 6.0
-Date: Mon, 17 Sep 2012 08:50:35 UTC
+Date: Mon, 17 Sep 2012 09:23:00 UTC
 Architectures: i386 amd64
 Components: main contrib non-free
 Description: Swine repository

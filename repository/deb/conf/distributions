@@ -7,6 +7,7 @@ Description: Swine repository
 Architectures: i386 amd64 source
 Components: main contrib non-free
 UDebComponents: main
+SignWith: 735F5C51
 
 Origin: swine
 Label: squeeze
@@ -17,6 +18,7 @@ Description: Swine repository
 Architectures: i386 amd64 source
 Components: main contrib non-free
 UDebComponents: main
+SignWith: 735F5C51
 
 Origin: swine
 Label: stable
@@ -27,3 +29,4 @@ Description: Swine repository
 Architectures: i386 amd64 source
 Components: main contrib non-free
 UDebComponents: main
+SignWith: 735F5C51

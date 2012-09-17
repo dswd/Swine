@@ -1,3 +1,6 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
 Origin: swine
 Label: squeeze
 Suite: stable
@@ -103,3 +106,14 @@ SHA256:
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 non-free/source/Sources
  59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 non-free/source/Sources.gz
  e630d42cca1957f21dfd885b37a5e7c6f82fa9a937f6715551266fa5b7983e17 129 non-free/source/Release
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iQEcBAEBAgAGBQJQVuvzAAoJEF2ZRKtzX1xRdZsIAIMCrq4LDExW1bI5t6RRsJwr
+0Obc9gLzKFtDmaLRHMQXZvepA9TkROWr0dqfbud/DoVyYjuTq/SowomTPUiisg2+
+bEuKJf0ws0Tx2HO5DmiSqrrJgeE5pY8Eq7WHRaj67MWxJkFHYTHGSh7dYDotcI4S
+PMrJAZ5YJ+FbmVDkHZ088WZ0FG1fMoUEhyzT9SLaA6fg0TEn1xu75oEbImRSSKsX
+z8K/6NPQ+nxWg8Ni+5YNApcFQ/w4pazJoM++a5ltlGX8AEHrEZ0hrfhxtxUQiaDI
+xjVOGx8EhYbjHoxeuLkNelcSyKBJkxuUfCqrmu8VXgCldb2cHA4XQp8gH52MEAI=
+=/FsC
+-----END PGP SIGNATURE-----

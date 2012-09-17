@@ -3,7 +3,7 @@ Label: lenny
 Suite: stable
 Codename: lenny
 Version: 5.0
-Date: Mon, 17 Sep 2012 08:50:35 UTC
+Date: Mon, 17 Sep 2012 09:22:44 UTC
 Architectures: i386 amd64
 Components: main contrib non-free
 Description: Swine repository
