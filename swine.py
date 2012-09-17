@@ -25,9 +25,9 @@ import os, sys, traceback
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 import swinelib, config, icolib
-import time, webbrowser, pipes
+import time, webbrowser, pipes, thread
 from PyQt4.QtGui import *
-from PyQt4.QtCore import Qt, QTranslator, QLocale
+from PyQt4.QtCore import Qt, QTranslator, QLocale, SIGNAL, SLOT
 from swinelib import *
 from threading import Thread
 from AboutDialog import *
@@ -60,9 +60,35 @@ def loadIconFromData (data, scale=None):
 def tr(s, context="@default"):
   return unicode(QApplication.translate(context, s, None, QApplication.UnicodeUTF8))
   
+
+
+_threads = []
+class WrapperThread(QtCore.QThread):
+  def __init__(self, func, args, kwargs):
+    QtCore.QThread.__init__(self)
+    self.func = func
+    self.args = args
+    self.kwargs = kwargs
+    _threads.append(self)
+  def run(self):
+    try:
+      self.func(*self.args, **self.kwargs)
+    finally:
+      _threads.remove(self)
+
+    
+#NOTICE: Do not access other Qt objects from detached functions, use signals+slots
+def detached(func):
+  def call(*args, **kwargs):
+    wrapper = WrapperThread(func, args, kwargs)
+    wrapper.start()
+  return call
+  
+
   
   
-class IconListItem(QListWidgetItem):
+  
+class IconListItem(QListWidgetItem, QtCore.QObject):
   def __init__(self, parent, name, icon=None, description=None, **kwargs):
     QListWidgetItem.__init__(self, icon, name, parent)
     if description:
@@ -91,7 +117,7 @@ class SwineSlotItem(IconListItem):
   def mainWindow(self):
     return self.listWidget().topLevelWidget()
   def refreshShortcutList(self):
-    self.mainWindow().slotList_selectionChanged()
+    self.listWidget().emit(SIGNAL('changed()'))
   def delete_cb(self):
     if QMessageBox.warning(self.listWidget(), self.tr("Delete Slot"), self.tr("Are you sure ?"), QMessageBox.Yes|QMessageBox.No) == QMessageBox.Yes:
       self.slot.delete()
@@ -108,42 +134,55 @@ class SwineSlotItem(IconListItem):
     slotItem = SwineSlotItem(self.listWidget(), slot)
     slotItem.rename_cb()
   def searchShortcuts_cb(self):
-    SwineShortcutImportDialog(self.slot, self.mainWindow()).exec_()
+    SwineShortcutImportDialog(self.slot, self.listWidget()).exec_()
     self.refreshShortcutList()
   def run_cb(self):
-    SwineRunDialog(self.slot, self.mainWindow()).show()
+    SwineRunDialog(self.slot, self.listWidget()).show()
+  @detached
   def filemanager_cb(self):
     self.slot.runWinefile()
+  @detached
   def shell_cb(self):
     self.slot.runWin(["cmd.exe"], runInTerminal=True)
+  @detached
   def taskmgr_cb(self):
     self.slot.runWin(["taskmgr.exe"])
   def runDefault_cb(self):
     if self.slot.loadDefaultShortcut():
-      self.mainWindow.runShortcut(self.slot.loadDefaultShortcut())
+      self.mainWindow().runShortcut(self.slot.loadDefaultShortcut())
   def settings_cb(self):
-    SwineSlotSettingsDialog(self.mainWindow(), self.slot).exec_()
+    SwineSlotSettingsDialog(self.listWidget(), self.slot).exec_()
   def export_cb(self):
-    path = QFileDialog.getSaveFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
+    path = QFileDialog.getSaveFileName(self.listWidget(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if not path:
       return
+    self.exportTo(path)
+  @detached
+  def exportTo(self, path):
     self.slot.exportData(unicode(path))
   def import_cb(self):
-    path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
+    path = QFileDialog.getOpenFileName(self.listWidget(), self.tr("Select archive file"), "", self.tr("Swine Slots (*.swine *.tar.gz)"))
     if path:
-      self.slot.importData(unicode(path))
-      self.refreshShortcutList()
+      self.importFrom(path)
+  @detached
+  def importFrom(self, path):
+    self.slot.importData(unicode(path))
+    self.refreshShortcutList()
   def verbrun_cb(self):
-    path = QFileDialog.getOpenFileName(self.mainWindow(), self.tr("Select script file"), "", self.tr("Winetricks scripts (*.verb)"))
+    path = QFileDialog.getOpenFileName(self.listWidget(), self.tr("Select script file"), "", self.tr("Winetricks scripts (*.verb)"))
     if path:
-      self.slot.runVerb(os.path.realpath(unicode(path)))
-      if config.getValue("auto_import_shortcuts"):
-        SwineShortcutImportDialog(self.slot, self.mainWindow(), onlyNew=True).exec_()
-        self.refreshShortcutList()
+      self.runVerb(os.path.realpath(unicode(path)))
+  @detached    
+  def runVerb(self, path):
+    self.slot.runVerb(path)
+    if config.getValue("auto_import_shortcuts"):
+      SwineShortcutImportDialog(self.slot, self.listWidget(), onlyNew=True).exec_()
+      self.refreshShortcutList()
+  @detached
   def winetricks(self, tool):
     self.slot.runWinetricks(tool)
     if config.getValue("auto_import_shortcuts"):
-      SwineShortcutImportDialog(self.slot, self.mainWindow(), onlyNew=True).exec_()
+      SwineShortcutImportDialog(self.slot, self.listWidget(), onlyNew=True).exec_()
       self.refreshShortcutList()
   def winetricks_callback(self, tool):
     return lambda :self.winetricks(tool)
@@ -152,6 +191,7 @@ class SwineSlotItem(IconListItem):
 
 class SwineShortcutItem(IconListItem):
   def __init__(self, parent, shortcut):
+    self.parent = parent
     self.shortcut = shortcut
     self.iconObj = None
     if shortcut.getIcon():
@@ -163,15 +203,14 @@ class SwineShortcutItem(IconListItem):
     self.updateDefaultState()
   def tr(self, s):
     return tr(s, self.__class__.__name__)
+  def mainWindow(self):
+    return self.listWidget().topLevelWidget()
   def updateDefaultState(self):
     font = self.font()
     font.setBold(self.shortcut.isDefault())
     self.setFont(font)
-  def mainWindow(self):
-    return self.listWidget().topLevelWidget()
   def refreshShortcutList(self):
-    #Attention: this invalidates the current object as the underlying C++ object is removed
-    self.mainWindow().slotList_selectionChanged()
+    self.listWidget().emit(SIGNAL('changed()'))
   def run_cb(self):
     self.mainWindow().runShortcut(self.shortcut)
   def delete_cb(self):
@@ -189,7 +228,7 @@ class SwineShortcutItem(IconListItem):
     shortcutItem = SwineShortcutItem(self.listWidget(), shortcut)
     shortcutItem.rename_cb()
   def edit_cb(self):
-    dialog = SwineShortcutDialog(self.shortcut, self.mainWindow(), self.tr("Edit Shortcut"))
+    dialog = SwineShortcutDialog(self.shortcut, self.listWidget(), self.tr("Edit Shortcut"))
     if dialog.exec_():
       self.shortcut.rename(unicode(self.shortcut.getName()))
       if self.shortcut.isDefault():
@@ -203,10 +242,10 @@ class SwineShortcutItem(IconListItem):
       shortcuts.item(i).updateDefaultState()
   def createMenuEntry_cb(self):
     self.shortcut.createMenuEntry()
-    QMessageBox.information(self.mainWindow(), self.tr("Menu Entry"), self.tr("Menu entry for %s has been created") % self.shortcut.getName())
+    QMessageBox.information(self.listWidget(), self.tr("Menu Entry"), self.tr("Menu entry for %s has been created") % self.shortcut.getName())
   def removeMenuEntry_cb(self):
     self.shortcut.removeMenuEntry()
-    QMessageBox.information(self.mainWindow(), self.tr("Menu Entry"), self.tr("Menu entry for %s has been removed") % self.shortcut.getName())
+    QMessageBox.information(self.listWidget(), self.tr("Menu Entry"), self.tr("Menu entry for %s has been removed") % self.shortcut.getName())
 
 
 
@@ -218,6 +257,9 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
     self.winetricksVersion.setText(self.tr("Version: %s") % winetricks.version) 
     self.slotList.keyReleaseEvent = self.slotListKeyReleaseEvent
     self.shortcutList.keyReleaseEvent = self.shortcutListKeyReleaseEvent
+    QtCore.QObject.connect(self.slotList, SIGNAL('changed()'), self.reloadShortcuts)
+    QtCore.QObject.connect(self.shortcutList, SIGNAL('changed()'), self.reloadShortcuts)
+    QtCore.QObject.connect(self, SIGNAL('winetricksUpdated(QString)'), self.winetricksUpdated)
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def currentSlotItem(self):
@@ -360,7 +402,7 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
     shortcut = Shortcut(self.tr("New Shortcut"), self.currentSlotItem().slot)
     dialog = SwineShortcutDialog(shortcut, self, self.tr("New Shortcut"))
     if dialog.exec_():
-      self.slotList_selectionChanged()
+      self.reloadShortcuts()
   def createSlot_cb(self):
     (name, code) = QInputDialog.getText(self, self.tr("Create Slot"), self.tr("Name:"), QLineEdit.Normal, self.tr("New Slot"))
     if code:
@@ -379,6 +421,7 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
     menu.popup(self.slotList.mapToGlobal(point))
   def showSwineHelp(self):
     SwineAboutDialog(self).show()
+  @detached
   def showWineHelp(self):
     loadDefaultSlot().runWin(["winver"])  
   def showWinetricksHelp(self):
@@ -387,9 +430,12 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
     webbrowser.open(SWINE_WEBSITE)
   def openAppdbWebsite(self):
     webbrowser.open(APPDB_WEBSITE)
+  @detached
   def downloadWinetricks(self):
     oldVersion = winetricks.version
     winetricks.download()
+    self.emit(SIGNAL('winetricksUpdated(QString)'), oldVersion)
+  def winetricksUpdated(self, oldVersion):
     self.winetricksVersion.setText(self.tr("Version: %s") % winetricks.version)
     if winetricks.version == oldVersion:
       QMessageBox.information(self, self.tr("Winetricks"), self.tr("Winetricks is already at version %s") % winetricks.version)
@@ -405,28 +451,31 @@ class SwineMainWindow(QMainWindow, Ui_MainWindow):
         self.downloadWinetricks()
   def menuExitAction_activated(self):
     self.close()
-  def slotList_selectionChanged(self):
-    self.rebuildShortcutList()
-    self.rebuildMenuBar()
-  def shortcutList_selectionChanged(self):
-    self.rebuildMenuBar()
   def shortcutList_itemExecuted(self, item):
     self.runShortcut(item.shortcut)
   def slotList_itemExecuted(self, item):
     slot = item.slot
     if slot.loadDefaultShortcut():
       self.runShortcut(slot.loadDefaultShortcut())
+  @detached
   def runShortcut(self, shortcut):
     res = shortcut.run()
     if res.returncode:
-      dialog = QMessageBox(QMessageBox.Critical, self.tr("Error"), self.tr("Execution failed with code %s") % res.returncode, QMessageBox.Ok, self)
-      dialog.setDetailedText(res.stderr_data)
-      dialog.adjustSize()
-      dialog.exec_()
-    if SwineShortcutImportDialog(shortcut.slot, self, onlyNew=True).exec_():
-      self.slotList_selectionChanged()
+      self.emit(SIGNAL("executionFailed(int,QString)"), res.returncode, res.stderr_data)
+    self.emit(SIGNAL("executionFinished(PyQt_PyObject)"), shortcut.slot)
   def settingsDialog(self):
     SwineSettingsDialog(self).exec_()
+  def onExecutionFailed(self, code, msg):
+    dialog = QMessageBox(QMessageBox.Critical, self.tr("Error"), self.tr("Execution failed with code %s") % code, QMessageBox.Ok, self)
+    dialog.setDetailedText(msg)
+    dialog.adjustSize()
+    dialog.exec_()
+  def importShortcuts(self, slot):
+    if SwineShortcutImportDialog(slot, self, onlyNew=True).exec_():
+      self.slotList_selectionChanged()
+  def reloadShortcuts(self):
+    self.rebuildShortcutList()
+    self.rebuildMenuBar()
 
 
 

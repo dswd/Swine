@@ -139,10 +139,10 @@ try:
         print slot.getName()
   elif mode == Mode.Run:
     need_shortcut_def()
-    shortcut.run(wait=True, args=otherargs)
+    shortcut.run(args=otherargs)
   elif mode == Mode.RunDirect:
     need_slot()
-    slot.runWin([program]+atherargs, wait=True)
+    slot.runWin([program]+atherargs)
   elif mode == Mode.RunWis:
     need_slot()
     slot.runWis(path)

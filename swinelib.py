@@ -176,13 +176,12 @@ class Shortcut:
   def removeMenuEntry(self):
     if self.hasMenuEntry():
       os.remove(self._menuEntryPath())
-      os.remove(self._menuEntryIconPath())
-  def run(self, wait=True, args=[]):
+  def run(self, args=[]):
     prog = [self.getProgram()]+self.getArguments()
     workingDirectory = self['working_directory']
     runInTerminal = self["interminal"] and int(self["interminal"]) == 1
     desktop = self["desktop"]
-    return self.slot.runWin(prog=prog+args, wait=wait, workingDirectory=workingDirectory, runInTerminal=runInTerminal, desktop=desktop)
+    return self.slot.runWin(prog=prog+args, workingDirectory=workingDirectory, runInTerminal=runInTerminal, desktop=desktop)
   def readFromLnk(self, path):
     if not os.path.exists(path):
       path = self.slot.winPathToUnix(path)
@@ -397,12 +396,11 @@ class Slot:
     if oldfiles and onlyNew:
       files = list(set(files) - set(oldfiles))
     return files
-  def runNative(self, prog, cwd=None, wait=True, env=None, stdin=None, stdout=None, stderr=None):
+  def runNative(self, prog, cwd=None, env=None, stdin=None, stdout=None, stderr=None):
     """Run any native program (no windows binaries)
     Parameters:
       prog: this is the program with all paramters as a list
       cwd: the working directory (unix-path)
-      wait: wait until the process terminates
       env: custom environment, NOTE: this overwrites the normal environment
       stdin, stdout, stderr: if this is set to "subprocess.PIPE" a new pipe is created to be accessed later
                              if this is set to a file descriptor, the file is used as input/output
@@ -410,9 +408,9 @@ class Slot:
     if not cwd and self.exists():
       cwd = self.getPath()
     proc = Popen(prog, stdin=stdin, stderr=stderr, stdout=stdout, cwd=cwd, env=env)
-    (proc.stdout_data, proc.stderr_data) = proc.communicate() if wait else (None, None)
+    (proc.stdout_data, proc.stderr_data) = proc.communicate()
     return proc
-  def runWineTool(self, prog, cwd=None, wait=True, stdin=None, stdout=None, stderr=None, debug=None, winePath=False):
+  def runWineTool(self, prog, cwd=None, stdin=None, stdout=None, stderr=None, debug=None, winePath=False):
     """Run a wine tool (eg wine itself) with prefix and debug environment set
     This is only a wrapper for runNative
     """
@@ -436,7 +434,7 @@ class Slot:
       libPaths = filter(os.path.exists, (os.path.join(winePath, binDir) for binDir in ["lib", "usr/lib", "lib64", "usr/lib64"]))
       if libPaths:
         env["LD_LIBRARY_PATH"] = os.pathsep.join(libPaths+[os.environ.get("LD_LIBRARY_PATH", os.pathsep.join(["/usr/lib","/lib","/usr/lib64","/lib64"]))])
-    return self.runNative(prog, cwd, wait, env, stdin, stdout, stderr)
+    return self.runNative(prog, cwd, env, stdin, stdout, stderr)
   def runVerb(self, verbFile):
     return self.runWineTool(["xterm", "-T", "Verb %s" % verbFile, "-hold", "-e", winetricks.WINETRICKS, "--gui", "--no-isolate", verbFile])
   def runWinetricks(self, prog):
@@ -444,12 +442,11 @@ class Slot:
     This is only a wrapper for runNative
     """
     return self.runWineTool(["xterm", "-T", "Winetricks %s" % prog, "-hold", "-e", winetricks.WINETRICKS, unicode(prog)])
-  def runWin(self, prog, workingDirectory=".", wait=True, runInTerminal=False, desktop=None, debug=None, log=None, winePath=False):
+  def runWin(self, prog, workingDirectory=".", runInTerminal=False, desktop=None, debug=None, log=None, winePath=False):
     """Run a windows program
     Parameters:
       prog: this is the program with all paramters as a list
       workingDirectory: the working directory, unix- and windows-paths will work
-      wait: wait until the process terminates
       runInTerminal: if this is set the wine call is done with wineconsole instead of wine
       debug: user-defined WINEDEBUG-String (see wine manpage)
       log: if this is set, wine stderr output will be written to that file
@@ -459,7 +456,6 @@ class Slot:
       prog.insert(0, "start")
       if os.path.exists(prog[1]): #Path is unix path
         prog.insert(1, "/UNIX")
-      if wait:
         prog.insert(1, "/W")
     if desktop:
       prog.insert(0, "explorer")
@@ -474,25 +470,25 @@ class Slot:
       cwd = workingDirectory
     if os.path.exists(self.winPathToUnix(workingDirectory)):
       cwd = self.winPathToUnix(workingDirectory)
-    res = self.runWineTool(prog, cwd, wait=wait, stderr=subprocess.PIPE, debug=debug, winePath=winePath)
+    res = self.runWineTool(prog, cwd, stderr=subprocess.PIPE, debug=debug, winePath=winePath)
     if log:
       with open(log, "w") as fp:
         fp.write(res.stderr_data)
     return res
   def runWinecfg(self, winePath=False):
-    return self.runWineTool(["wine", "winecfg"], wait=True, winePath=winePath)
+    return self.runWineTool(["wine", "winecfg"], winePath=winePath)
   def runRegedit(self, winePath=False):
-    return self.runWineTool(["wine", "regedit"], wait=True, winePath=winePath)
+    return self.runWineTool(["wine", "regedit"], winePath=winePath)
   def runWineboot(self, winePath=False):
-    return self.runWineTool(["wine", "wineboot"], wait=True, winePath=winePath)
+    return self.runWineTool(["wine", "wineboot"], winePath=winePath)
   def runWinefile(self, directory="C:", winePath=False):
-    return self.runWineTool(["wine", "winefile", directory], wait=True, winePath=winePath)
+    return self.runWineTool(["wine", "winefile", directory], winePath=winePath)
   def runUninstaller(self, winePath=False):
-    return self.runWineTool(["wine", "uninstaller"], wait=True, winePath=winePath)
+    return self.runWineTool(["wine", "uninstaller"], winePath=winePath)
   def runWineControl(self, winePath=False):
-    return self.runWineTool(["wine", "control"], wait=True, winePath=winePath)
+    return self.runWineTool(["wine", "control"], winePath=winePath)
   def runEject(self, winePath=False):
-    return self.runWin(["wine", "eject"], wait=True, winePath=winePath)
+    return self.runWin(["wine", "eject"], winePath=winePath)
   def isWindowsPath(path):
     return W_SEP in path
   def _normalizePath(self, path, sep):
@@ -632,7 +628,7 @@ def getWineVersion(path):
       valid = valid and os.path.exists(os.path.join(path, f))
     if not valid:
       return None
-  proc = defaultSlot.runWineTool(["wine", "--version"], winePath=path, stdout=subprocess.PIPE, wait=True)
+  proc = defaultSlot.runWineTool(["wine", "--version"], winePath=path, stdout=subprocess.PIPE)
   return proc.stdout_data.strip() if proc.stdout_data else None
     
 def findWinePaths():

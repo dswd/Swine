@@ -1,3 +1,10 @@
+swine (1.0.1) unstable; urgency=low
+
+  * Using signals/slots for detached execution
+  * Some bugfixes
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Mon, 17 Sep 2012 10:47:48 +0200
+
 swine (1.0-1) unstable; urgency=low
 
   * Last minute bugfix

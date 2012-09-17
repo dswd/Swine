@@ -2,7 +2,7 @@ import os, re, subprocess, shutil, tempfile, collections
 
 Icon = collections.namedtuple("Icon", ["id", "width", "height", "bits", "data"])
 
-def _exec(cmd, ingoreError=False):
+def _exec(cmd, ignoreError=False):
   process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   out, err = process.communicate()
   if process.returncode and not ignoreError:

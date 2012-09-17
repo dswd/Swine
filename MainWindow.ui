@@ -324,7 +324,7 @@
    <sender>shortcutList</sender>
    <signal>selectionChanged()</signal>
    <receiver>MainWindow</receiver>
-   <slot>shortcutList_selectionChanged()</slot>
+   <slot>rebuildMenuBar()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -388,7 +388,7 @@
    <sender>slotList</sender>
    <signal>itemSelectionChanged()</signal>
    <receiver>MainWindow</receiver>
-   <slot>slotList_selectionChanged()</slot>
+   <slot>reloadShortcuts()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>89</x>
@@ -436,7 +436,7 @@
    <sender>shortcutList</sender>
    <signal>itemSelectionChanged()</signal>
    <receiver>MainWindow</receiver>
-   <slot>shortcutList_selectionChanged()</slot>
+   <slot>rebuildMenuBar()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>354</x>
@@ -560,14 +560,48 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>MainWindow</sender>
+   <signal>executionFailed(int,QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onExecutionFailed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>274</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MainWindow</sender>
+   <signal>executionFinished(PyQt_PyObject)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>importShortcuts()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>274</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>slotList_selectionChanged()</slot>
+  <signal>executionFailed(int,QString)</signal>
+  <signal>executionFinished(PyQt_PyObject)</signal>
+  <slot>reloadShortcuts()</slot>
   <slot>slotList_itemExecuted()</slot>
   <slot>slotList_rightButtonClicked()</slot>
   <slot>shortcutList_rightButtonClicked()</slot>
   <slot>shortcutList_itemExecuted()</slot>
-  <slot>shortcutList_selectionChanged()</slot>
+  <slot>rebuildMenuBar()</slot>
   <slot>slotList_itemRenamed()</slot>
   <slot>shortcutList_itemRenamed()</slot>
   <slot>showSwineHelp()</slot>
@@ -577,5 +611,7 @@
   <slot>openSwineWebsite()</slot>
   <slot>openAppdbWebsite()</slot>
   <slot>settingsDialog()</slot>
+  <slot>onExecutionFailed()</slot>
+  <slot>importShortcuts()</slot>
  </slots>
 </ui>
