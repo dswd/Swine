@@ -137,7 +137,7 @@ class SwineSlotItem(IconListItem):
     SwineShortcutImportDialog(self.slot, self.listWidget()).exec_()
     self.refreshShortcutList()
   def run_cb(self):
-    SwineRunDialog(self.slot, self.listWidget()).show()
+    SwineRunDialog(self.slot, self.mainWindow()).show()
   @detached
   def filemanager_cb(self):
     self.slot.runWinefile()
@@ -587,7 +587,7 @@ class SwineRunDialog(SwineProgramDialog):
     self.parent.runShortcut(self.shortcut)
     if config.getValue("auto_import_shortcuts"):
       SwineShortcutImportDialog(self.shortcut.slot, self, onlyNew=True).exec_()
-      self.parent.slotList_selectionChanged()
+      self.parent.reloadShortcuts()
   def __init__(self, slot, parent):
     self.slot = slot
     name = tr("Run Program")
