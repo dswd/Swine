@@ -1,3 +1,10 @@
+swine (1.0.1-1) unstable; urgency=low
+
+  * Fixed a bug in Slot->Run...
+  * Fixed a bug when running a URL
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Wed, 19 Sep 2012 23:08:05 +0200
+
 swine (1.0.1) unstable; urgency=low
 
   * Using signals/slots for detached execution
