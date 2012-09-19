@@ -1,16 +1,16 @@
 Package: swine
-Version: 1.0.1
+Version: 1.0.1-1
 Architecture: all
 Maintainer: Dennis Schwerdel <schwerdel+swine@googlemail.com>
-Installed-Size: 497
+Installed-Size: 498
 Depends: python-qt4, python (>= 2.6), cabextract, wine, xterm, icoutils
 Priority: extra
 Section: otherosfs
-Filename: pool/main/s/swine/swine_1.0.1_all.deb
-Size: 123374
-SHA256: 8f4a1b0c0b0ebcba4a8ab22acd72854c4ac93637d902a91f7c67ef227ce6a9f9
-SHA1: 4325beaf1f068c399a45e0bb34f2e31c7f72834c
-MD5sum: fc8fea0e382a7a0d12d6abe25342a62a
+Filename: pool/main/s/swine/swine_1.0.1-1_all.deb
+Size: 123562
+SHA256: 975f63b6098793b4d5114ad4ff8a5301a3c10fdd9667fe53f357ade4966d3c7e
+SHA1: 5c50bb70c865cb79f5aa7d23ccffe4b1eb464a62
+MD5sum: abcba75a09a1791c75208b5b883263f3
 Description: Graphical frontend for wine
  Swine is a graphical frontend for wine (windows-api emulation
  for Linux) that can manage several slots. With Swine you can
