@@ -179,42 +179,42 @@ Fehlermeldung: %s</translation>
 <context>
     <name>ProgramDialog</name>
     <message>
-        <location filename="ProgramDialog.py" line="155"/>
+        <location filename="ProgramDialog.py" line="163"/>
         <source>Working Directory:</source>
         <translation>Arbeitsverzeichnis:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="156"/>
+        <location filename="ProgramDialog.py" line="164"/>
         <source>Application:</source>
         <translation>Anwendung:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="157"/>
+        <location filename="ProgramDialog.py" line="165"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="158"/>
+        <location filename="ProgramDialog.py" line="166"/>
         <source>Parameters:</source>
         <translation>Parameter:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="159"/>
+        <location filename="ProgramDialog.py" line="167"/>
         <source>Run in Terminal</source>
         <translation>In Terminal ausführen</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="160"/>
+        <location filename="ProgramDialog.py" line="168"/>
         <source>Desktop:</source>
         <translation>Desktop:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="161"/>
+        <location filename="ProgramDialog.py" line="169"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="162"/>
+        <location filename="ProgramDialog.py" line="170"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -222,17 +222,17 @@ Fehlermeldung: %s</translation>
 <context>
     <name>RunnerDialog</name>
     <message>
-        <location filename="RunnerDialog.py" line="54"/>
+        <location filename="RunnerDialog.py" line="55"/>
         <source>Swine %s</source>
         <translation>Swine %s</translation>
     </message>
     <message>
-        <location filename="RunnerDialog.py" line="55"/>
+        <location filename="RunnerDialog.py" line="56"/>
         <source>Please select a slot:</source>
         <translation>Wählen sie einen Slot aus:</translation>
     </message>
     <message>
-        <location filename="RunnerDialog.py" line="56"/>
+        <location filename="RunnerDialog.py" line="57"/>
         <source>Run in this slot</source>
         <translation>In diesem Slot ausführen</translation>
     </message>
@@ -240,42 +240,42 @@ Fehlermeldung: %s</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="Settings.py" line="124"/>
+        <location filename="Settings.py" line="134"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="125"/>
+        <location filename="Settings.py" line="135"/>
         <source>Default wine path</source>
         <translation>Standard wine-Pfad</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="126"/>
+        <location filename="Settings.py" line="136"/>
         <source>Allow menu entry creation</source>
         <translation>Erstellen von Menueinträgen erlauben</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="127"/>
+        <location filename="Settings.py" line="137"/>
         <source>Automatically import shortcuts</source>
         <translation>Shortcuts automatisch importieren</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="128"/>
+        <location filename="Settings.py" line="138"/>
         <source>Debug line</source>
         <translation>Debug-Einstellungen</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="129"/>
+        <location filename="Settings.py" line="139"/>
         <source>Wine architecture</source>
         <translation>Wine-Architektur</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="130"/>
+        <location filename="Settings.py" line="140"/>
         <source>General</source>
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="Settings.py" line="131"/>
+        <location filename="Settings.py" line="141"/>
         <source>Wine paths</source>
         <translation>Wine-Pfade</translation>
     </message>

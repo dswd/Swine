@@ -229,6 +229,9 @@
        <property name="text">
         <string>OK</string>
        </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -278,9 +281,16 @@
  <tabstops>
   <tabstop>nameInput</tabstop>
   <tabstop>applicationInput</tabstop>
+  <tabstop>exeSelectButton</tabstop>
   <tabstop>paramsInput</tabstop>
+  <tabstop>workingDirectoryInput</tabstop>
+  <tabstop>wdSelectButton</tabstop>
   <tabstop>icon</tabstop>
+  <tabstop>desktopCheckBox</tabstop>
+  <tabstop>runInTerminalCheckBox</tabstop>
+  <tabstop>desktopResolution</tabstop>
   <tabstop>okButton</tabstop>
+  <tabstop>cancelButton</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>

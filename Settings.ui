@@ -184,6 +184,19 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>defaultWinePath</tabstop>
+  <tabstop>allowMenuEntryCreation</tabstop>
+  <tabstop>autoImportShortcuts</tabstop>
+  <tabstop>debugLine</tabstop>
+  <tabstop>architecture</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>winePathsList</tabstop>
+  <tabstop>addButton</tabstop>
+  <tabstop>autoDetectButton</tabstop>
+  <tabstop>removeButton</tabstop>
+ </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>
