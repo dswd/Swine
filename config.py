@@ -23,7 +23,7 @@ import os
 
 os.environ['PATH'] += ":" + os.path.dirname(__file__)
 
-VERSION="1.0.1" #no spaces here, line is interpreted by bash
+VERSION="1.0.2" #no spaces here, line is interpreted by bash
 
 HOME_PATH = os.getenv("HOME")
 SWINE_PATH = os.path.join(HOME_PATH, ".swine")

@@ -1,3 +1,11 @@
+swine (1.0.2) unstable; urgency=low
+
+  * Open file button in icon dialog
+  * Icon change button more visible
+  * Fixed problem with icon selection on non-existing executables
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Thu, 20 Sep 2012 15:52:42 +0200
+
 swine (1.0.1-1) unstable; urgency=low
 
   * Fixed a bug in Slot->Run...
