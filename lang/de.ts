@@ -3,12 +3,12 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="swine.py" line="593"/>
+        <location filename="swine.py" line="602"/>
         <source>Run Program</source>
         <translation>Programm ausführen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="744"/>
+        <location filename="swine.py" line="753"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -92,12 +92,17 @@ Fehlermeldung: %s</translation>
     <message>
         <location filename="IconDialog.py" line="64"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <location filename="IconDialog.py" line="65"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation type="obsolete">Abbrechen</translation>
+    </message>
+    <message>
+        <location filename="IconDialog.py" line="71"/>
+        <source>Select Icon</source>
+        <translation type="unfinished">Icon auswählen</translation>
     </message>
 </context>
 <context>
@@ -383,6 +388,19 @@ Fehlermeldung: %s</translation>
     </message>
 </context>
 <context>
+    <name>SwineIconDialog</name>
+    <message>
+        <location filename="swine.py" line="514"/>
+        <source>Select icon file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="514"/>
+        <source>Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SwineMainWindow</name>
     <message>
         <location filename="swine.py" line="439"/>
@@ -613,22 +631,22 @@ Fehlermeldung: %s</translation>
 <context>
     <name>SwineProgramDialog</name>
     <message>
-        <location filename="swine.py" line="543"/>
+        <location filename="swine.py" line="553"/>
         <source>Executable selection</source>
         <translation>Programmauswahl</translation>
     </message>
     <message>
-        <location filename="swine.py" line="543"/>
+        <location filename="swine.py" line="553"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation>Ausführbare Dateien (*.exe *.EXE);;Installationsarchive (*.msi *.MSI);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="561"/>
+        <location filename="swine.py" line="563"/>
         <source>Select Icon</source>
-        <translation>Icon auswählen</translation>
+        <translation type="obsolete">Icon auswählen</translation>
     </message>
     <message>
-        <location filename="swine.py" line="569"/>
+        <location filename="swine.py" line="578"/>
         <source>Shortcut name cannot be empty</source>
         <translation>Verknüpfungsname darf nicht leer sein</translation>
     </message>
@@ -636,7 +654,7 @@ Fehlermeldung: %s</translation>
 <context>
     <name>SwineRunDialog</name>
     <message>
-        <location filename="swine.py" line="597"/>
+        <location filename="swine.py" line="606"/>
         <source>Run</source>
         <translation>ausführen</translation>
     </message>
@@ -672,7 +690,7 @@ Fehlermeldung: %s</translation>
 <context>
     <name>SwineShortcutDialog</name>
     <message>
-        <location filename="swine.py" line="613"/>
+        <location filename="swine.py" line="622"/>
         <source>Save</source>
         <translation>speichern</translation>
     </message>
@@ -736,12 +754,12 @@ Fehlermeldung: %s</translation>
 <context>
     <name>WinePathItem</name>
     <message>
-        <location filename="swine.py" line="691"/>
+        <location filename="swine.py" line="700"/>
         <source>Wine path selection</source>
         <translation>Wine-Pfad Auswahl</translation>
     </message>
     <message>
-        <location filename="swine.py" line="697"/>
+        <location filename="swine.py" line="706"/>
         <source>No wine binary found in %s</source>
         <translation>Kein wine-Programm in %s gefunden</translation>
     </message>

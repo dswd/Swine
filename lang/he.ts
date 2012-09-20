@@ -3,12 +3,12 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="swine.py" line="593"/>
+        <location filename="swine.py" line="602"/>
         <source>Run Program</source>
         <translation>הרצת תכנית</translation>
     </message>
     <message>
-        <location filename="swine.py" line="744"/>
+        <location filename="swine.py" line="753"/>
         <source>Error</source>
         <translation>שגיאה</translation>
     </message>
@@ -89,12 +89,17 @@ Error: %s</source>
     <message>
         <location filename="IconDialog.py" line="64"/>
         <source>OK</source>
-        <translation>אישור</translation>
+        <translation type="obsolete">אישור</translation>
     </message>
     <message>
         <location filename="IconDialog.py" line="65"/>
         <source>Cancel</source>
-        <translation>ביטול</translation>
+        <translation type="obsolete">ביטול</translation>
+    </message>
+    <message>
+        <location filename="IconDialog.py" line="71"/>
+        <source>Select Icon</source>
+        <translation type="unfinished">נא לבחור בסמל</translation>
     </message>
 </context>
 <context>
@@ -380,6 +385,19 @@ Error: %s</source>
     </message>
 </context>
 <context>
+    <name>SwineIconDialog</name>
+    <message>
+        <location filename="swine.py" line="514"/>
+        <source>Select icon file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="514"/>
+        <source>Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SwineMainWindow</name>
     <message>
         <location filename="swine.py" line="439"/>
@@ -610,22 +628,22 @@ Error: %s</source>
 <context>
     <name>SwineProgramDialog</name>
     <message>
-        <location filename="swine.py" line="543"/>
+        <location filename="swine.py" line="553"/>
         <source>Executable selection</source>
         <translation>בחירה הניתנת להרצה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="543"/>
+        <location filename="swine.py" line="553"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation>תכניות של Windows ‏(‎*.exe *.EXE)‏;;תכניות התקנה שלWindows‏ (‎*.msi *.MSI);;כל הקבצים (*)</translation>
     </message>
     <message>
-        <location filename="swine.py" line="561"/>
+        <location filename="swine.py" line="563"/>
         <source>Select Icon</source>
-        <translation>נא לבחור בסמל</translation>
+        <translation type="obsolete">נא לבחור בסמל</translation>
     </message>
     <message>
-        <location filename="swine.py" line="569"/>
+        <location filename="swine.py" line="578"/>
         <source>Shortcut name cannot be empty</source>
         <translation>שם קיצור הדרך לא יכול להישאר ריק</translation>
     </message>
@@ -633,7 +651,7 @@ Error: %s</source>
 <context>
     <name>SwineRunDialog</name>
     <message>
-        <location filename="swine.py" line="597"/>
+        <location filename="swine.py" line="606"/>
         <source>Run</source>
         <translation>הפעלה</translation>
     </message>
@@ -669,7 +687,7 @@ Error: %s</source>
 <context>
     <name>SwineShortcutDialog</name>
     <message>
-        <location filename="swine.py" line="613"/>
+        <location filename="swine.py" line="622"/>
         <source>Save</source>
         <translation>שמירה</translation>
     </message>
@@ -733,12 +751,12 @@ Error: %s</source>
 <context>
     <name>WinePathItem</name>
     <message>
-        <location filename="swine.py" line="691"/>
+        <location filename="swine.py" line="700"/>
         <source>Wine path selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="697"/>
+        <location filename="swine.py" line="706"/>
         <source>No wine binary found in %s</source>
         <translation type="unfinished"></translation>
     </message>

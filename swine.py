@@ -490,24 +490,39 @@ class SwineAboutDialog(QDialog, Ui_AboutDialog):
 
 
 class SwineIconDialog(QDialog,Ui_IconDialog):
-  def __init__(self, icons, parent, name):
+  def __init__(self, parent, path):
     QDialog.__init__(self, parent)
     self.setupUi(self)
-    self.setWindowTitle(name)
-    self.icons = icons
+    self._loadIcons(path)
     self.iconData = None
+  def tr(self, s):
+    return tr(s, self.__class__.__name__)
+  def _loadIcons(self, path):
+    self.filename.setText(path)
+    icons = []
+    if path.lower().endswith(".exe"):
+      icons = icolib.readExeIcons(path)
+    elif path.lower().endswith(".ico"):
+      icons = icolib.readIcoIcons(path)
+    else:
+      with open(path) as fp:
+        data = fp.read()
+      image = loadIconFromData(data, scale=(32, 32))
+      if image:
+        IconListItem(self.iconView, os.path.basename(path), image, iconData=data)
     for icon in icons:
       image = loadIconFromData(icon.data, scale=(32, 32))
       if image:
         IconListItem(self.iconView, "%dx%d %d-bit" % (icon.width, icon.height, icon.bits), image, iconData=icon.data)
-  def tr(self, s):
-    return tr(s, self.__class__.__name__)
-  def okButton_clicked(self):
+  def openFile(self):
+    path = QFileDialog.getOpenFileName(self, self.tr("Select icon file"), "", self.tr("Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)"))
+    if path:
+      self.iconView.clear()
+      self._loadIcons(unicode(path))
+  def accept(self):
     item = self.iconView.currentItem()
     self.iconData = item.iconData if item else None
-    self.accept()
-  def cancelButton_clicked(self):
-    self.close()
+    QDialog.accept(self)
 
 
 
@@ -557,8 +572,7 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
       return
     workDir = str(self.workingDirectoryInput.text())
     prog = self.shortcut.getSlot().winPathToUnix(prog, basedir=workDir)
-    icons = icolib.readExeIcons(prog)
-    dialog = SwineIconDialog(icons, self.parent, self.tr("Select Icon"))
+    dialog = SwineIconDialog(self.parent, prog)
     if dialog.exec_():
       pass
     self.iconData = dialog.iconData
