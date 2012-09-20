@@ -73,22 +73,28 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>16</width>
-         <height>16</height>
+         <width>32</width>
+         <height>32</height>
         </size>
        </property>
        <property name="text">
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>image1</normaloff>image1</iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/icons/images/wabi.png</normaloff>:/icons/images/wabi.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
        <property name="shortcut">
         <string/>
        </property>
        <property name="flat">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>

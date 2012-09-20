@@ -3,12 +3,12 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="swine.py" line="602"/>
+        <location filename="swine.py" line="611"/>
         <source>Run Program</source>
         <translation>Lancer un programme</translation>
     </message>
     <message>
-        <location filename="swine.py" line="753"/>
+        <location filename="swine.py" line="762"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -184,42 +184,42 @@ Erreur : %s</translation>
 <context>
     <name>ProgramDialog</name>
     <message>
-        <location filename="ProgramDialog.py" line="163"/>
+        <location filename="ProgramDialog.py" line="164"/>
         <source>Working Directory:</source>
         <translation>Répertoire de travail :</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="164"/>
+        <location filename="ProgramDialog.py" line="165"/>
         <source>Application:</source>
         <translation>Application :</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="165"/>
+        <location filename="ProgramDialog.py" line="166"/>
         <source>Name:</source>
         <translation>Nom :</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="166"/>
+        <location filename="ProgramDialog.py" line="167"/>
         <source>Parameters:</source>
         <translation>Paramètres :</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="167"/>
+        <location filename="ProgramDialog.py" line="168"/>
         <source>Run in Terminal</source>
         <translation>Lancer dans un terminal</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="168"/>
+        <location filename="ProgramDialog.py" line="169"/>
         <source>Desktop:</source>
         <translation>Bureau :</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="169"/>
+        <location filename="ProgramDialog.py" line="170"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="170"/>
+        <location filename="ProgramDialog.py" line="171"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
@@ -390,12 +390,12 @@ Erreur : %s</translation>
 <context>
     <name>SwineIconDialog</name>
     <message>
-        <location filename="swine.py" line="514"/>
+        <location filename="swine.py" line="520"/>
         <source>Select icon file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="514"/>
+        <location filename="swine.py" line="520"/>
         <source>Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -631,12 +631,12 @@ Erreur : %s</translation>
 <context>
     <name>SwineProgramDialog</name>
     <message>
-        <location filename="swine.py" line="553"/>
+        <location filename="swine.py" line="562"/>
         <source>Executable selection</source>
         <translation>Choix de l&apos;exécutable</translation>
     </message>
     <message>
-        <location filename="swine.py" line="553"/>
+        <location filename="swine.py" line="562"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation>Exécutables Windows (*.exe *.EXE);;Installateurs Windows (*.msi *.MSI);;All files (*)</translation>
     </message>
@@ -646,7 +646,7 @@ Erreur : %s</translation>
         <translation type="obsolete">Sélectionner une icône</translation>
     </message>
     <message>
-        <location filename="swine.py" line="578"/>
+        <location filename="swine.py" line="587"/>
         <source>Shortcut name cannot be empty</source>
         <translation>Le nom du raccourci ne peut pas être vide</translation>
     </message>
@@ -654,7 +654,7 @@ Erreur : %s</translation>
 <context>
     <name>SwineRunDialog</name>
     <message>
-        <location filename="swine.py" line="606"/>
+        <location filename="swine.py" line="615"/>
         <source>Run</source>
         <translation>Lancer</translation>
     </message>
@@ -690,7 +690,7 @@ Erreur : %s</translation>
 <context>
     <name>SwineShortcutDialog</name>
     <message>
-        <location filename="swine.py" line="622"/>
+        <location filename="swine.py" line="631"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
@@ -754,12 +754,12 @@ Erreur : %s</translation>
 <context>
     <name>WinePathItem</name>
     <message>
-        <location filename="swine.py" line="700"/>
+        <location filename="swine.py" line="709"/>
         <source>Wine path selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="706"/>
+        <location filename="swine.py" line="715"/>
         <source>No wine binary found in %s</source>
         <translation type="unfinished"></translation>
     </message>

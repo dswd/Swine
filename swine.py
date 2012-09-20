@@ -499,6 +499,8 @@ class SwineIconDialog(QDialog,Ui_IconDialog):
     return tr(s, self.__class__.__name__)
   def _loadIcons(self, path):
     self.filename.setText(path)
+    if not os.path.exists(path):
+      return
     icons = []
     if path.lower().endswith(".exe"):
       icons = icolib.readExeIcons(path)
@@ -550,6 +552,8 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
       if shortcut.getDesktop():
         self.desktopResolution.setCurrentText(shortcut.getDesktop().split(",")[1])
       self.runInTerminalCheckBox.setChecked(bool(self.shortcut["interminal"]))
+    if not self.iconData:
+      self.icon.setIcon(loadIcon(":/icons/images/wabi.png"))
   def tr(self, s):
     return tr(s, self.__class__.__name__)
   def cancelButton_clicked(self):

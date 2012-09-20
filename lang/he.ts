@@ -3,12 +3,12 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="swine.py" line="602"/>
+        <location filename="swine.py" line="611"/>
         <source>Run Program</source>
         <translation>הרצת תכנית</translation>
     </message>
     <message>
-        <location filename="swine.py" line="753"/>
+        <location filename="swine.py" line="762"/>
         <source>Error</source>
         <translation>שגיאה</translation>
     </message>
@@ -181,42 +181,42 @@ Error: %s</source>
 <context>
     <name>ProgramDialog</name>
     <message>
-        <location filename="ProgramDialog.py" line="163"/>
+        <location filename="ProgramDialog.py" line="164"/>
         <source>Working Directory:</source>
         <translation>תיקיית העבודה:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="164"/>
+        <location filename="ProgramDialog.py" line="165"/>
         <source>Application:</source>
         <translation>יישום:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="165"/>
+        <location filename="ProgramDialog.py" line="166"/>
         <source>Name:</source>
         <translation>שם:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="166"/>
+        <location filename="ProgramDialog.py" line="167"/>
         <source>Parameters:</source>
         <translation>פרמטרים:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="167"/>
+        <location filename="ProgramDialog.py" line="168"/>
         <source>Run in Terminal</source>
         <translation>הפעלה במסוף</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="168"/>
+        <location filename="ProgramDialog.py" line="169"/>
         <source>Desktop:</source>
         <translation>שולחן עבודה:</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="169"/>
+        <location filename="ProgramDialog.py" line="170"/>
         <source>OK</source>
         <translation>אישור</translation>
     </message>
     <message>
-        <location filename="ProgramDialog.py" line="170"/>
+        <location filename="ProgramDialog.py" line="171"/>
         <source>Cancel</source>
         <translation>ביטול</translation>
     </message>
@@ -387,12 +387,12 @@ Error: %s</source>
 <context>
     <name>SwineIconDialog</name>
     <message>
-        <location filename="swine.py" line="514"/>
+        <location filename="swine.py" line="520"/>
         <source>Select icon file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="514"/>
+        <location filename="swine.py" line="520"/>
         <source>Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -628,12 +628,12 @@ Error: %s</source>
 <context>
     <name>SwineProgramDialog</name>
     <message>
-        <location filename="swine.py" line="553"/>
+        <location filename="swine.py" line="562"/>
         <source>Executable selection</source>
         <translation>בחירה הניתנת להרצה</translation>
     </message>
     <message>
-        <location filename="swine.py" line="553"/>
+        <location filename="swine.py" line="562"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation>תכניות של Windows ‏(‎*.exe *.EXE)‏;;תכניות התקנה שלWindows‏ (‎*.msi *.MSI);;כל הקבצים (*)</translation>
     </message>
@@ -643,7 +643,7 @@ Error: %s</source>
         <translation type="obsolete">נא לבחור בסמל</translation>
     </message>
     <message>
-        <location filename="swine.py" line="578"/>
+        <location filename="swine.py" line="587"/>
         <source>Shortcut name cannot be empty</source>
         <translation>שם קיצור הדרך לא יכול להישאר ריק</translation>
     </message>
@@ -651,7 +651,7 @@ Error: %s</source>
 <context>
     <name>SwineRunDialog</name>
     <message>
-        <location filename="swine.py" line="606"/>
+        <location filename="swine.py" line="615"/>
         <source>Run</source>
         <translation>הפעלה</translation>
     </message>
@@ -687,7 +687,7 @@ Error: %s</source>
 <context>
     <name>SwineShortcutDialog</name>
     <message>
-        <location filename="swine.py" line="622"/>
+        <location filename="swine.py" line="631"/>
         <source>Save</source>
         <translation>שמירה</translation>
     </message>
@@ -751,12 +751,12 @@ Error: %s</source>
 <context>
     <name>WinePathItem</name>
     <message>
-        <location filename="swine.py" line="700"/>
+        <location filename="swine.py" line="709"/>
         <source>Wine path selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swine.py" line="706"/>
+        <location filename="swine.py" line="715"/>
         <source>No wine binary found in %s</source>
         <translation type="unfinished"></translation>
     </message>
