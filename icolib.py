@@ -14,6 +14,8 @@ def _extractExeIcons(path, targetDir, onlyNr=None):
     os.mkdirs(targetDir)
   
 def readIcoIcons(icoFile):
+  if not os.path.exists(icoFile):
+    return []
   icons = []
   for line in _exec(["icotool", "-l", icoFile]).splitlines():
     f = re.match("--icon --index=([0-9]+) --width=([0-9]+) --height=([0-9]+) --bit-depth=([0-9]+) --palette-size=([0-9]+)", line)
@@ -26,6 +28,8 @@ def readIcoIcons(icoFile):
   return icons
 
 def readExeIcons(path, onlyNr=None):
+  if not os.path.exists(path):
+    return []
   tmpdir = tempfile.mkdtemp()
   if onlyNr == None:
     _exec(["wrestool", "-x", "-t14", "--output", tmpdir, path])
