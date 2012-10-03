@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="de" sourcelanguage="">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.0">
 <context>
     <name>@default</name>
     <message>
@@ -90,19 +89,9 @@ Fehlermeldung: %s</translation>
 <context>
     <name>IconDialog</name>
     <message>
-        <location filename="IconDialog.py" line="64"/>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <location filename="IconDialog.py" line="65"/>
-        <source>Cancel</source>
-        <translation type="obsolete">Abbrechen</translation>
-    </message>
-    <message>
         <location filename="IconDialog.py" line="71"/>
         <source>Select Icon</source>
-        <translation type="unfinished">Icon auswählen</translation>
+        <translation>Icon auswählen</translation>
     </message>
 </context>
 <context>
@@ -392,12 +381,12 @@ Fehlermeldung: %s</translation>
     <message>
         <location filename="swine.py" line="520"/>
         <source>Select icon file</source>
-        <translation type="unfinished"></translation>
+        <translation>Icon-Datei auswählen</translation>
     </message>
     <message>
         <location filename="swine.py" line="520"/>
         <source>Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</source>
-        <translation type="unfinished"></translation>
+        <translation>Icon-Dateien (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</translation>
     </message>
 </context>
 <context>
@@ -608,16 +597,6 @@ Fehlermeldung: %s</translation>
         <translation>Winetricks wurde auf version %s upgedatet</translation>
     </message>
     <message>
-        <location filename="swine.py" line="469"/>
-        <source>Error</source>
-        <translation>Fehler</translation>
-    </message>
-    <message>
-        <location filename="swine.py" line="469"/>
-        <source>Execution failed with code %s</source>
-        <translation>Programm mit Fehler %s abgebrochen</translation>
-    </message>
-    <message>
         <location filename="swine.py" line="447"/>
         <source>Winetricks not found. Do you want to download Winetricks now?</source>
         <translation>Winetricks konnte nicht gefunden werden. Wollen Sie Winetricks jetzt herunterladen?</translation>
@@ -626,6 +605,16 @@ Fehlermeldung: %s</translation>
         <location filename="swine.py" line="450"/>
         <source>Winetricks is quite old, version %s. Do you want to update Winetricks now?</source>
         <translation>Winetricks-Version ist veraltet (Version %s). Wollen Sie Winetricks jetzt aktualisieren?</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="469"/>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <location filename="swine.py" line="469"/>
+        <source>Execution failed with code %s</source>
+        <translation>Programm mit Fehler %s abgebrochen</translation>
     </message>
 </context>
 <context>
@@ -639,11 +628,6 @@ Fehlermeldung: %s</translation>
         <location filename="swine.py" line="562"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
         <translation>Ausführbare Dateien (*.exe *.EXE);;Installationsarchive (*.msi *.MSI);;Alle Dateien (*)</translation>
-    </message>
-    <message>
-        <location filename="swine.py" line="563"/>
-        <source>Select Icon</source>
-        <translation type="obsolete">Icon auswählen</translation>
     </message>
     <message>
         <location filename="swine.py" line="587"/>

@@ -550,7 +550,7 @@ class SwineProgramDialog(QDialog, Ui_ProgramDialog):
       self.paramsInput.setText(" ".join(map(pipes.quote, shortcut.getArguments())))
       self.desktopCheckBox.setChecked(bool(shortcut.getDesktop()))
       if shortcut.getDesktop():
-        self.desktopResolution.setCurrentText(shortcut.getDesktop().split(",")[1])
+        self.desktopResolution.setCurrentIndex(self.desktopResolution.findText(shortcut.getDesktop().split(",")[1]))
       self.runInTerminalCheckBox.setChecked(bool(self.shortcut["interminal"]))
     if not self.iconData:
       self.icon.setIcon(loadIcon(":/icons/images/wabi.png"))
