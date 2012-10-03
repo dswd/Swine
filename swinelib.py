@@ -135,7 +135,7 @@ class Shortcut:
       path = os.path.join(path, name)
       with open(path, "wb") as fp:
         fp.write(icon)
-      self['icon'] = os.path.join(self.slot.getPath(), "icons", name)
+      self['icon'] = os.path.join("icons", name)
     else:
       self["icon"] = None
   def getWorkingDirectory(self):
@@ -260,11 +260,11 @@ class Slot:
     if not os.path.exists(path):
       raise SwineException(self.tr("%s does not exist") % drive)
     return path
-  def getOldConfigFile(self):
+  def getOldConfigFile(self): #Legacy support code
     return os.path.join(self.getPath(), "swine.ini")
   def getConfigFile(self):
     return os.path.join(self.getPath(), "swine_slot.conf")
-  def migrateOldConfig(self):
+  def migrateOldConfig(self): #Legacy support code
     import ConfigParser, ast
     config = ConfigParser.ConfigParser()
     if os.path.exists(self.getOldConfigFile()):
@@ -284,9 +284,11 @@ class Slot:
         if "\\\\" in dat["program"]:
           dat["program"] = ast.literal_eval('"'+dat["program"]+'"')
         dat["arguments"] = args[1:]
-        self.shortcutData[name] = dat 
+        self.shortcutData[name] = dat
+  def migrateConfig(self):
+    pass
   def loadConfig(self):
-    if os.path.exists(self.getOldConfigFile()):
+    if os.path.exists(self.getOldConfigFile()): #Legacy support code
       self.migrateOldConfig()
       self.saveConfig()
       os.rename(self.getOldConfigFile(), self.getOldConfigFile()+".old")
@@ -294,6 +296,7 @@ class Slot:
       return
     with open(self.getConfigFile(), "r") as fp:
       self.config = json_load(fp)
+      self.migrateConfig()
       self.settings = self.config.get("settings", {})
       self.shortcutData = self.config.get("shortcuts", {})
   def saveConfig(self):
