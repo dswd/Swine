@@ -1,3 +1,10 @@
+swine (1.0.3) unstable; urgency=low
+
+  * Fixed absolute icon paths
+  * Fixed bug with desktop setting
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Thu, 18 Oct 2012 21:48:55 +0200
+
 swine (1.0.2) unstable; urgency=low
 
   * Open file button in icon dialog

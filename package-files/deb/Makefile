@@ -16,6 +16,9 @@ rebuild: swine_$(rev).dsc
 	dpkg-source -x swine_$(rev).dsc
 	cd swine-$(rev); debuild -b -us -uc; cd ..
 
+version:
+	cd meta; dch -v $(rev) --force-distribution -D unstable
+
 clean:
 	rm -rf swine-$(rev)*
 	rm -rf swine_$(rev)*

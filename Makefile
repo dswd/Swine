@@ -24,6 +24,11 @@ distfiles = $(py_files) $(ui_files_py) $(qrc_files_py) README LICENSE version.sh
 
 all: compile
 
+deb-version:
+	cd $(deb_dir); export rev=$(rev); make version
+
+version: deb-version
+
 deb-clean:
 	cd $(deb_dir); export rev=$(rev); make clean
 

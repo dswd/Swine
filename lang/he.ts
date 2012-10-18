@@ -1,4 +1,5 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="he" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="2.0" language="he" sourcelanguage="">
 <context>
     <name>@default</name>
     <message>
@@ -12,22 +13,22 @@
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="591"/>
+        <location filename="swinelib.py" line="594"/>
         <source>Config could not be loaded</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="595"/>
+        <location filename="swinelib.py" line="598"/>
         <source>created %s</source>
         <translation>%s נוצר</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="598"/>
+        <location filename="swinelib.py" line="601"/>
         <source>symlinked %s to %s</source>
         <translation>%s קושר סימבולית אל %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="617"/>
+        <location filename="swinelib.py" line="620"/>
         <source>Slot does not exist: %s</source>
         <translation>החריץ לא קיים: %s</translation>
     </message>
@@ -37,7 +38,7 @@
 Return code: %d
 Output: %s
 Error: %s</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="winetricks.py" line="106"/>
@@ -88,7 +89,7 @@ Error: %s</source>
     <message>
         <location filename="IconDialog.py" line="71"/>
         <source>Select Icon</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -156,7 +157,7 @@ Error: %s</source>
     <message>
         <location filename="MainWindow.py" line="182"/>
         <source>Settings</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -233,42 +234,42 @@ Error: %s</source>
     <message>
         <location filename="Settings.py" line="134"/>
         <source>Settings</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Settings.py" line="135"/>
         <source>Default wine path</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Settings.py" line="136"/>
         <source>Allow menu entry creation</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Settings.py" line="137"/>
         <source>Automatically import shortcuts</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Settings.py" line="138"/>
         <source>Debug line</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Settings.py" line="139"/>
         <source>Wine architecture</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Settings.py" line="140"/>
         <source>General</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Settings.py" line="141"/>
         <source>Wine paths</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -299,7 +300,7 @@ Error: %s</source>
     <message>
         <location filename="ShortcutImport.py" line="72"/>
         <source>Select shortcuts to import:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -320,37 +321,37 @@ Error: %s</source>
         <translation>%s לא קיים</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="306"/>
+        <location filename="swinelib.py" line="309"/>
         <source>Slot already exists: %s</source>
         <translation>החריץ כבר קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="312"/>
+        <location filename="swinelib.py" line="315"/>
         <source>Default slot cannot be deleted</source>
         <translation>לא ניתן למחוק את חריץ בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="336"/>
+        <location filename="swinelib.py" line="339"/>
         <source>Slot does not exist: %s</source>
         <translation>החריץ אינו קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="332"/>
+        <location filename="swinelib.py" line="335"/>
         <source>Slot name cannot be empty</source>
         <translation>שם החריץ לא יכול להישאר ריק</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="339"/>
+        <location filename="swinelib.py" line="342"/>
         <source>Slot does already exist: %s</source>
         <translation>החריץ כבר קיים: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="334"/>
+        <location filename="swinelib.py" line="337"/>
         <source>Default slot cannot be renamed</source>
         <translation>לא ניתן לשנות את שם חריץ בררת המחדל</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="566"/>
+        <location filename="swinelib.py" line="569"/>
         <source>File name cannot be empty</source>
         <translation>שם הקובץ לא יכול להיות ריק</translation>
     </message>
@@ -360,17 +361,17 @@ Error: %s</source>
     <message>
         <location filename="SlotSettings.py" line="54"/>
         <source>Slot settings</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SlotSettings.py" line="55"/>
         <source>Wine path</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SlotSettings.py" line="56"/>
         <source>General</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -378,12 +379,12 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="520"/>
         <source>Select icon file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="swine.py" line="520"/>
         <source>Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -541,7 +542,7 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="343"/>
         <source>Run winetricks script</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="swine.py" line="450"/>
@@ -561,7 +562,7 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="369"/>
         <source>Settings</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="swine.py" line="395"/>
@@ -586,7 +587,7 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="441"/>
         <source>Winetricks is already at version %s</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="swine.py" line="443"/>
@@ -596,12 +597,12 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="447"/>
         <source>Winetricks not found. Do you want to download Winetricks now?</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="swine.py" line="450"/>
         <source>Winetricks is quite old, version %s. Do you want to update Winetricks now?</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="swine.py" line="469"/>
@@ -729,7 +730,7 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="172"/>
         <source>Winetricks scripts (*.verb)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -737,12 +738,12 @@ Error: %s</source>
     <message>
         <location filename="swine.py" line="709"/>
         <source>Wine path selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="swine.py" line="715"/>
         <source>No wine binary found in %s</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

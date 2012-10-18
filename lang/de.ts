@@ -1,4 +1,5 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="2.0" language="de" sourcelanguage="">
 <context>
     <name>@default</name>
     <message>
@@ -12,22 +13,22 @@
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="591"/>
+        <location filename="swinelib.py" line="594"/>
         <source>Config could not be loaded</source>
         <translation>Konfiguration konnte nicht geladen werden</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="595"/>
+        <location filename="swinelib.py" line="598"/>
         <source>created %s</source>
         <translation>%s wurde erstellt</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="598"/>
+        <location filename="swinelib.py" line="601"/>
         <source>symlinked %s to %s</source>
         <translation>%s mit %s verknüpft</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="617"/>
+        <location filename="swinelib.py" line="620"/>
         <source>Slot does not exist: %s</source>
         <translation>Slot existiert nicht: %s</translation>
     </message>
@@ -323,37 +324,37 @@ Fehlermeldung: %s</translation>
         <translation>%s existiert nicht</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="306"/>
+        <location filename="swinelib.py" line="309"/>
         <source>Slot already exists: %s</source>
         <translation>Slot existiert bereits: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="312"/>
+        <location filename="swinelib.py" line="315"/>
         <source>Default slot cannot be deleted</source>
         <translation>Standard-Slot kann nicht gelöscht werden</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="336"/>
+        <location filename="swinelib.py" line="339"/>
         <source>Slot does not exist: %s</source>
         <translation>Slot existiert nicht: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="332"/>
+        <location filename="swinelib.py" line="335"/>
         <source>Slot name cannot be empty</source>
         <translation>Slot-Name darf nicht leer sein</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="339"/>
+        <location filename="swinelib.py" line="342"/>
         <source>Slot does already exist: %s</source>
         <translation>Slot existiert bereits: %s</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="334"/>
+        <location filename="swinelib.py" line="337"/>
         <source>Default slot cannot be renamed</source>
         <translation>Standard-Slot kann nicht umbenannt werden</translation>
     </message>
     <message>
-        <location filename="swinelib.py" line="566"/>
+        <location filename="swinelib.py" line="569"/>
         <source>File name cannot be empty</source>
         <translation>Dateiname darf nicht leer sein</translation>
     </message>
