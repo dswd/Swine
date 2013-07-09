@@ -3,18 +3,18 @@ Label: lenny
 Suite: stable
 Codename: lenny
 Version: 5.0
-Date: Thu, 18 Oct 2012 20:00:38 UTC
+Date: Tue, 09 Jul 2013 19:55:19 UTC
 Architectures: i386 amd64
 Components: main contrib non-free
 Description: Swine repository
 MD5Sum:
- c5e6f62684a921dde133e155be518e8c 789 main/binary-i386/Packages
- e6b945df7fe6554ef4af3f3427495803 526 main/binary-i386/Packages.gz
+ e4c5921770258404e61acd6b671a9c82 789 main/binary-i386/Packages
+ 89e3476f9c568bc0907c986c1e438c01 525 main/binary-i386/Packages.gz
  a688dd01e86004271439c1b110665871 121 main/binary-i386/Release
  d41d8cd98f00b204e9800998ecf8427e 0 main/debian-installer/binary-i386/Packages
  7029066c27ac6f5ef18d660d5741979a 20 main/debian-installer/binary-i386/Packages.gz
- c5e6f62684a921dde133e155be518e8c 789 main/binary-amd64/Packages
- e6b945df7fe6554ef4af3f3427495803 526 main/binary-amd64/Packages.gz
+ e4c5921770258404e61acd6b671a9c82 789 main/binary-amd64/Packages
+ 89e3476f9c568bc0907c986c1e438c01 525 main/binary-amd64/Packages.gz
  176fed4c4ba8a4648b6f66f8c784934b 122 main/binary-amd64/Release
  d41d8cd98f00b204e9800998ecf8427e 0 main/debian-installer/binary-amd64/Packages
  7029066c27ac6f5ef18d660d5741979a 20 main/debian-installer/binary-amd64/Packages.gz
@@ -40,13 +40,13 @@ MD5Sum:
  7029066c27ac6f5ef18d660d5741979a 20 non-free/source/Sources.gz
  f655b5c16fc0cdd9d365bdf526fe9f52 127 non-free/source/Release
 SHA1:
- f3cd9868ab153a8f79942c6f93bd2e91119e086c 789 main/binary-i386/Packages
- 954d112630fdd9aea11a87bcc7a7dc00b663ccc1 526 main/binary-i386/Packages.gz
+ d356cf2876ac22e59a1f4cd77c71cc59aa19ddb2 789 main/binary-i386/Packages
+ 441df14a05917de0f628ae524327894aaf580ba3 525 main/binary-i386/Packages.gz
  6f353608d7a75dca8fd78b30f2b3d9bb0e61f836 121 main/binary-i386/Release
  da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/debian-installer/binary-i386/Packages
  46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/debian-installer/binary-i386/Packages.gz
- f3cd9868ab153a8f79942c6f93bd2e91119e086c 789 main/binary-amd64/Packages
- 954d112630fdd9aea11a87bcc7a7dc00b663ccc1 526 main/binary-amd64/Packages.gz
+ d356cf2876ac22e59a1f4cd77c71cc59aa19ddb2 789 main/binary-amd64/Packages
+ 441df14a05917de0f628ae524327894aaf580ba3 525 main/binary-amd64/Packages.gz
  6840a41af71e4c6bcad117f2d39bfa2fd45e277d 122 main/binary-amd64/Release
  da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/debian-installer/binary-amd64/Packages
  46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/debian-installer/binary-amd64/Packages.gz
@@ -72,13 +72,13 @@ SHA1:
  46c6643f07aa7f6bfe7118de926b86defc5087c4 20 non-free/source/Sources.gz
  402be391c095734231e78e8bd52d0f9cf4bb42ef 127 non-free/source/Release
 SHA256:
- 24fa735da556c1feedcaf74ab86dc8cab21e61aa23647fe70e9be0a56e0acb0d 789 main/binary-i386/Packages
- 68ad1ceef85b302ea2a4a1327446b4cbe39843e75daacf6255d599e821be4d30 526 main/binary-i386/Packages.gz
+ 95877374063a5ba382273ae4868e49d096698e322cfc52ea1b38c94a0fb92ece 789 main/binary-i386/Packages
+ 05dda99b9c480df9854f0aaccaf2cd771b25297a224879e6849e96f7b50ca1d2 525 main/binary-i386/Packages.gz
  bde6e154b797b4da2eefa2c3d0858a05bfd8f2bb856a49204d5bbccd2eb1865c 121 main/binary-i386/Release
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/debian-installer/binary-i386/Packages
  59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/debian-installer/binary-i386/Packages.gz
- 24fa735da556c1feedcaf74ab86dc8cab21e61aa23647fe70e9be0a56e0acb0d 789 main/binary-amd64/Packages
- 68ad1ceef85b302ea2a4a1327446b4cbe39843e75daacf6255d599e821be4d30 526 main/binary-amd64/Packages.gz
+ 95877374063a5ba382273ae4868e49d096698e322cfc52ea1b38c94a0fb92ece 789 main/binary-amd64/Packages
+ 05dda99b9c480df9854f0aaccaf2cd771b25297a224879e6849e96f7b50ca1d2 525 main/binary-amd64/Packages.gz
  3848ffc4af47b094cbadb96589dae59f1c02ec67555e6c12a88d6bf5f5d04c9e 122 main/binary-amd64/Release
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/debian-installer/binary-amd64/Packages
  59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/debian-installer/binary-amd64/Packages.gz
