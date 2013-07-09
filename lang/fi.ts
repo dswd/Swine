@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="es" sourcelanguage="">
+<!DOCTYPE TS><TS version="2.0" language="fi" sourcelanguage="">
 <context>
     <name>@default</name>
     <message>
         <location filename="swine.py" line="611"/>
         <source>Run Program</source>
-        <translation>Iniciar programa</translation>
+        <translation>Suorita ohjelma</translation>
     </message>
     <message>
         <location filename="swine.py" line="762"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="594"/>
         <source>Config could not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetuksia ei voitu ladata</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="598"/>
         <source>created %s</source>
-        <translation>creado %s</translation>
+        <translation>luotu %s</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="601"/>
         <source>symlinked %s to %s</source>
-        <translation>symlinked %s a %s</translation>
+        <translation>symlinkitetty %s -&gt; %s</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="620"/>
         <source>Slot does not exist: %s</source>
-        <translation>La ranura no existe: %s</translation>
+        <translation>Lohkoa ei löydy: %s</translation>
     </message>
     <message>
         <location filename="winetricks.py" line="65"/>
@@ -38,20 +38,20 @@
 Return code: %d
 Output: %s
 Error: %s</source>
-        <translation>El comando falló: %s⏎
-Código de retorno: %d⏎
-Salida: %s⏎
-Error: %s</translation>
+        <translation>Komento epäonnistui: %s
+Paluukoodi: %d
+Tuloste: %s
+Virhe: %s</translation>
     </message>
     <message>
         <location filename="winetricks.py" line="106"/>
         <source>Loading winetricks entries...</source>
-        <translation>Cargando entradas de Winetricks...</translation>
+        <translation>Ladataan Winetricks kohteita...</translation>
     </message>
     <message>
         <location filename="winetricks.py" line="113"/>
         <source>WARNING: Winetricks binary not found</source>
-        <translation>ADVERTENCIA: No se encontró binario de Winetricks</translation>
+        <translation>VAROITUS: Winetricks ei löytynyt</translation>
     </message>
 </context>
 <context>
@@ -59,32 +59,32 @@ Error: %s</translation>
     <message>
         <location filename="AboutDialog.py" line="435"/>
         <source>About Swine</source>
-        <translation>Acerca de Swine</translation>
+        <translation>Tietoja Swinesta</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="436"/>
         <source>Swine version %s</source>
-        <translation>Versión de Swine %s</translation>
+        <translation>Swine versio %s</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="437"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>Tietoja</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="438"/>
         <source>License</source>
-        <translation>Licencia</translation>
+        <translation>Lisenssi</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="439"/>
         <source>Included Works</source>
-        <translation>Trabajos incluidos</translation>
+        <translation>Yhteistyössä</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="440"/>
         <source>Close</source>
-        <translation>Cerrar</translation>
+        <translation>Sulje</translation>
     </message>
 </context>
 <context>
@@ -92,7 +92,7 @@ Error: %s</translation>
     <message>
         <location filename="IconDialog.py" line="71"/>
         <source>Select Icon</source>
-        <translation>Seleccione un icono</translation>
+        <translation>Valitse kuvake</translation>
     </message>
 </context>
 <context>
@@ -110,7 +110,7 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="172"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>Tietoja</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="173"/>
@@ -120,12 +120,12 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="174"/>
         <source>About Swine</source>
-        <translation>Acerca de Swine</translation>
+        <translation>Tietoja Swinesta</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="175"/>
         <source>Exit</source>
-        <translation>Salir</translation>
+        <translation>Lopeta</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="176"/>
@@ -135,22 +135,22 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="177"/>
         <source>About Wine</source>
-        <translation>Acerca de Wine</translation>
+        <translation>Tietoja Swinesta</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="178"/>
         <source>About Winetricks</source>
-        <translation>Acerca de Winetricks</translation>
+        <translation>Tietoja Winetricksista</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="179"/>
         <source>Download winetricks</source>
-        <translation>Descargar Winetricks</translation>
+        <translation>Lataa Winetricks</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="180"/>
         <source>Swine Website</source>
-        <translation>Sitio Web de Swine</translation>
+        <translation>Swine kotisivu</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="181"/>
@@ -160,7 +160,7 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="182"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
 </context>
 <context>
@@ -168,7 +168,7 @@ Error: %s</translation>
     <message>
         <location filename="swinerun.py" line="38"/>
         <source>Create new slot...</source>
-        <translation>Crear nueva ranura...</translation>
+        <translation>Luo uusi lohko...</translation>
     </message>
 </context>
 <context>
@@ -176,32 +176,32 @@ Error: %s</translation>
     <message>
         <location filename="ProgramDialog.py" line="164"/>
         <source>Working Directory:</source>
-        <translation>Directorio de trabajo:</translation>
+        <translation>Työskentelykansio:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="165"/>
         <source>Application:</source>
-        <translation>Aplicación:</translation>
+        <translation>Sovellus:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="166"/>
         <source>Name:</source>
-        <translation>Nombre:</translation>
+        <translation>Nimi:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="167"/>
         <source>Parameters:</source>
-        <translation>Parámetros:</translation>
+        <translation>Parametrit:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="168"/>
         <source>Run in Terminal</source>
-        <translation>Ejecutar en Terminal</translation>
+        <translation>Suorita päätteessä</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="169"/>
         <source>Desktop:</source>
-        <translation>Escritorio:</translation>
+        <translation>Työpöytä:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="170"/>
@@ -211,7 +211,7 @@ Error: %s</translation>
     <message>
         <location filename="ProgramDialog.py" line="171"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation>Peruuta</translation>
     </message>
 </context>
 <context>
@@ -224,12 +224,12 @@ Error: %s</translation>
     <message>
         <location filename="RunnerDialog.py" line="56"/>
         <source>Please select a slot:</source>
-        <translation>Por favor, seleccione una ranura:</translation>
+        <translation>Valitse lohko:</translation>
     </message>
     <message>
         <location filename="RunnerDialog.py" line="57"/>
         <source>Run in this slot</source>
-        <translation>Ejecutar en esta ranura:</translation>
+        <translation>Suorita lohkossa</translation>
     </message>
 </context>
 <context>
@@ -237,42 +237,42 @@ Error: %s</translation>
     <message>
         <location filename="Settings.py" line="134"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="Settings.py" line="135"/>
         <source>Default wine path</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletus Wine versio</translation>
     </message>
     <message>
         <location filename="Settings.py" line="136"/>
         <source>Allow menu entry creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Salli valikkokuvakkeiden luonti</translation>
     </message>
     <message>
         <location filename="Settings.py" line="137"/>
         <source>Automatically import shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuo pikakuvakkeet automaattisesti</translation>
     </message>
     <message>
         <location filename="Settings.py" line="138"/>
         <source>Debug line</source>
-        <translation type="unfinished"></translation>
+        <translation>Virheenjäljitysrivit</translation>
     </message>
     <message>
         <location filename="Settings.py" line="139"/>
         <source>Wine architecture</source>
-        <translation type="unfinished"></translation>
+        <translation>Wine arkkitehtuuri</translation>
     </message>
     <message>
         <location filename="Settings.py" line="140"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Yleiset</translation>
     </message>
     <message>
         <location filename="Settings.py" line="141"/>
         <source>Wine paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Wine versiot</translation>
     </message>
 </context>
 <context>
@@ -280,17 +280,17 @@ Error: %s</translation>
     <message>
         <location filename="swinelib.py" line="96"/>
         <source>Shortcut name cannot be empty</source>
-        <translation>El nombre del acceso directo no puede estar vacío</translation>
+        <translation>Pikakuvakkeelle on annettava nimi</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="98"/>
         <source>Shortcut already exists</source>
-        <translation>El acceso directo ya existe</translation>
+        <translation>Pikakuvake on jo olemassa</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="189"/>
         <source>File does not exist</source>
-        <translation>El archivo no existe</translation>
+        <translation>Tiedostoa ei löydy</translation>
     </message>
 </context>
 <context>
@@ -298,12 +298,12 @@ Error: %s</translation>
     <message>
         <location filename="ShortcutImport.py" line="71"/>
         <source>Import shortcuts</source>
-        <translation>Importar acceso directo</translation>
+        <translation>Tuo pikakuvakkeita</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="72"/>
         <source>Select shortcuts to import:</source>
-        <translation>Seleccione acceso directo por importar:</translation>
+        <translation>Valitse tuotavat pikakuvakkeet:</translation>
     </message>
 </context>
 <context>
@@ -311,52 +311,52 @@ Error: %s</translation>
     <message>
         <location filename="swinelib.py" line="220"/>
         <source>Slot name cannot be empty.</source>
-        <translation>El nombre de la ranura no puede estar vacío</translation>
+        <translation>Lohkolle on annettava nimi.</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="245"/>
         <source>Shortcut name cannot be empty</source>
-        <translation>El nombre del acceso directo no puede estar vacío</translation>
+        <translation>Pikakuvakkeelle on annettava nimi</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="261"/>
         <source>%s does not exist</source>
-        <translation>%s no existe</translation>
+        <translation>%s ei löydy</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="309"/>
         <source>Slot already exists: %s</source>
-        <translation>La ranura ya existe: %s</translation>
+        <translation>Lohko on jo olemassa: %s</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="315"/>
         <source>Default slot cannot be deleted</source>
-        <translation>La ranura por defecto no se puede eliminar</translation>
+        <translation>Oletuslohkoa ei voi poistaa</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="339"/>
         <source>Slot does not exist: %s</source>
-        <translation>La ranura no existe: %s</translation>
+        <translation>Lohkoa ei löydy: %s</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="335"/>
         <source>Slot name cannot be empty</source>
-        <translation>El nombre de la ranura no puede estar vacío</translation>
+        <translation>Lohkolle on annettava nimi</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="342"/>
         <source>Slot does already exist: %s</source>
-        <translation>La ranura aún existe: %s</translation>
+        <translation>Lohko on jo olemassa: %s</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="337"/>
         <source>Default slot cannot be renamed</source>
-        <translation>La ranura por defecto no se puede renombrar</translation>
+        <translation>Oletuslohkoa ei voi uudelleen nimetä</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="569"/>
         <source>File name cannot be empty</source>
-        <translation>El nombre de archivo no puede estar vacío</translation>
+        <translation>Anna tiedoston nimi</translation>
     </message>
 </context>
 <context>
@@ -364,17 +364,17 @@ Error: %s</translation>
     <message>
         <location filename="SlotSettings.py" line="54"/>
         <source>Slot settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Lohkon asetukset</translation>
     </message>
     <message>
         <location filename="SlotSettings.py" line="55"/>
         <source>Wine path</source>
-        <translation type="unfinished"></translation>
+        <translation>Wine versio</translation>
     </message>
     <message>
         <location filename="SlotSettings.py" line="56"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Yleistä</translation>
     </message>
 </context>
 <context>
@@ -382,12 +382,12 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="520"/>
         <source>Select icon file</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse kuvaketiedosto</translation>
     </message>
     <message>
         <location filename="swine.py" line="520"/>
         <source>Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvaketiedostot (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</translation>
     </message>
 </context>
 <context>
@@ -395,157 +395,157 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="439"/>
         <source>Version: %s</source>
-        <translation>Versión: %s</translation>
+        <translation>Versio: %s</translation>
     </message>
     <message>
         <location filename="swine.py" line="297"/>
         <source>Shortcut</source>
-        <translation>Acceso directo</translation>
+        <translation>Pikakuvake</translation>
     </message>
     <message>
         <location filename="swine.py" line="403"/>
         <source>New Shortcut</source>
-        <translation>Nuevo acceso directo</translation>
+        <translation>Uusi pikakuvake</translation>
     </message>
     <message>
         <location filename="swine.py" line="301"/>
         <source>Run</source>
-        <translation>Ejecutar</translation>
+        <translation>Suorita</translation>
     </message>
     <message>
         <location filename="swine.py" line="303"/>
         <source>Set Default</source>
-        <translation>Establecer como predeterminado</translation>
+        <translation>Aseta oletukseksi</translation>
     </message>
     <message>
         <location filename="swine.py" line="305"/>
         <source>Remove Menu Entry</source>
-        <translation>Eliminar entrada del menú</translation>
+        <translation>Poista valikosta</translation>
     </message>
     <message>
         <location filename="swine.py" line="307"/>
         <source>Create Menu Entry</source>
-        <translation>Crear entrada del menú</translation>
+        <translation>Lisää valikkoon</translation>
     </message>
     <message>
         <location filename="swine.py" line="309"/>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="swine.py" line="371"/>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation>Uudelleen nimeä</translation>
     </message>
     <message>
         <location filename="swine.py" line="372"/>
         <source>Copy</source>
-        <translation>Copiar</translation>
+        <translation>Kopioi</translation>
     </message>
     <message>
         <location filename="swine.py" line="374"/>
         <source>Delete</source>
-        <translation>Eliminar</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <location filename="swine.py" line="315"/>
         <source>Slot</source>
-        <translation>Ranura</translation>
+        <translation>Lohko</translation>
     </message>
     <message>
         <location filename="swine.py" line="407"/>
         <source>New Slot</source>
-        <translation>Nueva ranura</translation>
+        <translation>Uusi lohko</translation>
     </message>
     <message>
         <location filename="swine.py" line="397"/>
         <source>Import Slot</source>
-        <translation>Importar ranura</translation>
+        <translation>Tuo lohko</translation>
     </message>
     <message>
         <location filename="swine.py" line="320"/>
         <source>Run default</source>
-        <translation>Ejecutar por defecto</translation>
+        <translation>Suorita oletusohjelma</translation>
     </message>
     <message>
         <location filename="swine.py" line="321"/>
         <source>Run...</source>
-        <translation>Ejecutar...</translation>
+        <translation>Suorita...</translation>
     </message>
     <message>
         <location filename="swine.py" line="325"/>
         <source>Tools</source>
-        <translation>Herramientas</translation>
+        <translation>Työkalut</translation>
     </message>
     <message>
         <location filename="swine.py" line="326"/>
         <source>Shell</source>
-        <translation>Shell</translation>
+        <translation>Komentorivi</translation>
     </message>
     <message>
         <location filename="swine.py" line="327"/>
         <source>File Manager</source>
-        <translation>Administrador de archivos</translation>
+        <translation>Tiedostoselain</translation>
     </message>
     <message>
         <location filename="swine.py" line="328"/>
         <source>Taskmanager</source>
-        <translation>Administrador de tareas</translation>
+        <translation>Tehtävienhallinta</translation>
     </message>
     <message>
         <location filename="swine.py" line="330"/>
         <source>Winecfg</source>
-        <translation>Winecfg</translation>
+        <translation>Winen asetukset</translation>
     </message>
     <message>
         <location filename="swine.py" line="331"/>
         <source>Start Regedit</source>
-        <translation>Inicie Regedit</translation>
+        <translation>Rekisterieditori</translation>
     </message>
     <message>
         <location filename="swine.py" line="332"/>
         <source>Uninstall Software</source>
-        <translation>Desinstalar Software</translation>
+        <translation>Poista sovellus</translation>
     </message>
     <message>
         <location filename="swine.py" line="333"/>
         <source>Control-Center</source>
-        <translation>Centro de control</translation>
+        <translation>Ohjauspaneeli</translation>
     </message>
     <message>
         <location filename="swine.py" line="335"/>
         <source>Commands</source>
-        <translation>Comandos</translation>
+        <translation>Komennot</translation>
     </message>
     <message>
         <location filename="swine.py" line="336"/>
         <source>Import Shortcuts</source>
-        <translation>Importar accesos directos</translation>
+        <translation>Tuo pikakuvakkeet</translation>
     </message>
     <message>
         <location filename="swine.py" line="337"/>
         <source>Reboot wine</source>
-        <translation>Reiniciar wine</translation>
+        <translation>Käynnistä Wine uudelleen</translation>
     </message>
     <message>
         <location filename="swine.py" line="338"/>
         <source>Eject CD</source>
-        <translation>Expulsar CD</translation>
+        <translation>Poista levy</translation>
     </message>
     <message>
         <location filename="swine.py" line="340"/>
         <source>Export</source>
-        <translation>Exportar</translation>
+        <translation>Vie</translation>
     </message>
     <message>
         <location filename="swine.py" line="341"/>
         <source>Import Data</source>
-        <translation>Importar Datos</translation>
+        <translation>Tuo</translation>
     </message>
     <message>
         <location filename="swine.py" line="343"/>
         <source>Run winetricks script</source>
-        <translation>Ejecutar un script winetricks</translation>
+        <translation>Suorita Winetricks skripti</translation>
     </message>
     <message>
         <location filename="swine.py" line="450"/>
@@ -555,67 +555,67 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="347"/>
         <source>Call Winetricks</source>
-        <translation>Llamar a Winetricks</translation>
+        <translation>Suorita Winetricks</translation>
     </message>
     <message>
         <location filename="swine.py" line="349"/>
         <source>Winetricks is not installed</source>
-        <translation>Winetricks no está instalado</translation>
+        <translation>Winetricks ei ole asennettuna</translation>
     </message>
     <message>
         <location filename="swine.py" line="369"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="swine.py" line="395"/>
         <source>Select archive</source>
-        <translation>Seleccione archivo</translation>
+        <translation>Valitse paketti</translation>
     </message>
     <message>
         <location filename="swine.py" line="395"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
-        <translation>Ranuras de Swine (*.swine *.tar.gz)</translation>
+        <translation>Swine lohkot (*.swine *.tar.gz)</translation>
     </message>
     <message>
         <location filename="swine.py" line="407"/>
         <source>Name:</source>
-        <translation>Nombre:</translation>
+        <translation>Nimi:</translation>
     </message>
     <message>
         <location filename="swine.py" line="407"/>
         <source>Create Slot</source>
-        <translation>Crear Ranura</translation>
+        <translation>Luo lohko</translation>
     </message>
     <message>
         <location filename="swine.py" line="441"/>
         <source>Winetricks is already at version %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Winetricks on jo ajantasalla. Versio %s</translation>
     </message>
     <message>
         <location filename="swine.py" line="443"/>
         <source>Winetricks has been updated to version %s</source>
-        <translation>Winetricks se ha actualizado a la versión %s</translation>
+        <translation>Winetricks on päivitetty versioon %s</translation>
     </message>
     <message>
         <location filename="swine.py" line="447"/>
         <source>Winetricks not found. Do you want to download Winetricks now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Winetricks ei löytynyt. Haluatko ladata Winetricks nyt?</translation>
     </message>
     <message>
         <location filename="swine.py" line="450"/>
         <source>Winetricks is quite old, version %s. Do you want to update Winetricks now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Winetricks versiosi %s on vahentunut. Haluatko päivittää Winetricks nyt?</translation>
     </message>
     <message>
         <location filename="swine.py" line="469"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <location filename="swine.py" line="469"/>
         <source>Execution failed with code %s</source>
-        <translation>La ejecución falló con el código %s</translation>
+        <translation>Suorittaminen epäonnistui, virhekoodi %s</translation>
     </message>
 </context>
 <context>
@@ -623,18 +623,17 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="562"/>
         <source>Executable selection</source>
-        <translation>Seleccióne ejecutable</translation>
+        <translation>Valitse suoritettava tiedosto</translation>
     </message>
     <message>
         <location filename="swine.py" line="562"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
-        <translation>Ejecutables de Windows (*.exe *.EXE);;Instaladores (*.msi *.MSI);;Todo (*)
-</translation>
+        <translation>Windows tiedostot (*.exe *.EXE);;Windows asennusohjelma (*.msi *.MSI);;Kaikki tiedostot (*)</translation>
     </message>
     <message>
         <location filename="swine.py" line="587"/>
         <source>Shortcut name cannot be empty</source>
-        <translation>El nombre del acceso directo no puede estar vacío</translation>
+        <translation>Pikakuvakkeelle on annettava nimi</translation>
     </message>
 </context>
 <context>
@@ -642,7 +641,7 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="615"/>
         <source>Run</source>
-        <translation>Ejecutar</translation>
+        <translation>Suorita</translation>
     </message>
 </context>
 <context>
@@ -650,27 +649,27 @@ Error: %s</translation>
     <message>
         <location filename="swinerun.py" line="74"/>
         <source>Create Slot</source>
-        <translation>Crear ranura</translation>
+        <translation>Luo lohko</translation>
     </message>
     <message>
         <location filename="swinerun.py" line="74"/>
         <source>Name:</source>
-        <translation>Nombre:</translation>
+        <translation>Nimi:</translation>
     </message>
     <message>
         <location filename="swinerun.py" line="74"/>
         <source>New Slot</source>
-        <translation>Nueva ranura</translation>
+        <translation>Uusi lohko</translation>
     </message>
     <message>
         <location filename="swinerun.py" line="86"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <location filename="swinerun.py" line="86"/>
         <source>Execution failed with code %s</source>
-        <translation>La ejecución falló con el código %s</translation>
+        <translation>Suorittaminen epäonnistui, virhekoodi %s</translation>
     </message>
 </context>
 <context>
@@ -678,7 +677,7 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="631"/>
         <source>Save</source>
-        <translation>Guardar</translation>
+        <translation>Tallenna</translation>
     </message>
 </context>
 <context>
@@ -686,22 +685,22 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="231"/>
         <source>Edit Shortcut</source>
-        <translation>Editar acceso directo</translation>
+        <translation>Muokkaa pikakuvaketta</translation>
     </message>
     <message>
         <location filename="swine.py" line="248"/>
         <source>Menu Entry</source>
-        <translation>Entrada del Menú</translation>
+        <translation>Valikkokuvake</translation>
     </message>
     <message>
         <location filename="swine.py" line="245"/>
         <source>Menu entry for %s has been created</source>
-        <translation>La entrada del Menú %s ha sido creada</translation>
+        <translation>%s valikkokuvake on luotu</translation>
     </message>
     <message>
         <location filename="swine.py" line="248"/>
         <source>Menu entry for %s has been removed</source>
-        <translation>La entrada del Menú %s ha sido eliminada</translation>
+        <translation>%s valikkokuvake on poistettu</translation>
     </message>
 </context>
 <context>
@@ -709,32 +708,32 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="122"/>
         <source>Delete Slot</source>
-        <translation>Borrar Ranura</translation>
+        <translation>Poista lohko</translation>
     </message>
     <message>
         <location filename="swine.py" line="122"/>
         <source>Are you sure ?</source>
-        <translation>¿Está seguro?</translation>
+        <translation>Oletko varma?</translation>
     </message>
     <message>
         <location filename="swine.py" line="164"/>
         <source>Select archive file</source>
-        <translation>Seleccione archivo</translation>
+        <translation>Valitse pakettitiedosto</translation>
     </message>
     <message>
         <location filename="swine.py" line="164"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
-        <translation>Ranuras de Swine (*.swine *.tar.gz)</translation>
+        <translation>Swine lohkot (*.swine *.tar.gz)</translation>
     </message>
     <message>
         <location filename="swine.py" line="172"/>
         <source>Select script file</source>
-        <translation>Seleccione script</translation>
+        <translation>Valitse skriptitiedosto</translation>
     </message>
     <message>
         <location filename="swine.py" line="172"/>
         <source>Winetricks scripts (*.verb)</source>
-        <translation>Scripts Winetricks (*.verb)</translation>
+        <translation>Winetricks skriptit (*.verb)</translation>
     </message>
 </context>
 <context>
@@ -742,12 +741,12 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="709"/>
         <source>Wine path selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää uusi Wine versio</translation>
     </message>
     <message>
         <location filename="swine.py" line="715"/>
         <source>No wine binary found in %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Wine tiedostoja ei löytynyt kohteesta %s</translation>
     </message>
 </context>
 </TS>

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="es" sourcelanguage="">
+<!DOCTYPE TS><TS version="2.0" language="tr" sourcelanguage="">
 <context>
     <name>@default</name>
     <message>
         <location filename="swine.py" line="611"/>
         <source>Run Program</source>
-        <translation>Iniciar programa</translation>
+        <translation>Program Çalıştır</translation>
     </message>
     <message>
         <location filename="swine.py" line="762"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Hata</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="594"/>
         <source>Config could not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırma yüklenemedi</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="598"/>
         <source>created %s</source>
-        <translation>creado %s</translation>
+        <translation>%s oluşturuldu</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="601"/>
         <source>symlinked %s to %s</source>
-        <translation>symlinked %s a %s</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="swinelib.py" line="620"/>
         <source>Slot does not exist: %s</source>
-        <translation>La ranura no existe: %s</translation>
+        <translation>Slow mevcut değil: %s</translation>
     </message>
     <message>
         <location filename="winetricks.py" line="65"/>
@@ -38,20 +38,17 @@
 Return code: %d
 Output: %s
 Error: %s</source>
-        <translation>El comando falló: %s⏎
-Código de retorno: %d⏎
-Salida: %s⏎
-Error: %s</translation>
+        <translation>Komut başarısız: %s\n Dönüş kodu: %d\n Çıkış: %s\n Hata: %s</translation>
     </message>
     <message>
         <location filename="winetricks.py" line="106"/>
         <source>Loading winetricks entries...</source>
-        <translation>Cargando entradas de Winetricks...</translation>
+        <translation>Winetricks girdileri yükleniyor...</translation>
     </message>
     <message>
         <location filename="winetricks.py" line="113"/>
         <source>WARNING: Winetricks binary not found</source>
-        <translation>ADVERTENCIA: No se encontró binario de Winetricks</translation>
+        <translation>UYARI: Winetricks ikilik dosyası bulunamadı.</translation>
     </message>
 </context>
 <context>
@@ -59,32 +56,32 @@ Error: %s</translation>
     <message>
         <location filename="AboutDialog.py" line="435"/>
         <source>About Swine</source>
-        <translation>Acerca de Swine</translation>
+        <translation>Swine Hakkında</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="436"/>
         <source>Swine version %s</source>
-        <translation>Versión de Swine %s</translation>
+        <translation>Swine sürüm %s</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="437"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>Hakkında</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="438"/>
         <source>License</source>
-        <translation>Licencia</translation>
+        <translation>Lisans</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="439"/>
         <source>Included Works</source>
-        <translation>Trabajos incluidos</translation>
+        <translation>Dahil Edilen Çalışmalar</translation>
     </message>
     <message>
         <location filename="AboutDialog.py" line="440"/>
         <source>Close</source>
-        <translation>Cerrar</translation>
+        <translation>Kapat</translation>
     </message>
 </context>
 <context>
@@ -92,7 +89,7 @@ Error: %s</translation>
     <message>
         <location filename="IconDialog.py" line="71"/>
         <source>Select Icon</source>
-        <translation>Seleccione un icono</translation>
+        <translation>Simge Seç</translation>
     </message>
 </context>
 <context>
@@ -110,7 +107,7 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="172"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>Hakkında</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="173"/>
@@ -120,12 +117,12 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="174"/>
         <source>About Swine</source>
-        <translation>Acerca de Swine</translation>
+        <translation>Swine Hakkında</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="175"/>
         <source>Exit</source>
-        <translation>Salir</translation>
+        <translation>Çıkış</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="176"/>
@@ -135,22 +132,22 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="177"/>
         <source>About Wine</source>
-        <translation>Acerca de Wine</translation>
+        <translation>Swine Hakkında</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="178"/>
         <source>About Winetricks</source>
-        <translation>Acerca de Winetricks</translation>
+        <translation>Winetricks Hakkında</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="179"/>
         <source>Download winetricks</source>
-        <translation>Descargar Winetricks</translation>
+        <translation>Winetricks&apos;i indir</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="180"/>
         <source>Swine Website</source>
-        <translation>Sitio Web de Swine</translation>
+        <translation>Swine Web Sayfası</translation>
     </message>
     <message>
         <location filename="MainWindow.py" line="181"/>
@@ -160,7 +157,7 @@ Error: %s</translation>
     <message>
         <location filename="MainWindow.py" line="182"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarlar</translation>
     </message>
 </context>
 <context>
@@ -168,7 +165,7 @@ Error: %s</translation>
     <message>
         <location filename="swinerun.py" line="38"/>
         <source>Create new slot...</source>
-        <translation>Crear nueva ranura...</translation>
+        <translation>Yeni slot oluştur...</translation>
     </message>
 </context>
 <context>
@@ -176,42 +173,42 @@ Error: %s</translation>
     <message>
         <location filename="ProgramDialog.py" line="164"/>
         <source>Working Directory:</source>
-        <translation>Directorio de trabajo:</translation>
+        <translation>Çalışılan Dizin:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="165"/>
         <source>Application:</source>
-        <translation>Aplicación:</translation>
+        <translation>Uygulama</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="166"/>
         <source>Name:</source>
-        <translation>Nombre:</translation>
+        <translation>İsim:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="167"/>
         <source>Parameters:</source>
-        <translation>Parámetros:</translation>
+        <translation>Parametreler:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="168"/>
         <source>Run in Terminal</source>
-        <translation>Ejecutar en Terminal</translation>
+        <translation>Uçbirimde Çalıştır</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="169"/>
         <source>Desktop:</source>
-        <translation>Escritorio:</translation>
+        <translation>Masaüstü:</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="170"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Tamam</translation>
     </message>
     <message>
         <location filename="ProgramDialog.py" line="171"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation>İptal</translation>
     </message>
 </context>
 <context>
@@ -224,12 +221,12 @@ Error: %s</translation>
     <message>
         <location filename="RunnerDialog.py" line="56"/>
         <source>Please select a slot:</source>
-        <translation>Por favor, seleccione una ranura:</translation>
+        <translation>Lütfen bir slot seçin</translation>
     </message>
     <message>
         <location filename="RunnerDialog.py" line="57"/>
         <source>Run in this slot</source>
-        <translation>Ejecutar en esta ranura:</translation>
+        <translation>Bu slotu çalıştır</translation>
     </message>
 </context>
 <context>
@@ -237,42 +234,42 @@ Error: %s</translation>
     <message>
         <location filename="Settings.py" line="134"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarlar</translation>
     </message>
     <message>
         <location filename="Settings.py" line="135"/>
         <source>Default wine path</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan Wine yolu</translation>
     </message>
     <message>
         <location filename="Settings.py" line="136"/>
         <source>Allow menu entry creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü girdisi oluşturulmasına izin ver</translation>
     </message>
     <message>
         <location filename="Settings.py" line="137"/>
         <source>Automatically import shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kısayolları otomatik olarak içe aktar</translation>
     </message>
     <message>
         <location filename="Settings.py" line="138"/>
         <source>Debug line</source>
-        <translation type="unfinished"></translation>
+        <translation>Hata ayıklama satırı</translation>
     </message>
     <message>
         <location filename="Settings.py" line="139"/>
         <source>Wine architecture</source>
-        <translation type="unfinished"></translation>
+        <translation>Wine mimarisi</translation>
     </message>
     <message>
         <location filename="Settings.py" line="140"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Genel</translation>
     </message>
     <message>
         <location filename="Settings.py" line="141"/>
         <source>Wine paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Wine yolları</translation>
     </message>
 </context>
 <context>
@@ -280,17 +277,17 @@ Error: %s</translation>
     <message>
         <location filename="swinelib.py" line="96"/>
         <source>Shortcut name cannot be empty</source>
-        <translation>El nombre del acceso directo no puede estar vacío</translation>
+        <translation>Kısayol adı boş olamaz</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="98"/>
         <source>Shortcut already exists</source>
-        <translation>El acceso directo ya existe</translation>
+        <translation>Kısayol zaten mevcut</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="189"/>
         <source>File does not exist</source>
-        <translation>El archivo no existe</translation>
+        <translation>Dosya mevcut değil</translation>
     </message>
 </context>
 <context>
@@ -298,12 +295,12 @@ Error: %s</translation>
     <message>
         <location filename="ShortcutImport.py" line="71"/>
         <source>Import shortcuts</source>
-        <translation>Importar acceso directo</translation>
+        <translation>Kısayolları içe aktar</translation>
     </message>
     <message>
         <location filename="ShortcutImport.py" line="72"/>
         <source>Select shortcuts to import:</source>
-        <translation>Seleccione acceso directo por importar:</translation>
+        <translation>İçe aktarılacak kısayolları seç</translation>
     </message>
 </context>
 <context>
@@ -311,52 +308,52 @@ Error: %s</translation>
     <message>
         <location filename="swinelib.py" line="220"/>
         <source>Slot name cannot be empty.</source>
-        <translation>El nombre de la ranura no puede estar vacío</translation>
+        <translation>Slot adı boş olamaz</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="245"/>
         <source>Shortcut name cannot be empty</source>
-        <translation>El nombre del acceso directo no puede estar vacío</translation>
+        <translation>Kısayol adı boş olamaz</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="261"/>
         <source>%s does not exist</source>
-        <translation>%s no existe</translation>
+        <translation>%s mevcut değil</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="309"/>
         <source>Slot already exists: %s</source>
-        <translation>La ranura ya existe: %s</translation>
+        <translation>Slot zaten mevcut: %s</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="315"/>
         <source>Default slot cannot be deleted</source>
-        <translation>La ranura por defecto no se puede eliminar</translation>
+        <translation>Varsayılan slot silinemez</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="339"/>
         <source>Slot does not exist: %s</source>
-        <translation>La ranura no existe: %s</translation>
+        <translation>Slot mevcut değil: %s</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="335"/>
         <source>Slot name cannot be empty</source>
-        <translation>El nombre de la ranura no puede estar vacío</translation>
+        <translation>Slot adı boş olamaz</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="342"/>
         <source>Slot does already exist: %s</source>
-        <translation>La ranura aún existe: %s</translation>
+        <translation>Slot zaten mevcut: %s</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="337"/>
         <source>Default slot cannot be renamed</source>
-        <translation>La ranura por defecto no se puede renombrar</translation>
+        <translation>Varsayılan slotun adı değiştirilemez</translation>
     </message>
     <message>
         <location filename="swinelib.py" line="569"/>
         <source>File name cannot be empty</source>
-        <translation>El nombre de archivo no puede estar vacío</translation>
+        <translation>Dosya adı boş olamaz</translation>
     </message>
 </context>
 <context>
@@ -364,17 +361,17 @@ Error: %s</translation>
     <message>
         <location filename="SlotSettings.py" line="54"/>
         <source>Slot settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Slot ayarları</translation>
     </message>
     <message>
         <location filename="SlotSettings.py" line="55"/>
         <source>Wine path</source>
-        <translation type="unfinished"></translation>
+        <translation>Wine yolu</translation>
     </message>
     <message>
         <location filename="SlotSettings.py" line="56"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Genel</translation>
     </message>
 </context>
 <context>
@@ -382,12 +379,12 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="520"/>
         <source>Select icon file</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge dosyası seç</translation>
     </message>
     <message>
         <location filename="swine.py" line="520"/>
         <source>Icon files (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge dosyaları (*.exe *.EXE *.ico *.ICO *.png *.bmp *.jpg *.jpeg *.gif)</translation>
     </message>
 </context>
 <context>
@@ -395,102 +392,102 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="439"/>
         <source>Version: %s</source>
-        <translation>Versión: %s</translation>
+        <translation>Sürüm: %s</translation>
     </message>
     <message>
         <location filename="swine.py" line="297"/>
         <source>Shortcut</source>
-        <translation>Acceso directo</translation>
+        <translation>Kısayol</translation>
     </message>
     <message>
         <location filename="swine.py" line="403"/>
         <source>New Shortcut</source>
-        <translation>Nuevo acceso directo</translation>
+        <translation>Yeni Kısayol</translation>
     </message>
     <message>
         <location filename="swine.py" line="301"/>
         <source>Run</source>
-        <translation>Ejecutar</translation>
+        <translation>Çalıştır</translation>
     </message>
     <message>
         <location filename="swine.py" line="303"/>
         <source>Set Default</source>
-        <translation>Establecer como predeterminado</translation>
+        <translation>Varsayılan Yap</translation>
     </message>
     <message>
         <location filename="swine.py" line="305"/>
         <source>Remove Menu Entry</source>
-        <translation>Eliminar entrada del menú</translation>
+        <translation>Menü Girdisini Sil</translation>
     </message>
     <message>
         <location filename="swine.py" line="307"/>
         <source>Create Menu Entry</source>
-        <translation>Crear entrada del menú</translation>
+        <translation>Menü Girdisi Oluştur</translation>
     </message>
     <message>
         <location filename="swine.py" line="309"/>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation>Düzenle</translation>
     </message>
     <message>
         <location filename="swine.py" line="371"/>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation>Yeniden Adlandır</translation>
     </message>
     <message>
         <location filename="swine.py" line="372"/>
         <source>Copy</source>
-        <translation>Copiar</translation>
+        <translation>Kopyala</translation>
     </message>
     <message>
         <location filename="swine.py" line="374"/>
         <source>Delete</source>
-        <translation>Eliminar</translation>
+        <translation>Sil</translation>
     </message>
     <message>
         <location filename="swine.py" line="315"/>
         <source>Slot</source>
-        <translation>Ranura</translation>
+        <translation>Slot</translation>
     </message>
     <message>
         <location filename="swine.py" line="407"/>
         <source>New Slot</source>
-        <translation>Nueva ranura</translation>
+        <translation>Yeni Slot</translation>
     </message>
     <message>
         <location filename="swine.py" line="397"/>
         <source>Import Slot</source>
-        <translation>Importar ranura</translation>
+        <translation>İçe Slot Aktar</translation>
     </message>
     <message>
         <location filename="swine.py" line="320"/>
         <source>Run default</source>
-        <translation>Ejecutar por defecto</translation>
+        <translation>Varsayılanı çalıştır</translation>
     </message>
     <message>
         <location filename="swine.py" line="321"/>
         <source>Run...</source>
-        <translation>Ejecutar...</translation>
+        <translation>Çalıştır...</translation>
     </message>
     <message>
         <location filename="swine.py" line="325"/>
         <source>Tools</source>
-        <translation>Herramientas</translation>
+        <translation>Araçlar</translation>
     </message>
     <message>
         <location filename="swine.py" line="326"/>
         <source>Shell</source>
-        <translation>Shell</translation>
+        <translation>Kabuk</translation>
     </message>
     <message>
         <location filename="swine.py" line="327"/>
         <source>File Manager</source>
-        <translation>Administrador de archivos</translation>
+        <translation>Dosya Yöneticisi</translation>
     </message>
     <message>
         <location filename="swine.py" line="328"/>
         <source>Taskmanager</source>
-        <translation>Administrador de tareas</translation>
+        <translation>Görev Yöneticisi</translation>
     </message>
     <message>
         <location filename="swine.py" line="330"/>
@@ -500,52 +497,52 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="331"/>
         <source>Start Regedit</source>
-        <translation>Inicie Regedit</translation>
+        <translation>Regedit&apos;i Başlat</translation>
     </message>
     <message>
         <location filename="swine.py" line="332"/>
         <source>Uninstall Software</source>
-        <translation>Desinstalar Software</translation>
+        <translation>Yazılım Kaldır</translation>
     </message>
     <message>
         <location filename="swine.py" line="333"/>
         <source>Control-Center</source>
-        <translation>Centro de control</translation>
+        <translation>Denetim Masası</translation>
     </message>
     <message>
         <location filename="swine.py" line="335"/>
         <source>Commands</source>
-        <translation>Comandos</translation>
+        <translation>Komutlar</translation>
     </message>
     <message>
         <location filename="swine.py" line="336"/>
         <source>Import Shortcuts</source>
-        <translation>Importar accesos directos</translation>
+        <translation>Kısayolları İçe Aktar</translation>
     </message>
     <message>
         <location filename="swine.py" line="337"/>
         <source>Reboot wine</source>
-        <translation>Reiniciar wine</translation>
+        <translation>Wine&apos;ı Yeniden Başlat</translation>
     </message>
     <message>
         <location filename="swine.py" line="338"/>
         <source>Eject CD</source>
-        <translation>Expulsar CD</translation>
+        <translation>CD&apos;yi Çıkart</translation>
     </message>
     <message>
         <location filename="swine.py" line="340"/>
         <source>Export</source>
-        <translation>Exportar</translation>
+        <translation>Dışa Aktar</translation>
     </message>
     <message>
         <location filename="swine.py" line="341"/>
         <source>Import Data</source>
-        <translation>Importar Datos</translation>
+        <translation>İçe Veri Aktar</translation>
     </message>
     <message>
         <location filename="swine.py" line="343"/>
         <source>Run winetricks script</source>
-        <translation>Ejecutar un script winetricks</translation>
+        <translation>Winetricks betiği çalıştır</translation>
     </message>
     <message>
         <location filename="swine.py" line="450"/>
@@ -555,67 +552,67 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="347"/>
         <source>Call Winetricks</source>
-        <translation>Llamar a Winetricks</translation>
+        <translation>Winetricks&apos;i Çalıştır</translation>
     </message>
     <message>
         <location filename="swine.py" line="349"/>
         <source>Winetricks is not installed</source>
-        <translation>Winetricks no está instalado</translation>
+        <translation>Winetricks yüklenmedi</translation>
     </message>
     <message>
         <location filename="swine.py" line="369"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarlar</translation>
     </message>
     <message>
         <location filename="swine.py" line="395"/>
         <source>Select archive</source>
-        <translation>Seleccione archivo</translation>
+        <translation>Arşiv seç</translation>
     </message>
     <message>
         <location filename="swine.py" line="395"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
-        <translation>Ranuras de Swine (*.swine *.tar.gz)</translation>
+        <translation>Swine Slotları (*.swine *.tar.gz)</translation>
     </message>
     <message>
         <location filename="swine.py" line="407"/>
         <source>Name:</source>
-        <translation>Nombre:</translation>
+        <translation>İsim:</translation>
     </message>
     <message>
         <location filename="swine.py" line="407"/>
         <source>Create Slot</source>
-        <translation>Crear Ranura</translation>
+        <translation>Slot Oluştur</translation>
     </message>
     <message>
         <location filename="swine.py" line="441"/>
         <source>Winetricks is already at version %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Winetricks zaten %s sürümünde</translation>
     </message>
     <message>
         <location filename="swine.py" line="443"/>
         <source>Winetricks has been updated to version %s</source>
-        <translation>Winetricks se ha actualizado a la versión %s</translation>
+        <translation>Winetricks %s sürümüne güncellendi</translation>
     </message>
     <message>
         <location filename="swine.py" line="447"/>
         <source>Winetricks not found. Do you want to download Winetricks now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Winetricks bulunamadı. Winetricks&apos;i şimdi indirmek ister misiniz?</translation>
     </message>
     <message>
         <location filename="swine.py" line="450"/>
         <source>Winetricks is quite old, version %s. Do you want to update Winetricks now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Winetricks sürümü, %s, çok eski. Winetricks&apos;i şimdi güncellemek ister misiniz?</translation>
     </message>
     <message>
         <location filename="swine.py" line="469"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Hata</translation>
     </message>
     <message>
         <location filename="swine.py" line="469"/>
         <source>Execution failed with code %s</source>
-        <translation>La ejecución falló con el código %s</translation>
+        <translation>Çalıştırma %s kodu ile başarısız oldu</translation>
     </message>
 </context>
 <context>
@@ -623,18 +620,17 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="562"/>
         <source>Executable selection</source>
-        <translation>Seleccióne ejecutable</translation>
+        <translation>Çalıştırabilir seçimi</translation>
     </message>
     <message>
         <location filename="swine.py" line="562"/>
         <source>Windows executables (*.exe *.EXE);;Windows installers (*.msi *.MSI);;All files (*)</source>
-        <translation>Ejecutables de Windows (*.exe *.EXE);;Instaladores (*.msi *.MSI);;Todo (*)
-</translation>
+        <translation>Windows çalıştırılabilirleri (*.exe *.EXE);;Windows yükleyicileri (*.msi *.MSI);;Tüm dosyalar (*)</translation>
     </message>
     <message>
         <location filename="swine.py" line="587"/>
         <source>Shortcut name cannot be empty</source>
-        <translation>El nombre del acceso directo no puede estar vacío</translation>
+        <translation>Kısayol adı boş olamaz</translation>
     </message>
 </context>
 <context>
@@ -642,7 +638,7 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="615"/>
         <source>Run</source>
-        <translation>Ejecutar</translation>
+        <translation>Çalıştır</translation>
     </message>
 </context>
 <context>
@@ -650,27 +646,27 @@ Error: %s</translation>
     <message>
         <location filename="swinerun.py" line="74"/>
         <source>Create Slot</source>
-        <translation>Crear ranura</translation>
+        <translation>Slot Oluştur</translation>
     </message>
     <message>
         <location filename="swinerun.py" line="74"/>
         <source>Name:</source>
-        <translation>Nombre:</translation>
+        <translation>İsim:</translation>
     </message>
     <message>
         <location filename="swinerun.py" line="74"/>
         <source>New Slot</source>
-        <translation>Nueva ranura</translation>
+        <translation>Yeni Slot</translation>
     </message>
     <message>
         <location filename="swinerun.py" line="86"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Hata</translation>
     </message>
     <message>
         <location filename="swinerun.py" line="86"/>
         <source>Execution failed with code %s</source>
-        <translation>La ejecución falló con el código %s</translation>
+        <translation>Çalıştırma %s hata kodu ile başarısız oldu</translation>
     </message>
 </context>
 <context>
@@ -678,7 +674,7 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="631"/>
         <source>Save</source>
-        <translation>Guardar</translation>
+        <translation>Kaydet</translation>
     </message>
 </context>
 <context>
@@ -686,22 +682,22 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="231"/>
         <source>Edit Shortcut</source>
-        <translation>Editar acceso directo</translation>
+        <translation>Kısayolu Düzenle</translation>
     </message>
     <message>
         <location filename="swine.py" line="248"/>
         <source>Menu Entry</source>
-        <translation>Entrada del Menú</translation>
+        <translation>Menü Girdisi</translation>
     </message>
     <message>
         <location filename="swine.py" line="245"/>
         <source>Menu entry for %s has been created</source>
-        <translation>La entrada del Menú %s ha sido creada</translation>
+        <translation>%s için menü girdisi oluşturuldu</translation>
     </message>
     <message>
         <location filename="swine.py" line="248"/>
         <source>Menu entry for %s has been removed</source>
-        <translation>La entrada del Menú %s ha sido eliminada</translation>
+        <translation>%s için menü girdisi silindi</translation>
     </message>
 </context>
 <context>
@@ -709,32 +705,32 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="122"/>
         <source>Delete Slot</source>
-        <translation>Borrar Ranura</translation>
+        <translation>Slotu Sil</translation>
     </message>
     <message>
         <location filename="swine.py" line="122"/>
         <source>Are you sure ?</source>
-        <translation>¿Está seguro?</translation>
+        <translation>Emin misiniz?</translation>
     </message>
     <message>
         <location filename="swine.py" line="164"/>
         <source>Select archive file</source>
-        <translation>Seleccione archivo</translation>
+        <translation>Arşiv dosyası seç</translation>
     </message>
     <message>
         <location filename="swine.py" line="164"/>
         <source>Swine Slots (*.swine *.tar.gz)</source>
-        <translation>Ranuras de Swine (*.swine *.tar.gz)</translation>
+        <translation>Swine Slotları (*.swine *.tar.gz)</translation>
     </message>
     <message>
         <location filename="swine.py" line="172"/>
         <source>Select script file</source>
-        <translation>Seleccione script</translation>
+        <translation>Betik dosyası seç</translation>
     </message>
     <message>
         <location filename="swine.py" line="172"/>
         <source>Winetricks scripts (*.verb)</source>
-        <translation>Scripts Winetricks (*.verb)</translation>
+        <translation>Winetricks betikleri (*.verb)</translation>
     </message>
 </context>
 <context>
@@ -742,12 +738,12 @@ Error: %s</translation>
     <message>
         <location filename="swine.py" line="709"/>
         <source>Wine path selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wine yolu seçimi</translation>
     </message>
     <message>
         <location filename="swine.py" line="715"/>
         <source>No wine binary found in %s</source>
-        <translation type="unfinished"></translation>
+        <translation>%s içinde hiç Wine ikilik dosyası bulunamadı</translation>
     </message>
 </context>
 </TS>

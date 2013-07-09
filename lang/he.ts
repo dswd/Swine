@@ -89,7 +89,7 @@ Error: %s</source>
     <message>
         <location filename="IconDialog.py" line="71"/>
         <source>Select Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>נא לבחור בסמל</translation>
     </message>
 </context>
 <context>

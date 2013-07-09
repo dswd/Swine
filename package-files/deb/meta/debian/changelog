@@ -1,3 +1,9 @@
+swine (1.0.4) unstable; urgency=low
+
+  * New translations: Vietnamese, Polish, Finnish, Turkish, Norwegian
+
+ -- Dennis Schwerdel <schwerdel@informatik.uni-kl.de>  Tue, 09 Jul 2013 21:27:58 +0200
+
 swine (1.0.3) unstable; urgency=low
 
   * Fixed absolute icon paths

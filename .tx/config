@@ -1,9 +1,10 @@
 [main]
-host = https://www.transifex.net
+host = https://www.transifex.com
 
 [Swine.swine-messages]
 file_filter = lang/<lang>.ts
-host = https://www.transifex.net
-source_lang = en
+host = https://www.transifex.com
 source_file = lang/en.ts
+source_lang = en
 type = ts
+

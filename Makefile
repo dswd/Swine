@@ -7,11 +7,12 @@ qrc_files_py = ${qrc_files:.qrc=_rc.py}
 py_files = swine.py swinecli.py swinerun.py swinelib.py shortcutlib.py icolib.py config.py winetricks.py
 deb_dir = package-files/deb
 buildfiles = Makefile
-resources = resources/* images/*
-lang = en de he fr es
+resources = resources/*
+images = images/*
+lang = en de he fr es fi pl tr vi
 lang_ts = $(addprefix lang/,$(addsuffix .ts,$(lang)))
 lang_qm = $(addprefix translations/,$(addsuffix .qm,$(lang)))
-sources = $(py_files) $(ui_files) $(qrc_files) README.md LICENSE version.sh $(buildfiles) $(resources) $(lang_ts)
+sources = $(py_files) $(ui_files) $(qrc_files) README.md LICENSE version.sh $(buildfiles) $(images) $(resources) $(lang_ts)
 distfiles = $(py_files) $(ui_files_py) $(qrc_files_py) README LICENSE version.sh $(resources) $(lang_qm)
 
 .SUFFIXES: _rc.py .qrc .py .ui
