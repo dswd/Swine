@@ -95,6 +95,7 @@ install: compile
 	mkdir -p $(DESTDIR)$(datadir)/applications
 	cp resources/swine.desktop $(DESTDIR)$(datadir)/applications/swine.desktop
 	cp resources/swine-extensions.desktop $(DESTDIR)$(datadir)/applications/swine-extensions.desktop
+	rm -f $(DESTDIR)$(bindir)/swine $(DESTDIR)$(bindir)/swinecli $(DESTDIR)$(bindir)/swinerun
 	ln -s $(libdir)/swine/swine.py $(DESTDIR)$(bindir)/swine
 	ln -s $(libdir)/swine/swinecli.py $(DESTDIR)$(bindir)/swinecli
 	ln -s $(libdir)/swine/swinerun.py $(DESTDIR)$(bindir)/swinerun
