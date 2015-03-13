@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 ############################################################################
 #    Copyright (C) 2007-2012 by Dennis Schwerdel, Thomas Schmidt           #
