@@ -1,3 +1,4 @@
+include config.make
 rev = $(shell ./version.sh)
 
 ui_files = MainWindow.ui AboutDialog.ui ProgramDialog.ui RunnerDialog.ui IconDialog.ui ShortcutImport.ui Settings.ui SlotSettings.ui
@@ -15,6 +16,14 @@ lang_qm = $(addprefix translations/,$(addsuffix .qm,$(lang)))
 sources = $(py_files) $(ui_files) $(qrc_files) README.md LICENSE version.sh $(buildfiles) $(images) $(resources) $(lang_ts)
 distfiles = $(py_files) $(ui_files_py) $(qrc_files_py) README LICENSE version.sh $(resources) $(lang_qm)
 
+all: compile
+
+config.make:
+	@echo ""
+	@echo "You need to call ./configure first." >&2
+	@echo ""
+	@exit 1
+
 .SUFFIXES: _rc.py .qrc .py .ui
 
 .ui.py:
@@ -22,8 +31,6 @@ distfiles = $(py_files) $(ui_files_py) $(qrc_files_py) README LICENSE version.sh
 
 .qrc_rc.py:
 	pyrcc4 $< -o $@
-
-all: compile
 
 deb-version:
 	cd $(deb_dir); export rev=$(rev); make version
@@ -75,19 +82,21 @@ dist: swine-$(rev).tar.gz swine-$(rev)-src.tar.gz
 
 clean:
 	rm -rf $(ui_files_py) $(qrc_files_py) $(lang_qm) *.pyc *.tar.gz *~
+dist-clean: clean
+	rm -f config.make
 
 install: compile
-	mkdir -p $(DESTDIR)/usr/lib/swine
-	cp $(py_files) $(ui_files_py) $(qrc_files_py) $(DESTDIR)/usr/lib/swine
-	mkdir -p $(DESTDIR)/usr/share/swine/translations
-	cp $(lang_qm) $(DESTDIR)/usr/share/swine/translations
-	mkdir -p $(DESTDIR)/usr/share/swine/images
-	cp images/swine32.png $(DESTDIR)/usr/share/swine/images
-	mkdir -p $(DESTDIR)/usr/share/applications
-	cp resources/swine.desktop $(DESTDIR)/usr/share/applications/swine.desktop
-	cp resources/swine-extensions.desktop $(DESTDIR)/usr/share/applications/swine-extensions.desktop
-	ln -s ../lib/swine/swine.py $(DESTDIR)/usr/bin/swine
-	ln -s ../lib/swine/swinecli.py $(DESTDIR)/usr/bin/swinecli
-	ln -s ../lib/swine/swinerun.py $(DESTDIR)/usr/bin/swinerun
+	mkdir -p $(DESTDIR)$(libdir)/swine
+	cp $(py_files) $(ui_files_py) $(qrc_files_py) $(DESTDIR)$(libdir)/swine
+	mkdir -p $(DESTDIR)$(datadir)/swine/translations
+	cp $(lang_qm) $(DESTDIR)$(datadir)/swine/translations
+	mkdir -p $(DESTDIR)$(datadir)/swine/images
+	cp images/swine32.png $(DESTDIR)$(datadir)/swine/images
+	mkdir -p $(DESTDIR)$(datadir)/applications
+	cp resources/swine.desktop $(DESTDIR)$(datadir)/applications/swine.desktop
+	cp resources/swine-extensions.desktop $(DESTDIR)$(datadir)/applications/swine-extensions.desktop
+	ln -s $(libdir)/swine/swine.py $(DESTDIR)$(bindir)/swine
+	ln -s $(libdir)/swine/swinecli.py $(DESTDIR)$(bindir)/swinecli
+	ln -s $(libdir)/swine/swinerun.py $(DESTDIR)$(bindir)/swinerun
 
 deb: deb-clean deb-build

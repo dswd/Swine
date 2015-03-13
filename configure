@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+usage()
+{
+	echo ""
+	echo "Usage: ./configure [--prefix=PREFIX] [--bindir=PATH] [--datadir=PATH]"
+	echo "                   [--libdir=PATH] [--mandir=PATH]"
+	echo ""
+}
+
+prefix="/usr/local"
+bindir=""
+datadir=""
+libdir=""
+mandir=""
+
+while [[ $# > 0 ]] ; do
+	CMD="$1"; shift
+	case "$CMD" in
+		--prefix=*)
+			prefix="${CMD#*=}"
+			;;
+		--prefix)
+			prefix="$1"; shift
+			;;
+
+		--bindir=*)
+			bindir="${CMD#*=}"
+			;;
+		--bindir)
+			bindir="$1"; shift
+			;;
+
+		--datadir=*)
+			datadir="${CMD#*=}"
+			;;
+		--datadir)
+			datadir="$1"; shift
+			;;
+
+		--libdir=*)
+			libdir="${CMD#*=}"
+			;;
+		--libdir)
+			libdir="$1"; shift
+			;;
+
+		--mandir=*)
+			mandir="${CMD#*=}"
+			;;
+		--mandir)
+			mandir="$1"; shift
+			;;
+
+		--help)
+			usage
+			exit
+			;;
+		*)
+			echo "WARNING: Unknown argument $CMD." >&2
+			;;
+	esac
+done
+
+[ -z "$bindir" ] && bindir="$prefix/bin"
+[ -z "$datadir" ] && datadir="$prefix/share"
+[ -z "$libdir" ] && libdir="$prefix/lib"
+[ -z "$mandir" ] && mandir="$prefix/share/man"
+
+(
+	echo "#"
+	echo "# This file is automatically created by ./configure, DO NOT EDIT!"
+	echo "#"
+	echo ""
+	echo "prefix=$prefix"
+	echo "bindir=$bindir"
+	echo "datadir=$datadir"
+	echo "libdir=$libdir"
+	echo "mandir=$mandir"
+) > config.make
+
+exit 0
