@@ -28,9 +28,11 @@ config.make:
 
 .ui.py:
 	pyuic4 $< -o $@
+	@touch -r $< $@
 
 .qrc_rc.py:
 	pyrcc4 $< -o $@
+	@touch -r $< $@
 
 deb-version:
 	cd $(deb_dir); export rev=$(rev); make version
@@ -64,6 +66,7 @@ $(lang_qm): $(lang_ts)
 translations/%.qm: lang/%.ts
 	mkdir -p translations
 	lrelease-qt4 $< -compress -qm $@
+	@touch -r $< $@
 
 swine-$(rev).tar.gz: compile $(distfiles)
 	mkdir swine-$(rev)
