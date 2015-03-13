@@ -419,7 +419,7 @@ class Slot:
     """
     env = os.environ.copy()
     env["WINEPREFIX"] = self.getPath()
-    env["WINEARCH"] = self["architecture"]
+    env["WINEARCH"] = self["architecture"] if not os.path.exists(os.path.join(self.getPath(), "system.reg")) else ""
     env["WINEDEBUG"] = debug if debug else self["debug_line"]
     if not self["allow_menu_entry_creation"]:
       env["WINEDLLOVERRIDES"] = "winemenubuilder.exe=d" #do not add shortcuts to desktop or menu
