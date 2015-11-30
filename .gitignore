@@ -13,3 +13,4 @@ swine-*.tar.gz
 *.pyc
 *.verb
 translations
+config.make
